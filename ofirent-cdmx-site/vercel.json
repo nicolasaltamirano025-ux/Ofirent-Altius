@@ -1,0 +1,11 @@
+{
+  "trailingSlash": true,
+  "rewrites": [
+    { "source": "/ubicaciones/renta-oficinas-colonia-roma/", "destination": "/ubicacion-roma.html" },
+    { "source": "/ubicaciones/renta-oficinas-colonia-condesa/", "destination": "/ubicacion-condesa.html" },
+    { "source": "/ubicaciones/renta-oficinas-colonia-cuauhtemoc/", "destination": "/ubicacion-cuauhtemoc.html" },
+    { "source": "/ubicaciones/renta-oficinas-colonia-del-valle/", "destination": "/ubicacion-delvalle.html" },
+    { "source": "/ubicaciones/renta-oficinas-colonia-narvarte/", "destination": "/ubicacion-narvarte.html" },
+    { "source": "/ubicaciones/renta-oficinas-colonia-napoles/", "destination": "/ubicacion-napoles.html" }
+  ]
+}
