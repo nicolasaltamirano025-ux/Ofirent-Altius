@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OfiRent · Renta de Oficinas en CDMX</title>
+<meta name="description" content="Oficinas equipadas, virtuales y salas de juntas en 6 ubicaciones de la Ciudad de México: Nápoles, Del Valle, Condesa, Roma, Narvarte y Cuauhtémoc.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OfiRent",
+  "url": "https://ofirent-cdmx.vercel.app",
+  "makesOffer": [
+    {"@type":"Offer","name":"Oficina Virtual Básico","price":"799","priceCurrency":"MXN"},
+    {"@type":"Offer","name":"Oficina Virtual Ejecutivo","price":"1299","priceCurrency":"MXN"},
+    {"@type":"Offer","name":"Oficina Virtual Plus","price":"1599","priceCurrency":"MXN"},
+    {"@type":"Offer","name":"Oficina Virtual VIP","price":"1899","priceCurrency":"MXN"}
+  ],
+  "department": [
+    {"@type":"LocalBusiness","name":"OfiRent Nápoles","address":{"@type":"PostalAddress","streetAddress":"Rochester 94","addressLocality":"Ciudad de México","addressCountry":"MX"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"4"}},
+    {"@type":"LocalBusiness","name":"OfiRent Del Valle","address":{"@type":"PostalAddress","streetAddress":"Gabriel Mancera 725","addressLocality":"Ciudad de México","addressCountry":"MX"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.7","reviewCount":"24"}},
+    {"@type":"LocalBusiness","name":"OfiRent Condesa","address":{"@type":"PostalAddress","streetAddress":"Av. Álvaro Obregón 270","addressLocality":"Ciudad de México","addressCountry":"MX"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.5","reviewCount":"11"}},
+    {"@type":"LocalBusiness","name":"OfiRent Roma","address":{"@type":"PostalAddress","streetAddress":"C. Orizaba 208","addressLocality":"Ciudad de México","addressCountry":"MX"}},
+    {"@type":"LocalBusiness","name":"OfiRent Narvarte","address":{"@type":"PostalAddress","streetAddress":"Eje 1 Pte., Av. Cuauhtémoc 722","addressLocality":"Ciudad de México","addressCountry":"MX"}},
+    {"@type":"LocalBusiness","name":"OfiRent Cuauhtémoc","address":{"@type":"PostalAddress","streetAddress":"C. Río Po 43","addressLocality":"Ciudad de México","addressCountry":"MX"}}
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap topnav-inner">
+    <div class="logo-mark"><img src="/assets/logo.png" alt="OfiRent"></div>
+    <div class="navlinks">
+      <a href="#ubicaciones">Ubicaciones</a><a href="#servicios">Servicios</a><a href="#virtual">Oficina Virtual</a><a href="#interes">Oficina Física</a><a href="#faq">FAQ</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="#contacto" class="nav-cta">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Ciudad de México</div>
+        <h1 class="hero-title">Tu Oficina Ideal<br><span class="thin">en la Ciudad de México</span></h1>
+        <p class="hero-lede">6 ubicaciones en Nápoles, Del Valle, Condesa, Roma, Narvarte y Cuauhtémoc. Oficinas equipadas, virtuales y salas de juntas que se adaptan al tamaño y la etapa de tu negocio, sin contratos complicados.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#interes">Conoce oficinas físicas <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a class="btn ghost" href="#virtual">Cotizar oficina virtual <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hero-stat-num">6</div><div class="hero-stat-label">Ubicaciones en CDMX</div></div>
+          <div><div class="hero-stat-num">190+</div><div class="hero-stat-label">Oficinas en la red</div></div>
+          <div><div class="hero-stat-num">20+</div><div class="hero-stat-label">Años de experiencia</div></div>
+          <div><div class="hero-stat-num">$6,500</div><div class="hero-stat-label">Oficina privada desde</div></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <video class="hero-video-embed" autoplay muted loop playsinline webkit-playsinline preload="auto">
+          <source src="/assets/ofirent-hero.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap trust-inner">
+    <span class="trust-label">Reseñas reales en Google</span>
+    <span class="trust-chip"><span class="stars">★★★★★</span><b>5.0</b> Nápoles</span>
+    <span class="trust-chip"><span class="stars">★★★★★</span><b>4.7</b> Del Valle</span>
+    <span class="trust-chip"><span class="stars">★★★★★</span><b>4.5</b> Condesa</span>
+  </div>
+</div>
+
+<section class="alt" id="por-que-ofirent">
+  <div class="wrap">
+    <div class="eyebrow">Por qué elegirnos</div>
+    <h2 class="section-title">Más que oficinas en renta</h2>
+    <p class="section-sub">Cuatro razones concretas por las que empresas de todos los tamaños llevan más de 20 años trabajando con nosotros.</p>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <h3 class="why-title">6 ubicaciones, un solo contrato</h3>
+        <p class="why-text">Nápoles, Del Valle, Condesa, Roma, Narvarte y Cuauhtémoc. Eliges la zona que le conviene a tu equipo o a tus clientes, sin renegociar nada si cambias de sucursal.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <h3 class="why-title">Empiezas a trabajar el mismo día</h3>
+        <p class="why-text">"El mismo día que firmas contrato, el mismo día que empiezas a ser productivo": así lo describe uno de nuestros clientes reales en Google. Sin obras, sin esperas.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <h3 class="why-title">Café y salas de juntas en las 6</h3>
+        <p class="why-text">No es un servicio exclusivo de una sola sede premium: café y salas de juntas están disponibles en cada una de nuestras 6 ubicaciones, sin costo extra.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <h3 class="why-title">Creces sin cambiar de proveedor</h3>
+        <p class="why-text">Empiezas con domicilio fiscal en una oficina virtual y, cuando lo necesites, pasas a una oficina física, con el mismo equipo que ya te conoce.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ubicaciones">
+  <div class="wrap">
+    <div class="eyebrow">Nuestras ubicaciones</div>
+    <h2 class="section-title">6 zonas, una sola red</h2>
+    <p class="section-sub">Cada sucursal con su propio inventario y precio. Encuentra la opción que se adapta a tu equipo. Escríbenos y te confirmamos disponibilidad real al momento.</p>
+    <div class="loc-grid reveal-group">
+      <a class="loc-card reveal" href="/ubicacion-napoles.html">
+        <img class="loc-photo" src="/assets/loc-napoles.jpg" alt="OfiRent Nápoles">
+        <div class="loc-body">
+          <div class="loc-name">Nápoles</div>
+          <div class="loc-addr">Rochester 94</div>
+          <div class="loc-diff">A minutos del World Trade Center</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>3.7 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $6,500/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span></div>
+        </div>
+      </a>
+      <a class="loc-card reveal" href="/ubicacion-delvalle.html">
+        <img class="loc-photo" src="/assets/loc-delvalle.jpg" alt="OfiRent Del Valle">
+        <div class="loc-body">
+          <div class="loc-name">Del Valle</div>
+          <div class="loc-addr">Gabriel Mancera 725</div>
+          <div class="loc-diff">Nuestra sede mejor calificada en Google</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>6.8 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $7,500/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span><span class="loc-tag">Coworking</span></div>
+        </div>
+      </a>
+      <a class="loc-card reveal" href="/ubicacion-condesa.html">
+        <img class="loc-photo" src="/assets/loc-condesa.jpg" alt="OfiRent Condesa">
+        <div class="loc-body">
+          <div class="loc-name">Condesa</div>
+          <div class="loc-addr">Av. Álvaro Obregón 270</div>
+          <div class="loc-diff">Rodeada de cafés y vida cultural</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>6.8 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $7,900/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span></div>
+        </div>
+      </a>
+      <a class="loc-card reveal" href="/ubicacion-roma.html">
+        <img class="loc-photo" src="/assets/loc-roma.jpg" alt="OfiRent Roma">
+        <div class="loc-body">
+          <div class="loc-name">Roma</div>
+          <div class="loc-addr">C. Orizaba 208</div>
+          <div class="loc-diff">Terraza y coworking en Roma Norte</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>7.1 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $9,900/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span><span class="loc-tag">Coworking</span></div>
+        </div>
+      </a>
+      <a class="loc-card reveal" href="/ubicacion-narvarte.html">
+        <img class="loc-photo" src="/assets/loc-narvarte.jpg" alt="OfiRent Narvarte">
+        <div class="loc-body">
+          <div class="loc-name">Narvarte</div>
+          <div class="loc-addr">Eje 1 Pte., Av. Cuauhtémoc 722</div>
+          <div class="loc-diff">El inventario más grande de la red</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>4.0 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $6,900/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span><span class="loc-tag">Capacitación</span><span class="loc-tag">Coworking</span></div>
+        </div>
+      </a>
+      <a class="loc-card reveal" href="/ubicacion-cuauhtemoc.html">
+        <img class="loc-photo" src="/assets/loc-riopo.jpg" alt="OfiRent Cuauhtémoc">
+        <div class="loc-body">
+          <div class="loc-name">Cuauhtémoc</div>
+          <div class="loc-addr">C. Río Po 43</div>
+          <div class="loc-diff">Sala de capacitación y ubicación céntrica</div>
+          <div class="loc-stats">
+            <div class="loc-stat"><b>4.8 m²</b><span>oficinas desde</span></div>
+          </div>
+          <div class="loc-price">Desde $6,900/mes</div>
+          <div class="loc-tags"><span class="loc-tag">Café</span><span class="loc-tag">Salas de juntas</span><span class="loc-tag">Capacitación</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="servicios">
+  <div class="wrap">
+    <div class="eyebrow">En todas las sucursales</div>
+    <h2 class="section-title">Servicios y amenidades</h2>
+    <p class="section-sub">Todo lo que tu equipo necesita para operar desde el primer día, sin gestionar proveedores por separado. Café y salas de juntas en las 6 ubicaciones; capacitación en Narvarte y Cuauhtémoc; coworking físico en Narvarte, Roma y Del Valle.</p>
+    <div class="amen-grid reveal-group">
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="11"/><line x1="10" y1="3" x2="10" y2="11"/><line x1="13" y1="3" x2="13" y2="11"/><path d="M7 11c0 2 1.5 3 3 3s3-1 3-3"/><line x1="10" y1="14" x2="10" y2="21"/></svg></div><div class="amen-name">Café siempre listo</div><div class="amen-note">Las 6 ubicaciones</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="1"/><rect x="8" y="3" width="3" height="2" rx="0.5"/><rect x="13" y="3" width="3" height="2" rx="0.5"/><rect x="8" y="19" width="3" height="2" rx="0.5"/><rect x="13" y="19" width="3" height="2" rx="0.5"/></svg></div><div class="amen-name">Salas de juntas</div><div class="amen-note">Las 6 ubicaciones</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/><path d="M7 9l3 2 2-3 5 4"/></svg></div><div class="amen-name">Salas de capacitación</div><div class="amen-note">Narvarte y Cuauhtémoc</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="8" r="2.5"/><circle cx="12" cy="16" r="2.5"/><line x1="9.8" y1="9.8" x2="10.5" y2="14"/><line x1="14.2" y1="9.8" x2="13.5" y2="14"/></svg></div><div class="amen-name">Coworking</div><div class="amen-note">Narvarte, Roma y Del Valle</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M6 15c0-4 1.5-8 6-8s6 4 6 8"/><line x1="4" y1="15" x2="20" y2="15"/><path d="M9 18a3 3 0 0 0 6 0"/></svg></div><div class="amen-name">Recepción y valet parking</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="amen-name">Espacios sanitizados</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><div class="amen-name">Internet de alta velocidad</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="1"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></div><div class="amen-name">Domicilio fiscal y comercial</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="espacios">
+  <div class="wrap">
+    <img src="/assets/espacios-productividad.jpg" alt="Espacios diseñados para tu productividad en OfiRent: tranquilidad, orden y limpieza, comodidad" style="width:100%;border-radius:16px;border:1px solid var(--line);">
+  </div>
+</section>
+
+<section class="alt" id="coworking">
+  <div class="wrap">
+    <div class="eyebrow">Membresía de coworking</div>
+    <h2 class="section-title">Espacio compartido, sin renta fija</h2>
+    <p class="section-sub">Coworking físico disponible en Narvarte, Roma y Del Valle: acceso a escritorio compartido, salas de juntas y todos los servicios de la ubicación, sin comprometerte a una oficina privada. Escríbenos y te compartimos los planes de membresía disponibles.</p>
+    <div class="loc-tags" style="gap:10px;margin-bottom:32px;">
+      <span class="loc-tag" style="font-size:13px;padding:8px 16px;">Narvarte</span>
+      <span class="loc-tag" style="font-size:13px;padding:8px 16px;">Roma</span>
+      <span class="loc-tag" style="font-size:13px;padding:8px 16px;">Del Valle</span>
+    </div>
+    <a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20la%20membres%C3%ADa%20de%20coworking%20de%20OfiRent." target="_blank" rel="noopener">Conocer planes de coworking <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<section id="interes">
+  <div class="wrap">
+    <div class="interes-box">
+      <div class="eyebrow" style="color:var(--gold);">Oficina física</div>
+      <h2>¿Qué estás buscando?</h2>
+      <p class="interes-sub">Encontremos el espacio ideal para tu equipo. Cuéntanos qué ubicación y tamaño te interesa y un asesor te contacta con las opciones disponibles según tu presupuesto, sin compromiso.</p>
+
+      <div class="field-label">Ubicación de interés</div>
+      <div class="pill-row" id="pill-ubicacion">
+        <button class="pill" data-val="Nápoles">Nápoles</button>
+        <button class="pill" data-val="Del Valle">Del Valle</button>
+        <button class="pill" data-val="Condesa">Condesa</button>
+        <button class="pill" data-val="Roma">Roma</button>
+        <button class="pill" data-val="Narvarte">Narvarte</button>
+        <button class="pill" data-val="Cuauhtémoc">Cuauhtémoc</button>
+        <button class="pill" data-val="No estoy seguro">No estoy seguro</button>
+      </div>
+
+      <div class="field-label">Tamaño de equipo</div>
+      <div class="pill-row" id="pill-tamano">
+        <button class="pill" data-val="1-2 personas">1–2 personas</button>
+        <button class="pill" data-val="3-4 personas">3–4 personas</button>
+        <button class="pill" data-val="5-6 personas">5–6 personas</button>
+        <button class="pill" data-val="Más de 6 personas">Más de 6</button>
+      </div>
+
+      <a class="wa-cta" id="wa-link" href="#" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="contacto-form">
+  <div class="wrap">
+    <div class="eyebrow">Resolvemos tus dudas</div>
+    <h2 class="section-title">Déjanos tus datos y te contactamos</h2>
+    <p class="section-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
+    <div class="kommo-form-card">
+      <script src="https://forms.kommo.com/forms/js/form_1635815_535ab9144ad964393884e00792e6c796.js" charset="utf-8"></script>
+      <script id="amoforms_script_1635815" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1767728992"></script>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="virtual">
+  <div class="wrap">
+    <div class="eyebrow">Oficina virtual · precio 2026</div>
+    <h2 class="section-title">Domicilio fiscal y comercial</h2>
+    <p class="section-sub">La misma flexibilidad de una oficina física, sin ocupar un espacio fijo. Mismo esquema de 4 planes en las 6 ubicaciones.</p>
+    <div class="plans-grid">
+      <div class="plan-card"><div class="plan-name">Básico</div><div class="plan-price">$799<span>/mes</span></div><div class="plan-persona">Para freelancers y negocios que empiezan</div><p class="plan-desc">Incluye domicilio fiscal y comercial.</p><a class="plan-btn" href="#">Cotizar</a></div>
+      <div class="plan-card"><div class="plan-name">Ejecutivo</div><div class="plan-price">$1,299<span>/mes</span></div><div class="plan-persona">Para profesionistas que reciben clientes seguido</div><p class="plan-desc">Línea general y acceso a sala de juntas y/o estación de trabajo.</p><a class="plan-btn" href="#">Cotizar</a></div>
+      <div class="plan-card"><div class="plan-name">Plus</div><div class="plan-price">$1,599<span>/mes</span></div><div class="plan-persona">Para equipos pequeños en crecimiento</div><p class="plan-desc">Línea personalizada, acceso a sala de juntas y/o estación de trabajo.</p><a class="plan-btn" href="#">Cotizar</a></div>
+      <div class="plan-card"><div class="plan-name">VIP</div><div class="plan-price">$1,899<span>/mes</span></div><div class="plan-persona">Para empresas con presencia en varias zonas</div><p class="plan-desc">Línea personalizada, acceso multicentro a sala de juntas y/o estación de trabajo.</p><a class="plan-btn" href="#">Cotizar</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Preguntas frecuentes</div>
+    <h2 class="section-title">Antes de escribirnos</h2>
+    <div class="accordion reveal-group">
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Qué diferencia hay entre oficina física y virtual?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>La física es un espacio dedicado dentro de una de nuestras 6 ubicaciones. La virtual te da domicilio fiscal y comercial sin ocupar espacio fijo, con acceso a sala de juntas o estación de trabajo según el plan.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Todas las ubicaciones tienen coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Coworking físico está disponible en Narvarte, Roma y Del Valle; las demás ubicaciones tienen salas de juntas y oficinas privadas.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cómo sé qué hay disponible en la ubicación que busco?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Escríbenos con lo que buscas (ubicación, tamaño de equipo) y un asesor te confirma disponibilidad real al momento; el inventario cambia seguido.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Qué incluye una oficina equipada?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Internet de alta velocidad, recepción, café, servicio de limpieza y acceso a salas de juntas: llegas y trabajas el mismo día que firmas.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo rentar una sala de juntas sin ser inquilino?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí, las salas de juntas se pueden rentar por evento aunque no tengas oficina con nosotros.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Qué significa "acceso multicentro"?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Con el plan VIP no dependes de una sola sucursal: puedes usar sala de juntas o estación de trabajo en cualquiera de nuestras 6 ubicaciones en Ciudad de México, según lo que necesites en el momento.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="ubicacion-mapa">
+  <div class="wrap">
+    <div class="eyebrow">Cómo llegar</div>
+    <h2 class="section-title">Nuestras 6 ubicaciones en CDMX</h2>
+    <a class="map-image-card" href="https://www.google.com/maps/search/OfiRent+CDMX" target="_blank" rel="noopener" aria-label="Ver nuestras ubicaciones en Google Maps">
+      <img src="/assets/mapa-6-ubicaciones.jpg" alt="Mapa de las 6 ubicaciones de OfiRent en Ciudad de México">
+    </a>
+  </div>
+</section>
+
+<section class="alt" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow">Reseñas verificadas</div>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <div class="reviews-grid reveal-group">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Muy buenas oficinas con todo incluido: el mismo día que firmas contrato, empiezas a ser productivo.</p>
+        <div class="review-who"><span class="review-name">José Luis</span><span class="review-meta">Local Guide · 99 reseñas · OfiRent Del Valle</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Buena ubicación e instalaciones, perfecto para la reunión de trabajo.</p>
+        <div class="review-who"><span class="review-name">Dannae Jimaya</span><span class="review-meta">Local Guide · 23 reseñas · OfiRent Del Valle</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Muy bonitas oficinas.</p>
+        <div class="review-who"><span class="review-name">Aldo Liberi</span><span class="review-meta">Local Guide · 15 reseñas · OfiRent Condesa</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Excelente lugar para trabajar, buen espacio, con cafecito, buena conexión a internet y excelente personal.</p>
+        <div class="review-who"><span class="review-name">Ada SO</span><span class="review-meta">Local Guide · 43 reseñas · OfiRent Cuauhtémoc</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Excelentes instalaciones, muy atentos a toda necesidad, ambiente silencioso para dar una buena junta o capacitación.</p>
+        <div class="review-who"><span class="review-name">Jorge A. Lucatero</span><span class="review-meta">Local Guide · 5 reseñas · OfiRent Cuauhtémoc</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Excelente atención y servicio. Muy céntrico y con muchas vías de acceso.</p>
+        <div class="review-who"><span class="review-name">Corporativo Lomas Business Center</span><span class="review-meta">Local Guide · 6 reseñas · OfiRent Del Valle</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br>Nápoles · Del Valle · Condesa · Roma · Narvarte · Cuauhtémoc</div>
+      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>hola@ofirent.com.mx</div>
+    </div>
+    <div class="footer-bottom">OFIRENT · CONCEPTO DE REDISEÑO, NO ES EL SITIO FINAL</div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/525532009907?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20OfiRent." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.93 7.93 0 0 0 3.85 1h.01a7.94 7.94 0 0 0 5.54-13.58zm-5.55 12.2a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.61 6.61 0 0 1-6.65 6.6zm3.62-4.94c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.63-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4s.2-.23.3-.35a1.36 1.36 0 0 0 .2-.34.37.37 0 0 0 0-.35c-.05-.1-.45-1.1-.62-1.5s-.33-.35-.45-.35h-.4a.75.75 0 0 0-.55.26 2.3 2.3 0 0 0-.72 1.7 4 4 0 0 0 .85 2.12 9.2 9.2 0 0 0 3.54 3.13c.5.21.88.34 1.18.44a2.85 2.85 0 0 0 1.3.08 2.13 2.13 0 0 0 1.4-.98 1.73 1.73 0 0 0 .12-.98c-.05-.09-.18-.14-.38-.24z"/></svg>
+</a>
+
+<script>
+  document.querySelectorAll('.accordion-header').forEach(function(h){
+    h.addEventListener('click', function(){
+      var item = h.closest('.accordion-item');
+      var wasOpen = item.classList.contains('open');
+      item.parentElement.querySelectorAll('.accordion-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  var ubic = null, tamano = null;
+  function updateWa(){
+    var parts = [];
+    if(ubic) parts.push('Ubicación: ' + ubic);
+    if(tamano) parts.push('Tamaño de equipo: ' + tamano);
+    var msg = 'Hola, me interesa una oficina con OfiRent.' + (parts.length ? ' ' + parts.join('. ') + '.' : '');
+    document.getElementById('wa-link').href = 'https://wa.me/525532009907?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('#pill-ubicacion .pill').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#pill-ubicacion .pill').forEach(function(x){x.classList.remove('selected');});
+      b.classList.add('selected'); ubic = b.dataset.val; updateWa();
+    });
+  });
+  document.querySelectorAll('#pill-tamano .pill').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#pill-tamano .pill').forEach(function(x){x.classList.remove('selected');});
+      b.classList.add('selected'); tamano = b.dataset.val; updateWa();
+    });
+  });
+  updateWa();
+
+  document.querySelectorAll('.reveal-group').forEach(function(group){
+    var items = group.querySelectorAll('.reveal');
+    items.forEach(function(el, i){ el.style.transitionDelay = Math.min(i*70,420) + 'ms'; });
+  });
+  var groupIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+        groupIO.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal-group').forEach(function(g){ groupIO.observe(g); });
+
+  var navEl = document.querySelector('nav.topnav');
+  var lastY = window.scrollY;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if(y > lastY && y > navEl.offsetHeight){ navEl.classList.add('nav-hidden'); }
+    else if(y < lastY){ navEl.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, {passive:true});
+</script>
+</body>
+</html>

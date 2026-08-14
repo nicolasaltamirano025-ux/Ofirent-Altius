@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<title>Flyer reseñas OfiRent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page{ size: 8.5in 11in; margin: 0; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  width:8.5in;
+  height:11in;
+  background:#f7f8f5;
+  font-family:'Public Sans', sans-serif;
+  color:#1c1f1d;
+  position:relative;
+  overflow:hidden;
+}
+
+.deco-top{
+  position:absolute; top:-2.2in; right:-2.2in;
+  width:5in; height:5in; border-radius:50%;
+  background:#eaf1ec;
+}
+.deco-bottom{
+  position:absolute; bottom:-2.6in; left:-2in;
+  width:5.4in; height:5.4in; border-radius:50%;
+  background:#eaf1ec;
+}
+
+.page{
+  position:relative;
+  width:100%; height:100%;
+  padding:0.35in 0.65in 1.45in;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.logo{ width:1.9in; height:auto; }
+
+.eyebrow{
+  margin-top:0.4in;
+  font-family:'Public Sans', sans-serif;
+  font-weight:700;
+  font-size:13pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:#1f5d40;
+}
+
+h1{
+  font-family:'Big Shoulders Display', sans-serif;
+  font-weight:800;
+  font-size:42pt;
+  line-height:1.08;
+  letter-spacing:0.3px;
+  color:#153e2b;
+  margin:0.18in 0 0;
+  max-width:6.9in;
+}
+
+.sub{
+  font-size:14pt;
+  line-height:1.5;
+  color:#4b524d;
+  max-width:5.6in;
+  margin:0.28in 0 0;
+}
+
+.qr-card{
+  margin-top:0.42in;
+  background:#ffffff;
+  border-radius:0.32in;
+  box-shadow:0 0.2in 0.55in rgba(21,62,43,0.16);
+  padding:0.35in;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.qr-card img{ width:2.9in; height:2.9in; display:block; }
+.scan-caption{
+  margin-top:0.22in;
+  font-weight:700;
+  font-size:12.5pt;
+  color:#153e2b;
+}
+
+.steps{
+  margin-top:0.12in;
+  display:flex;
+  gap:0.5in;
+  justify-content:center;
+}
+.step{
+  max-width:1.8in;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.step-num{
+  width:0.5in; height:0.5in;
+  border-radius:50%;
+  background:#1f5d40;
+  color:#fff;
+  font-family:'Big Shoulders Display', sans-serif;
+  font-weight:700;
+  font-size:18pt;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:0.12in;
+}
+.step-text{ font-size:11pt; color:#4b524d; line-height:1.4; }
+
+.footer{
+  position:absolute;
+  bottom:0; left:0;
+  width:100%;
+  background:#153e2b;
+  color:#eaf1ec;
+  padding:0.4in 0.4in;
+  font-size:12.5pt;
+  font-weight:500;
+  text-align:center;
+}
+.footer strong{ color:#fff; font-size:14.5pt; }
+</style>
+</head>
+<body>
+<div class="deco-top"></div>
+<div class="deco-bottom"></div>
+<div class="page">
+  <img class="logo" src="assets/logo-ofirent.png" alt="OfiRent">
+
+  <div class="eyebrow">Tu opinión nos importa</div>
+  <h1>¿Cómo ha sido tu experiencia con nosotros?</h1>
+  <p class="sub">Escanea el código y cuéntanos. Toma menos de un minuto y nos ayuda a seguir mejorando.</p>
+
+  <div class="qr-card">
+    <img src="assets/qr-resenas.png" alt="Código QR">
+    <div class="scan-caption">Escanea con la cámara de tu celular</div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Abre la cámara de tu celular y apunta al código</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Toca el aviso que aparece en la pantalla</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Califícanos y cuéntanos qué podemos mejorar</div>
+    </div>
+  </div>
+
+  <div class="footer"><strong>Gracias por ser parte de OfiRent.</strong><br>Oficinas equipadas y virtuales en la Ciudad de México</div>
+</div>
+</body>
+</html>

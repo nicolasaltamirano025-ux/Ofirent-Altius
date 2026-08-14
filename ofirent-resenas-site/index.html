@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reseñas OfiRent</title>
+<link rel="icon" href="/assets/logo-ofirent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* =====================================================================
+   ZONA EDITABLE — cambia colores/tamaños básicos aquí si hace falta.
+   Para cambiar TEXTOS y LINKS, ve al bloque CONFIG dentro de <script>
+   más abajo en este mismo archivo (búscalo con Ctrl+F: "ZONA EDITABLE").
+   ===================================================================== */
+:root{
+  --green:#1f5d40;
+  --green-dark:#153e2b;
+  --paper:#f7f8f5;
+  --card:#ffffff;
+  --ink:#1c1f1d;
+  --gray:#6b7280;
+  --line:#e6e8e4;
+  --gold:#f2a93b;
+  --radius:22px;
+  --radius-sm:14px;
+  --display:'Big Shoulders Display', sans-serif;
+  --body:'Public Sans', sans-serif;
+}
+/* ===================================================================== */
+
+*{box-sizing:border-box;}
+body{margin:0;}
+html,body{
+  min-height:100%;
+  background:var(--paper);
+  font-family:var(--body);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px 16px;
+}
+.card{
+  width:100%;
+  max-width:460px;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 20px 60px rgba(21,62,43,0.10), 0 2px 8px rgba(21,62,43,0.06);
+  padding:36px 30px 30px;
+  text-align:center;
+}
+.logo{
+  max-width:150px;
+  height:auto;
+  margin:0 auto 22px;
+  display:block;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:26px;
+  line-height:1.15;
+  letter-spacing:0.2px;
+  margin:0 0 8px;
+  color:var(--green-dark);
+}
+.sub{
+  font-size:15px;
+  color:var(--gray);
+  margin:0 0 26px;
+  line-height:1.5;
+}
+label.field-label{
+  display:block;
+  text-align:left;
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 6px;
+}
+select, input[type=text], input[type=tel], textarea{
+  width:100%;
+  font-family:var(--body);
+  font-size:15px;
+  padding:12px 14px;
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  background:#fff;
+  color:var(--ink);
+  outline:none;
+  transition:border-color .15s ease;
+}
+select:focus, input:focus, textarea:focus{ border-color:var(--green); }
+textarea{ resize:vertical; min-height:88px; font-family:var(--body); }
+.location-block{ margin-bottom:22px; }
+
+.stars-prompt{
+  font-size:14px;
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 14px;
+}
+.stars{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-bottom:6px;
+}
+.star-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:4px;
+  line-height:0;
+  transition:transform .12s ease;
+}
+.star-btn:hover{ transform:scale(1.12); }
+.star-btn svg{ width:42px; height:42px; display:block; }
+.star-btn .star-shape{
+  fill:#e3e5e0;
+  stroke:#d5d8d1;
+  stroke-width:1;
+  transition:fill .15s ease, stroke .15s ease;
+}
+.star-btn.filled .star-shape{ fill:var(--gold); stroke:var(--gold); }
+.rating-note{
+  min-height:18px;
+  font-size:13px;
+  color:var(--gray);
+  margin-bottom:4px;
+}
+
+.extra-fields{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transition:max-height .35s ease, opacity .3s ease, margin .35s ease;
+}
+.extra-fields.open{
+  max-height:600px;
+  opacity:1;
+  margin-top:18px;
+}
+.extra-fields .field{ margin-bottom:14px; text-align:left; }
+.intro-negative{
+  font-size:14px;
+  color:var(--ink);
+  background:#f2f6f3;
+  border-radius:var(--radius-sm);
+  padding:12px 14px;
+  margin-bottom:16px;
+  text-align:left;
+  line-height:1.5;
+}
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:999px;
+  padding:14px 20px;
+  font-family:var(--body);
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+  transition:transform .12s ease, background .15s ease, opacity .15s ease;
+}
+.btn:active{ transform:scale(0.98); }
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+}
+.btn-primary:hover{ background:var(--green-dark); }
+.btn-primary:disabled{ opacity:.5; cursor:not-allowed; }
+
+.state{ display:none; }
+.state.active{ display:block; }
+
+.result-icon{
+  width:58px; height:58px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 16px;
+}
+.result-icon.positive{ background:#e7f2ec; color:var(--green); }
+.result-icon.negative{ background:#f2f6f3; color:var(--green-dark); }
+.result-icon svg{ width:28px; height:28px; }
+.result-title{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:22px;
+  color:var(--green-dark);
+  margin:0 0 8px;
+}
+.result-text{
+  font-size:14.5px;
+  color:var(--gray);
+  line-height:1.5;
+  margin:0;
+}
+.spinner{
+  width:20px;height:20px;
+  border-radius:50%;
+  border:2.5px solid #cfe0d7;
+  border-top-color:var(--green);
+  display:inline-block;
+  margin-top:14px;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.footer-note{
+  margin-top:24px;
+  font-size:11.5px;
+  color:#a3a9a1;
+  letter-spacing:0.2px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="card">
+
+    <!-- ===== ESTADO 1: formulario de calificación ===== -->
+    <div class="state active" id="state-rate">
+      <img class="logo" src="/assets/logo-ofirent.png" alt="OfiRent">
+      <h1 id="txt-headline"></h1>
+      <p class="sub" id="txt-subheadline"></p>
+
+      <div class="location-block">
+        <label class="field-label" for="location" id="txt-location-label"></label>
+        <select id="location"></select>
+      </div>
+
+      <p class="stars-prompt" id="txt-star-prompt"></p>
+      <div class="stars" id="stars"></div>
+      <p class="rating-note" id="rating-note"></p>
+
+      <div class="extra-fields" id="extra-fields">
+        <p class="intro-negative" id="txt-negative-intro"></p>
+        <div class="field">
+          <label class="field-label" id="txt-comment-label" for="f-comment"></label>
+          <textarea id="f-comment"></textarea>
+        </div>
+        <div class="field">
+          <label class="field-label" id="txt-name-label" for="f-name"></label>
+          <input type="text" id="f-name">
+        </div>
+        <div class="field">
+          <label class="field-label" id="txt-phone-label" for="f-phone"></label>
+          <input type="tel" id="f-phone">
+        </div>
+        <button class="btn btn-primary" id="btn-submit-negative"></button>
+        <p class="rating-note" id="submit-error" style="color:#c0392b; display:none;"></p>
+      </div>
+    </div>
+
+    <!-- ===== ESTADO 2: camino positivo (redirigiendo) ===== -->
+    <div class="state" id="state-positive">
+      <div class="result-icon positive">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="result-title" id="txt-positive-title"></h2>
+      <p class="result-text" id="txt-positive-text"></p>
+      <div class="spinner"></div>
+    </div>
+
+    <!-- ===== ESTADO 3: camino negativo, confirmación ===== -->
+    <div class="state" id="state-negative-done">
+      <div class="result-icon negative">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="result-title" id="txt-negative-done-title"></h2>
+      <p class="result-text" id="txt-negative-done-text"></p>
+    </div>
+
+    <p class="footer-note" id="txt-footer"></p>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   ZONA EDITABLE — TEXTOS Y LINKS
+   (La conexión con la base de datos de Airtable NO vive aquí, vive del
+   lado del servidor en /api/review.js + variables de entorno en Vercel,
+   para que el token privado nunca quede expuesto en esta página pública.)
+   Cambia lo que necesites aquí abajo. No toques nada después del
+   bloque que dice "NO EDITAR DE AQUÍ PARA ABAJO".
+   ===================================================================== */
+const CONFIG = {
+
+  // Textos de la pantalla principal
+  headline: "¿Cómo fue tu experiencia con nosotros?",
+  subheadline: "Tu opinión nos ayuda a mejorar. Tómate 10 segundos.",
+
+  // Selector de ubicación
+  locationLabel: "Selecciona tu ubicación",
+  locations: [
+    "Nápoles",
+    "Del Valle",
+    "Condesa",
+    "Roma",
+    "Narvarte",
+    "Río Po (Cuauhtémoc)"
+  ],
+
+  starPrompt: "Toca las estrellas para calificarnos",
+
+  // A partir de cuántas estrellas se considera "positiva" (va al link externo).
+  // Con 4: 4 y 5 estrellas = positiva. 1, 2 y 3 = negativa (formulario interno).
+  positiveThreshold: 4,
+
+  // ---- Camino POSITIVO (4-5 estrellas) ----
+  positiveTitle: "¡Gracias por tu calificación!",
+  positiveText: "Nos alegra que tu experiencia haya sido excelente. Te estamos redirigiendo…",
+  // PENDIENTE: pega aquí el link al que quieres mandar a la gente feliz (ej. tu link de reseña de Google).
+  // PENDIENTE: pega aquí el link de reseña de Google de CADA ubicación
+  // (Google Business Profile → esa sede → "Pedir reseñas" → copiar enlace,
+  // se ve tipo g.page/r/XXXXXXXXXXXX/review). Debe haber uno por cada
+  // nombre exacto que está arriba en "locations".
+  // Sacados el 2026-08-09 vía el Place ID de cada ficha real de Google
+  // (herramienta pública "Place ID Finder" de Google, verificados contra
+  // la dirección real de cada sucursal). Si Google cambia el Place ID de
+  // alguna ficha en el futuro, solo hay que repetir el proceso para esa.
+  positiveLinks: {
+    "Nápoles": "https://search.google.com/local/writereview?placeid=ChIJ752Gjkz_0YURiret7gFI6FA",
+    "Del Valle": "https://search.google.com/local/writereview?placeid=ChIJpdLIuAv_0YURzNNtdULrNik",
+    "Condesa": "https://search.google.com/local/writereview?placeid=ChIJjwIzpmL_0YURWp3D-ho7gpQ",
+    "Roma": "https://search.google.com/local/writereview?placeid=ChIJUw3NxY7_0YURMPipei0MTTk",
+    "Narvarte": "https://search.google.com/local/writereview?placeid=ChIJgTgOhsv_0YURNZRkAWbm8WE",
+    "Río Po (Cuauhtémoc)": "https://search.google.com/local/writereview?placeid=ChIJX43jGBj50YURZz4f3yTdktE"
+  },
+  positiveRedirectDelayMs: 1400,
+
+  // ---- Camino NEGATIVO (1-3 estrellas) ----
+  negativeIntro: "Gracias por tu honestidad. Cuéntanos qué pasó para poder mejorar:",
+  commentLabel: "¿Qué podríamos mejorar?",
+  commentPlaceholder: "Cuéntanos con el mayor detalle posible…",
+  nameLabel: "Tu nombre",
+  phoneLabel: "Tu teléfono",
+  submitButtonText: "Enviar comentario",
+  negativeDoneTitle: "Gracias por tu comentario",
+  negativeDoneText: "Ya lo registramos. Nuestro equipo lo va a revisar y te lo agradecemos mucho.",
+
+  footer: "Encuesta de uso interno — OfiRent",
+
+  // Error genérico si algo falla al guardar el comentario en Airtable
+  errorText: "No se pudo guardar tu comentario. Por favor intenta de nuevo."
+};
+/* =====================================================================
+   NO EDITAR DE AQUÍ PARA ABAJO
+   ===================================================================== */
+
+document.title = "Reseñas OfiRent";
+
+// Render textos estáticos
+document.getElementById('txt-headline').textContent = CONFIG.headline;
+document.getElementById('txt-subheadline').textContent = CONFIG.subheadline;
+document.getElementById('txt-location-label').textContent = CONFIG.locationLabel;
+document.getElementById('txt-star-prompt').textContent = CONFIG.starPrompt;
+document.getElementById('txt-negative-intro').textContent = CONFIG.negativeIntro;
+document.getElementById('txt-comment-label').textContent = CONFIG.commentLabel;
+document.getElementById('f-comment').placeholder = CONFIG.commentPlaceholder;
+document.getElementById('txt-name-label').textContent = CONFIG.nameLabel;
+document.getElementById('txt-phone-label').textContent = CONFIG.phoneLabel;
+document.getElementById('btn-submit-negative').textContent = CONFIG.submitButtonText;
+document.getElementById('txt-positive-title').textContent = CONFIG.positiveTitle;
+document.getElementById('txt-positive-text').textContent = CONFIG.positiveText;
+document.getElementById('txt-negative-done-title').textContent = CONFIG.negativeDoneTitle;
+document.getElementById('txt-negative-done-text').textContent = CONFIG.negativeDoneText;
+document.getElementById('txt-footer').textContent = CONFIG.footer;
+
+// Poblar ubicaciones
+const locSelect = document.getElementById('location');
+CONFIG.locations.forEach(loc=>{
+  const opt = document.createElement('option');
+  opt.value = loc; opt.textContent = loc;
+  locSelect.appendChild(opt);
+});
+
+// Construir estrellas
+const starsWrap = document.getElementById('stars');
+const STAR_SVG = '<svg viewBox="0 0 24 24"><path class="star-shape" d="M12 2.5l2.9 6.06 6.6.83-4.86 4.6 1.28 6.6L12 17.9l-5.92 3.09 1.28-6.6L2.5 9.4l6.6-.83L12 2.5z"/></svg>';
+let currentRating = 0;
+const starButtons = [];
+for(let i=1;i<=5;i++){
+  const b = document.createElement('button');
+  b.type='button';
+  b.className='star-btn';
+  b.setAttribute('aria-label', i+' estrellas');
+  b.innerHTML = STAR_SVG;
+  b.addEventListener('mouseenter', ()=> paintStars(i));
+  b.addEventListener('mouseleave', ()=> paintStars(currentRating));
+  b.addEventListener('click', ()=> selectRating(i));
+  starsWrap.appendChild(b);
+  starButtons.push(b);
+}
+function paintStars(n){
+  starButtons.forEach((btn,idx)=>{
+    btn.classList.toggle('filled', idx < n);
+  });
+}
+
+const ratingNote = document.getElementById('rating-note');
+const extraFields = document.getElementById('extra-fields');
+
+function selectRating(n){
+  currentRating = n;
+  paintStars(n);
+  ratingNote.textContent = n + (n===1 ? ' estrella' : ' estrellas');
+
+  if(n >= CONFIG.positiveThreshold){
+    extraFields.classList.remove('open');
+    goPositive();
+  } else {
+    extraFields.classList.add('open');
+    setTimeout(()=> extraFields.scrollIntoView({behavior:'smooth', block:'nearest'}), 200);
+  }
+}
+
+function showState(id){
+  document.querySelectorAll('.state').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goPositive(){
+  showState('state-positive');
+  const selectedLocation = locSelect.value;
+  const url = CONFIG.positiveLinks[selectedLocation] || Object.values(CONFIG.positiveLinks)[0];
+  setTimeout(()=>{
+    window.location.href = url;
+  }, CONFIG.positiveRedirectDelayMs);
+}
+
+document.getElementById('btn-submit-negative').addEventListener('click', async ()=>{
+  const btn = document.getElementById('btn-submit-negative');
+  const errorEl = document.getElementById('submit-error');
+  btn.disabled = true;
+  errorEl.style.display = 'none';
+
+  const payload = {
+    rating: currentRating,
+    location: locSelect.value || '',
+    comment: document.getElementById('f-comment').value.trim(),
+    name: document.getElementById('f-name').value.trim(),
+    phone: document.getElementById('f-phone').value.trim()
+  };
+
+  try{
+    const res = await fetch('/api/review', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error('bad response');
+    showState('state-negative-done');
+  }catch(e){
+    errorEl.textContent = CONFIG.errorText;
+    errorEl.style.display = 'block';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
