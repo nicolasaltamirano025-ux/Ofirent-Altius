@@ -190,7 +190,8 @@
   .map-image-card{display:block;width:100%;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(12,22,31,.1);transition:transform .2s ease, box-shadow .2s ease;}
   .map-image-card:hover{transform:translateY(-3px);box-shadow:0 24px 56px rgba(12,22,31,.14);}
   .map-image-card img{display:block;width:100%;height:auto;}
-  .location-photo{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line);}
+  .location-photo{display:block;width:100%;max-height:480px;object-fit:cover;object-position:center 30%;border-radius:16px;border:1px solid var(--line);}
+  @media (max-width:700px){ .location-photo{max-height:340px;} }
   .rating-text b{color:var(--ink);font-family:var(--mono);font-size:15px;}
   .rating-text a{color:var(--blue);text-decoration:none;font-weight:600;}
   .rating-text a:hover{text-decoration:underline;}
@@ -800,7 +801,7 @@
     <a class="map-image-card" href="https://www.google.com/maps/search/Torre+Altius+Corporate+Center+Queretaro" target="_blank" rel="noopener" aria-label="Ver Torre Altius en Google Maps">
       <img src="/assets/mapa-altius.jpg" alt="Mapa de Torre Altius en Querétaro">
     </a>
-    <img class="location-photo" src="/assets/location.jpg" alt="Torre Altius, vista exterior" style="width:100%;height:auto;aspect-ratio:auto;margin-top:24px;">
+    <img class="location-photo" src="/assets/location.jpg" alt="Torre Altius, vista exterior" style="margin-top:24px;">
   </div>
 </section>
 
