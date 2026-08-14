@@ -4,7 +4,7 @@ Monorepo con 3 sitios estáticos independientes para las marcas **OfiRent** (ren
 
 ## Qué hace cada sitio
 
-- **`ofirent-cdmx-site/`** — Sitio principal de OfiRent CDMX. Home con hero, servicios (oficina virtual/equipada/coworking), las 6 ubicaciones, planes, FAQ, formulario de contacto. Más 6 páginas de detalle por ubicación (`ubicacion-*.html`).
+- **`ofirent-cdmx-site/`** — Sitio principal de OfiRent CDMX. Home con hero, servicios (oficina virtual/equipada/coworking), las 6 ubicaciones, planes, FAQ, formulario de contacto. Más: 6 páginas de ubicación en `/ubicaciones/renta-oficinas-colonia-*/` (vía rewrites de `vercel.json`, archivos físicos siguen siendo `ubicacion-*.html`), 3 páginas de servicio dedicadas en `/servicios/`, y el blog completo migrado de WordPress (94 posts reales en `/blog/<slug>/`, generados por `blog-data/generate_blog.py` a partir de `blog-data/wp-posts-raw.json`). Las URLs ya calzan 1:1 con las del sitio real en WordPress (`ofirent.com.mx`), pensado para cuando se apunte el dominio real — ver la sección de "Contexto de negocio" más abajo antes de tocar eso.
 - **`torre-altius-site/`** — Sitio de Torre Altius Querétaro (una sola página, `index.html`). Hero con foto real del edificio, oficinas disponibles, salas de juntas/capacitación, inquilinos reales (TV Azteca, Bepensa, RAC, Forvia), planes de oficina virtual, FAQ, contacto.
 - **`ofirent-resenas-site/`** — Landing interna de una sola página con flujo de calificación por estrellas: 4-5★ redirige a la reseña de Google de la sucursal seleccionada, 1-3★ abre un formulario (comentario/nombre/teléfono) que se guarda en Airtable vía una función serverless. Pensado para repartirse con un flyer/QR en las oficinas, **no es parte del sitio público de marketing**.
 
