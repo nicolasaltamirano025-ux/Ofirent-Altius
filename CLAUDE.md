@@ -55,8 +55,10 @@ Cada carpeta es su propio proyecto de Vercel bajo el team **`fully-promoted-qro`
 
 ```bash
 cd ofirent-cdmx-site   # o torre-altius-site / ofirent-resenas-site
-npx vercel deploy --prod --yes
+npx vercel deploy --prod --yes --scope fully-promoted-qro
 ```
+
+El `--scope` es necesario explícitamente (sin él, la CLI puede intentar resolver el team equivocado y falla con "Not authorized" aunque `.vercel/project.json` ya tenga el `orgId` correcto).
 
 URLs de producción:
 - OfiRent CDMX: https://ofirent-cdmx-site.vercel.app
