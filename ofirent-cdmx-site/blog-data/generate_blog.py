@@ -7,6 +7,9 @@ URL structure. Also generates /blog/index.html as a listing page.
 import json, os, re, html
 from bs4 import BeautifulSoup
 
+with open(os.path.join(os.path.dirname(__file__), "image-url-map.json"), encoding="utf-8") as _f:
+    IMAGE_MAP = json.load(_f)
+
 SITE_ROOT = r"C:/Users/Nicolas/Desktop/Ofirent-Altius/ofirent-cdmx-site"
 DATA_FILE = os.path.join(SITE_ROOT, "blog-data", "wp-posts-raw.json")
 SITE_URL = "https://ofirent-cdmx-site.vercel.app"
@@ -80,6 +83,7 @@ def build_page(post):
     media = embedded.get("wp:featuredmedia")
     if media and isinstance(media, list) and media[0].get("source_url"):
         img_url = media[0]["source_url"]
+        img_url = IMAGE_MAP.get(img_url, img_url)
 
     soup = BeautifulSoup(post["content"]["rendered"], "lxml")
     auto_post = soup.select_one("div.auto-post")
@@ -190,7 +194,7 @@ def main():
         img_url = None
         media = post.get("_embedded", {}).get("wp:featuredmedia")
         if media and isinstance(media, list) and media[0].get("source_url"):
-            img_url = media[0]["source_url"]
+            img_url = IMAGE_MAP.get(media[0]["source_url"], media[0]["source_url"])
         listing_items.append({
             "slug": slug, "title": title, "excerpt": excerpt,
             "date": post["date"][:10], "img": img_url,
