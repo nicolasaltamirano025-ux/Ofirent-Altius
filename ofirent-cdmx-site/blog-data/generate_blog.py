@@ -47,6 +47,7 @@ FOOTER = '''<footer id="contacto">
     lastY = y;
   }, {passive:true});
 </script>
+<script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>
 '''
