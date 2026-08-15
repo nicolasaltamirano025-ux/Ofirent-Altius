@@ -202,6 +202,17 @@
   .footer-contact{font-family:var(--body);font-size:12.5px;line-height:2;}
   .footer-bottom{font-family:var(--body);font-size:10.5px;color:var(--steel);margin-top:40px;border-top:1px solid var(--line);padding-top:20px;}
 
+  .social-icons{display:flex;gap:12px;margin-top:14px;}
+  .social-icons a{width:32px;height:32px;border-radius:50%;background:var(--paper-raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:background .15s ease, transform .15s ease;}
+  .social-icons a:hover{background:var(--green);transform:translateY(-2px);}
+  .social-icons svg{width:16px;height:16px;fill:var(--steel);}
+  .social-icons a:hover svg{fill:#fff;}
+
+  .footer-blog b{color:var(--ink);display:block;font-family:var(--display);font-size:18px;margin-bottom:6px;}
+  .footer-blog p{font-family:var(--body);font-size:12.5px;color:var(--steel);line-height:1.6;margin-bottom:8px;max-width:220px;}
+  .footer-blog a{font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--green);text-decoration:none;}
+  .footer-blog a:hover{text-decoration:underline;}
+
   /* BLOG ARTICLE BODY */
   .blog-body{max-width:760px;}
   .blog-body .intro{font-size:17px;line-height:1.7;color:var(--ink);margin-bottom:8px;}
@@ -222,3 +233,19 @@
   .blog-body .elementor-accordion-content p{font-size:14.5px;line-height:1.7;color:var(--steel);margin:0;}
   .blog-body section.interlink{margin-top:32px;padding:16px 20px;background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;font-size:14.5px;}
   .blog-body section.interlink a, section.interlink a{color:var(--green);}
+
+  /* ANNIVERSARY BANNER */
+  .anniversary-banner{position:relative;overflow:hidden;background:linear-gradient(120deg, var(--green-deep), var(--green) 60%, var(--gold-deep));color:#fff;padding:14px 0;}
+  .anniversary-banner.hidden{display:none;}
+  .anniversary-inner{display:flex;align-items:center;gap:16px;position:relative;z-index:2;}
+  .anniversary-num{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,.25);flex-shrink:0;}
+  .anniversary-text{font-family:var(--body);font-size:14px;line-height:1.5;}
+  .anniversary-text b{font-weight:800;}
+  .anniversary-close{margin-left:auto;flex-shrink:0;background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease;}
+  .anniversary-close:hover{background:rgba(255,255,255,.3);}
+  @media (max-width:700px){ .anniversary-num{font-size:26px;} .anniversary-text{font-size:12.5px;} }
+
+  .confetti-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+  .confetti-piece{position:absolute;top:-20px;width:8px;height:14px;opacity:.9;animation:confettiFall linear forwards;}
+  @keyframes confettiFall{ 0%{transform:translateY(0) rotate(0deg);opacity:1;} 100%{transform:translateY(160px) rotate(540deg);opacity:0;} }
+  @media (prefers-reduced-motion: reduce){ .confetti-piece{display:none;} }
