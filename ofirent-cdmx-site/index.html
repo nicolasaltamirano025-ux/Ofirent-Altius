@@ -31,6 +31,13 @@
 </head>
 <body>
 
+<div class="anniv-intro" id="anniv-intro" role="dialog" aria-modal="true" aria-label="Video de aniversario: 20 años de OfiRent">
+  <video class="anniv-intro-video" autoplay muted playsinline preload="auto">
+    <source src="/assets/aniversario-20-anos.mp4" type="video/mp4">
+  </video>
+  <button class="anniv-intro-close" id="anniv-intro-close" aria-label="Cerrar video">&times;</button>
+</div>
+
 <nav class="topnav">
   <div class="wrap topnav-inner">
     <div class="logo-mark"><img src="/assets/logo.png" alt="OfiRent"></div>
@@ -490,6 +497,31 @@
       banner.classList.add('hidden');
       sessionStorage.setItem('ofirent_anniv_dismissed', '1');
     });
+  })();
+
+  (function(){
+    var intro = document.getElementById('anniv-intro');
+    if(!intro) return;
+    if(sessionStorage.getItem('ofirent_anniv_video_seen')){
+      intro.remove();
+      return;
+    }
+    document.body.classList.add('anniv-lock');
+    var video = intro.querySelector('.anniv-intro-video');
+    var closeBtn = document.getElementById('anniv-intro-close');
+
+    function dismiss(){
+      sessionStorage.setItem('ofirent_anniv_video_seen', '1');
+      intro.classList.add('hidden');
+      document.body.classList.remove('anniv-lock');
+      setTimeout(function(){ intro.remove(); }, 550);
+    }
+
+    setTimeout(function(){ closeBtn.classList.add('show'); }, 2000);
+    video.addEventListener('error', function(){ closeBtn.classList.add('show'); });
+    video.addEventListener('ended', dismiss);
+    closeBtn.addEventListener('click', dismiss);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') dismiss(); });
   })();
 </script>
 <script src="/assets/cookie-consent.js" defer></script>

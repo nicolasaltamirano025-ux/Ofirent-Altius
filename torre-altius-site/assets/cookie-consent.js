@@ -1,16 +1,9 @@
 // Banner de consentimiento de cookies + carga condicional de Google Analytics 4.
-// PENDIENTE: reemplazar GA_MEASUREMENT_ID por el Measurement ID real (formato G-XXXXXXXXXX)
-// cuando exista la propiedad de GA4. Mientras tanto, el banner funciona normal pero
-// no carga ningún script de analítica real (evita mandar datos a un ID inventado).
 (function () {
-  var GA_MEASUREMENT_ID = 'G-PENDIENTE';
+  var GA_MEASUREMENT_ID = 'G-32SSPF4K9Q';
   var STORAGE_KEY = 'altius_cookie_consent';
 
   function loadGA() {
-    if (GA_MEASUREMENT_ID === 'G-PENDIENTE') {
-      console.log('[cookie-consent] Consentimiento otorgado, pero GA_MEASUREMENT_ID sigue siendo un placeholder. No se carga ningún script.');
-      return;
-    }
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
