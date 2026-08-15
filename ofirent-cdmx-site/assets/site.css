@@ -235,15 +235,16 @@
   .blog-body section.interlink a, section.interlink a{color:var(--green);}
 
   /* ANNIVERSARY BANNER */
-  .anniversary-banner{position:relative;overflow:hidden;background:linear-gradient(120deg, var(--green-deep), var(--green) 60%, var(--gold-deep));color:#fff;padding:14px 0;}
+  .anniversary-banner{position:relative;overflow:hidden;background:linear-gradient(120deg, var(--green-deep), var(--green) 60%, var(--gold-deep));color:#fff;padding:20px 0;}
   .anniversary-banner.hidden{display:none;}
-  .anniversary-inner{display:flex;align-items:center;gap:16px;position:relative;z-index:2;}
-  .anniversary-num{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,.25);flex-shrink:0;}
-  .anniversary-text{font-family:var(--body);font-size:14px;line-height:1.5;}
+  .anniversary-inner{display:flex;align-items:center;position:relative;z-index:2;}
+  .anniversary-content{display:flex;align-items:center;justify-content:center;gap:18px;flex:1;text-align:center;}
+  .anniversary-num{font-family:var(--display);font-weight:800;font-size:42px;line-height:1;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,.25);flex-shrink:0;}
+  .anniversary-text{font-family:var(--body);font-size:16px;line-height:1.5;}
   .anniversary-text b{font-weight:800;}
-  .anniversary-close{margin-left:auto;flex-shrink:0;background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease;}
+  .anniversary-close{margin-left:16px;flex-shrink:0;background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease;}
   .anniversary-close:hover{background:rgba(255,255,255,.3);}
-  @media (max-width:700px){ .anniversary-num{font-size:26px;} .anniversary-text{font-size:12.5px;} }
+  @media (max-width:700px){ .anniversary-content{flex-direction:column;gap:4px;text-align:center;} .anniversary-num{font-size:30px;} .anniversary-text{font-size:13.5px;} }
 
   .confetti-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
   .confetti-piece{position:absolute;top:-20px;width:8px;height:14px;opacity:.9;animation:confettiFall linear forwards;}
