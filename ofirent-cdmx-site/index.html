@@ -518,9 +518,9 @@
       setTimeout(function(){ intro.remove(); }, 550);
     }
 
-    setTimeout(function(){ closeBtn.classList.add('show'); }, 2000);
-    video.addEventListener('error', function(){ closeBtn.classList.add('show'); });
-    video.addEventListener('ended', dismiss);
+    closeBtn.classList.add('show');
+    setTimeout(dismiss, 2000);
+    video.addEventListener('error', dismiss);
     closeBtn.addEventListener('click', dismiss);
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') dismiss(); });
   })();
