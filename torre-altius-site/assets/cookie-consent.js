@@ -1,18 +1,16 @@
-// Banner de consentimiento de cookies + carga condicional de Google Analytics 4.
+// Banner de consentimiento de cookies + carga condicional de Google Tag Manager.
 (function () {
-  var GA_MEASUREMENT_ID = 'G-32SSPF4K9Q';
+  var GTM_ID = 'GTM-MLSS9VN';
   var STORAGE_KEY = 'altius_cookie_consent';
 
-  function loadGA() {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
-    document.head.appendChild(s);
+  function loadGTM() {
     window.dataLayer = window.dataLayer || [];
-    function gtag() { window.dataLayer.push(arguments); }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = document.getElementsByTagName('script')[0];
+    var j = document.createElement('script');
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+    f.parentNode.insertBefore(j, f);
   }
 
   function hideBanner() {
@@ -23,7 +21,7 @@
   function setConsent(value) {
     try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
     hideBanner();
-    if (value === 'granted') loadGA();
+    if (value === 'granted') loadGTM();
   }
 
   function renderBanner() {
@@ -62,7 +60,7 @@
   try { existing = localStorage.getItem(STORAGE_KEY); } catch (e) {}
 
   if (existing === 'granted') {
-    loadGA();
+    loadGTM();
   } else if (existing !== 'denied') {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderBanner);
