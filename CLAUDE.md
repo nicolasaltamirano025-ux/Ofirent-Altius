@@ -66,7 +66,11 @@ URLs de producción:
 - Torre Altius: https://torre-altius-site.vercel.app
 - Encuestas: https://ofirent-resenas.vercel.app
 
-Ninguno de los 3 apunta todavía a su dominio real (`ofirent.com.mx` / `torrealtius.com`) — ese cambio está pendiente de coordinarse con la agencia SEO del cliente para no perder posicionamiento (redirects 301, mismas URLs).
+Ninguno de los 3 apunta todavía a su dominio real (`ofirent.com.mx` / `torrealtius.com`) — el cambio de DNS está en proceso, coordinado con el técnico que administra ambos dominios (mismos nameservers `ns01/ns02.redwolfdns.com` para los dos, así que se pide en un solo mensaje). Ambos dominios ya están dados de alta y vinculados a su proyecto de Vercel correspondiente (`vercel domains add`), solo falta que el DNS real apunte:
+- `ofirent.com.mx`: requiere A (`@` → `216.198.79.1`), TXT de verificación (`_vercel` → `vc-domain-verify=ofirent.com.mx,fe58023227fdd8f096b2`) y CNAME (`www` → `2d6faa29230ee9e1.vercel-dns-017.com.`) — más complejo porque el dominio quedó marcado como "vinculado a otra cuenta de Vercel" (falso positivo, se resuelve con el TXT).
+- `torrealtius.com`: más simple, solo requiere A en `@` y en `www` → `76.76.21.21` (mismo IP para ambos, sin TXT de verificación).
+- `torre-altius-site/vercel.json` ya tiene los 301 redirects de las 5 URLs viejas indexadas del WordPress real (`/buscas-la-mejor-oficina-para-tu-empresa/`, `/oficinas-en-queretaro-renta/`, `/desde-346m2/`, `/desde-23m2/`, `/renta-de-oficinas-en-queretaro/`) hacia `/`, ya que son variantes casi duplicadas con contenido de 2019-2020 desactualizado (pisos que ya no se rentan) — no vale la pena reconstruirlas, mejor consolidar el link equity en el home nuevo.
+- En ambos dominios: **no tocar nameservers ni registros MX/correo existentes**, solo agregar los registros de arriba en el panel de DNS actual.
 
 ## Variables de entorno
 
