@@ -16,7 +16,7 @@ SITE_URL = "https://ofirent-cdmx-site.vercel.app"
 
 NAV = '''<nav class="topnav">
   <div class="wrap topnav-inner">
-    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
+    <div class="logo-mark"><a href="/"><img src="/assets/logo-20-anos.png" alt="OfiRent"></a></div>
     <div class="navlinks">
       <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/blog/">Blog</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -26,7 +26,7 @@ NAV = '''<nav class="topnav">
 FOOTER = '''<footer id="contacto">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br>Nápoles · Del Valle · Condesa · Roma · Narvarte · Cuauhtémoc</div>
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a> · <a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a> · <a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a> · <a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a> · <a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a> · <a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></div>
       <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>contacto@ofirent.com.mx</div>
     </div>
     <div class="footer-bottom">OFIRENT · CONCEPTO DE REDISEÑO, NO ES EL SITIO FINAL</div>

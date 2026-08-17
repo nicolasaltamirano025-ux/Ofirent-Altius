@@ -199,6 +199,8 @@
   footer{background:var(--paper);color:var(--steel);padding:56px 0 34px;border-top:1px solid var(--line);}
   .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
   .footer-addr b{color:var(--ink);display:block;font-family:var(--display);font-size:18px;margin-bottom:6px;}
+  .footer-addr a{color:var(--steel);text-decoration:none;}
+  .footer-addr a:hover{color:var(--green);text-decoration:underline;}
   .footer-contact{font-family:var(--body);font-size:12.5px;line-height:2;}
   .footer-bottom{font-family:var(--body);font-size:10.5px;color:var(--steel);margin-top:40px;border-top:1px solid var(--line);padding-top:20px;}
 
@@ -212,6 +214,18 @@
   .footer-blog p{font-family:var(--body);font-size:12.5px;color:var(--steel);line-height:1.6;margin-bottom:8px;max-width:220px;}
   .footer-blog a{font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--green);text-decoration:none;}
   .footer-blog a:hover{text-decoration:underline;}
+
+  /* BLOG LISTING GRID */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px;}
+  @media (max-width:900px){ .blog-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .blog-grid{grid-template-columns:1fr;} }
+  .blog-card{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s ease, box-shadow .2s ease;}
+  .blog-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(19,32,26,.12);}
+  .blog-card img{width:100%;height:180px;object-fit:cover;display:block;}
+  .blog-card-body{padding:18px 20px;display:flex;flex-direction:column;flex:1;}
+  .blog-card-date{font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.03em;color:var(--green);text-transform:uppercase;margin-bottom:8px;}
+  .blog-card-title{font-family:var(--display);font-size:18px;line-height:1.25;color:var(--ink);margin-bottom:8px;}
+  .blog-card-excerpt{font-family:var(--body);font-size:13.5px;line-height:1.6;color:var(--steel);flex:1;}
 
   /* BLOG ARTICLE BODY */
   .blog-body{max-width:760px;}
