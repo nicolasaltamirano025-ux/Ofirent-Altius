@@ -33,7 +33,8 @@
   nav.topnav.nav-hidden{transform:translateY(-100%);}
   .topnav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;}
   @media (max-width:700px){ .topnav-inner{padding:12px 20px;} }
-  .logo-mark img{height:48px;width:auto;}
+  .logo-mark img{height:64px;width:auto;}
+  @media (max-width:700px){ .logo-mark img{height:52px;} }
   .navlinks{display:flex;align-items:center;gap:28px;font-family:var(--body);font-weight:700;font-size:14px;color:#13201a;}
   .navlinks a{text-decoration:none;}
   .navlinks a:hover{color:var(--green);}
