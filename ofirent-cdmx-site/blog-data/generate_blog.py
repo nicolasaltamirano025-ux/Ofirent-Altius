@@ -156,6 +156,9 @@ def build_page(post):
 <title>{html.escape(title)} | Blog OfiRent</title>
 <meta name="description" content="{excerpt}">
 ''' + "\n".join(f'<script type="application/ld+json">\n{b}\n</script>' for b in ld_blocks) + f'''
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{{position:relative;overflow:hidden;padding:124px 0 40px;background:var(--paper);}}
@@ -221,7 +224,7 @@ def main():
     cards = []
     for it in listing_items:
         img_html = f'<img src="{it["img"]}" alt="{html.escape(it["title"])}" loading="lazy">' if it["img"] else ""
-        cards.append(f'''      <a class="blog-card reveal" href="/blog/{it['slug']}/">
+        cards.append(f'''      <a class="blog-card" href="/blog/{it['slug']}/">
         {img_html}
         <div class="blog-card-body">
           <div class="blog-card-date">{it['date']}</div>
@@ -237,6 +240,9 @@ def main():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blog OfiRent · Oficinas, domicilio fiscal y coworking en CDMX</title>
 <meta name="description" content="Guías y artículos sobre oficinas equipadas, oficinas virtuales, domicilio fiscal y coworking en las 6 ubicaciones de OfiRent en Ciudad de México.">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{{position:relative;overflow:hidden;padding:124px 0 40px;background:var(--paper);}}
