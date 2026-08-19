@@ -3,22 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oficina Virtual CDMX · Domicilio Fiscal y Comercial | OfiRent</title>
-<meta name="description" content="Contrata oficina virtual en CDMX con domicilio fiscal y comercial desde $799/mes. 4 planes, 6 ubicaciones, acceso a sala de juntas y estación de trabajo.">
+<title>Oficinas Virtuales y Domicilio Fiscal CDMX | OfiRent</title>
+<meta name="description" content="Contrata oficina virtual en CDMX con domicilio fiscal o comercial, recepción, atención de llamadas y acceso a espacios profesionales según tu plan.">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"Service",
-  "name":"Oficina Virtual CDMX",
-  "serviceType":"Oficina virtual, domicilio fiscal y comercial",
-  "description":"Oficina virtual en Ciudad de México con domicilio fiscal y comercial, línea telefónica y acceso a sala de juntas o estación de trabajo según el plan.",
-  "url":"https://ofirent-cdmx-site.vercel.app/servicios/renta-oficinas-virtuales-cdmx/",
-  "provider":{"@type":"Organization","name":"OfiRent","url":"https://ofirent-cdmx-site.vercel.app"},
-  "areaServed":{"@type":"City","name":"Ciudad de México"},
-  "offers":[
-    {"@type":"Offer","name":"Plan Básico","price":"799","priceCurrency":"MXN"},
-    {"@type":"Offer","name":"Plan Ejecutivo","price":"1299","priceCurrency":"MXN"},
-    {"@type":"Offer","name":"Plan Plus","price":"1599","priceCurrency":"MXN"},
-    {"@type":"Offer","name":"Plan VIP","price":"1899","priceCurrency":"MXN"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/#service",
+      "name": "Oficinas virtuales en CDMX",
+      "serviceType": "Oficina virtual, domicilio fiscal y domicilio comercial",
+      "description": "Servicio de oficinas virtuales en Ciudad de México con opciones de domicilio fiscal o comercial, recepción de correspondencia, atención telefónica y acceso a espacios profesionales según el plan contratado.",
+      "url": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/",
+      "provider": { "@id": "https://www.ofirent.com.mx/#organization" },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Benito Juárez, Ciudad de México" },
+        { "@type": "AdministrativeArea", "name": "Cuauhtémoc, Ciudad de México" }
+      ],
+      "offers":[
+        {"@type":"Offer","name":"Plan Básico","price":"799","priceCurrency":"MXN"},
+        {"@type":"Offer","name":"Plan Ejecutivo","price":"1299","priceCurrency":"MXN"},
+        {"@type":"Offer","name":"Plan Plus","price":"1599","priceCurrency":"MXN"},
+        {"@type":"Offer","name":"Plan VIP","price":"1899","priceCurrency":"MXN"}
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://www.ofirent.com.mx/contacto/",
+        "servicePhone": { "@type": "ContactPoint", "telephone": "+525532009907", "contactType": "sales", "availableLanguage": "es-MX" }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.ofirent.com.mx/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios" },
+        { "@type": "ListItem", "position": 3, "name": "Oficinas virtuales", "item": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/" }
+      ]
+    },
+    {
+      "@type": ["WebPage", "FAQPage"],
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/#webpage",
+      "url": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/",
+      "name": "Oficinas Virtuales y Domicilio Fiscal CDMX | OfiRent",
+      "description": "Contrata oficina virtual en CDMX con domicilio fiscal o comercial, recepción, atención de llamadas y acceso a espacios profesionales según tu plan.",
+      "isPartOf": { "@id": "https://www.ofirent.com.mx/#website" },
+      "about": { "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/#service" },
+      "breadcrumb": { "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/#breadcrumb" },
+      "inLanguage": "es-MX",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es una oficina virtual?", "acceptedAnswer": { "@type": "Answer", "text": "Es un servicio que permite utilizar una dirección profesional y contratar recepción, telefonía, correspondencia o acceso ocasional a espacios físicos sin ocupar una oficina todos los días." } },
+        { "@type": "Question", "name": "¿Puedo utilizar la dirección como domicilio fiscal?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, cuando el plan contratado incluye domicilio fiscal y el cliente cumple con la documentación y condiciones requeridas por OfiRent." } },
+        { "@type": "Question", "name": "¿Qué diferencia existe entre domicilio fiscal y comercial?", "acceptedAnswer": { "@type": "Answer", "text": "El domicilio fiscal se registra para efectos tributarios y administrativos. El domicilio comercial se utiliza como dirección pública de contacto y presentación empresarial." } },
+        { "@type": "Question", "name": "¿Reciben correspondencia y paquetería?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, cuando el plan incluye recepción de correspondencia. La entrega, notificación y recolección se realiza conforme a las reglas de la sede contratada." } },
+        { "@type": "Question", "name": "¿Pueden contestar las llamadas con el nombre de mi empresa?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Los planes con línea telefónica personalizada permiten que recepción conteste con el nombre de la empresa, transfiera llamadas o tome mensajes." } },
+        { "@type": "Question", "name": "¿Puedo utilizar salas de juntas?", "acceptedAnswer": { "@type": "Answer", "text": "Algunos planes incluyen o permiten contratar uso de salas u oficinas por evento. El acceso está sujeto al plan, reservación y disponibilidad." } },
+        { "@type": "Question", "name": "¿En qué zonas hay oficinas virtuales de OfiRent?", "acceptedAnswer": { "@type": "Answer", "text": "OfiRent ofrece opciones en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles, dentro de las alcaldías Cuauhtémoc y Benito Juárez." } },
+        { "@type": "Question", "name": "¿Puedo contratar una oficina virtual si vivo fuera de CDMX?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. La oficina virtual puede funcionar para empresas y profesionistas de otras ciudades que necesitan presencia empresarial en Ciudad de México." } },
+        { "@type": "Question", "name": "¿Cuánto tiempo tarda la activación?", "acceptedAnswer": { "@type": "Answer", "text": "El tiempo depende del plan, la revisión de documentos y la fecha de contratación. OfiRent confirma el proceso antes de formalizar el servicio." } },
+        { "@type": "Question", "name": "¿Puedo cambiar después a una oficina física?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. La disponibilidad de oficinas privadas depende de la sede, la capacidad requerida y la fecha de inicio." } }
+      ]
+    }
   ]
 }
 </script>
@@ -49,12 +95,29 @@
   <div class="wrap">
     <a class="back-link" href="/#servicios">← Ver todos los servicios</a>
     <div class="eyebrow">Oficina virtual · precio 2026</div>
-    <h1 class="hero-title">Oficina virtual en CDMX<br><span class="thin">Domicilio fiscal y comercial</span></h1>
-    <p class="hero-lede" style="max-width:60ch;">La misma flexibilidad de una oficina física, sin ocupar un espacio fijo. Domicilio fiscal y comercial, línea telefónica y acceso a sala de juntas o estación de trabajo, con el mismo esquema de 4 planes en nuestras 6 ubicaciones de Ciudad de México.</p>
+    <h1 class="hero-title">Oficinas virtuales en CDMX<br><span class="thin">para operar con una dirección profesional</span></h1>
+    <p class="hero-lede" style="max-width:60ch;">Una oficina virtual permite que tu empresa tenga presencia profesional en Ciudad de México sin mantener un espacio físico de uso diario. Dependiendo del plan, puedes contratar domicilio fiscal o comercial, recepción de correspondencia, atención de llamadas y acceso a salas u oficinas para reuniones.</p>
+    <p class="hero-lede" style="max-width:60ch;">OfiRent administra este servicio desde 2005 y cuenta con ubicaciones en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles.</p>
     <div class="hero-ctas">
-      <a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20la%20oficina%20virtual%20de%20OfiRent." target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-      <a class="btn ghost" href="/#ubicaciones">Ver ubicaciones</a>
+      <a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20la%20oficina%20virtual%20de%20OfiRent." target="_blank" rel="noopener">Solicitar información</a>
+      <a class="btn ghost" href="/#ubicaciones">Comparar ubicaciones</a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Cómo funciona</div>
+    <h2 class="section-title">¿Qué es una oficina virtual y cómo funciona?</h2>
+    <p class="section-sub">Una oficina virtual combina una dirección empresarial con servicios de recepción y apoyo administrativo. El cliente puede operar desde otra ciudad, desde casa o de forma remota, mientras OfiRent recibe correspondencia, atiende llamadas y facilita espacios profesionales conforme al plan contratado.</p>
+    <p class="section-sub">No todos los planes incluyen los mismos servicios. Algunas modalidades se enfocan en el domicilio fiscal o comercial; otras agregan línea telefónica personalizada, recepción de llamadas, uso de salas de juntas u oficinas por evento.</p>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>La recepción puede responder con el nombre de la empresa, transferir llamadas o tomar mensajes. También puede recibir correspondencia y paquetería vinculada con la operación del cliente, de acuerdo con las condiciones del servicio.</p>
+        <p>Cuando el usuario necesita reunirse con clientes, realizar una entrevista o trabajar durante algunas horas, puede solicitar el uso de una sala de juntas u oficina. Este acceso depende del plan, la reservación y la disponibilidad de la sede.</p>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -74,32 +137,153 @@
 <section>
   <div class="wrap">
     <div class="eyebrow">Qué incluye</div>
-    <h2 class="section-title">Pensada para operar sin oficina fija</h2>
-    <div class="amen-grid reveal-group">
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="1"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></div><div class="amen-name">Domicilio fiscal y comercial</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="1"/><rect x="8" y="3" width="3" height="2" rx="0.5"/><rect x="13" y="3" width="3" height="2" rx="0.5"/><rect x="8" y="19" width="3" height="2" rx="0.5"/><rect x="13" y="19" width="3" height="2" rx="0.5"/></svg></div><div class="amen-name">Sala de juntas</div><div class="amen-note">Según el plan</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M6 15c0-4 1.5-8 6-8s6 4 6 8"/><line x1="4" y1="15" x2="20" y2="15"/><path d="M9 18a3 3 0 0 0 6 0"/></svg></div><div class="amen-name">Recepción</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="11"/><line x1="10" y1="3" x2="10" y2="11"/><line x1="13" y1="3" x2="13" y2="11"/><path d="M7 11c0 2 1.5 3 3 3s3-1 3-3"/><line x1="10" y1="14" x2="10" y2="21"/></svg></div><div class="amen-name">Café en la ubicación</div></div>
+    <h2 class="section-title">Servicios que puede incluir una oficina virtual</h2>
+    <p class="section-sub">No comunicamos que todos los servicios están incluidos en todos los planes: cada beneficio depende del plan contratado.</p>
+    <div class="service-type-grid reveal-group">
+      <div class="service-type-card reveal"><h3>Domicilio fiscal</h3><p>Dirección que puede utilizarse para trámites fiscales cuando el plan contratado cumple con los requisitos aplicables. OfiRent orienta al cliente sobre la documentación necesaria antes de activar el servicio.</p></div>
+      <div class="service-type-card reveal"><h3>Domicilio comercial</h3><p>Dirección profesional para presentaciones comerciales, papelería, tarjetas, sitio web y comunicación con clientes o proveedores, conforme al alcance del plan.</p></div>
+      <div class="service-type-card reveal"><h3>Recepción de correspondencia</h3><p>Recepción de documentos, mensajería y paquetería relacionada con la operación de la empresa. La entrega o recolección depende de las reglas de cada sede y modalidad.</p></div>
+      <div class="service-type-card reveal"><h3>Línea telefónica personalizada</h3><p>Número con atención profesional. La recepción puede contestar con el nombre de la empresa, transferir llamadas o registrar mensajes.</p></div>
+      <div class="service-type-card reveal"><h3>Llamadas locales y nacionales</h3><p>Las líneas personalizadas pueden incluir llamadas locales y nacionales dentro del servicio contratado, sin cargos adicionales por llamada, según el plan.</p></div>
+      <div class="service-type-card reveal"><h3>Uso de salas u oficinas</h3><p>Algunas modalidades permiten reservar salas de juntas u oficinas por evento para reuniones, entrevistas, presentaciones o trabajo temporal.</p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20una%20propuesta%20de%20oficina%20virtual." target="_blank" rel="noopener">Solicitar una propuesta de oficina virtual</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Casos de uso</div>
+    <h2 class="section-title">¿Para quién funciona una oficina virtual?</h2>
+    <div class="compare-grid reveal-group">
+      <div class="compare-card reveal"><h3>Emprendedores y profesionistas</h3><p>Adecuada para quienes trabajan de forma remota y necesitan separar su domicilio personal de la imagen pública del negocio.</p></div>
+      <div class="compare-card reveal"><h3>Despachos y consultores</h3><p>Funciona para profesionales que requieren una dirección para recibir documentos, atender llamadas y reunirse ocasionalmente con clientes.</p></div>
+      <div class="compare-card reveal"><h3>Empresas en constitución</h3><p>Puede apoyar a negocios que necesitan definir un domicilio fiscal o comercial antes de iniciar operaciones, sujeto a revisión documental y contratación.</p></div>
+      <div class="compare-card reveal"><h3>Empresas de otras ciudades</h3><p>Permite establecer presencia en Ciudad de México sin abrir de inmediato una oficina física permanente.</p></div>
+      <div class="compare-card reveal"><h3>Equipos híbridos o remotos</h3><p>Ayuda a mantener una dirección institucional y un punto de recepción mientras el equipo trabaja desde distintas ubicaciones.</p></div>
+      <div class="compare-card reveal"><h3>Empresas que validan un mercado</h3><p>Puede utilizarse como etapa inicial antes de contratar una oficina privada o ampliar la operación en CDMX.</p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20ayuda%20para%20elegir%20un%20plan%20de%20oficina%20virtual." target="_blank" rel="noopener">Ayúdame a elegir un plan</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Diferencias importantes</div>
+    <h2 class="section-title">Domicilio fiscal y domicilio comercial: diferencias principales</h2>
+    <div class="compare-grid reveal-group" style="grid-template-columns:1fr 1fr;">
+      <div class="compare-card reveal"><h3>Domicilio fiscal</h3><p>Se relaciona con la ubicación registrada ante las autoridades para efectos tributarios y administrativos. Su contratación requiere documentación, validación y cumplimiento de las condiciones establecidas por OfiRent.</p></div>
+      <div class="compare-card reveal"><h3>Domicilio comercial</h3><p>Se utiliza como dirección pública de contacto para clientes, proveedores, sitio web, papelería y comunicación empresarial. No debe presentarse automáticamente como domicilio fiscal si el plan no incluye ese servicio.</p></div>
+    </div>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>Antes de contratar, el cliente debe indicar para qué utilizará la dirección. Esta información permite recomendar el plan adecuado y evitar que una dirección comercial se utilice para un trámite que requiere domicilio fiscal.</p>
+        <p>OfiRent cuenta con más de 20 años de experiencia en la administración de oficinas y domicilios empresariales. El objetivo es mantener una operación ordenada, recibir correctamente las comunicaciones y reducir riesgos derivados de información incompleta o de una contratación inadecuada.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn ghost" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20consultar%20un%20plan%20con%20domicilio%20fiscal." target="_blank" rel="noopener">Consultar un plan con domicilio fiscal</a></p>
+  </div>
+</section>
+
+<section class="alt" id="ubicaciones-virtual">
+  <div class="wrap">
+    <div class="eyebrow">Dónde dar de alta tu oficina virtual</div>
+    <h2 class="section-title">Ubicaciones disponibles en Ciudad de México</h2>
+    <div class="compare-grid reveal-group">
+      <div class="compare-card reveal"><h3>Roma</h3><p>Dirección profesional en una zona céntrica y activa. La sede cuenta con oficinas privadas, salas de juntas y área de coworking.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-roma/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Roma →</a></p></div>
+      <div class="compare-card reveal"><h3>Condesa</h3><p>Ubicación para empresas y profesionistas que requieren presencia en una zona comercial y profesional. Cuenta con oficinas privadas y salas de juntas.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-condesa/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Condesa →</a></p></div>
+      <div class="compare-card reveal"><h3>Cuauhtémoc – Río Pô</h3><p>Ubicación cercana a corredores corporativos. Cuenta con oficinas privadas, salas de juntas y sala de capacitación.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Cuauhtémoc →</a></p></div>
+      <div class="compare-card reveal"><h3>Del Valle</h3><p>Dirección en una zona consolidada de negocios, con oficinas privadas, salas de juntas y área de coworking.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-del-valle/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Del Valle →</a></p></div>
+      <div class="compare-card reveal"><h3>Narvarte</h3><p>Sede cercana a Metro Etiopía, Metrobús y Viaducto. Cuenta con oficinas privadas, coworking, terraza, salas de juntas y sala de capacitación.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-narvarte/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Narvarte →</a></p></div>
+      <div class="compare-card reveal"><h3>Nápoles</h3><p>Dirección en una zona comercial con oficinas privadas y salas de juntas. No cuenta con valet parking formal de OfiRent.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-napoles/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer la sede Nápoles →</a></p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="/#ubicaciones">Comparar todas las ubicaciones</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Proceso</div>
+    <h2 class="section-title">¿Cómo elegir el plan adecuado?</h2>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal"><div class="why-num">01</div><h3 class="why-title">Define tu necesidad de domicilio</h3><p class="why-text">Define si necesitas domicilio fiscal, domicilio comercial o ambos.</p></div>
+      <div class="why-item reveal"><div class="why-num">02</div><h3 class="why-title">Correspondencia y paquetería</h3><p class="why-text">Indica si recibirás correspondencia o paquetería con frecuencia.</p></div>
+      <div class="why-item reveal"><div class="why-num">03</div><h3 class="why-title">Línea telefónica</h3><p class="why-text">Confirma si necesitas una línea telefónica personalizada.</p></div>
+      <div class="why-item reveal"><div class="why-num">04</div><h3 class="why-title">Uso de salas</h3><p class="why-text">Calcula cuántas veces al mes utilizarás salas u oficinas.</p></div>
+      <div class="why-item reveal"><div class="why-num">05</div><h3 class="why-title">Ubicación</h3><p class="why-text">Elige la ubicación que facilite tus trámites, reuniones o atención a clientes.</p></div>
+      <div class="why-item reveal"><div class="why-num">06</div><h3 class="why-title">Fecha de inicio</h3><p class="why-text">Comparte la fecha en que deseas activar el servicio.</p></div>
+    </div>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>La propuesta debe prepararse después de conocer el uso real de la dirección. Esto evita contratar servicios innecesarios o seleccionar una modalidad que no cubra los requisitos del negocio.</p>
+        <p>El equipo de OfiRent puede explicar las diferencias entre planes, revisar disponibilidad y solicitar la documentación necesaria antes de formalizar la contratación.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20una%20recomendaci%C3%B3n%20personalizada%20de%20oficina%20virtual." target="_blank" rel="noopener">Recibir una recomendación personalizada</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Ventajas</div>
+    <h2 class="section-title">¿Por qué contratar una oficina virtual con OfiRent?</h2>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal"><div class="why-num">01</div><h3 class="why-title">Más de 20 años de experiencia</h3><p class="why-text">OfiRent comenzó operaciones en 2005 y cuenta con experiencia administrando oficinas, recepción, telefonía y domicilios empresariales.</p></div>
+      <div class="why-item reveal"><div class="why-num">02</div><h3 class="why-title">Seis ubicaciones en CDMX</h3><p class="why-text">El cliente puede elegir entre Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles.</p></div>
+      <div class="why-item reveal"><div class="why-num">03</div><h3 class="why-title">Atención personalizada</h3><p class="why-text">El equipo ayuda a identificar el plan adecuado según el uso de la dirección y los servicios requeridos.</p></div>
+      <div class="why-item reveal"><div class="why-num">04</div><h3 class="why-title">Recepción profesional</h3><p class="why-text">La empresa puede mantener una imagen ordenada ante llamadas, correspondencia y visitas programadas.</p></div>
+      <div class="why-item reveal"><div class="why-num">05</div><h3 class="why-title">Espacios para reuniones</h3><p class="why-text">Algunas modalidades permiten utilizar salas u oficinas conforme al plan, reservación y disponibilidad.</p></div>
+      <div class="why-item reveal"><div class="why-num">06</div><h3 class="why-title">Posibilidad de crecer</h3><p class="why-text">Un cliente puede comenzar con una oficina virtual y posteriormente migrar a coworking u oficina privada cuando su operación lo requiera.</p></div>
     </div>
   </div>
 </section>
 
-<section class="alt" id="faq">
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Preguntas frecuentes</div>
     <h2 class="section-title">Antes de escribirnos</h2>
     <div class="accordion reveal-group">
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Qué diferencia hay entre oficina física y virtual?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>La física es un espacio dedicado dentro de una de nuestras 6 ubicaciones. La virtual te da domicilio fiscal y comercial sin ocupar espacio fijo, con acceso a sala de juntas o estación de trabajo según el plan.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Qué es una oficina virtual?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Es un servicio que permite utilizar una dirección profesional y contratar recepción, telefonía, correspondencia o acceso ocasional a espacios físicos sin ocupar una oficina todos los días.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Qué significa "acceso multicentro"?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Con el plan VIP no dependes de una sola sucursal: puedes usar sala de juntas o estación de trabajo en cualquiera de nuestras 6 ubicaciones en Ciudad de México, según lo que necesites en el momento.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Puedo utilizar la dirección como domicilio fiscal?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí, cuando el plan contratado incluye domicilio fiscal y el cliente cumple con la documentación y condiciones requeridas por OfiRent.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿En qué ubicaciones puedo dar de alta mi oficina virtual?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Escríbenos con la ubicación que te interesa y un asesor te confirma disponibilidad; las 6 sedes ofrecen el mismo esquema de planes.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Qué diferencia existe entre domicilio fiscal y comercial?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>El domicilio fiscal se registra para efectos tributarios y administrativos. El domicilio comercial se utiliza como dirección pública de contacto y presentación empresarial.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Reciben correspondencia y paquetería?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí, cuando el plan incluye recepción de correspondencia. La entrega, notificación y recolección se realiza conforme a las reglas de la sede contratada.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Pueden contestar las llamadas con el nombre de mi empresa?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Los planes con línea telefónica personalizada permiten que recepción conteste con el nombre de la empresa, transfiera llamadas o tome mensajes.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo utilizar salas de juntas?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Algunos planes incluyen o permiten contratar uso de salas u oficinas por evento. El acceso está sujeto al plan, reservación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿En qué zonas hay oficinas virtuales de OfiRent?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>OfiRent ofrece opciones en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles, dentro de las alcaldías Cuauhtémoc y Benito Juárez.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo contratar una oficina virtual si vivo fuera de CDMX?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. La oficina virtual puede funcionar para empresas y profesionistas de otras ciudades que necesitan presencia empresarial en Ciudad de México.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cuánto tiempo tarda la activación?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>El tiempo depende del plan, la revisión de documentos y la fecha de contratación. OfiRent confirma el proceso antes de formalizar el servicio.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo cambiar después a una oficina física?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. La disponibilidad de oficinas privadas depende de la sede, la capacidad requerida y la fecha de inicio.</p></div></div>
       </div>
     </div>
   </div>
