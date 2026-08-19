@@ -1,7 +1,9 @@
 // Función serverless (Vercel). Guarda leads temporales del sitio web en Airtable
 // mientras se resuelve el problema del formulario de Kommo (ver historial del proyecto).
-// Reusa las mismas variables de entorno / tabla que review.js.
+// Escribe en la tabla "Leads" (separada de "Reseñas"), misma base y token que review.js.
 // Acepta peticiones cross-origin desde los sitios de OfiRent y Torre Altius.
+
+const LEADS_TABLE_ID = 'tbl6E6ipJTHkb2YBV';
 
 const ALLOWED_ORIGINS = [
   'https://ofirent.com.mx',
@@ -32,40 +34,30 @@ module.exports = async (req, res) => {
 
   const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
   const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-  const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME || 'Reseñas';
 
   if (!AIRTABLE_TOKEN || !AIRTABLE_BASE_ID) {
     res.status(500).json({ error: 'Airtable no está configurado todavía en Vercel.' });
     return;
   }
 
-  const { name, company, phone, email, location, teamSize, serviceType, comments, source } = req.body || {};
+  const { name, company, phone, email, location, serviceType, comments, source } = req.body || {};
 
   if (!name || !phone) {
     res.status(400).json({ error: 'Nombre y teléfono son obligatorios.' });
     return;
   }
 
-  const commentParts = [
-    '[LEAD SITIO WEB - formulario temporal, Kommo caído]',
-    source ? `Sitio: ${source}` : '',
-    company ? `Empresa: ${company}` : '',
-    email ? `Correo: ${email}` : '',
-    serviceType ? `Servicio de interés: ${serviceType}` : '',
-    teamSize ? `Tamaño de equipo: ${teamSize}` : '',
-    comments ? `Comentarios: ${comments}` : ''
-  ].filter(Boolean).join(' | ');
-
-  const fields = {
-    Nombre: name || '',
-    Teléfono: phone || '',
-    Comentario: commentParts
-  };
-  if (location) fields['Ubicación'] = location;
+  const fields = { Nombre: name || '', 'Teléfono': phone || '' };
+  if (email) fields['Correo'] = email;
+  if (company) fields['Empresa'] = company;
+  if (location) fields['Ubicacion Ofirent'] = location;
+  if (serviceType) fields['Servicio de interés'] = serviceType;
+  const comentarios = [source ? `[${source}]` : '', comments || ''].filter(Boolean).join(' ');
+  if (comentarios) fields['Comentarios'] = comentarios;
 
   try {
     const airtableRes = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`,
+      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${LEADS_TABLE_ID}`,
       {
         method: 'POST',
         headers: {
