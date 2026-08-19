@@ -52,8 +52,8 @@ module.exports = async (req, res) => {
   if (company) fields['Empresa'] = company;
   if (location) fields['Ubicacion Ofirent'] = location;
   if (serviceType) fields['Servicio de interés'] = serviceType;
-  const comentarios = [source ? `[${source}]` : '', comments || ''].filter(Boolean).join(' ');
-  if (comentarios) fields['Comentarios'] = comentarios;
+  if (source) fields['Sitio'] = source;
+  if (comments) fields['Comentarios'] = comments;
 
   try {
     const airtableRes = await fetch(
