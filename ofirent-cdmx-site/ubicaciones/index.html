@@ -4,16 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ubicaciones de Oficinas en Renta en CDMX | OfiRent</title>
-<meta name="description" content="Compara las 6 ubicaciones de OfiRent en CDMX: Nápoles, Del Valle, Condesa, Roma, Narvarte y Cuauhtémoc. Precios, servicios y disponibilidad.">
+<meta name="description" content="Compara oficinas en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles. Revisa servicios por sede y solicita disponibilidad.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","name":"Ubicaciones de OfiRent en Ciudad de México","numberOfItems":6,"itemListElement":[
-{"@type":"ListItem","position":1,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-napoles/","name":"OfiRent Nápoles"},
-{"@type":"ListItem","position":2,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-del-valle/","name":"OfiRent Del Valle"},
-{"@type":"ListItem","position":3,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-condesa/","name":"OfiRent Condesa"},
-{"@type":"ListItem","position":4,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-roma/","name":"OfiRent Roma"},
-{"@type":"ListItem","position":5,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-narvarte/","name":"OfiRent Narvarte"},
-{"@type":"ListItem","position":6,"url":"https://ofirent-cdmx-site.vercel.app/ubicaciones/renta-oficinas-colonia-cuauhtemoc/","name":"OfiRent Cuauhtémoc"}
-]}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "@id": "https://www.ofirent.com.mx/ubicaciones/#locations",
+      "name": "Ubicaciones de OfiRent en Ciudad de México",
+      "numberOfItems": 6,
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-roma/", "name": "OfiRent Roma"},
+        {"@type": "ListItem", "position": 2, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-condesa/", "name": "OfiRent Condesa"},
+        {"@type": "ListItem", "position": 3, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-cuauhtemoc/", "name": "OfiRent Cuauhtémoc–Río Pô"},
+        {"@type": "ListItem", "position": 4, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-del-valle/", "name": "OfiRent Del Valle"},
+        {"@type": "ListItem", "position": 5, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-narvarte/", "name": "OfiRent Narvarte"},
+        {"@type": "ListItem", "position": 6, "url": "https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-napoles/", "name": "OfiRent Nápoles"}
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.ofirent.com.mx/ubicaciones/#webpage",
+      "url": "https://www.ofirent.com.mx/ubicaciones/",
+      "name": "Ubicaciones de Oficinas en Renta en CDMX | OfiRent",
+      "description": "Compara oficinas en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles. Revisa servicios por sede y solicita disponibilidad.",
+      "isPartOf": {"@id": "https://www.ofirent.com.mx/#website"},
+      "about": {"@id": "https://www.ofirent.com.mx/ubicaciones/#locations"},
+      "inLanguage": "es-MX"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.ofirent.com.mx/ubicaciones/#breadcrumb",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.ofirent.com.mx/"},
+        {"@type": "ListItem", "position": 2, "name": "Ubicaciones", "item": "https://www.ofirent.com.mx/ubicaciones/"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.ofirent.com.mx/ubicaciones/#faq",
+      "mainEntity": [
+        {"@type": "Question", "name": "¿Cuántas ubicaciones tiene OfiRent en CDMX?", "acceptedAnswer": {"@type": "Answer", "text": "OfiRent cuenta con seis sedes activas en esta etapa: Roma, Condesa, Cuauhtémoc–Río Pô, Del Valle, Narvarte y Nápoles."}},
+        {"@type": "Question", "name": "¿En qué alcaldías se encuentran las oficinas?", "acceptedAnswer": {"@type": "Answer", "text": "Roma, Condesa y Cuauhtémoc–Río Pô se encuentran en la alcaldía Cuauhtémoc. Del Valle, Narvarte y Nápoles se encuentran en Benito Juárez."}},
+        {"@type": "Question", "name": "¿En qué sedes hay coworking?", "acceptedAnswer": {"@type": "Answer", "text": "El coworking está disponible en Roma, Del Valle y Narvarte."}},
+        {"@type": "Question", "name": "¿En qué sedes hay salas de capacitación?", "acceptedAnswer": {"@type": "Answer", "text": "Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô."}},
+        {"@type": "Question", "name": "¿Todas las sedes tienen salas de juntas?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Todas las sedes cuentan con salas de juntas, sujetas a reservación y disponibilidad."}},
+        {"@type": "Question", "name": "¿Todas las sedes tienen valet parking?", "acceptedAnswer": {"@type": "Answer", "text": "No. Nápoles no cuenta con valet parking formal de OfiRent. Las demás sedes tienen esta opción sujeta a operación y disponibilidad."}},
+        {"@type": "Question", "name": "¿Hay oficinas para una sola persona?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Existen privados individuales y opciones para equipos pequeños. La capacidad exacta depende de la sede y la disponibilidad."}},
+        {"@type": "Question", "name": "¿Puedo utilizar servicios en otra sucursal?", "acceptedAnswer": {"@type": "Answer", "text": "Algunos planes permiten utilizar espacios en otras sedes mediante el modelo multicentro, sujeto a reservación y disponibilidad."}},
+        {"@type": "Question", "name": "¿Cómo elijo entre Roma, Condesa y Cuauhtémoc?", "acceptedAnswer": {"@type": "Answer", "text": "Compara cercanía con clientes, traslados y servicios. Roma tiene coworking, Cuauhtémoc–Río Pô tiene sala de capacitación y Condesa ofrece oficinas privadas y salas de juntas."}},
+        {"@type": "Question", "name": "¿Cómo elijo entre Del Valle, Narvarte y Nápoles?", "acceptedAnswer": {"@type": "Answer", "text": "Del Valle y Narvarte tienen coworking; Narvarte también cuenta con sala de capacitación. Nápoles ofrece oficinas y salas, pero no tiene valet parking formal."}}
+      ]
+    }
+  ]
+}
 </script>
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/icon-512.png" type="image/png">
@@ -23,6 +68,12 @@
   .locpage-hero{position:relative;overflow:hidden;padding:124px 0 40px;background:var(--paper);}
   .back-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--steel);text-decoration:none;margin-bottom:24px;}
   .back-link:hover{color:var(--green);}
+  .svc-table{width:100%;border-collapse:collapse;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:13.5px;}
+  .svc-table th, .svc-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);}
+  .svc-table th{background:var(--paper);font-family:var(--body);font-weight:700;color:var(--ink);}
+  .svc-table td{color:var(--steel);}
+  .svc-table tr:last-child td{border-bottom:none;}
+  .svc-table-wrap{overflow-x:auto;}
 </style>
 </head>
 <body>
@@ -41,8 +92,9 @@
   <div class="wrap">
     <a class="back-link" href="/">← Volver al inicio</a>
     <div class="eyebrow">Nuestras ubicaciones</div>
-    <h1 class="hero-title">6 zonas, una sola red</h1>
-    <p class="hero-lede" style="max-width:60ch;">Cada sucursal con su propio inventario y precio. Encuentra la opción que se adapta a tu equipo. Escríbenos y te confirmamos disponibilidad real al momento.</p>
+    <h1 class="hero-title">Ubicaciones de oficinas<br><span class="thin">en renta en CDMX</span></h1>
+    <p class="hero-lede" style="max-width:60ch;">OfiRent cuenta con seis centros en las alcaldías Cuauhtémoc y Benito Juárez. Cada ubicación ofrece oficinas privadas, recepción, internet, limpieza, mantenimiento, telefonía, coffee station y salas de juntas, con diferencias en coworking, capacitación y estacionamiento.</p>
+    <p class="hero-lede" style="max-width:60ch;">Compara la colonia, los traslados de tu equipo y los servicios que necesitas. La capacidad de las oficinas y la disponibilidad cambian por sede, por lo que conviene solicitar una propuesta antes de elegir.</p>
   </div>
 </section>
 
@@ -119,18 +171,125 @@
   </div>
 </section>
 
-<section class="alt" id="faq">
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Comparativo</div>
+    <h2 class="section-title">Comparativo rápido de servicios por sede</h2>
+    <p class="section-sub">Servicios sujetos al plan, reservación y disponibilidad.</p>
+    <div class="svc-table-wrap">
+      <table class="svc-table">
+        <thead><tr><th>Sede</th><th>Oficinas privadas</th><th>Salas de juntas</th><th>Coworking</th><th>Sala de capacitación</th><th>Valet parking</th></tr></thead>
+        <tbody>
+          <tr><td>Roma</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí*</td></tr>
+          <tr><td>Condesa</td><td>Sí</td><td>Sí</td><td>No</td><td>No</td><td>Sí*</td></tr>
+          <tr><td>Cuauhtémoc – Río Pô</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí</td><td>Sí*</td></tr>
+          <tr><td>Del Valle</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí*</td></tr>
+          <tr><td>Narvarte</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí*</td></tr>
+          <tr><td>Nápoles</td><td>Sí</td><td>Sí</td><td>No</td><td>No</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--steel);margin-top:10px;">*Sujeto a operación y disponibilidad.</p>
+    <p style="margin-top:20px;"><a class="btn ghost" href="#interes">Ayúdame a comparar sedes</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Antes de decidir</div>
+    <h2 class="section-title">Cómo elegir la ubicación adecuada</h2>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal"><div class="why-num">01</div><h3 class="why-title">Traslados del equipo</h3><p class="why-text">Considera los puntos de origen de las personas que utilizarán la oficina y el tiempo de traslado en transporte público o automóvil.</p></div>
+      <div class="why-item reveal"><div class="why-num">02</div><h3 class="why-title">Cercanía con clientes</h3><p class="why-text">Elige una sede que facilite reuniones, visitas y actividades recurrentes. Las salas de juntas pueden reservarse en distintas ubicaciones según el plan.</p></div>
+      <div class="why-item reveal"><div class="why-num">03</div><h3 class="why-title">Tipo de servicio</h3><p class="why-text">Coworking está disponible únicamente en Roma, Del Valle y Narvarte. Las salas de capacitación están disponibles sólo en Narvarte y Cuauhtémoc–Río Pô.</p></div>
+      <div class="why-item reveal"><div class="why-num">04</div><h3 class="why-title">Capacidad y disponibilidad</h3><p class="why-text">Existen privados desde una persona y opciones para equipos pequeños de hasta aproximadamente diez integrantes. La capacidad exacta debe confirmarse por sede.</p></div>
+      <div class="why-item reveal"><div class="why-num">05</div><h3 class="why-title">Estacionamiento</h3><p class="why-text">Nápoles no cuenta con valet parking formal de OfiRent. Las demás sedes tienen esta opción, sujeta a operación y disponibilidad.</p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="#interes">Solicitar recomendación de ubicación</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">En todas las sucursales</div>
+    <h2 class="section-title">Servicios generales disponibles en los centros</h2>
+    <p class="section-sub">Las sedes ofrecen oficinas amuebladas, internet, recepción profesional, limpieza, mantenimiento, telefonía personalizada, coffee station y salas de juntas conforme al plan contratado.</p>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>La recepción puede atender llamadas con el nombre de la empresa, transferirlas o tomar mensajes. Las llamadas locales y nacionales forman parte del servicio. La correspondencia, mensajería y paquetería se gestionan según la modalidad contratada.</p>
+        <p>La contratación puede adaptarse a proyectos temporales de uno o dos meses y a periodos mayores. Los servicios exactos, capacidades y condiciones deben confirmarse en la propuesta comercial.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn ghost" href="/servicios-oficinas/">Conocer los servicios de oficinas</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Multicentro</div>
+    <h2 class="section-title">Acceso multicentro para trabajar o reunirte en otra zona</h2>
+    <p class="section-sub">Algunos planes permiten utilizar salas, coworking o determinadas áreas comunes en una sede distinta al centro principal del cliente. Esto amplía las opciones para recibir clientes o trabajar cerca de una cita.</p>
+    <p class="section-sub">El acceso depende del plan, la reservación y la disponibilidad. No se comunican horas ilimitadas ni acceso automático a todos los espacios.</p>
+    <p style="margin-top:20px;"><a class="btn ghost" href="#interes">Consultar acceso multicentro</a></p>
+  </div>
+</section>
+
+<section class="alt" id="interes">
+  <div class="wrap">
+    <div class="interes-box" style="max-width:640px;margin:0 auto;">
+      <div class="eyebrow" style="color:var(--gold);">Compara y agenda</div>
+      <h2>Compara sedes y agenda una visita</h2>
+      <p class="interes-sub">Comparte la colonia que prefieres, el número de personas, el servicio que necesitas, la fecha de inicio y la duración estimada. OfiRent puede revisar disponibilidad y recomendar una o más ubicaciones.</p>
+      <a class="wa-cta" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20comparar%20ubicaciones%20de%20OfiRent%20y%20agendar%20una%20visita." target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Preguntas frecuentes</div>
     <h2 class="section-title">Antes de escribirnos</h2>
     <div class="accordion reveal-group">
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Todas las ubicaciones tienen coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Coworking físico está disponible en Narvarte, Roma y Del Valle; las demás ubicaciones tienen salas de juntas y oficinas privadas.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Cuántas ubicaciones tiene OfiRent en CDMX?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>OfiRent cuenta con seis sedes activas en esta etapa: Roma, Condesa, Cuauhtémoc–Río Pô, Del Valle, Narvarte y Nápoles.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Cómo sé qué hay disponible en la ubicación que busco?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Escríbenos con lo que buscas (ubicación, tamaño de equipo) y un asesor te confirma disponibilidad real al momento; el inventario cambia seguido.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿En qué alcaldías se encuentran las oficinas?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Roma, Condesa y Cuauhtémoc–Río Pô se encuentran en la alcaldía Cuauhtémoc. Del Valle, Narvarte y Nápoles se encuentran en Benito Juárez.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿En qué sedes hay coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>El coworking está disponible en Roma, Del Valle y Narvarte.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿En qué sedes hay salas de capacitación?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Todas las sedes tienen salas de juntas?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Todas las sedes cuentan con salas de juntas, sujetas a reservación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Todas las sedes tienen valet parking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Nápoles no cuenta con valet parking formal de OfiRent. Las demás sedes tienen esta opción sujeta a operación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Hay oficinas para una sola persona?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Existen privados individuales y opciones para equipos pequeños. La capacidad exacta depende de la sede y la disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo utilizar servicios en otra sucursal?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Algunos planes permiten utilizar espacios en otras sedes mediante el modelo multicentro, sujeto a reservación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cómo elijo entre Roma, Condesa y Cuauhtémoc?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Compara cercanía con clientes, traslados y servicios. Roma tiene coworking, Cuauhtémoc–Río Pô tiene sala de capacitación y Condesa ofrece oficinas privadas y salas de juntas.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cómo elijo entre Del Valle, Narvarte y Nápoles?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Del Valle y Narvarte tienen coworking; Narvarte también cuenta con sala de capacitación. Nápoles ofrece oficinas y salas, pero no tiene valet parking formal.</p></div></div>
       </div>
     </div>
   </div>
