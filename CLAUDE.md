@@ -2,6 +2,18 @@
 
 Monorepo con 3 sitios estáticos independientes para las marcas **OfiRent** (renta de oficinas equipadas/virtuales/coworking en CDMX, 6 sedes) y **Torre Altius** (edificio corporativo en Jurica, Querétaro), operadas por el mismo grupo. Un tercer sitio es una encuesta interna de reseñas para ambas marcas.
 
+## Flujo de trabajo entre sesiones (OBLIGATORIO)
+
+Este repo se trabaja en paralelo desde más de una sesión de Claude Code (local y en la nube) al mismo tiempo. Para que una decisión tomada en una sesión sí llegue a la otra, en vez de depender de que alguien avise a mano, la regla es:
+
+- **Nunca hacer push directo a `main`.** Todo cambio va en una rama nueva (`claude/<algo-descriptivo>`) y se abre un Pull Request en GitHub. `main` solo avanza fusionando PRs.
+- **Antes de empezar cualquier tarea**, correr `git fetch origin main` y revisar `git log HEAD..origin/main --oneline` para ver si hay commits nuevos que la otra sesión ya fusionó, antes de asumir el estado del repo.
+- **Ninguna decisión de negocio/dato real** (precios, plazos de contrato, disponibilidad, textos legales, políticas comerciales, etc.) cuenta como "decidida" hasta que quede escrita en la sección "Decisiones confirmadas con el cliente" de este mismo archivo y esté fusionada a `main`. Este archivo es lo único que ambas sesiones leen automáticamente al arrancar, así que es el mecanismo real de sincronización, no un mensaje que alguien tiene que recordar reenviar.
+- Si encuentras que dos fuentes (este archivo, un brief, lo que dijo el cliente en otra sesión) dicen cosas distintas sobre el mismo dato, no elijas una por tu cuenta: pregúntale al usuario y, una vez resuelto, actualiza esta sección para que no se vuelva a contradecir.
+
+### Decisiones confirmadas con el cliente
+- Membresía Oro de coworking (incluye domicilio fiscal/comercial): contrato mínimo **6 meses**, no 1 año.
+
 ## Qué hace cada sitio
 
 - **`ofirent-cdmx-site/`** — Sitio principal de OfiRent CDMX. Home con hero, servicios (oficina virtual/equipada/coworking), las 6 ubicaciones, planes, FAQ, formulario de contacto. Más: 6 páginas de ubicación en `/ubicaciones/renta-oficinas-colonia-*/` (vía rewrites de `vercel.json`, archivos físicos siguen siendo `ubicacion-*.html`), 3 páginas de servicio dedicadas en `/servicios/`, y el blog completo migrado de WordPress (94 posts reales en `/blog/<slug>/`, generados por `blog-data/generate_blog.py` a partir de `blog-data/wp-posts-raw.json`). Las URLs ya calzan 1:1 con las del sitio real en WordPress (`ofirent.com.mx`), pensado para cuando se apunte el dominio real — ver la sección de "Contexto de negocio" más abajo antes de tocar eso.
