@@ -336,6 +336,21 @@
   .footer-addr b{color:#fff;display:block;font-family:var(--display);font-size:18px;margin-bottom:6px;}
   .footer-contact{font-family:var(--mono);font-size:12.5px;line-height:2;}
   .footer-bottom{font-family:var(--mono);font-size:10.5px;color:#5c7382;margin-top:40px;border-top:1px solid rgba(255,255,255,.08);padding-top:20px;}
+
+  .lead-form{max-width:620px;margin:0 auto;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:32px;}
+  .lead-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:600px){ .lead-form-grid{grid-template-columns:1fr;} }
+  .lead-form label{display:block;font-family:var(--body);font-weight:600;font-size:13px;color:var(--steel);margin-bottom:6px;}
+  .lead-form input, .lead-form select, .lead-form textarea{width:100%;font-family:var(--body);font-size:14.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:16px;}
+  .lead-form input:focus, .lead-form select:focus, .lead-form textarea:focus{outline:2px solid var(--blue);outline-offset:1px;}
+  .lead-form textarea{resize:vertical;min-height:80px;grid-column:1/-1;}
+  .lead-form .full{grid-column:1/-1;}
+  .lead-form button[type="submit"]{width:100%;font-family:var(--body);font-weight:700;font-size:15px;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:14px;cursor:pointer;transition:background .15s ease;}
+  .lead-form button[type="submit"]:hover{background:var(--navy-deep);}
+  .lead-form button[type="submit"]:disabled{opacity:.6;cursor:default;}
+  .lead-form-msg{margin-top:14px;font-size:14px;font-weight:600;text-align:center;}
+  .lead-form-msg.ok{color:var(--blue);}
+  .lead-form-msg.err{color:#e33;}
 </style>
 
 
@@ -365,6 +380,32 @@
         <img class="hero-photo" src="/assets/facade.jpg" alt="Torre Altius, vista exterior">
       </div>
     </div>
+  </div>
+</section>
+
+<section class="alt" id="contacto-form">
+  <div class="wrap">
+    <div class="eyebrow">Resolvemos tus dudas</div>
+    <h2 class="section-title">Déjanos tus datos y te contactamos</h2>
+    <p class="section-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
+    <form class="lead-form" id="lead-form">
+      <div class="lead-form-grid">
+        <div><label for="lf-name">Nombre *</label><input type="text" id="lf-name" name="name" required></div>
+        <div><label for="lf-phone">Teléfono *</label><input type="tel" id="lf-phone" name="phone" required></div>
+        <div><label for="lf-email">Correo</label><input type="email" id="lf-email" name="email"></div>
+        <div><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company"></div>
+        <div class="full"><label for="lf-service">Servicio de interés</label>
+          <select id="lf-service" name="serviceType">
+            <option value="">No estoy seguro</option>
+            <option>Oficina privada</option><option>Oficina virtual</option>
+            <option>Sala de juntas</option><option>Sala de capacitación</option>
+          </select>
+        </div>
+        <div class="full"><label for="lf-comments">Comentarios</label><textarea id="lf-comments" name="comments"></textarea></div>
+      </div>
+      <button type="submit">Enviar</button>
+      <div class="lead-form-msg" id="lf-msg"></div>
+    </form>
   </div>
 </section>
 
@@ -813,18 +854,6 @@
   </div>
 </section>
 
-<section class="alt" id="contacto-form">
-  <div class="wrap">
-    <div class="eyebrow">Resolvemos tus dudas</div>
-    <h2 class="section-title">Déjanos tus datos y te contactamos</h2>
-    <p class="section-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
-    <div class="kommo-form-card">
-      <script src="https://forms.kommo.com/forms/js/form_1635815_535ab9144ad964393884e00792e6c796.js" charset="utf-8"></script>
-      <script id="amoforms_script_1635815" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1767728992"></script>
-    </div>
-  </div>
-</section>
-
 <footer id="contacto">
   <div class="wrap">
     <div class="footer-grid">
@@ -920,5 +949,49 @@
     document.getElementById('rev-prev').addEventListener('click', function(){ revTrack.scrollBy({left:-cardW*2, behavior:'smooth'}); });
     document.getElementById('rev-next').addEventListener('click', function(){ revTrack.scrollBy({left:cardW*2, behavior:'smooth'}); });
   }
+</script>
+<script>
+  (function(){
+    var form = document.getElementById('lead-form');
+    if(!form) return;
+    var msg = document.getElementById('lf-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      msg.textContent = '';
+      msg.className = 'lead-form-msg';
+      var data = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        email: form.email.value.trim(),
+        company: form.company.value.trim(),
+        serviceType: form.serviceType.value,
+        comments: form.comments.value.trim(),
+        source: 'Torre Altius'
+      };
+      fetch('https://ofirent-resenas.vercel.app/api/lead', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, body: j}; }); })
+        .then(function(res){
+          btn.disabled = false;
+          if(res.ok && res.body.ok){
+            msg.textContent = 'Gracias, recibimos tus datos. Un asesor te contacta pronto.';
+            msg.className = 'lead-form-msg ok';
+            form.reset();
+          } else {
+            msg.textContent = 'No se pudo enviar. Escríbenos por WhatsApp mejor.';
+            msg.className = 'lead-form-msg err';
+          }
+        })
+        .catch(function(){
+          btn.disabled = false;
+          msg.textContent = 'No se pudo enviar. Escríbenos por WhatsApp mejor.';
+          msg.className = 'lead-form-msg err';
+        });
+    });
+  })();
 </script>
 <script src="/assets/cookie-consent.js" defer></script>

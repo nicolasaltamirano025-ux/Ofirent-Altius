@@ -190,6 +190,21 @@
   .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
   .pill{font-family:var(--body);font-size:14px;font-weight:500;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:.15s;}
   .pill.selected,.pill:hover{background:var(--green);border-color:var(--green);color:#fff;}
+
+  .lead-form{max-width:620px;margin:0 auto;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:32px;}
+  .lead-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:600px){ .lead-form-grid{grid-template-columns:1fr;} }
+  .lead-form label{display:block;font-family:var(--body);font-weight:600;font-size:13px;color:var(--steel);margin-bottom:6px;}
+  .lead-form input, .lead-form select, .lead-form textarea{width:100%;font-family:var(--body);font-size:14.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:16px;}
+  .lead-form input:focus, .lead-form select:focus, .lead-form textarea:focus{outline:2px solid var(--green);outline-offset:1px;}
+  .lead-form textarea{resize:vertical;min-height:80px;grid-column:1/-1;}
+  .lead-form .full{grid-column:1/-1;}
+  .lead-form button[type="submit"]{width:100%;font-family:var(--body);font-weight:700;font-size:15px;background:var(--green);color:#fff;border:none;border-radius:10px;padding:14px;cursor:pointer;transition:background .15s ease;}
+  .lead-form button[type="submit"]:hover{background:var(--green-deep);}
+  .lead-form button[type="submit"]:disabled{opacity:.6;cursor:default;}
+  .lead-form-msg{margin-top:14px;font-size:14px;font-weight:600;text-align:center;}
+  .lead-form-msg.ok{color:var(--green);}
+  .lead-form-msg.err{color:#b3261e;}
   .wa-cta{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-family:var(--body);font-weight:600;font-size:15px;padding:16px 28px;border-radius:10px;text-decoration:none;margin-top:8px;box-shadow:0 6px 20px rgba(37,211,102,.3);transition:transform .18s ease;}
   .wa-cta:hover{transform:translateY(-1px);}
 

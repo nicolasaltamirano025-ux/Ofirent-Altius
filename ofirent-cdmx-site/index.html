@@ -265,10 +265,31 @@
     <div class="eyebrow">Resolvemos tus dudas</div>
     <h2 class="section-title">Déjanos tus datos y te contactamos</h2>
     <p class="section-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
-    <div class="kommo-form-card">
-      <script src="https://forms.kommo.com/forms/js/form_1635815_535ab9144ad964393884e00792e6c796.js" charset="utf-8"></script>
-      <script id="amoforms_script_1635815" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1767728992"></script>
-    </div>
+    <form class="lead-form" id="lead-form">
+      <div class="lead-form-grid">
+        <div><label for="lf-name">Nombre *</label><input type="text" id="lf-name" name="name" required></div>
+        <div><label for="lf-phone">Teléfono *</label><input type="tel" id="lf-phone" name="phone" required></div>
+        <div><label for="lf-email">Correo</label><input type="email" id="lf-email" name="email"></div>
+        <div><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company"></div>
+        <div><label for="lf-location">Ubicación de interés</label>
+          <select id="lf-location" name="location">
+            <option value="">No estoy seguro</option>
+            <option>Nápoles</option><option>Del Valle</option><option>Condesa</option>
+            <option>Roma</option><option>Narvarte</option><option>Cuauhtémoc</option>
+          </select>
+        </div>
+        <div><label for="lf-service">Servicio de interés</label>
+          <select id="lf-service" name="serviceType">
+            <option value="">No estoy seguro</option>
+            <option>Oficina equipada</option><option>Oficina virtual</option>
+            <option>Coworking</option><option>Sala de juntas</option>
+          </select>
+        </div>
+        <div class="full"><label for="lf-comments">Comentarios</label><textarea id="lf-comments" name="comments"></textarea></div>
+      </div>
+      <button type="submit">Enviar</button>
+      <div class="lead-form-msg" id="lf-msg"></div>
+    </form>
   </div>
 </section>
 
@@ -816,6 +837,51 @@
     video.addEventListener('error', dismiss);
     closeBtn.addEventListener('click', dismiss);
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') dismiss(); });
+  })();
+</script>
+<script>
+  (function(){
+    var form = document.getElementById('lead-form');
+    if(!form) return;
+    var msg = document.getElementById('lf-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      msg.textContent = '';
+      msg.className = 'lead-form-msg';
+      var data = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        email: form.email.value.trim(),
+        company: form.company.value.trim(),
+        location: form.location.value,
+        serviceType: form.serviceType.value,
+        comments: form.comments.value.trim(),
+        source: 'OfiRent CDMX'
+      };
+      fetch('https://ofirent-resenas.vercel.app/api/lead', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json().then(function(j){ return {ok: r.ok, body: j}; }); })
+        .then(function(res){
+          btn.disabled = false;
+          if(res.ok && res.body.ok){
+            msg.textContent = 'Gracias, recibimos tus datos. Un asesor te contacta pronto.';
+            msg.className = 'lead-form-msg ok';
+            form.reset();
+          } else {
+            msg.textContent = 'No se pudo enviar. Escríbenos por WhatsApp mejor.';
+            msg.className = 'lead-form-msg err';
+          }
+        })
+        .catch(function(){
+          btn.disabled = false;
+          msg.textContent = 'No se pudo enviar. Escríbenos por WhatsApp mejor.';
+          msg.className = 'lead-form-msg err';
+        });
+    });
   })();
 </script>
 <script src="/assets/cookie-consent.js" defer></script>
