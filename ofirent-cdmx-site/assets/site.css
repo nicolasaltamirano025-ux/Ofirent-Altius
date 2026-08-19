@@ -118,6 +118,30 @@
   .why-num{font-family:var(--display);font-weight:800;font-size:26px;color:var(--green);margin-bottom:10px;}
   .why-title{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;}
   .why-text{font-size:14px;color:var(--steel);line-height:1.65;}
+
+  .readmore{margin-top:4px;}
+  .readmore summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-weight:700;font-size:14px;color:var(--green);margin-top:6px;}
+  .readmore summary::-webkit-details-marker{display:none;}
+  .readmore summary::after{content:"+";font-size:16px;}
+  .readmore[open] summary::after{content:"\2212";}
+  .readmore-body p, .readmore-body li{font-size:15px;line-height:1.7;color:var(--steel);margin-bottom:12px;}
+  .readmore-body{margin-top:10px;}
+
+  .compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px;}
+  @media (max-width:900px){ .compare-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .compare-grid{grid-template-columns:1fr;} }
+  .compare-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:24px;}
+  .compare-card h3{font-family:var(--display);font-size:16px;margin-bottom:8px;}
+  .compare-card p{font-size:14px;color:var(--steel);line-height:1.6;}
+
+  .service-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px;}
+  @media (max-width:900px){ .service-type-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .service-type-grid{grid-template-columns:1fr;} }
+  .service-type-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;}
+  .service-type-card h3{font-family:var(--display);font-size:17px;margin-bottom:10px;}
+  .service-type-card p{font-size:14px;color:var(--steel);line-height:1.65;flex:1;margin-bottom:16px;}
+  .service-type-card a{font-family:var(--body);font-weight:700;font-size:13.5px;color:var(--green);text-decoration:none;}
+  .service-type-card a:hover{text-decoration:underline;}
   .amen-grid.amen-grid-9{grid-template-columns:repeat(3,1fr);}
   @media (max-width:600px){ .amen-grid.amen-grid-9{grid-template-columns:1fr;} }
   .amen-item{background:var(--paper-raised);padding:32px 22px;display:flex;flex-direction:column;gap:16px;transition:transform .25s ease, box-shadow .25s ease;}
