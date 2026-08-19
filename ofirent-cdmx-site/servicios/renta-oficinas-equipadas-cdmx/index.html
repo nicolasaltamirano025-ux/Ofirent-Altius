@@ -4,18 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Renta de Oficinas Equipadas en CDMX | OfiRent</title>
-<meta name="description" content="Renta oficinas equipadas en CDMX: mobiliario, internet, recepción y limpieza incluidos. 6 ubicaciones: Nápoles, Del Valle, Condesa, Roma, Narvarte y Cuauhtémoc.">
+<meta name="description" content="Renta oficinas equipadas en CDMX con mobiliario, internet, recepción, limpieza y salas. Opciones para una persona y equipos pequeños.">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"Service",
-  "name":"Renta de Oficinas Equipadas CDMX",
-  "serviceType":"Renta de oficinas privadas y equipadas",
-  "description":"Oficinas privadas equipadas en Ciudad de México con mobiliario, internet, recepción, limpieza y acceso a salas de juntas.",
-  "url":"https://ofirent-cdmx-site.vercel.app/servicios/renta-oficinas-equipadas-cdmx/",
-  "provider":{"@type":"Organization","name":"OfiRent","url":"https://ofirent-cdmx-site.vercel.app"},
-  "areaServed":{"@type":"City","name":"Ciudad de México"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/#service",
+      "name": "Renta de oficinas equipadas en CDMX",
+      "serviceType": "Renta de oficinas privadas, amuebladas y equipadas",
+      "description": "Oficinas privadas equipadas en Ciudad de México con mobiliario, internet, recepción, limpieza, mantenimiento, telefonía y acceso a salas según la modalidad contratada.",
+      "url": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/",
+      "provider": { "@id": "https://www.ofirent.com.mx/#organization" },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Benito Juárez, Ciudad de México" },
+        { "@type": "AdministrativeArea", "name": "Cuauhtémoc, Ciudad de México" }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://www.ofirent.com.mx/contacto/",
+        "servicePhone": { "@type": "ContactPoint", "telephone": "+525532009907", "contactType": "sales", "availableLanguage": "es-MX" }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.ofirent.com.mx/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios" },
+        { "@type": "ListItem", "position": 3, "name": "Renta de oficinas equipadas", "item": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/" }
+      ]
+    },
+    {
+      "@type": ["WebPage", "FAQPage"],
+      "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/#webpage",
+      "url": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/",
+      "name": "Renta de Oficinas Equipadas en CDMX | OfiRent",
+      "description": "Renta oficinas equipadas en CDMX con mobiliario, internet, recepción, limpieza y salas. Opciones para una persona y equipos pequeños.",
+      "isPartOf": { "@id": "https://www.ofirent.com.mx/#website" },
+      "about": { "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/#service" },
+      "breadcrumb": { "@id": "https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/#breadcrumb" },
+      "inLanguage": "es-MX",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué incluye una oficina equipada?", "acceptedAnswer": { "@type": "Answer", "text": "Incluye mobiliario, internet, limpieza, mantenimiento, recepción profesional, línea telefónica, atención de llamadas, coffee station y acceso a salas conforme al plan contratado." } },
+        { "@type": "Question", "name": "¿Para cuántas personas hay oficinas?", "acceptedAnswer": { "@type": "Answer", "text": "Existen privados desde una persona y opciones para equipos pequeños de hasta aproximadamente diez integrantes. La capacidad exacta depende de la sede, la distribución y la disponibilidad." } },
+        { "@type": "Question", "name": "¿Puedo rentar una oficina por uno o dos meses?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. OfiRent puede atender proyectos temporales, remodelaciones o necesidades de corta duración. Los periodos largos pueden contar con condiciones preferenciales." } },
+        { "@type": "Question", "name": "¿Las oficinas ya tienen mobiliario?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Las oficinas equipadas incluyen mobiliario básico para comenzar a trabajar, de acuerdo con la distribución disponible." } },
+        { "@type": "Question", "name": "¿Puedo recibir clientes en la oficina?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Las sedes cuentan con recepción y salas de juntas. El acceso y uso de espacios compartidos depende del plan, reservación y disponibilidad." } },
+        { "@type": "Question", "name": "¿Puedo utilizar salas en otra sucursal?", "acceptedAnswer": { "@type": "Answer", "text": "Algunos planes permiten utilizar salas o áreas comunes en una sede distinta. El acceso está sujeto a la modalidad contratada, reservación y disponibilidad." } },
+        { "@type": "Question", "name": "¿Todas las sedes tienen coworking?", "acceptedAnswer": { "@type": "Answer", "text": "No. Las áreas de coworking están disponibles únicamente en Roma, Del Valle y Narvarte." } },
+        { "@type": "Question", "name": "¿En qué sedes hay sala de capacitación?", "acceptedAnswer": { "@type": "Answer", "text": "Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô, con capacidad aproximada de 20 a 25 personas." } },
+        { "@type": "Question", "name": "¿Todas las sedes tienen valet parking?", "acceptedAnswer": { "@type": "Answer", "text": "No. Nápoles no cuenta con valet parking formal de OfiRent. Las demás sedes cuentan con esta opción, sujeta a operación y disponibilidad." } },
+        { "@type": "Question", "name": "¿Cómo elijo la ubicación adecuada?", "acceptedAnswer": { "@type": "Answer", "text": "Considera los traslados del equipo, cercanía con clientes, capacidad requerida, servicios diferenciales y disponibilidad. Un asesor puede ayudarte a comparar opciones." } }
+      ]
+    }
+  ]
 }
 </script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{position:relative;overflow:hidden;padding:124px 0 56px;background:var(--paper);}
@@ -24,10 +73,11 @@
 </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav class="topnav">
   <div class="wrap topnav-inner">
-    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
+    <div class="logo-mark"><a href="/"><img src="/assets/logo-20-anos.png" alt="OfiRent"></a></div>
     <div class="navlinks">
       <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/#faq">FAQ</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -39,32 +89,145 @@
   <div class="wrap">
     <a class="back-link" href="/#servicios">← Ver todos los servicios</a>
     <div class="eyebrow">Oficina física</div>
-    <h1 class="hero-title">Renta de oficinas equipadas<br><span class="thin">en Ciudad de México</span></h1>
-    <p class="hero-lede" style="max-width:60ch;">Oficinas privadas listas para trabajar desde el primer día: mobiliario, internet de alta velocidad, recepción, café y limpieza incluidos, en 6 ubicaciones de la ciudad.</p>
+    <h1 class="hero-title">Renta de oficinas equipadas en CDMX<br><span class="thin">listas para trabajar</span></h1>
+    <p class="hero-lede" style="max-width:60ch;">OfiRent ofrece oficinas privadas amuebladas en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles. Cada espacio integra mobiliario, internet, recepción, limpieza, mantenimiento y servicios compartidos para que tu empresa pueda comenzar a operar sin coordinar distintos proveedores.</p>
+    <p class="hero-lede" style="max-width:60ch;">Puedes elegir un privado para una persona o una oficina para un equipo pequeño. La capacidad exacta depende de la sede, la distribución y la disponibilidad.</p>
     <div class="hero-ctas">
-      <a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20una%20oficina%20equipada%20de%20OfiRent." target="_blank" rel="noopener">Contactar por WhatsApp</a>
-      <a class="btn ghost" href="/#ubicaciones">Ver ubicaciones</a>
+      <a class="btn primary" href="#interes">Consultar disponibilidad</a>
+      <a class="btn ghost" href="https://wa.me/525532009907?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20visita%20a%20una%20oficina%20equipada." target="_blank" rel="noopener">Agendar una visita</a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Oficinas equipadas</div>
+    <h2 class="section-title">Una oficina privada sin encargarte de toda la operación</h2>
+    <p class="section-sub">Rentar una oficina tradicional implica comprar mobiliario, contratar internet, coordinar limpieza, atender mantenimiento y organizar una recepción. Una oficina equipada reúne estos elementos en un mismo servicio para reducir el tiempo de instalación y simplificar la operación diaria.</p>
+    <p class="section-sub">Las oficinas de OfiRent están preparadas para profesionistas, despachos y empresas pequeñas que necesitan privacidad, una dirección profesional y un espacio funcional desde el inicio.</p>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>La recepción puede contestar con el nombre de la empresa, transferir llamadas o tomar mensajes. Las líneas personalizadas pueden incluir llamadas locales y nacionales dentro del servicio contratado.</p>
+        <p>El coffee station de autoservicio ofrece café, agua y té. El cliente también puede utilizar salas de juntas y determinadas áreas comunes conforme a su modalidad, reservación y disponibilidad.</p>
+      </div>
+    </details>
   </div>
 </section>
 
 <section class="alt">
   <div class="wrap">
     <div class="eyebrow">En todas las sucursales</div>
-    <h2 class="section-title">Servicios y amenidades</h2>
-    <p class="section-sub">Todo lo que tu equipo necesita para operar desde el primer día, sin gestionar proveedores por separado.</p>
+    <h2 class="section-title">¿Qué incluye una oficina equipada?</h2>
+    <p class="section-sub">No comunicamos horas ilimitadas ni que todos los planes incluyen exactamente los mismos alcances.</p>
     <div class="amen-grid reveal-group">
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="11"/><line x1="10" y1="3" x2="10" y2="11"/><line x1="13" y1="3" x2="13" y2="11"/><path d="M7 11c0 2 1.5 3 3 3s3-1 3-3"/><line x1="10" y1="14" x2="10" y2="21"/></svg></div><div class="amen-name">Café siempre listo</div><div class="amen-note">Las 6 ubicaciones</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="1"/><rect x="8" y="3" width="3" height="2" rx="0.5"/><rect x="13" y="3" width="3" height="2" rx="0.5"/><rect x="8" y="19" width="3" height="2" rx="0.5"/><rect x="13" y="19" width="3" height="2" rx="0.5"/></svg></div><div class="amen-name">Salas de juntas</div><div class="amen-note">Las 6 ubicaciones</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M6 15c0-4 1.5-8 6-8s6 4 6 8"/><line x1="4" y1="15" x2="20" y2="15"/><path d="M9 18a3 3 0 0 0 6 0"/></svg></div><div class="amen-name">Recepción y valet parking</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="amen-name">Espacios sanitizados</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><div class="amen-name">Internet de alta velocidad</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="1"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></div><div class="amen-name">Domicilio fiscal y comercial</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="9" rx="1"/><line x1="8" y1="19" x2="16" y2="19"/><line x1="12" y1="15" x2="12" y2="19"/></svg></div><div class="amen-name">Mobiliario</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><div class="amen-name">Internet</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M6 15c0-4 1.5-8 6-8s6 4 6 8"/><line x1="4" y1="15" x2="20" y2="15"/><path d="M9 18a3 3 0 0 0 6 0"/></svg></div><div class="amen-name">Recepción profesional</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="amen-name">Limpieza y mantenimiento</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg></div><div class="amen-name">Línea telefónica personalizada</div></div>
+      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="11"/><line x1="10" y1="3" x2="10" y2="11"/><line x1="13" y1="3" x2="13" y2="11"/><path d="M7 11c0 2 1.5 3 3 3s3-1 3-3"/><line x1="10" y1="14" x2="10" y2="21"/></svg></div><div class="amen-name">Coffee station</div></div>
+    </div>
+    <details class="readmore">
+      <summary>Ver todos los servicios incluidos</summary>
+      <div class="readmore-body">
+        <p><strong>Salas de juntas</strong>: espacios para reuniones, entrevistas o presentaciones, sujetos al plan, reservación y disponibilidad.</p>
+        <p><strong>Servicio multicentro</strong>: determinados planes pueden permitir el uso de salas o áreas comunes en otra sede de OfiRent, sujeto a las condiciones contratadas.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20oficina%20equipada." target="_blank" rel="noopener">Solicitar una cotización</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Según tu equipo</div>
+    <h2 class="section-title">Oficinas según el tamaño y la etapa de tu equipo</h2>
+    <div class="compare-grid reveal-group">
+      <div class="compare-card reveal"><h3>Privado para una persona</h3><p>Funciona para consultores, profesionistas o emprendedores que necesitan concentración, privacidad y una imagen empresarial.</p></div>
+      <div class="compare-card reveal"><h3>Oficina para equipo pequeño</h3><p>Adecuada para equipos de cuatro, seis, siete o hasta aproximadamente diez personas, de acuerdo con la sede, distribución y disponibilidad.</p></div>
+      <div class="compare-card reveal"><h3>Oficina temporal por proyecto</h3><p>Puede utilizarse durante uno o dos meses para proyectos, remodelaciones, atención cercana a un cliente o necesidades operativas temporales.</p></div>
+      <div class="compare-card reveal"><h3>Oficina para operación continua</h3><p>Permite establecer una sede de trabajo sin asumir la instalación y administración completa de una oficina convencional.</p></div>
+      <div class="compare-card reveal"><h3>Espacio para entrevistas o atención a clientes</h3><p>Algunas oficinas y salas pueden reservarse por hora o jornada para entrevistas, reuniones o trabajo temporal, sujetas a disponibilidad.</p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="#interes">Ayúdame a elegir una oficina</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Comparativo</div>
+    <h2 class="section-title">Oficina equipada frente a una oficina tradicional</h2>
+    <div class="compare-grid reveal-group" style="grid-template-columns:1fr 1fr;">
+      <div class="compare-card reveal"><h3>Oficina equipada</h3><p>Reduce las tareas necesarias antes de comenzar a trabajar. El cliente no tiene que comprar mobiliario, instalar internet, contratar limpieza ni coordinar mantenimiento y recepción por separado.</p></div>
+      <div class="compare-card reveal"><h3>Oficina tradicional</h3><p>Puede ofrecer mayor control sobre adecuaciones, pero exige inversión inicial, contratos con proveedores y administración continua.</p></div>
+    </div>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>Para comparar correctamente, no basta con revisar la renta mensual. También deben considerarse mobiliario, depósito, instalaciones, internet, limpieza, mantenimiento, recepción, telefonía y tiempo de implementación.</p>
+        <p>OfiRent prepara la propuesta según la sede, la capacidad, la fecha de inicio y el periodo estimado de contratación.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn ghost" href="#interes">Comparar una oficina equipada</a></p>
+  </div>
+</section>
+
+<section id="ubicaciones-equipadas">
+  <div class="wrap">
+    <div class="eyebrow">Dónde elegir</div>
+    <h2 class="section-title">Seis ubicaciones para elegir la zona adecuada</h2>
+    <div class="compare-grid reveal-group">
+      <div class="compare-card reveal"><h3>Roma</h3><p>Oficinas privadas, salas de juntas y área de coworking en una zona céntrica y activa.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-roma/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Roma →</a></p></div>
+      <div class="compare-card reveal"><h3>Condesa</h3><p>Oficinas privadas y salas de juntas en una zona de actividad profesional y comercial.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-condesa/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Condesa →</a></p></div>
+      <div class="compare-card reveal"><h3>Cuauhtémoc – Río Pô</h3><p>Oficinas privadas, salas de juntas y sala de capacitación para aproximadamente 20 a 25 personas.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Cuauhtémoc →</a></p></div>
+      <div class="compare-card reveal"><h3>Del Valle</h3><p>Oficinas privadas, salas de juntas y área de coworking en una zona consolidada de negocios.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-del-valle/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Del Valle →</a></p></div>
+      <div class="compare-card reveal"><h3>Narvarte</h3><p>Privados desde una persona y equipos pequeños, coworking, terraza, salas de juntas y sala de capacitación. Cerca de Metro Etiopía, Metrobús y Viaducto.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-narvarte/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Narvarte →</a></p></div>
+      <div class="compare-card reveal"><h3>Nápoles</h3><p>Oficinas privadas y salas de juntas. No cuenta con valet parking formal de OfiRent.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-napoles/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer oficinas en Nápoles →</a></p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="/#ubicaciones">Comparar todas las ubicaciones</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Proceso</div>
+    <h2 class="section-title">¿Cómo funciona la contratación?</h2>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal"><div class="why-num">01</div><h3 class="why-title">Ubicación</h3><p class="why-text">Comparte la ubicación que prefieres.</p></div>
+      <div class="why-item reveal"><div class="why-num">02</div><h3 class="why-title">Número de personas</h3><p class="why-text">Indica el número de personas que utilizarán la oficina.</p></div>
+      <div class="why-item reveal"><div class="why-num">03</div><h3 class="why-title">Fecha de inicio</h3><p class="why-text">Señala la fecha estimada de inicio.</p></div>
+      <div class="why-item reveal"><div class="why-num">04</div><h3 class="why-title">Duración</h3><p class="why-text">Define si la necesidad es temporal o de mayor permanencia.</p></div>
+      <div class="why-item reveal"><div class="why-num">05</div><h3 class="why-title">Servicios adicionales</h3><p class="why-text">Explica si requieres salas, telefonía, correspondencia u otros servicios.</p></div>
+      <div class="why-item reveal"><div class="why-num">06</div><h3 class="why-title">Visita</h3><p class="why-text">Revisa las opciones disponibles y agenda una visita.</p></div>
+    </div>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>Las oficinas físicas pueden atender proyectos de uno o dos meses. Las contrataciones de mayor permanencia pueden acceder a condiciones preferenciales, según la propuesta comercial.</p>
+        <p>La disponibilidad cambia por sede y capacidad. Por ello, la cotización debe prepararse después de revisar las necesidades concretas del equipo.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn primary" href="#interes">Recibir opciones disponibles</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Ventajas</div>
+    <h2 class="section-title">¿Por qué elegir una oficina equipada de OfiRent?</h2>
+    <div class="why-grid reveal-group">
+      <div class="why-item reveal"><div class="why-num">01</div><h3 class="why-title">Más de 20 años de experiencia</h3><p class="why-text">OfiRent comenzó operaciones en 2005 y cuenta con experiencia administrando oficinas, recepción, telefonía y domicilios empresariales.</p></div>
+      <div class="why-item reveal"><div class="why-num">02</div><h3 class="why-title">Espacios listos para trabajar</h3><p class="why-text">El cliente evita coordinar mobiliario, conectividad y proveedores independientes antes de instalarse.</p></div>
+      <div class="why-item reveal"><div class="why-num">03</div><h3 class="why-title">Servicios integrados</h3><p class="why-text">Internet, limpieza, mantenimiento, recepción, telefonía, coffee station y salas forman parte de la solución de acuerdo con la modalidad.</p></div>
+      <div class="why-item reveal"><div class="why-num">04</div><h3 class="why-title">Flexibilidad</h3><p class="why-text">Existen opciones para proyectos temporales y periodos de mayor permanencia.</p></div>
+      <div class="why-item reveal"><div class="why-num">05</div><h3 class="why-title">Atención personalizada</h3><p class="why-text">El equipo ayuda a comparar capacidades, ubicaciones y servicios antes de preparar una propuesta.</p></div>
+      <div class="why-item reveal"><div class="why-num">06</div><h3 class="why-title">Red de ubicaciones</h3><p class="why-text">Las sedes de CDMX se encuentran en Roma, Condesa, Cuauhtémoc, Del Valle, Narvarte y Nápoles.</p></div>
     </div>
   </div>
 </section>
 
-<section id="interes">
+<section class="alt" id="interes">
   <div class="wrap">
     <div class="interes-box">
       <div class="eyebrow" style="color:var(--gold);">Oficina física</div>
@@ -95,22 +258,50 @@
   </div>
 </section>
 
-<section class="alt" id="faq">
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Preguntas frecuentes</div>
     <h2 class="section-title">Antes de escribirnos</h2>
     <div class="accordion reveal-group">
       <div class="accordion-item reveal">
         <div class="accordion-header"><span class="accordion-title">¿Qué incluye una oficina equipada?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Internet de alta velocidad, recepción, café, servicio de limpieza y acceso a salas de juntas: llegas y trabajas el mismo día que firmas.</p></div></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Incluye mobiliario, internet, limpieza, mantenimiento, recepción profesional, línea telefónica, atención de llamadas, coffee station y acceso a salas conforme al plan contratado.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Cómo sé qué hay disponible en la ubicación que busco?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Escríbenos con lo que buscas (ubicación, tamaño de equipo) y un asesor te confirma disponibilidad real al momento; el inventario cambia seguido.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Para cuántas personas hay oficinas?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Existen privados desde una persona y opciones para equipos pequeños de hasta aproximadamente diez integrantes. La capacidad exacta depende de la sede, la distribución y la disponibilidad.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Qué diferencia hay entre oficina física y virtual?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>La física es un espacio dedicado dentro de una de nuestras 6 ubicaciones. La virtual te da domicilio fiscal y comercial sin ocupar espacio fijo.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Puedo rentar una oficina por uno o dos meses?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. OfiRent puede atender proyectos temporales, remodelaciones o necesidades de corta duración. Los periodos largos pueden contar con condiciones preferenciales.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Las oficinas ya tienen mobiliario?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Las oficinas equipadas incluyen mobiliario básico para comenzar a trabajar, de acuerdo con la distribución disponible.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo recibir clientes en la oficina?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Las sedes cuentan con recepción y salas de juntas. El acceso y uso de espacios compartidos depende del plan, reservación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo utilizar salas en otra sucursal?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Algunos planes permiten utilizar salas o áreas comunes en una sede distinta. El acceso está sujeto a la modalidad contratada, reservación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Todas las sedes tienen coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Las áreas de coworking están disponibles únicamente en Roma, Del Valle y Narvarte.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿En qué sedes hay sala de capacitación?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô, con capacidad aproximada de 20 a 25 personas.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Todas las sedes tienen valet parking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Nápoles no cuenta con valet parking formal de OfiRent. Las demás sedes cuentan con esta opción, sujeta a operación y disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cómo elijo la ubicación adecuada?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Considera los traslados del equipo, cercanía con clientes, capacidad requerida, servicios diferenciales y disponibilidad. Un asesor puede ayudarte a comparar opciones.</p></div></div>
       </div>
     </div>
   </div>
@@ -119,10 +310,10 @@
 <footer id="contacto">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br>Nápoles · Del Valle · Condesa · Roma · Narvarte · Cuauhtémoc</div>
-      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>hola@ofirent.com.mx</div>
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a> · <a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a> · <a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a> · <a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a> · <a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a> · <a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></div>
+      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>contacto@ofirent.com.mx</div>
     </div>
-    <div class="footer-bottom">OFIRENT · CONCEPTO DE REDISEÑO, NO ES EL SITIO FINAL</div>
+    <div class="footer-bottom">OFIRENT © 2026 · <a href="/aviso-de-privacidad/" style="color:inherit;">Aviso de privacidad</a></div>
   </div>
 </footer>
 
@@ -185,5 +376,6 @@
     lastY = y;
   }, {passive:true});
 </script>
+<script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>

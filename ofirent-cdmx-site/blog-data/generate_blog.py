@@ -7,13 +7,16 @@ URL structure. Also generates /blog/index.html as a listing page.
 import json, os, re, html
 from bs4 import BeautifulSoup
 
+with open(os.path.join(os.path.dirname(__file__), "image-url-map.json"), encoding="utf-8") as _f:
+    IMAGE_MAP = json.load(_f)
+
 SITE_ROOT = r"C:/Users/Nicolas/Desktop/Ofirent-Altius/ofirent-cdmx-site"
 DATA_FILE = os.path.join(SITE_ROOT, "blog-data", "wp-posts-raw.json")
 SITE_URL = "https://ofirent-cdmx-site.vercel.app"
 
 NAV = '''<nav class="topnav">
   <div class="wrap topnav-inner">
-    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
+    <div class="logo-mark"><a href="/"><img src="/assets/logo-20-anos.png" alt="OfiRent"></a></div>
     <div class="navlinks">
       <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/blog/">Blog</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -23,10 +26,10 @@ NAV = '''<nav class="topnav">
 FOOTER = '''<footer id="contacto">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br>Nápoles · Del Valle · Condesa · Roma · Narvarte · Cuauhtémoc</div>
-      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>hola@ofirent.com.mx</div>
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a> · <a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a> · <a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a> · <a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a> · <a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a> · <a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></div>
+      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>contacto@ofirent.com.mx</div>
     </div>
-    <div class="footer-bottom">OFIRENT · CONCEPTO DE REDISEÑO, NO ES EL SITIO FINAL</div>
+    <div class="footer-bottom">OFIRENT © 2026 · <a href="/aviso-de-privacidad/" style="color:inherit;">Aviso de privacidad</a></div>
   </div>
 </footer>
 
@@ -35,6 +38,20 @@ FOOTER = '''<footer id="contacto">
 </a>
 
 <script>
+  document.querySelectorAll('.reveal-group').forEach(function(group){
+    var items = group.querySelectorAll('.reveal');
+    items.forEach(function(el, i){ el.style.transitionDelay = Math.min(i*70,420) + 'ms'; });
+  });
+  var groupIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+        groupIO.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal-group').forEach(function(g){ groupIO.observe(g); });
+
   var navEl = document.querySelector('nav.topnav');
   var lastY = window.scrollY;
   window.addEventListener('scroll', function(){
@@ -44,6 +61,7 @@ FOOTER = '''<footer id="contacto">
     lastY = y;
   }, {passive:true});
 </script>
+<script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>
 '''
@@ -80,6 +98,7 @@ def build_page(post):
     media = embedded.get("wp:featuredmedia")
     if media and isinstance(media, list) and media[0].get("source_url"):
         img_url = media[0]["source_url"]
+        img_url = IMAGE_MAP.get(img_url, img_url)
 
     soup = BeautifulSoup(post["content"]["rendered"], "lxml")
     auto_post = soup.select_one("div.auto-post")
@@ -137,6 +156,9 @@ def build_page(post):
 <title>{html.escape(title)} | Blog OfiRent</title>
 <meta name="description" content="{excerpt}">
 ''' + "\n".join(f'<script type="application/ld+json">\n{b}\n</script>' for b in ld_blocks) + f'''
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{{position:relative;overflow:hidden;padding:124px 0 40px;background:var(--paper);}}
@@ -147,6 +169,7 @@ def build_page(post):
 </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 {NAV}
 
@@ -190,7 +213,7 @@ def main():
         img_url = None
         media = post.get("_embedded", {}).get("wp:featuredmedia")
         if media and isinstance(media, list) and media[0].get("source_url"):
-            img_url = media[0]["source_url"]
+            img_url = IMAGE_MAP.get(media[0]["source_url"], media[0]["source_url"])
         listing_items.append({
             "slug": slug, "title": title, "excerpt": excerpt,
             "date": post["date"][:10], "img": img_url,
@@ -201,7 +224,7 @@ def main():
     cards = []
     for it in listing_items:
         img_html = f'<img src="{it["img"]}" alt="{html.escape(it["title"])}" loading="lazy">' if it["img"] else ""
-        cards.append(f'''      <a class="blog-card reveal" href="/blog/{it['slug']}/">
+        cards.append(f'''      <a class="blog-card" href="/blog/{it['slug']}/">
         {img_html}
         <div class="blog-card-body">
           <div class="blog-card-date">{it['date']}</div>
@@ -217,6 +240,9 @@ def main():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blog OfiRent · Oficinas, domicilio fiscal y coworking en CDMX</title>
 <meta name="description" content="Guías y artículos sobre oficinas equipadas, oficinas virtuales, domicilio fiscal y coworking en las 6 ubicaciones de OfiRent en Ciudad de México.">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{{position:relative;overflow:hidden;padding:124px 0 40px;background:var(--paper);}}
@@ -232,6 +258,7 @@ def main():
 </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 {NAV}
 

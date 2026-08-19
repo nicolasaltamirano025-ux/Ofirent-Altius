@@ -4,18 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coworking y Salas de Juntas en CDMX | OfiRent</title>
-<meta name="description" content="Coworking en Narvarte, Roma y Del Valle. Salas de juntas y capacitación en las 6 ubicaciones de OfiRent CDMX.">
+<meta name="description" content="Renta salas de juntas por hora y trabaja en coworking en Roma, Del Valle o Narvarte. Consulta espacios para reuniones, entrevistas y capacitación.">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"Service",
-  "name":"Coworking y Salas de Juntas CDMX",
-  "serviceType":["Coworking","Renta de salas de juntas"],
-  "description":"Membresía de coworking en Narvarte, Roma y Del Valle. Salas de juntas y capacitación en las 6 ubicaciones de OfiRent en Ciudad de México.",
-  "url":"https://ofirent-cdmx-site.vercel.app/servicios/renta-salas-juntas-y-coworking/",
-  "provider":{"@type":"Organization","name":"OfiRent","url":"https://ofirent-cdmx-site.vercel.app"},
-  "areaServed":{"@type":"City","name":"Ciudad de México"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/#service",
+      "name": "Coworking y salas de juntas en CDMX",
+      "serviceType": ["Coworking", "Renta de salas de juntas", "Salas de capacitación"],
+      "provider": {"@id": "https://www.ofirent.com.mx/#organization"},
+      "areaServed": {"@type": "City", "name": "Ciudad de México"},
+      "url": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/#webpage",
+      "url": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/",
+      "name": "Coworking y Salas de Juntas en CDMX | OfiRent",
+      "description": "Renta salas de juntas por hora y trabaja en coworking en Roma, Del Valle o Narvarte. Consulta espacios para reuniones, entrevistas y capacitación.",
+      "isPartOf": {"@id": "https://www.ofirent.com.mx/#website"},
+      "about": {"@id": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/#service"},
+      "inLanguage": "es-MX"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/#breadcrumb",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.ofirent.com.mx/"},
+        {"@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://www.ofirent.com.mx/servicios-oficinas/"},
+        {"@type": "ListItem", "position": 3, "name": "Coworking y salas de juntas", "item": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/#faq",
+      "mainEntity": [
+        {"@type": "Question", "name": "¿En qué sedes hay coworking?", "acceptedAnswer": {"@type": "Answer", "text": "Las áreas de coworking están disponibles en Roma, Del Valle y Narvarte."}},
+        {"@type": "Question", "name": "¿Cuál es el horario del coworking?", "acceptedAnswer": {"@type": "Answer", "text": "El horario general señalado es de lunes a viernes, de 9:00 a 18:00 horas. Conviene confirmar cualquier variación por sede antes de contratar."}},
+        {"@type": "Question", "name": "¿Qué incluye la membresía de coworking?", "acceptedAnswer": {"@type": "Answer", "text": "Incluye acceso al área compartida, internet, coffee station y cuatro horas mensuales de sala de juntas. Los demás beneficios dependen del plan."}},
+        {"@type": "Question", "name": "¿Puedo contratar coworking sin domicilio fiscal?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. La membresía puede contratarse desde un mes cuando no se requiere domicilio fiscal."}},
+        {"@type": "Question", "name": "¿Puedo reservar una sala sin rentar una oficina?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Un usuario externo puede reservar una sala por evento, hora o jornada, sujeto a disponibilidad."}},
+        {"@type": "Question", "name": "¿Para qué puedo utilizar una sala de juntas?", "acceptedAnswer": {"@type": "Answer", "text": "Puede utilizarse para reuniones, entrevistas, presentaciones, sesiones de trabajo o encuentros con clientes y colaboradores."}},
+        {"@type": "Question", "name": "¿En qué sedes hay salas de capacitación?", "acceptedAnswer": {"@type": "Answer", "text": "Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô."}},
+        {"@type": "Question", "name": "¿Cuántas personas caben en una sala de capacitación?", "acceptedAnswer": {"@type": "Answer", "text": "La capacidad aproximada es de 20 a 25 personas, según la configuración del espacio."}},
+        {"@type": "Question", "name": "¿Las salas cuentan con equipo para presentaciones?", "acceptedAnswer": {"@type": "Answer", "text": "Las salas de capacitación confirmadas cuentan con pantalla y conectividad inalámbrica o Bluetooth. El equipo de cada sala de juntas debe consultarse antes de reservar."}},
+        {"@type": "Question", "name": "¿Puedo utilizar una sala en otra sucursal?", "acceptedAnswer": {"@type": "Answer", "text": "Algunos planes permiten reservar espacios en otras sedes mediante el modelo multicentro. El acceso depende del plan, la reservación y la disponibilidad."}}
+      ]
+    }
+  ]
 }
 </script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   .locpage-hero{position:relative;overflow:hidden;padding:124px 0 56px;background:var(--paper);}
@@ -24,10 +67,11 @@
 </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav class="topnav">
   <div class="wrap topnav-inner">
-    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
+    <div class="logo-mark"><a href="/"><img src="/assets/logo-20-anos.png" alt="OfiRent"></a></div>
     <div class="navlinks">
       <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/#faq">FAQ</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -39,20 +83,33 @@
   <div class="wrap">
     <a class="back-link" href="/#servicios">← Ver todos los servicios</a>
     <div class="eyebrow">Coworking y salas de juntas</div>
-    <h1 class="hero-title">Coworking y salas de juntas<br><span class="thin">en Ciudad de México</span></h1>
-    <p class="hero-lede" style="max-width:60ch;">Espacio compartido sin renta fija en Narvarte, Roma y Del Valle, o salas de juntas y capacitación por evento en cualquiera de nuestras 6 ubicaciones, sin necesidad de ser inquilino.</p>
+    <h1 class="hero-title">Coworking y salas de juntas en CDMX<br><span class="thin">para trabajar y reunirte</span></h1>
+    <p class="hero-lede" style="max-width:60ch;">OfiRent ofrece áreas de coworking, salas de juntas y espacios por evento para profesionistas, emprendedores y empresas que necesitan trabajar o reunirse en un entorno profesional. Puedes elegir una membresía para utilizar áreas compartidas o reservar una sala únicamente durante las horas que necesites.</p>
+    <p class="hero-lede" style="max-width:60ch;">Las áreas de coworking están disponibles en Roma, Del Valle y Narvarte. Las salas de juntas se encuentran en las sedes de OfiRent y pueden utilizarse para reuniones, entrevistas, presentaciones y trabajo temporal, sujetas a reservación y disponibilidad.</p>
     <div class="hero-ctas">
-      <a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20coworking%20o%20una%20sala%20de%20juntas%20de%20OfiRent." target="_blank" rel="noopener">Contactar por WhatsApp</a>
-      <a class="btn ghost" href="/#ubicaciones">Ver ubicaciones</a>
+      <a class="btn primary" href="#interes">Consultar disponibilidad</a>
+      <a class="btn ghost" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20reservar%20una%20sala%20de%20juntas." target="_blank" rel="noopener">Reservar una sala</a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Dos soluciones</div>
+    <h2 class="section-title">Dos soluciones para necesidades distintas</h2>
+    <div class="compare-grid reveal-group" style="grid-template-columns:1fr 1fr;">
+      <div class="compare-card reveal"><h3>Coworking</h3><p>Funciona para quien necesita un espacio profesional de uso recurrente sin contratar una oficina privada. La membresía permite trabajar en áreas compartidas de Roma, Del Valle o Narvarte durante el horario establecido.</p></div>
+      <div class="compare-card reveal"><h3>Salas de juntas por evento</h3><p>Permiten recibir clientes, realizar entrevistas, presentar propuestas o reunirse con colaboradores por hora o jornada. No es necesario contratar una oficina privada o virtual para reservar una sala como usuario externo.</p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="#interes">Comparar coworking y salas</a></p>
   </div>
 </section>
 
 <section class="alt" id="coworking">
   <div class="wrap">
     <div class="eyebrow">Membresía de coworking</div>
-    <h2 class="section-title">Espacio compartido, sin renta fija</h2>
-    <p class="section-sub">Coworking físico disponible en Narvarte, Roma y Del Valle: acceso a escritorio compartido, salas de juntas y todos los servicios de la ubicación, sin comprometerte a una oficina privada.</p>
+    <h2 class="section-title">Coworking en Roma, Del Valle y Narvarte</h2>
+    <p class="section-sub">La membresía de coworking permite utilizar áreas abiertas de trabajo en las tres sedes confirmadas. El acceso general es de lunes a viernes de 9am a 6pm y sábados de 9am a 1pm.</p>
     <div class="loc-tags" style="gap:10px;margin-bottom:32px;">
       <a class="loc-tag" style="font-size:13px;padding:8px 16px;text-decoration:none;" href="https://maps.app.goo.gl/EnLuHFJ75FYeEDsu8" target="_blank" rel="noopener">📍 Narvarte</a>
       <a class="loc-tag" style="font-size:13px;padding:8px 16px;text-decoration:none;" href="https://maps.app.goo.gl/HzpzioRoFKJv1DEL6" target="_blank" rel="noopener">📍 Roma</a>
@@ -91,19 +148,76 @@
         <a class="plan-btn" href="https://wa.me/525532009907?text=Hola%2C%20me%20interesa%20la%20Membres%C3%ADa%20Oro%20de%20coworking%20de%20OfiRent." target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
+
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>Se contempla la posibilidad de registrar usuarios rotativos para ocupar una misma membresía en días distintos, siempre que no utilicen el lugar de forma simultánea. Esta modalidad debe confirmarse como política comercial antes de publicarse como beneficio definitivo.</p>
+      </div>
+    </details>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="eyebrow">Por evento</div>
-    <h2 class="section-title">Salas de juntas y capacitación</h2>
-    <p class="section-sub">Rentables por evento aunque no seas inquilino. Salas de juntas en las 6 ubicaciones; salas de capacitación en Narvarte y Cuauhtémoc.</p>
-    <div class="amen-grid reveal-group">
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="1"/><rect x="8" y="3" width="3" height="2" rx="0.5"/><rect x="13" y="3" width="3" height="2" rx="0.5"/><rect x="8" y="19" width="3" height="2" rx="0.5"/><rect x="13" y="19" width="3" height="2" rx="0.5"/></svg></div><div class="amen-name">Salas de juntas</div><div class="amen-note">Las 6 ubicaciones</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/><path d="M7 9l3 2 2-3 5 4"/></svg></div><div class="amen-name">Salas de capacitación</div><div class="amen-note">Narvarte y Cuauhtémoc</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="8" r="2.5"/><circle cx="12" cy="16" r="2.5"/><line x1="9.8" y1="9.8" x2="10.5" y2="14"/><line x1="14.2" y1="9.8" x2="13.5" y2="14"/></svg></div><div class="amen-name">Coworking</div><div class="amen-note">Narvarte, Roma y Del Valle</div></div>
-      <div class="amen-item reveal"><div class="amen-icon"><svg viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="11"/><line x1="10" y1="3" x2="10" y2="11"/><line x1="13" y1="3" x2="13" y2="11"/><path d="M7 11c0 2 1.5 3 3 3s3-1 3-3"/><line x1="10" y1="14" x2="10" y2="21"/></svg></div><div class="amen-name">Café en la ubicación</div></div>
+    <h2 class="section-title">Salas de juntas para reuniones, entrevistas y presentaciones</h2>
+    <p class="section-sub">Las salas de juntas pueden reservarse para reuniones con clientes, entrevistas, sesiones de trabajo, presentaciones y actividades empresariales puntuales. OfiRent cuenta con más de 16 salas distribuidas entre sus centros, con capacidades y configuraciones diferentes.</p>
+    <p class="section-sub">Un usuario externo puede reservar una sala sin contratar previamente una oficina virtual, una oficina privada o una membresía de coworking. La contratación se adapta al tiempo requerido y está sujeta a capacidad, horario y disponibilidad.</p>
+    <details class="readmore">
+      <summary>Ver más</summary>
+      <div class="readmore-body">
+        <p>Las salas también funcionan como una primera experiencia con OfiRent. El usuario conoce la recepción, limpieza, conectividad y atención del centro antes de decidir si necesita un servicio recurrente.</p>
+        <p>Algunas sedes cuentan con salas tipo meeting room o espacios más confortables para entrevistas, sesiones privadas o conversaciones que no requieren una mesa de consejo tradicional.</p>
+      </div>
+    </details>
+    <p style="margin-top:20px;"><a class="btn primary" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20reservar%20una%20sala%20de%20juntas." target="_blank" rel="noopener">Reservar una sala de juntas</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Grupos más amplios</div>
+    <h2 class="section-title">Salas de capacitación en Narvarte y Cuauhtémoc–Río Pô</h2>
+    <p class="section-sub">Las salas de capacitación están disponibles únicamente en Narvarte y Cuauhtémoc–Río Pô. La capacidad aproximada es de 20 a 25 personas, según la configuración del espacio.</p>
+    <p class="section-sub">Estas salas cuentan con pantalla y conectividad inalámbrica o Bluetooth para presentaciones. Funcionan para talleres, cursos, capacitaciones internas y reuniones de grupos más amplios.</p>
+    <p style="margin-top:20px;"><a class="btn ghost" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20consultar%20una%20sala%20de%20capacitaci%C3%B3n." target="_blank" rel="noopener">Consultar sala de capacitación</a></p>
+  </div>
+</section>
+
+<section id="ubicaciones-coworking">
+  <div class="wrap">
+    <div class="eyebrow">Dónde encontrarnos</div>
+    <h2 class="section-title">Ubicaciones y servicios disponibles</h2>
+    <div class="compare-grid reveal-group">
+      <div class="compare-card reveal"><h3>Roma</h3><p>Área común de coworking y salas de juntas para reuniones o trabajo temporal.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-roma/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Roma →</a></p></div>
+      <div class="compare-card reveal"><h3>Del Valle</h3><p>Área común de coworking y salas para reuniones, entrevistas y presentaciones.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-del-valle/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Del Valle →</a></p></div>
+      <div class="compare-card reveal"><h3>Narvarte</h3><p>Coworking, terraza, salas de juntas, espacios para entrevistas y sala de capacitación.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-narvarte/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Narvarte →</a></p></div>
+      <div class="compare-card reveal"><h3>Condesa</h3><p>Salas de juntas y espacios por evento. No cuenta con área común de coworking ni sala de capacitación.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-condesa/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Condesa →</a></p></div>
+      <div class="compare-card reveal"><h3>Nápoles</h3><p>Salas de juntas y espacios por evento. No cuenta con coworking ni sala de capacitación, ni valet parking formal.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-napoles/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Nápoles →</a></p></div>
+      <div class="compare-card reveal"><h3>Cuauhtémoc – Río Pô</h3><p>Salas de juntas y sala de capacitación. No cuenta con área común de coworking.</p><p style="margin-top:10px;"><a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/" style="color:var(--green);font-weight:700;font-size:13.5px;">Conocer Cuauhtémoc →</a></p></div>
+    </div>
+    <p style="margin-top:24px;"><a class="btn ghost" href="/#ubicaciones">Comparar ubicaciones</a></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Multicentro</div>
+    <h2 class="section-title">Acceso multicentro para ampliar tus opciones</h2>
+    <p class="section-sub">El modelo multicentro permite utilizar determinadas áreas comunes en una sucursal distinta a la sede principal del cliente. Una empresa puede tener su oficina en Narvarte y reservar una sala en Condesa o una capacitación en Cuauhtémoc–Río Pô.</p>
+    <p class="section-sub">El acceso depende del plan contratado, la reservación y la disponibilidad. No se prometen horas ilimitadas ni acceso automático a todos los espacios.</p>
+    <p style="margin-top:20px;"><a class="btn ghost" href="#interes">Consultar acceso multicentro</a></p>
+  </div>
+</section>
+
+<section id="interes">
+  <div class="wrap">
+    <div class="interes-box" style="max-width:640px;margin:0 auto;">
+      <div class="eyebrow" style="color:var(--gold);">Encuentra tu espacio</div>
+      <h2>Encuentra el espacio adecuado para tu próxima jornada o reunión</h2>
+      <p class="interes-sub">Comparte la ubicación, fecha, número de asistentes, duración, tipo de actividad y equipo que necesitas. Con esta información, OfiRent puede revisar disponibilidad y recomendar una membresía, una sala de juntas o una sala de capacitación.</p>
+      <a class="wa-cta" href="https://wa.me/525532009907?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20coworking%20o%20una%20sala." target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
     </div>
   </div>
 </section>
@@ -114,16 +228,44 @@
     <h2 class="section-title">Antes de escribirnos</h2>
     <div class="accordion reveal-group">
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Todas las ubicaciones tienen coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>No. Coworking físico está disponible en Narvarte, Roma y Del Valle; las demás ubicaciones tienen salas de juntas y oficinas privadas.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿En qué sedes hay coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Las áreas de coworking están disponibles en Roma, Del Valle y Narvarte.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Puedo rentar una sala de juntas sin ser inquilino?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí, las salas de juntas se pueden rentar por evento aunque no tengas oficina con nosotros.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Cuál es el horario del coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>El horario general señalado es de lunes a viernes, de 9:00 a 18:00 horas. Conviene confirmar cualquier variación por sede antes de contratar.</p></div></div>
       </div>
       <div class="accordion-item reveal">
-        <div class="accordion-header"><span class="accordion-title">¿Qué significa "acceso multicentro"?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="accordion-body"><div class="accordion-body-inner"><p>Con el plan VIP de oficina virtual no dependes de una sola sucursal: puedes usar sala de juntas o estación de trabajo en cualquiera de nuestras 6 ubicaciones en Ciudad de México, según lo que necesites en el momento.</p></div></div>
+        <div class="accordion-header"><span class="accordion-title">¿Qué incluye la membresía de coworking?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Incluye acceso al área compartida, internet, coffee station y cuatro horas mensuales de sala de juntas. Los demás beneficios dependen del plan.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo contratar coworking sin domicilio fiscal?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. La membresía puede contratarse desde un mes cuando no se requiere domicilio fiscal.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo reservar una sala sin rentar una oficina?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Sí. Un usuario externo puede reservar una sala por evento, hora o jornada, sujeto a disponibilidad.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Para qué puedo utilizar una sala de juntas?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Puede utilizarse para reuniones, entrevistas, presentaciones, sesiones de trabajo o encuentros con clientes y colaboradores.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿En qué sedes hay salas de capacitación?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Las salas de capacitación están disponibles en Narvarte y Cuauhtémoc–Río Pô.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Cuántas personas caben en una sala de capacitación?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>La capacidad aproximada es de 20 a 25 personas, según la configuración del espacio.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Las salas cuentan con equipo para presentaciones?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Las salas de capacitación confirmadas cuentan con pantalla y conectividad inalámbrica o Bluetooth. El equipo de cada sala de juntas debe consultarse antes de reservar.</p></div></div>
+      </div>
+      <div class="accordion-item reveal">
+        <div class="accordion-header"><span class="accordion-title">¿Puedo utilizar una sala en otra sucursal?</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="accordion-body"><div class="accordion-body-inner"><p>Algunos planes permiten reservar espacios en otras sedes mediante el modelo multicentro. El acceso depende del plan, la reservación y la disponibilidad.</p></div></div>
       </div>
     </div>
   </div>
@@ -132,10 +274,10 @@
 <footer id="contacto">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br>Nápoles · Del Valle · Condesa · Roma · Narvarte · Cuauhtémoc</div>
-      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>hola@ofirent.com.mx</div>
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a> · <a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a> · <a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a> · <a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a> · <a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a> · <a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></div>
+      <div class="footer-contact">55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>contacto@ofirent.com.mx</div>
     </div>
-    <div class="footer-bottom">OFIRENT · CONCEPTO DE REDISEÑO, NO ES EL SITIO FINAL</div>
+    <div class="footer-bottom">OFIRENT © 2026 · <a href="/aviso-de-privacidad/" style="color:inherit;">Aviso de privacidad</a></div>
   </div>
 </footer>
 
@@ -176,5 +318,6 @@
     lastY = y;
   }, {passive:true});
 </script>
+<script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/buscas-la-mejor-oficina-para-tu-empresa", "destination": "/", "permanent": true },
+    { "source": "/buscas-la-mejor-oficina-para-tu-empresa/", "destination": "/", "permanent": true },
+    { "source": "/oficinas-en-queretaro-renta", "destination": "/", "permanent": true },
+    { "source": "/oficinas-en-queretaro-renta/", "destination": "/", "permanent": true },
+    { "source": "/desde-346m2", "destination": "/", "permanent": true },
+    { "source": "/desde-346m2/", "destination": "/", "permanent": true },
+    { "source": "/desde-23m2", "destination": "/", "permanent": true },
+    { "source": "/desde-23m2/", "destination": "/", "permanent": true },
+    { "source": "/renta-de-oficinas-en-queretaro", "destination": "/", "permanent": true },
+    { "source": "/renta-de-oficinas-en-queretaro/", "destination": "/", "permanent": true }
+  ]
+}
