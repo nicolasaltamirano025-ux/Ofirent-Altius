@@ -80,7 +80,14 @@ Team de Vercel: **`fully-promoted-qro`**. Nombres de proyecto (pueden no calzar 
 
 Al conectar `ofirent-cdmx-site` a GitHub en Vercel, el proyecto quedó con `rootDirectory: null` a nivel de Project Settings. Un `npx vercel deploy --prod` corrido manualmente desde dentro de `ofirent-cdmx-site/` disparó una build **basada en git** (clonó el repo completo, no subió los archivos locales) que, al no tener `rootDirectory` configurado, construyó desde la raíz del monorepo en vez de desde `ofirent-cdmx-site/` — la build terminó en ~300ms sin generar ningún archivo, y `www.ofirent.com.mx` quedó devolviendo 404 en producción durante varios minutos.
 
-Se corrigió seteando `rootDirectory: "ofirent-cdmx-site"` en el proyecto vía API (`vercel api -X PATCH /v9/projects/<id> -F rootDirectory=ofirent-cdmx-site`) y forzando un rebuild con `vercel redeploy <deployment-url> --scope fully-promoted-qro`. `torre-altius-site` y `ofirent-resenas` no tuvieron este problema porque su `gitRootDirectory` ya quedó bien seteado por deployment al conectarlos.
+Se corrigió seteando `rootDirectory: "ofirent-cdmx-site"` en el proyecto vía API (`vercel api -X PATCH /v9/projects/<id> -F rootDirectory=ofirent-cdmx-site`) y forzando un rebuild con `vercel redeploy <deployment-url> --scope fully-promoted-qro`.
+
+**Actualización, misma tarde:** `torre-altius-site` y `ofirent-resenas` tenían el mismo problema (`rootDirectory: null`), no solo `ofirent-cdmx-site` como se pensó al inicio. Los tres quedaron conectados a GitHub el mismo día y los tres se cayeron (404) apenas se disparó el primer build vía git de cada uno, cada vez que se fusionó un PR a `main`. **Los tres ya están corregidos** (`rootDirectory` seteado a su carpeta correspondiente) y verificados en vivo:
+- `ofirent-cdmx-site` → `rootDirectory: "ofirent-cdmx-site"`
+- `torre-altius-site` → `rootDirectory: "torre-altius-site"`
+- `ofirent-resenas` → `rootDirectory: "ofirent-resenas-site"`
+
+Este es un ajuste de configuración de Vercel (no vive en el código de este repo), así que no hay forma de que un futuro PR lo revierta por accidente — pero si alguna vez alguien reconecta o recrea uno de estos proyectos en Vercel desde cero, hay que volver a setear su `rootDirectory` de inmediato, antes de que llegue el primer push a `main`.
 
 **Si un manual deploy es realmente necesario** (algo salió mal y no querés esperar a un push), usa `vercel redeploy <url-o-id-del-último-deployment> --scope fully-promoted-qro` en vez de `vercel deploy` — reconstruye desde el commit ya vinculado respetando el `rootDirectory` del proyecto. Nota para PowerShell/Git Bash en Windows: los comandos `vercel api /v9/...` necesitan `MSYS_NO_PATHCONV=1` antes del comando en Git Bash, porque MSYS convierte el path que empieza con `/` a una ruta de Windows y el CLI lo rechaza.
 
