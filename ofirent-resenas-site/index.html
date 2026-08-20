@@ -86,7 +86,7 @@ label.field-label{
   color:var(--ink);
   margin:0 0 6px;
 }
-select, input[type=text], input[type=tel], textarea{
+select, input[type=text], input[type=tel], input[type=email], textarea{
   width:100%;
   font-family:var(--body);
   font-size:15px;
@@ -258,6 +258,10 @@ textarea{ resize:vertical; min-height:88px; font-family:var(--body); }
           <label class="field-label" id="txt-phone-label" for="f-phone"></label>
           <input type="tel" id="f-phone">
         </div>
+        <div class="field">
+          <label class="field-label" id="txt-email-label" for="f-email"></label>
+          <input type="email" id="f-email" required>
+        </div>
         <button class="btn btn-primary" id="btn-submit-negative"></button>
         <p class="rating-note" id="submit-error" style="color:#c0392b; display:none;"></p>
       </div>
@@ -346,11 +350,15 @@ const CONFIG = {
   commentPlaceholder: "Cuéntanos con el mayor detalle posible…",
   nameLabel: "Tu nombre",
   phoneLabel: "Tu teléfono",
+  emailLabel: "Tu correo electrónico (obligatorio)",
   submitButtonText: "Enviar comentario",
   negativeDoneTitle: "Gracias por tu comentario",
   negativeDoneText: "Ya lo registramos. Nuestro equipo lo va a revisar y te lo agradecemos mucho.",
 
-  footer: "Encuesta de uso interno — OfiRent",
+  footer: "Encuesta de uso interno · OfiRent",
+
+  // Error si falta el correo o no tiene formato válido (campo obligatorio)
+  emailRequiredText: "Ingresa un correo electrónico válido para poder enviar tu comentario.",
 
   // Error genérico si algo falla al guardar el comentario en Airtable
   errorText: "No se pudo guardar tu comentario. Por favor intenta de nuevo."
@@ -371,6 +379,7 @@ document.getElementById('txt-comment-label').textContent = CONFIG.commentLabel;
 document.getElementById('f-comment').placeholder = CONFIG.commentPlaceholder;
 document.getElementById('txt-name-label').textContent = CONFIG.nameLabel;
 document.getElementById('txt-phone-label').textContent = CONFIG.phoneLabel;
+document.getElementById('txt-email-label').textContent = CONFIG.emailLabel;
 document.getElementById('btn-submit-negative').textContent = CONFIG.submitButtonText;
 document.getElementById('txt-positive-title').textContent = CONFIG.positiveTitle;
 document.getElementById('txt-positive-text').textContent = CONFIG.positiveText;
@@ -440,18 +449,30 @@ function goPositive(){
   }, CONFIG.positiveRedirectDelayMs);
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 document.getElementById('btn-submit-negative').addEventListener('click', async ()=>{
   const btn = document.getElementById('btn-submit-negative');
   const errorEl = document.getElementById('submit-error');
-  btn.disabled = true;
   errorEl.style.display = 'none';
+
+  const email = document.getElementById('f-email').value.trim();
+  if(!EMAIL_RE.test(email)){
+    errorEl.textContent = CONFIG.emailRequiredText;
+    errorEl.style.display = 'block';
+    document.getElementById('f-email').focus();
+    return;
+  }
+
+  btn.disabled = true;
 
   const payload = {
     rating: currentRating,
     location: locSelect.value || '',
     comment: document.getElementById('f-comment').value.trim(),
     name: document.getElementById('f-name').value.trim(),
-    phone: document.getElementById('f-phone').value.trim()
+    phone: document.getElementById('f-phone').value.trim(),
+    email: email
   };
 
   try{

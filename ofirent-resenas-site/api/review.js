@@ -17,7 +17,13 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const { rating, location, comment, name, phone } = req.body || {};
+  const { rating, location, comment, name, phone, email } = req.body || {};
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !EMAIL_RE.test(String(email).trim())) {
+    res.status(400).json({ error: 'Correo electrónico obligatorio o inválido.' });
+    return;
+  }
 
   try {
     const airtableRes = await fetch(
@@ -34,7 +40,8 @@ module.exports = async (req, res) => {
             Ubicación: location || '',
             Comentario: comment || '',
             Nombre: name || '',
-            Teléfono: phone || ''
+            Teléfono: phone || '',
+            Correo: String(email).trim()
           }
         })
       }

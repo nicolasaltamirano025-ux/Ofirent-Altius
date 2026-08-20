@@ -222,6 +222,13 @@
   .plan-btn{font-family:var(--body);font-weight:600;font-size:14px;text-align:center;padding:12px;border-radius:10px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:.15s;}
   .plan-btn:hover{background:var(--ink);color:#fff;}
 
+  .coworking-plans-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:8px 0 28px;}
+  @media (max-width:700px){ .coworking-plans-grid{grid-template-columns:1fr;} }
+  .plan-access{font-size:12px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0 16px;}
+  .plan-features{list-style:none;margin:0 0 22px;padding:0;font-size:13.5px;color:var(--steel);line-height:1.7;flex:1;}
+  .plan-features li{position:relative;padding-left:18px;}
+  .plan-features li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--green);}
+
   /* LOCATION MAP SECTION */
   .location-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin-top:36px;}
   @media (max-width:800px){ .location-grid{grid-template-columns:1fr;} }
