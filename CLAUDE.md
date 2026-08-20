@@ -65,26 +65,24 @@ Ambos sitios principales usan bordes muy redondeados (16-22px en tarjetas/panele
 
 ## Cómo hacer deploy
 
-Cada carpeta es su propio proyecto de Vercel bajo el team **`fully-promoted-qro`** (ya autenticado vía `npx vercel` en esta máquina). Para desplegar cambios de cualquiera de los 3:
+**Los 3 proyectos ya están conectados a GitHub en Vercel** (confirmado 2026-08-20 revisando `vercel api /v9/projects/<nombre>` de cada uno — los tres tienen `link.type: "github"` apuntando a este repo). Fusionar un PR a `main` dispara un deploy automático a producción para el sitio correspondiente. **Ya no uses `npx vercel deploy --prod` manualmente** para desplegar cambios normales — con git conectado, ese comando puede generar una build rota (ver incidente abajo). Deja que el merge a `main` dispare el deploy solo, y verifica con `curl` contra el dominio real después de fusionar.
 
-```bash
-cd ofirent-cdmx-site   # o torre-altius-site / ofirent-resenas-site
-npx vercel deploy --prod --yes --scope fully-promoted-qro
-```
+Team de Vercel: **`fully-promoted-qro`**. Nombres de proyecto (pueden no calzar 1:1 con el nombre de la carpeta):
+- `ofirent-cdmx-site` (carpeta `ofirent-cdmx-site/`) → https://ofirent-cdmx-site.vercel.app / https://www.ofirent.com.mx
+- `torre-altius-site` (carpeta `torre-altius-site/`) → https://torre-altius-site.vercel.app / https://torrealtius.com
+- `ofirent-resenas` (carpeta `ofirent-resenas-site/`, ojo que el nombre del proyecto en Vercel NO lleva "-site") → https://ofirent-resenas.vercel.app
 
-El `--scope` es necesario explícitamente (sin él, la CLI puede intentar resolver el team equivocado y falla con "Not authorized" aunque `.vercel/project.json` ya tenga el `orgId` correcto).
-
-URLs de producción:
-- OfiRent CDMX: https://ofirent-cdmx-site.vercel.app
-- Torre Altius: https://torre-altius-site.vercel.app
-- Encuestas: https://ofirent-resenas.vercel.app
-
-**`ofirent.com.mx` ya está apuntado y en vivo** (confirmado por el cliente, 2026-08-20) — el DNS quedó apuntando a Vercel. `torrealtius.com` sigue sin confirmar; hasta que alguien lo confirme aquí, tratarlo como pendiente:
-- `torrealtius.com`: requiere A en `@` y en `www` → `76.76.21.21` (sin TXT de verificación, más simple que `ofirent.com.mx`).
+**`ofirent.com.mx` ya está apuntado y en vivo** (confirmado por el cliente, 2026-08-20) — el DNS quedó apuntando a Vercel, con redirect 308 de `ofirent.com.mx` → `www.ofirent.com.mx`. `torrealtius.com` también está apuntado y en vivo (verificado 2026-08-20).
 - `torre-altius-site/vercel.json` ya tiene los 301 redirects de las 5 URLs viejas indexadas del WordPress real (`/buscas-la-mejor-oficina-para-tu-empresa/`, `/oficinas-en-queretaro-renta/`, `/desde-346m2/`, `/desde-23m2/`, `/renta-de-oficinas-en-queretaro/`) hacia `/`, ya que son variantes casi duplicadas con contenido de 2019-2020 desactualizado (pisos que ya no se rentan) — no vale la pena reconstruirlas, mejor consolidar el link equity en el home nuevo.
-- En ambos dominios: **no tocar nameservers ni registros MX/correo existentes**, solo agregar los registros de DNS que falten.
+- En ambos dominios: **no tocar nameservers ni registros MX/correo existentes**.
 
-**`ofirent-cdmx-site` ya está conectado a GitHub en Vercel** (2026-08-20, Project Settings → Git, con Pull Request Comments, Commit Status y deployment/repository_dispatch events activados) — fusionar un PR a `main` ahora **sí dispara un deploy automático a producción**, ya no hace falta correr `npx vercel deploy` a mano para ese sitio. **`torre-altius-site` y `ofirent-resenas-site` siguen sin conectar** (a confirmar cuando se haga) — para esos dos sigue haciendo falta el deploy manual (`npx vercel deploy --prod`) desde una máquina con `vercel login` hecho, después de cada merge importante.
+### Incidente 2026-08-20: build rota en producción por `rootDirectory` sin configurar
+
+Al conectar `ofirent-cdmx-site` a GitHub en Vercel, el proyecto quedó con `rootDirectory: null` a nivel de Project Settings. Un `npx vercel deploy --prod` corrido manualmente desde dentro de `ofirent-cdmx-site/` disparó una build **basada en git** (clonó el repo completo, no subió los archivos locales) que, al no tener `rootDirectory` configurado, construyó desde la raíz del monorepo en vez de desde `ofirent-cdmx-site/` — la build terminó en ~300ms sin generar ningún archivo, y `www.ofirent.com.mx` quedó devolviendo 404 en producción durante varios minutos.
+
+Se corrigió seteando `rootDirectory: "ofirent-cdmx-site"` en el proyecto vía API (`vercel api -X PATCH /v9/projects/<id> -F rootDirectory=ofirent-cdmx-site`) y forzando un rebuild con `vercel redeploy <deployment-url> --scope fully-promoted-qro`. `torre-altius-site` y `ofirent-resenas` no tuvieron este problema porque su `gitRootDirectory` ya quedó bien seteado por deployment al conectarlos.
+
+**Si un manual deploy es realmente necesario** (algo salió mal y no querés esperar a un push), usa `vercel redeploy <url-o-id-del-último-deployment> --scope fully-promoted-qro` en vez de `vercel deploy` — reconstruye desde el commit ya vinculado respetando el `rootDirectory` del proyecto. Nota para PowerShell/Git Bash en Windows: los comandos `vercel api /v9/...` necesitan `MSYS_NO_PATHCONV=1` antes del comando en Git Bash, porque MSYS convierte el path que empieza con `/` a una ruta de Windows y el CLI lo rechaza.
 
 ## Variables de entorno
 
