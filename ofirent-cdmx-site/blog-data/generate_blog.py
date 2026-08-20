@@ -16,7 +16,7 @@ SITE_URL = "https://ofirent-cdmx-site.vercel.app"
 
 NAV = '''<nav class="topnav">
   <div class="wrap topnav-inner">
-    <div class="logo-mark"><a href="/"><img src="/assets/logo-20-anos.png" alt="OfiRent"></a></div>
+    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
     <div class="navlinks">
       <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/blog/">Blog</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
