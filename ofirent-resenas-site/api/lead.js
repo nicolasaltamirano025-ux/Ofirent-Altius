@@ -42,13 +42,17 @@ module.exports = async (req, res) => {
 
   const { name, company, phone, email, location, serviceType, comments, source } = req.body || {};
 
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!name || !phone) {
     res.status(400).json({ error: 'Nombre y teléfono son obligatorios.' });
     return;
   }
+  if (!email || !EMAIL_RE.test(String(email).trim())) {
+    res.status(400).json({ error: 'Correo electrónico obligatorio o inválido.' });
+    return;
+  }
 
-  const fields = { Nombre: name || '', 'Teléfono': phone || '' };
-  if (email) fields['Correo'] = email;
+  const fields = { Nombre: name || '', 'Teléfono': phone || '', Correo: String(email).trim() };
   if (company) fields['Empresa'] = company;
   if (location) fields['Ubicacion Ofirent'] = location;
   if (serviceType) fields['Servicio de interés'] = serviceType;
