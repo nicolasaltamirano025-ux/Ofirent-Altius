@@ -45,7 +45,7 @@
     banner.setAttribute('aria-label', 'Aviso de cookies');
     banner.innerHTML =
       '<p>Usamos cookies propias y de terceros para analizar el uso del sitio y mejorar tu experiencia. ' +
-      'Puedes aceptarlas o rechazarlas.</p>' +
+      'Puedes aceptarlas o rechazarlas. Más información en nuestro <a href="/aviso-de-privacidad/" style="color:#fff;text-decoration:underline;">aviso de privacidad</a>.</p>' +
       '<div class="cc-actions">' +
       '<button class="cc-accept" type="button">Aceptar</button>' +
       '<button class="cc-reject" type="button">Rechazar</button>' +
