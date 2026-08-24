@@ -226,9 +226,16 @@
     <div class="logo-mark"><img src="/assets/logo.png" alt="OfiRent"></div>
     <div class="navlinks">
       <a href="#ubicaciones">Ubicaciones</a><a href="#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/blog/">Blog</a><a href="#faq">FAQ</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a><a href="#contacto" class="nav-cta">Contacto</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="wrap mobile-menu-inner">
+    <a href="#ubicaciones">Ubicaciones</a><a href="#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/blog/">Blog</a><a href="#faq">FAQ</a><a href="https://ofirent.conectika.tech/web/login" target="_blank" rel="noopener">Acceso a clientes</a>
+  </div>
+</div>
 
 <div class="anniversary-banner" id="anniversary-banner">
   <div class="confetti-container" id="confetti-container"></div>
@@ -827,6 +834,31 @@
     else if(y < lastY){ navEl.classList.remove('nav-hidden'); }
     lastY = y;
   }, {passive:true});
+
+  (function(){
+    var menuToggle = document.getElementById('menu-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if(!menuToggle || !mobileMenu) return;
+    menuToggle.addEventListener('click', function(){
+      var isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 900){
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   (function(){
     var banner = document.getElementById('anniversary-banner');

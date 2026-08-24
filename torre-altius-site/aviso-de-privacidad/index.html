@@ -53,6 +53,29 @@
   .navlinks{display:flex;align-items:center;gap:30px;font-family:var(--body);font-weight:700;font-size:14.5px;color:#c3d2db;}
   .navlinks a{text-decoration:none;}
   .navlinks a:hover{color:#fff;}
+  @media (max-width:800px){ .navlinks a:not(.nav-cta){display:none;} }
+
+  .nav-cta{
+    background:linear-gradient(135deg, var(--blue), var(--blue-light));
+    color:#fff !important;padding:11px 22px;border-radius:10px;
+    box-shadow:0 0 0 1px rgba(120,190,255,.3), 0 4px 18px rgba(0,113,174,.55), 0 0 26px rgba(63,169,224,.35);
+    transition:box-shadow .25s ease, transform .2s ease;
+  }
+  .nav-cta:hover{box-shadow:0 0 0 1px rgba(120,190,255,.5), 0 6px 22px rgba(0,113,174,.7), 0 0 34px rgba(63,169,224,.5);transform:translateY(-1px);}
+
+  .menu-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;margin-left:4px;background:none;border:none;cursor:pointer;}
+  @media (max-width:800px){ .menu-toggle{display:flex;} }
+  .menu-toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .25s ease, opacity .2s ease;}
+  .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-toggle.open span:nth-child(2){opacity:0;}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{max-height:0;overflow:hidden;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08);transition:max-height .35s ease;}
+  @media (min-width:801px){ .mobile-menu{display:none;} }
+  .mobile-menu.open{max-height:420px;}
+  .mobile-menu-inner{display:flex;flex-direction:column;padding:4px 20px 16px;}
+  .mobile-menu-inner a{font-family:var(--body);font-weight:700;font-size:15px;color:#c3d2db;text-decoration:none;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .mobile-menu-inner a:last-child{border-bottom:none;}
+  .mobile-menu-inner a:hover{color:#fff;}
 
   .back-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:12px;color:var(--steel);text-decoration:none;margin-bottom:24px;}
   .back-link:hover{color:var(--blue);}
@@ -95,9 +118,16 @@
     <a href="/"><div class="logo-mark"><img src="/assets/logo.png" alt="Altius Corporate Center"></div></a>
     <div class="navlinks">
       <a href="/#conoce">Conoce Altius</a><a href="/#interes">Oficina con Acabados</a><a href="/#faq">FAQ</a><a href="/#contacto" class="nav-cta">Contacto</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="wrap mobile-menu-inner">
+    <a href="/#conoce">Conoce Altius</a><a href="/#interes">Oficina con Acabados</a><a href="/#faq">FAQ</a>
+  </div>
+</div>
 
 <section class="legal-hero">
   <div class="wrap" style="max-width:820px;">
@@ -262,6 +292,32 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var menuToggle = document.getElementById('menu-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if(!menuToggle || !mobileMenu) return;
+    menuToggle.addEventListener('click', function(){
+      var isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 800){
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
 <script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>
