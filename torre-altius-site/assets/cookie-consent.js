@@ -1,6 +1,6 @@
 // Banner de consentimiento de cookies + carga condicional de Google Tag Manager.
 (function () {
-  var GTM_ID = 'GTM-MLSS9VN';
+  var GTM_ID = 'GTM-WFZ3GH8';
   var STORAGE_KEY = 'altius_cookie_consent';
 
   function loadGTM() {
