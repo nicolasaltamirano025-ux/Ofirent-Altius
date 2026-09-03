@@ -1,17 +1,9 @@
-// Banner de consentimiento de cookies + carga condicional de Google Tag Manager.
+// Banner de consentimiento de cookies. Google Tag Manager en este sitio
+// carga sin esperar consentimiento (script directo en el <head>, pedido
+// explícito del cliente), este archivo ya no lo carga, solo registra la
+// preferencia del visitante.
 (function () {
-  var GTM_ID = 'GTM-WFZ3GH8';
   var STORAGE_KEY = 'altius_cookie_consent';
-
-  function loadGTM() {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-    var f = document.getElementsByTagName('script')[0];
-    var j = document.createElement('script');
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
-    f.parentNode.insertBefore(j, f);
-  }
 
   function hideBanner() {
     var el = document.getElementById('cookie-consent-banner');
@@ -21,7 +13,6 @@
   function setConsent(value) {
     try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
     hideBanner();
-    if (value === 'granted') loadGTM();
   }
 
   function renderBanner() {
@@ -59,9 +50,7 @@
   var existing = null;
   try { existing = localStorage.getItem(STORAGE_KEY); } catch (e) {}
 
-  if (existing === 'granted') {
-    loadGTM();
-  } else if (existing !== 'denied') {
+  if (existing !== 'granted' && existing !== 'denied') {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderBanner);
     } else {
