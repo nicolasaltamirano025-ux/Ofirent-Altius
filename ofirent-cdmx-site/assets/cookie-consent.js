@@ -1,11 +1,12 @@
-// Banner de consentimiento de cookies. Google Tag Manager carga sin esperar
-// consentimiento (pedido explícito del cliente, 2026-09: el widget de
-// WhatsApp y el chatbot viven en GTM y no deben depender de que el
-// visitante acepte cookies, para no perder leads), este archivo ya no lo
-// gatea, solo registra la preferencia del visitante.
+// Aviso informativo de cookies. Google Tag Manager carga sin esperar
+// interacción del visitante (pedido explícito del cliente, 2026-09: el
+// widget de WhatsApp y el chatbot viven en GTM y no deben depender de
+// que el visitante acepte cookies, para no perder leads). Como ya no
+// hay nada que bloquear ni permitir, el banner solo informa y se cierra,
+// no ofrece un "Rechazar" que no tendría ningún efecto.
 (function () {
   var GTM_ID = 'GTM-MLSS9VN';
-  var STORAGE_KEY = 'ofirent_cookie_consent';
+  var STORAGE_KEY = 'ofirent_cookie_notice_seen';
 
   function loadGTM() {
     window.dataLayer = window.dataLayer || [];
@@ -24,8 +25,8 @@
     if (el) el.remove();
   }
 
-  function setConsent(value) {
-    try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
+  function dismissNotice() {
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
     hideBanner();
   }
 
@@ -41,7 +42,6 @@
       '#cookie-consent-banner button{font-family:inherit;font-weight:700;font-size:13px;border:none;' +
       'border-radius:999px;padding:10px 18px;cursor:pointer;}' +
       '#cookie-consent-banner .cc-accept{background:#1f5d40;color:#fff;}' +
-      '#cookie-consent-banner .cc-reject{background:transparent;color:#eaf1ec;border:1px solid rgba(255,255,255,.35) !important;}' +
       '@media (max-width:480px){ #cookie-consent-banner{left:10px;right:10px;bottom:10px;padding:16px;} }';
     document.head.appendChild(style);
 
@@ -50,22 +50,20 @@
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', 'Aviso de cookies');
     banner.innerHTML =
-      '<p>Usamos cookies propias y de terceros para analizar el uso del sitio y mejorar tu experiencia. ' +
-      'Puedes aceptarlas o rechazarlas. Más información en nuestro <a href="/aviso-de-privacidad/">aviso de privacidad</a>.</p>' +
+      '<p>Usamos cookies propias y de terceros para analizar el uso del sitio, mejorar tu experiencia y dar seguimiento a tu interés en nuestros servicios. ' +
+      'Puedes bloquearlas desde la configuración de tu navegador. Más información en nuestro <a href="/aviso-de-privacidad/">aviso de privacidad</a>.</p>' +
       '<div class="cc-actions">' +
-      '<button class="cc-accept" type="button">Aceptar</button>' +
-      '<button class="cc-reject" type="button">Rechazar</button>' +
+      '<button class="cc-accept" type="button">Entendido</button>' +
       '</div>';
     document.body.appendChild(banner);
 
-    banner.querySelector('.cc-accept').addEventListener('click', function () { setConsent('granted'); });
-    banner.querySelector('.cc-reject').addEventListener('click', function () { setConsent('denied'); });
+    banner.querySelector('.cc-accept').addEventListener('click', dismissNotice);
   }
 
   var existing = null;
   try { existing = localStorage.getItem(STORAGE_KEY); } catch (e) {}
 
-  if (existing !== 'granted' && existing !== 'denied') {
+  if (existing !== '1') {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderBanner);
     } else {
