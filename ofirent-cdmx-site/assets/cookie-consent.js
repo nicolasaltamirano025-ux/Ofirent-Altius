@@ -1,4 +1,8 @@
-// Banner de consentimiento de cookies + carga condicional de Google Tag Manager.
+// Banner de consentimiento de cookies. Google Tag Manager carga sin esperar
+// consentimiento (pedido explícito del cliente, 2026-09: el widget de
+// WhatsApp y el chatbot viven en GTM y no deben depender de que el
+// visitante acepte cookies, para no perder leads), este archivo ya no lo
+// gatea, solo registra la preferencia del visitante.
 (function () {
   var GTM_ID = 'GTM-MLSS9VN';
   var STORAGE_KEY = 'ofirent_cookie_consent';
@@ -13,6 +17,8 @@
     f.parentNode.insertBefore(j, f);
   }
 
+  loadGTM();
+
   function hideBanner() {
     var el = document.getElementById('cookie-consent-banner');
     if (el) el.remove();
@@ -21,7 +27,6 @@
   function setConsent(value) {
     try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
     hideBanner();
-    if (value === 'granted') loadGTM();
   }
 
   function renderBanner() {
@@ -60,9 +65,7 @@
   var existing = null;
   try { existing = localStorage.getItem(STORAGE_KEY); } catch (e) {}
 
-  if (existing === 'granted') {
-    loadGTM();
-  } else if (existing !== 'denied') {
+  if (existing !== 'granted' && existing !== 'denied') {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderBanner);
     } else {
