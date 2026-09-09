@@ -204,10 +204,7 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="anniv-intro" id="anniv-intro" role="dialog" aria-modal="true" aria-label="Video de aniversario: 20 años de OfiRent">
-  <video class="anniv-intro-video" autoplay muted playsinline preload="auto">
-    <source src="/assets/aniversario-20-anos-desktop.mp4" type="video/mp4" media="(min-width:701px)">
-    <source src="/assets/aniversario-20-anos-mobile.mp4" type="video/mp4">
-  </video>
+  <video class="anniv-intro-video" muted playsinline webkit-playsinline preload="auto"></video>
   <button class="anniv-intro-close" id="anniv-intro-close" aria-label="Cerrar video">&times;</button>
 </div>
 
@@ -894,6 +891,12 @@
     document.body.classList.add('anniv-lock');
     var video = intro.querySelector('.anniv-intro-video');
     var closeBtn = document.getElementById('anniv-intro-close');
+
+    var isDesktop = window.matchMedia('(min-width:701px)').matches;
+    video.src = isDesktop ? '/assets/aniversario-20-anos-desktop.mp4' : '/assets/aniversario-20-anos-mobile.mp4';
+    video.muted = true;
+    var playPromise = video.play();
+    if(playPromise && playPromise.catch){ playPromise.catch(function(){}); }
 
     function dismiss(){
       sessionStorage.setItem('ofirent_anniv_video_seen', '1');
