@@ -13,6 +13,7 @@ Este repo se trabaja en paralelo desde más de una sesión de Claude Code (local
 
 ### Decisiones confirmadas con el cliente
 - Membresía Oro de coworking (incluye domicilio fiscal/comercial): contrato mínimo **6 meses**, no 1 año.
+- Teléfono/WhatsApp por marca (confirmado por el usuario, 2026-09-28): **OfiRent CDMX = 55 3200 9907**, **Torre Altius = 55 3148 5707**. No mezclar. Los posts del blog de OfiRent que hablan de Querétaro/Altius (19 posts con Querétaro, Jurica o Juriquilla en título o slug) llevan el número de Altius en el topbar y el pie; todos los demás posts y páginas llevan el de OfiRent. Los posts nuevos sobre Querétaro deben seguir la misma regla.
 
 ## Qué hace cada sitio
 
