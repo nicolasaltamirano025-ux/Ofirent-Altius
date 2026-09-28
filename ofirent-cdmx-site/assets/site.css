@@ -306,6 +306,16 @@
   .blog-body p.text a{color:var(--green);}
   .blog-body ul.list{margin:0 0 16px 20px;padding:0;}
   .blog-body ul.list li{font-size:15.5px;line-height:1.7;color:var(--steel);margin-bottom:6px;}
+  .blog-body ol.list{margin:0 0 16px 22px;padding:0;}
+  .blog-body ol.list li{font-size:15.5px;line-height:1.7;color:var(--steel);margin-bottom:6px;}
+  .blog-body ul.list li a, .blog-body ol.list li a, .blog-body td a{color:var(--green);}
+  .blog-body .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 8px;}
+  .blog-body .table-wrap{overflow-x:auto;margin:18px 0 26px;border:1px solid var(--line);border-radius:14px;background:var(--paper-raised);}
+  .blog-body table.cmp-table{width:100%;border-collapse:collapse;min-width:560px;font-size:14.5px;line-height:1.55;}
+  .blog-body table.cmp-table th{text-align:left;font-family:var(--body);font-weight:700;color:var(--ink);background:rgba(28,132,73,.08);padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .blog-body table.cmp-table td{color:var(--steel);padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .blog-body table.cmp-table tr:last-child td{border-bottom:0;}
+  .blog-body table.cmp-table td:first-child{color:var(--ink);font-weight:600;}
   .blog-body .faq-block{margin-top:44px;}
   .blog-body .faq-block h3.heading{font-size:22px;margin-top:0;}
   .blog-body details.elementor-accordion-item{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;background:var(--paper-raised);}
