@@ -1,8 +1,8 @@
-// Cron diario de Vercel: reintenta las notificaciones que no salieron.
+// Cron diario de Vercel: reintenta los avisos que no salieron (registros de los ultimos 7 dias).
 // Exige Authorization: Bearer CRON_SECRET (Vercel lo envía solo a los crons).
 
 const airtable = require('./_lib/airtable');
-const { MAX_AUTO_ATTEMPTS, emailConfig, notifyRecord } = require('./_lib/notify');
+const { emailConfig, notifyRecord } = require('./_lib/notify');
 const { safeEqual } = require('./_lib/security');
 
 const BATCH_LIMIT = 25;
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const queue = await airtable.listUnsent(cfg, MAX_AUTO_ATTEMPTS, BATCH_LIMIT);
+    const queue = await airtable.listUnsent(cfg, BATCH_LIMIT);
     const summary = { ok: true, attempted: queue.length, sent: 0, failed: 0, pending: 0 };
     // En serie: volumen bajo y evita rebasar límites de tasa del proveedor.
     for (const record of queue) {

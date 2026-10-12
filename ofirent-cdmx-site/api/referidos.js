@@ -3,7 +3,7 @@
 // Solo mismo origen (sin CORS). El éxito se devuelve únicamente cuando Airtable
 // confirmó el guardado; un fallo del correo no cambia la respuesta (se reintenta).
 
-const { randomBytes } = require('node:crypto');
+const { createHash } = require('node:crypto');
 const airtable = require('./_lib/airtable');
 const { notifyRecord } = require('./_lib/notify');
 const { getClientIp, hashIp, isSameOrigin } = require('./_lib/security');
@@ -27,9 +27,12 @@ function fail(res, status, code, message, extra) {
   send(res, status, Object.assign({ ok: false, code, message }, extra || {}));
 }
 
-function newFolio() {
+// El folio se deriva de la clave de idempotencia: la misma clave siempre da el mismo
+// folio, así que buscarlo en Airtable detecta los reintentos sin un campo extra.
+function folioFromKey(key) {
+  const digest = createHash('sha256').update('referidos:' + key).digest();
   let out = '';
-  for (const byte of randomBytes(8)) out += FOLIO_ALPHABET[byte % FOLIO_ALPHABET.length];
+  for (let i = 0; i < 8; i++) out += FOLIO_ALPHABET[digest[i] % FOLIO_ALPHABET.length];
   return 'REF-' + out;
 }
 
@@ -105,32 +108,27 @@ module.exports = async (req, res) => {
   const ip = getClientIp(req.headers);
   const ipHash = ip ? hashIp(ip) : null;
 
+  const folio = folioFromKey(idempotencyKey);
+
   try {
     // Las dos consultas son independientes. Un reintento con la misma clave
     // devuelve el folio ya guardado aunque la conexión esté al límite.
     const [existing, recent] = await Promise.all([
-      airtable.findByIdempotencyKey(cfg, idempotencyKey),
+      airtable.findByFolio(cfg, folio),
       ipHash ? airtable.countRecentByIpHash(cfg, ipHash, RATE_LIMIT_PER_HOUR) : Promise.resolve(0),
     ]);
 
     if (existing) {
-      const folio = airtable.toReferral(existing).reference;
       return send(res, 200, { ok: true, reference: folio });
     }
     if (recent >= RATE_LIMIT_PER_HOUR) {
       return fail(res, 429, 'rate_limited', 'Recibimos muchos envíos desde tu conexión. Inténtalo de nuevo más tarde.');
     }
 
-    const folio = newFolio();
     // El éxito solo se devuelve cuando Airtable ya confirmó este guardado.
     const record = await airtable.createRecord(
       cfg,
-      airtable.toFields(validation.value, {
-        folio,
-        receivedAt: new Date().toISOString(),
-        idempotencyKey,
-        ipHash,
-      }),
+      airtable.toFields(validation.value, { folio, ipHash }),
     );
 
     // Con el registro ya guardado se intenta el correo; su fallo no cambia la respuesta.

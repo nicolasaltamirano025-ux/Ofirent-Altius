@@ -91,23 +91,22 @@ function makeWorld() {
         const formula = u.searchParams.get('filterByFormula') || '';
         const max = Number(u.searchParams.get('maxRecords')) || 100;
         let found;
-        const keyMatch = formula.match(/^\{Clave de envío\}='(.*)'$/);
+        const folioMatch = formula.match(/^\{Folio\}='(.*)'$/);
         const ipMatch = formula.match(/\{Huella de conexión\}='([^']*)'/);
-        if (keyMatch) {
-          found = world.records.filter((r) => r.fields['Clave de envío'] === keyMatch[1]);
+        if (folioMatch) {
+          found = world.records.filter((r) => r.fields['Folio'] === folioMatch[1]);
         } else if (ipMatch) {
+          assert.ok(formula.includes("IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-1,'hours'))"), 'ventana de una hora');
           const since = Date.now() - 3600 * 1000;
           found = world.records.filter(
-            (r) => r.fields['Huella de conexión'] === ipMatch[1] && Date.parse(r.fields['Fecha de recepción']) > since,
+            (r) => r.fields['Huella de conexión'] === ipMatch[1] && Date.parse(r.createdTime) > since,
           );
-        } else if (formula.includes("{Notificación}!='Enviada'")) {
-          const cap = Number(formula.match(/\{Intentos\}<(\d+)/)[1]);
-          found = world.records.filter((r) => {
-            const attempts = r.fields['Intentos'];
-            return (
-              r.fields['Notificación'] !== 'Enviada' && (attempts === undefined || attempts === null || attempts < cap)
-            );
-          });
+        } else if (formula.includes("{Aviso por correo}!='Enviado'")) {
+          const days = Number(formula.match(/-(\d+),'days'/)[1]);
+          const since = Date.now() - days * 86400 * 1000;
+          found = world.records.filter(
+            (r) => r.fields['Aviso por correo'] !== 'Enviado' && Date.parse(r.createdTime) > since,
+          );
         } else {
           throw new Error('fórmula no reconocida por el simulador: ' + formula);
         }
@@ -223,17 +222,24 @@ test('solicitud válida: guarda, responde 201 y el correo va solo a contacto@ofi
     const f = world.records[0].fields;
     assert.equal(f['Folio'], res.json.reference);
     assert.equal(f['Estado'], 'Nuevo');
-    assert.equal(f['Autorización confirmada'], true);
-    assert.equal(f['Sitio'], 'OfiRent CDMX / Programa de referidos');
+    assert.equal(f['Nombre de quien recomienda'], 'Ana Pérez Soto');
+    assert.equal(f['Nombre del referido'], 'Luis Mendoza');
     assert.equal(f['Teléfono de quien recomienda'], '5512345678');
     assert.equal(f['Teléfono del referido'], '5587654321');
-    assert.equal(f['Correo de quien recomienda'], 'ana@empresa.com');
-    assert.equal(f['Tipo de espacio'], 'Oficina');
     assert.ok(/^[0-9a-f]{64}$/.test(f['Huella de conexión']), 'huella sha256');
     assert.ok(!JSON.stringify(f).includes('203.0.113.9'), 'la IP no se guarda');
-    assert.equal(f['Notificación'], 'Enviada');
-    assert.equal(f['Intentos'], 1);
-    assert.equal(f['Último error'], undefined);
+    assert.equal(f['Aviso por correo'], 'Enviado');
+    // Los datos secundarios van en un solo campo.
+    const details = f['Detalles'];
+    assert.ok(details.includes('Empresa de quien recomienda: Estudio Pérez'));
+    assert.ok(details.includes('Correo de quien recomienda: ana@empresa.com'));
+    assert.ok(details.includes('Correo del referido: luis@correo.com'));
+    assert.ok(details.includes('Tipo de espacio: Oficina'));
+    assert.ok(details.includes('Zona o sucursal: Del Valle'));
+    assert.ok(details.includes('Autorización: quien recomienda confirmó'));
+    assert.ok(details.includes('Comentarios: Busca una oficina para 3 personas.\nPrefiere planta baja.'));
+    // Solo los 9 campos de la tabla mínima.
+    assert.deepEqual(Object.keys(f).sort(), [...ALLOWED_FIELDS].sort());
 
     assert.equal(world.emails.length, 1);
     const mail = world.emails[0];
@@ -262,9 +268,10 @@ test('campos opcionales vacíos no se envían a Airtable y no hay reply_to', asy
     });
     assert.equal(res.statusCode, 201);
     const f = world.records[0].fields;
-    for (const name of ['Empresa de quien recomienda', 'Correo de quien recomienda', 'Correo del referido', 'Tipo de espacio', 'Zona o sucursal', 'Comentarios']) {
-      assert.equal(f[name], undefined, name);
+    for (const label of ['Empresa de quien recomienda', 'Correo de quien recomienda', 'Correo del referido', 'Tipo de espacio', 'Zona o sucursal', 'Comentarios']) {
+      assert.ok(!f['Detalles'].includes(label + ':'), label);
     }
+    assert.ok(f['Detalles'].includes('Autorización:'));
     assert.equal(world.emails[0].body.reply_to, undefined);
     assert.ok(world.emails[0].body.html.includes('No indicado'));
   });
@@ -393,7 +400,7 @@ test('misma clave de idempotencia dos veces: un registro y un correo', async () 
   });
 });
 
-test('falla de Resend: el registro se conserva, queda Fallida y el reintento la marca Enviada', async () => {
+test('falla de Resend: el registro se conserva, queda Fallido y el reintento reconstruye el correo completo', async () => {
   await withWorld(async (world) => {
     world.resendMode = 'http403';
     const res = await call(handler, { body: validBody() });
@@ -402,9 +409,7 @@ test('falla de Resend: el registro se conserva, queda Fallida y el reintento la 
 
     assert.equal(world.records.length, 1);
     let f = world.records[0].fields;
-    assert.equal(f['Notificación'], 'Fallida');
-    assert.equal(f['Intentos'], 1);
-    assert.match(f['Último error'], /403/);
+    assert.match(f['Aviso por correo'], /^Fallido: .*403/);
 
     // Sin autorización no se puede disparar el reintento.
     assert.equal((await call(retryHandler, { method: 'GET', noBody: true })).statusCode, 401);
@@ -427,52 +432,63 @@ test('falla de Resend: el registro se conserva, queda Fallida y el reintento la 
       { attempted: 1, sent: 1, failed: 0 },
     );
     f = world.records[0].fields;
-    assert.equal(f['Notificación'], 'Enviada');
-    assert.equal(f['Intentos'], 2);
-    assert.equal(f['Último error'], undefined);
-    assert.deepEqual(world.emails[1].body.to, ['contacto@ofirent.com.mx']);
-    assert.ok(world.emails[1].body.html.includes(res.json.reference));
+    assert.equal(f['Aviso por correo'], 'Enviado');
 
-    // Ya enviada: un segundo reintento no hace nada.
-    const again = await call(retryHandler, {
+    // El correo reenviado sale con los mismos datos que el original (salen de "Detalles").
+    const first = world.emails[0].body;
+    const again1 = world.emails[1].body;
+    assert.deepEqual(again1.to, ['contacto@ofirent.com.mx']);
+    assert.equal(again1.reply_to, 'ana@empresa.com');
+    for (const needle of ['Estudio Pérez', 'ana@empresa.com', 'luis@correo.com', 'Oficina', 'Del Valle', 'Prefiere planta baja.', res.json.reference]) {
+      assert.ok(again1.html.includes(needle), 'falta en el reintento: ' + needle);
+    }
+    const strip = (t) => t.replace(/Recibida: .*\n/, '');
+    assert.equal(strip(again1.text), strip(first.text), 'mismo contenido que el primer envío');
+
+    // Ya enviado: un segundo reintento no hace nada.
+    const second = await call(retryHandler, {
       method: 'GET',
       noBody: true,
       headers: { authorization: 'Bearer cron-secret-test' },
     });
-    assert.equal(again.json.attempted, 0);
+    assert.equal(second.json.attempted, 0);
     assert.equal(world.emails.length, 2);
   });
 });
 
-test('falla de red al enviar el correo: registro conservado y marcado Fallida', async () => {
+test('falla de red al enviar el correo: registro conservado y marcado Fallido', async () => {
   await withWorld(async (world) => {
     world.resendMode = 'throw';
     const res = await call(handler, { body: validBody() });
     assert.equal(res.statusCode, 201);
-    assert.equal(world.records[0].fields['Notificación'], 'Fallida');
-    assert.equal(world.records[0].fields['Intentos'], 1);
+    assert.match(world.records[0].fields['Aviso por correo'], /^Fallido: /);
   });
 });
 
-test('reintento: respeta el tope de 5 intentos y no gasta intentos sin correo configurado', async () => {
+test('reintento: solo registros de los últimos 7 días; sin correo configurado no hace nada', async () => {
   await withWorld(async (world) => {
     world.resendMode = 'http403';
     await call(handler, { body: validBody() });
-    world.records[0].fields['Intentos'] = 5;
+    await call(handler, { body: validBody({ referredName: 'Marta Gómez' }) });
+    assert.equal(world.records.length, 2);
+    // El primero se vuelve de hace 8 días: ya salió de la ventana de reintento.
+    world.records[0].createdTime = new Date(Date.now() - 8 * 86400 * 1000).toISOString();
     world.resendMode = 'ok';
     const auth = { authorization: 'Bearer cron-secret-test' };
-    const capped = await call(retryHandler, { method: 'GET', noBody: true, headers: auth });
-    assert.equal(capped.json.attempted, 0, 'con 5 intentos ya no se reintenta solo');
-    assert.equal(world.emails.length, 1);
+    const run = await call(retryHandler, { method: 'GET', noBody: true, headers: auth });
+    assert.equal(run.json.attempted, 1, 'solo el registro reciente');
+    assert.equal(world.records[1].fields['Aviso por correo'], 'Enviado');
+    assert.match(world.records[0].fields['Aviso por correo'], /^Fallido/, 'el viejo se deja como está');
+    assert.equal(world.emails.length, 3);
   });
 
   await withWorld(
     async (world) => {
       const res = await call(handler, { body: validBody() });
       assert.equal(res.statusCode, 201, 'se guarda aunque no haya correo configurado');
-      assert.equal(world.records[0].fields['Notificación'], 'Pendiente');
-      assert.equal(world.records[0].fields['Intentos'], 0);
+      assert.match(world.records[0].fields['Aviso por correo'], /^Pendiente/);
       assert.equal(world.emails.length, 0);
+      const before = JSON.stringify(world.records);
       const retry = await call(retryHandler, {
         method: 'GET',
         noBody: true,
@@ -480,10 +496,47 @@ test('reintento: respeta el tope de 5 intentos y no gasta intentos sin correo co
       });
       assert.equal(retry.statusCode, 200);
       assert.equal(retry.json.skipped, 'email_not_configured');
-      assert.equal(world.records[0].fields['Intentos'], 0);
+      assert.equal(JSON.stringify(world.records), before, 'no se tocó ningún registro');
     },
     { RESEND_API_KEY: null },
   );
+});
+
+test('el folio sale de la clave de envío: misma clave, mismo folio; claves distintas, folios distintos', async () => {
+  await withWorld(async (world) => {
+    const keyA = randomUUID();
+    const a1 = await call(handler, { body: validBody({ idempotencyKey: keyA }) });
+    const a2 = await call(handler, { body: validBody({ idempotencyKey: keyA, referredName: 'Otro Nombre' }) });
+    const b = await call(handler, { body: validBody({ idempotencyKey: randomUUID() }) });
+    assert.equal(a1.json.reference, a2.json.reference);
+    assert.notEqual(a1.json.reference, b.json.reference);
+    assert.equal(world.records.length, 2);
+    assert.ok(world.records.every((r) => !('Clave de envío' in r.fields)), 'no existe campo de clave');
+  });
+});
+
+test('"Detalles": ida y vuelta sin perder datos, incluso con comentarios que imitan etiquetas', () => {
+  const { serializeDetails, parseDetails } = airtable;
+  const value = {
+    referrerCompany: 'Estudio: Pérez & Co.',
+    referrerEmail: 'ana@empresa.com',
+    referredEmail: '',
+    spaceType: 'bodega',
+    zone: 'Roma, Condesa',
+    comments: 'Línea 1\nZona o sucursal: falsa\nComentarios: otra\nAutorización: falsa',
+  };
+  const back = parseDetails(serializeDetails(value));
+  assert.deepEqual(back, {
+    referrerCompany: 'Estudio: Pérez & Co.',
+    referrerEmail: 'ana@empresa.com',
+    spaceType: 'bodega',
+    zone: 'Roma, Condesa',
+    comments: value.comments,
+  });
+  assert.deepEqual(parseDetails(''), {});
+  assert.deepEqual(parseDetails(undefined), {});
+  // Texto editado a mano por el personal: no truena y conserva lo que reconoce.
+  assert.equal(parseDetails('Zona o sucursal: Del Valle\nnota interna\n').zone, 'Del Valle');
 });
 
 test('reintento sin CRON_SECRET configurado siempre responde 401', async () => {

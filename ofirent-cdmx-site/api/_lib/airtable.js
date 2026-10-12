@@ -1,35 +1,41 @@
 // Acceso a la tabla "Referidos" de Airtable (misma base que "Leads").
 // fetch nativo, sin SDK. Nunca registra el contenido de las respuestas.
+//
+// Tabla minima: 9 campos. La fecha de recepcion es la propia fecha de creacion del
+// registro (createdTime / CREATED_TIME()), por eso no hay campo de fecha.
 
-const SITE_LABEL = 'OfiRent CDMX / Programa de referidos';
 const REQUEST_TIMEOUT_MS = 8000;
+// Un aviso no enviado se reintenta cada dia mientras el registro tenga menos de estos dias.
+const RETRY_WINDOW_DAYS = 7;
 
 // Nombres exactos de los campos de la tabla.
 const F = {
   folio: 'Folio',
-  receivedAt: 'Fecha de recepción',
   status: 'Estado',
   referrerName: 'Nombre de quien recomienda',
-  referrerCompany: 'Empresa de quien recomienda',
   referrerPhone: 'Teléfono de quien recomienda',
-  referrerEmail: 'Correo de quien recomienda',
   referredName: 'Nombre del referido',
   referredPhone: 'Teléfono del referido',
-  referredEmail: 'Correo del referido',
-  spaceType: 'Tipo de espacio',
-  zone: 'Zona o sucursal',
-  comments: 'Comentarios',
-  consent: 'Autorización confirmada',
-  site: 'Sitio',
-  notification: 'Notificación',
-  attempts: 'Intentos',
-  lastError: 'Último error',
-  idempotencyKey: 'Clave de envío',
+  details: 'Detalles',
+  mail: 'Aviso por correo',
   ipHash: 'Huella de conexión',
 };
 
-const SPACE_TO_OPTION = { oficina: 'Oficina', bodega: 'Bodega', otro: 'Otro' };
-const OPTION_TO_SPACE = { Oficina: 'oficina', Bodega: 'bodega', Otro: 'otro' };
+const SPACE_TO_LABEL = { oficina: 'Oficina', bodega: 'Bodega', otro: 'Otro' };
+const LABEL_TO_SPACE = { Oficina: 'oficina', Bodega: 'bodega', Otro: 'otro' };
+
+// Datos secundarios (una sola linea cada uno). "Comentarios" va siempre al final
+// porque es el unico multilinea: todo lo que sigue a su etiqueta le pertenece.
+const DETAIL_LABELS = [
+  ['referrerCompany', 'Empresa de quien recomienda'],
+  ['referrerEmail', 'Correo de quien recomienda'],
+  ['referredEmail', 'Correo del referido'],
+  ['spaceType', 'Tipo de espacio'],
+  ['zone', 'Zona o sucursal'],
+];
+const COMMENTS_LABEL = 'Comentarios';
+const CONSENT_LINE =
+  'Autorización: quien recomienda confirmó contar con la autorización de la persona recomendada.';
 
 class AirtableError extends Error {
   constructor(status, kind) {
@@ -87,21 +93,21 @@ async function request(cfg, method, path, options) {
   return response.json();
 }
 
-async function findByIdempotencyKey(cfg, key) {
+async function findByFolio(cfg, folio) {
   const data = await request(cfg, 'GET', '', {
     query: [
-      ['filterByFormula', "{" + F.idempotencyKey + "}='" + escapeFormulaString(key) + "'"],
+      ['filterByFormula', '{' + F.folio + "}='" + escapeFormulaString(folio) + "'"],
       ['maxRecords', '1'],
     ],
   });
   return (data.records && data.records[0]) || null;
 }
 
-// Cuántos envíos guardados tiene esta huella en la última hora (hasta `cap`).
+// Cuantos envios guardados tiene esta huella en la ultima hora (hasta `cap`).
 async function countRecentByIpHash(cfg, ipHash, cap) {
   const formula =
-    "AND({" + F.ipHash + "}='" + escapeFormulaString(ipHash) + "'," +
-    "IS_AFTER({" + F.receivedAt + "},DATEADD(NOW(),-1,'hours')))";
+    'AND({' + F.ipHash + "}='" + escapeFormulaString(ipHash) + "'," +
+    "IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-1,'hours')))";
   const data = await request(cfg, 'GET', '', {
     query: [
       ['filterByFormula', formula],
@@ -121,49 +127,65 @@ async function updateRecord(cfg, recordId, fields) {
   return request(cfg, 'PATCH', '/' + encodeURIComponent(recordId), { body: { fields } });
 }
 
-// Registros cuya notificación no salió y que aún no agotan los intentos.
-async function listUnsent(cfg, maxAttempts, limit) {
+// Registros cuyo aviso no salio y que siguen dentro de la ventana de reintento.
+async function listUnsent(cfg, limit) {
   const formula =
-    "AND({" + F.notification + "}!='Enviada',OR({" + F.attempts + "}=BLANK(),{" + F.attempts + "}<" +
-    Number(maxAttempts) + "))";
+    'AND({' + F.mail + "}!='Enviado'," +
+    "IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-" + RETRY_WINDOW_DAYS + ",'days')))";
   const data = await request(cfg, 'GET', '', {
     query: [
       ['filterByFormula', formula],
       ['maxRecords', String(limit)],
       ['pageSize', String(limit)],
-      ['sort[0][field]', F.receivedAt],
-      ['sort[0][direction]', 'asc'],
     ],
   });
   return data.records || [];
 }
 
-// Valor validado + metadatos -> campos de Airtable (los vacíos se omiten).
+// Datos secundarios del formulario -> texto del campo "Detalles".
+function serializeDetails(value) {
+  const lines = [];
+  for (const [key, label] of DETAIL_LABELS) {
+    const raw = key === 'spaceType' ? SPACE_TO_LABEL[value.spaceType] || '' : value[key];
+    if (raw) lines.push(label + ': ' + raw);
+  }
+  lines.push(CONSENT_LINE);
+  if (value.comments) lines.push(COMMENTS_LABEL + ': ' + value.comments);
+  return lines.join('\n');
+}
+
+// Texto de "Detalles" -> datos secundarios (para reconstruir el correo en un reintento).
+function parseDetails(text) {
+  const out = {};
+  const lines = String(text || '').split(/\r?\n/);
+  const commentsPrefix = COMMENTS_LABEL + ': ';
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.startsWith(commentsPrefix)) {
+      out.comments = [line.slice(commentsPrefix.length)].concat(lines.slice(i + 1)).join('\n');
+      break;
+    }
+    for (const [key, label] of DETAIL_LABELS) {
+      if (line.startsWith(label + ': ')) out[key] = line.slice(label.length + 2);
+    }
+  }
+  if (out.spaceType) out.spaceType = LABEL_TO_SPACE[out.spaceType] || '';
+  return out;
+}
+
+// Valor validado + metadatos -> campos de Airtable.
 function toFields(value, meta) {
   const fields = {
     [F.folio]: meta.folio,
-    [F.receivedAt]: meta.receivedAt,
     [F.status]: 'Nuevo',
     [F.referrerName]: value.referrerName,
     [F.referrerPhone]: value.referrerPhone,
     [F.referredName]: value.referredName,
     [F.referredPhone]: value.referredPhone,
-    [F.consent]: true,
-    [F.site]: SITE_LABEL,
-    [F.notification]: 'Pendiente',
-    [F.attempts]: 0,
-    [F.idempotencyKey]: meta.idempotencyKey,
+    [F.details]: serializeDetails(value),
+    [F.mail]: 'Pendiente',
   };
-  const optional = {
-    [F.referrerCompany]: value.referrerCompany,
-    [F.referrerEmail]: value.referrerEmail,
-    [F.referredEmail]: value.referredEmail,
-    [F.zone]: value.zone,
-    [F.comments]: value.comments,
-    [F.spaceType]: SPACE_TO_OPTION[value.spaceType] || '',
-    [F.ipHash]: meta.ipHash || '',
-  };
-  for (const key of Object.keys(optional)) if (optional[key]) fields[key] = optional[key];
+  if (meta.ipHash) fields[F.ipHash] = meta.ipHash;
   return fields;
 }
 
@@ -174,33 +196,36 @@ function str(value) {
 // Registro de Airtable -> forma que usa la plantilla del correo.
 function toReferral(record) {
   const f = (record && record.fields) || {};
+  const extra = parseDetails(f[F.details]);
   return {
     id: record.id,
     reference: str(f[F.folio]),
-    createdAt: str(f[F.receivedAt]),
+    createdAt: str(record.createdTime),
     referrerName: str(f[F.referrerName]),
-    referrerCompany: str(f[F.referrerCompany]),
+    referrerCompany: str(extra.referrerCompany),
     referrerPhone: str(f[F.referrerPhone]),
-    referrerEmail: str(f[F.referrerEmail]),
+    referrerEmail: str(extra.referrerEmail),
     referredName: str(f[F.referredName]),
     referredPhone: str(f[F.referredPhone]),
-    referredEmail: str(f[F.referredEmail]),
-    spaceType: OPTION_TO_SPACE[str(f[F.spaceType])] || '',
-    zone: str(f[F.zone]),
-    comments: str(f[F.comments]),
-    attempts: Number(f[F.attempts]) || 0,
+    referredEmail: str(extra.referredEmail),
+    spaceType: str(extra.spaceType),
+    zone: str(extra.zone),
+    comments: str(extra.comments),
   };
 }
 
 module.exports = {
   F,
+  RETRY_WINDOW_DAYS,
   AirtableError,
   config,
-  findByIdempotencyKey,
+  findByFolio,
   countRecentByIpHash,
   createRecord,
   updateRecord,
   listUnsent,
+  serializeDetails,
+  parseDetails,
   toFields,
   toReferral,
 };
