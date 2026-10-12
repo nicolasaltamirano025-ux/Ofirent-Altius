@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programa de referidos | OfiRent</title>
+<meta name="description" content="Recomienda OfiRent y gana un bono de $2,500 MXN por cada referido que rente y firme contrato. Conoce cómo funciona y registra tu recomendación.">
+<link rel="canonical" href="https://www.ofirent.com.mx/programa-de-referidos/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="OfiRent">
+<meta property="og:title" content="¡Recomienda y gana! Programa de referidos OfiRent">
+<meta property="og:description" content="Gana un bono de $2,500 MXN por cada referido que rente y firme contrato.">
+<meta property="og:url" content="https://www.ofirent.com.mx/programa-de-referidos/">
+<meta property="og:image" content="https://www.ofirent.com.mx/assets/referidos/ofirent-flyer-referidos.jpeg">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="1600">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* Hero: texto a la izquierda, flyer a la derecha; en móvil flyer, botón y texto */
+  .ref-hero{padding:30px 0 56px;background:var(--paper);}
+  .ref-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,400px);grid-template-rows:auto 1fr;grid-template-areas:"copy flyer" "cta flyer";column-gap:56px;align-items:start;}
+  .ref-copy{grid-area:copy;align-self:end;}
+  .ref-cta{grid-area:cta;align-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:28px;}
+  .ref-flyer{grid-area:flyer;margin:0;justify-self:end;max-width:100%;}
+  .ref-offer{font-size:clamp(19px,2.2vw,24px);font-weight:700;line-height:1.35;color:var(--ink);margin-bottom:14px;max-width:34ch;}
+  .ref-offer strong{color:var(--green);}
+  .ref-lead{font-size:16px;color:var(--steel);line-height:1.7;max-width:52ch;}
+  .ref-btn{font-weight:700;letter-spacing:.01em;text-transform:uppercase;padding:17px 28px;}
+  .ref-pdf{font-family:var(--body);font-weight:700;font-size:13.5px;color:var(--green-deep);text-decoration:underline;text-underline-offset:3px;}
+  .ref-pdf:hover{color:var(--green);}
+  .ref-flyer-open{display:block;padding:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper-raised);cursor:zoom-in;box-shadow:0 20px 50px rgba(19,32,26,.14);line-height:0;}
+  .ref-flyer-open:focus-visible{outline:3px solid var(--green);outline-offset:3px;}
+  .ref-flyer-open img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100svh - 170px);}
+  .ref-flyer-hint{display:flex;align-items:center;justify-content:center;gap:6px;border-top:1px solid var(--line);background:var(--paper-raised);color:var(--steel);font-family:var(--body);font-size:12.5px;font-weight:600;line-height:1.3;padding:10px 12px;}
+  @media (max-width:860px){
+    .ref-hero{padding:28px 0 40px;}
+    .ref-hero-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"flyer" "cta" "copy";row-gap:0;}
+    .ref-flyer{justify-self:center;}
+    .ref-cta{align-items:stretch;margin:22px 0 28px;}
+    .ref-btn{justify-content:center;text-align:center;}
+    .ref-pdf{text-align:center;}
+    .ref-copy{align-self:start;}
+  }
+
+  /* Lightbox del flyer */
+  dialog.ref-lightbox{border:0;padding:0;background:transparent;max-width:min(96vw,640px);max-height:96svh;width:100%;overflow:visible;}
+  dialog.ref-lightbox::backdrop{background:rgba(19,32,26,.78);}
+  .ref-lightbox-scroll{max-height:96svh;overflow:auto;border-radius:16px;background:var(--paper-raised);}
+  .ref-lightbox-scroll img{display:block;width:100%;height:auto;}
+  .ref-lightbox-close{position:absolute;top:10px;right:10px;z-index:2;background:rgba(19,32,26,.85);color:#fff;border:0;border-radius:100px;font-family:var(--body);font-weight:700;font-size:13px;padding:10px 16px;cursor:pointer;}
+  .ref-lightbox-close:hover{background:var(--ink);}
+
+  /* Cómo funciona */
+  .ref-steps{list-style:none;margin:8px 0 28px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:800px){ .ref-steps{grid-template-columns:1fr;} }
+  .ref-step{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px;}
+  .ref-step-icon{width:52px;height:52px;border-radius:14px;background:rgba(28,132,73,.1);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .ref-step-num{display:block;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
+  .ref-step h3{font-size:21px;margin-bottom:8px;}
+  .ref-step p{font-size:14.5px;color:var(--steel);line-height:1.65;}
+  .ref-highlight{display:flex;align-items:center;gap:14px;background:var(--green-deep);color:#fff;border-radius:18px;padding:20px 24px;font-family:var(--body);font-weight:600;font-size:16px;line-height:1.5;}
+  .ref-highlight svg{flex-shrink:0;color:var(--gold);}
+
+  /* Formulario */
+  .ref-form-section{background:var(--paper);scroll-margin-top:140px;}
+  #formulario{scroll-margin-top:140px;}
+  .ref-form-section .section-sub{margin-bottom:28px;}
+  .lead-form.ref-form{max-width:720px;margin:0;}
+  @media (max-width:600px){ .lead-form.ref-form{padding:24px 20px;} }
+  .ref-fieldset{border:0;margin:0 0 8px;padding:0;min-width:0;}
+  .ref-legend{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:18px;padding:0;}
+  .ref-legend-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--body);font-size:14px;font-weight:700;}
+  .ref-field{margin-bottom:12px;}
+  .lead-form .ref-field input,.lead-form .ref-field textarea{margin-bottom:6px;}
+  .lead-form .ref-field textarea{min-height:96px;}
+  .ref-req{color:#b3261e;}
+  .ref-opt{font-weight:500;color:var(--steel);}
+  .ref-field.has-error input,.ref-field.has-error textarea{border-color:#b3261e;background:#fff7f6;}
+  .ref-error{color:#b3261e;font-size:13px;font-weight:600;margin:0 0 4px;}
+  .ref-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
+  .ref-chip{font-family:var(--body);font-size:14px;font-weight:600;padding:11px 20px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .ref-chip:hover{border-color:var(--green);}
+  .ref-chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;}
+  .ref-chip:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+  .ref-consent{margin:20px 0 22px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper);}
+  .ref-consent.has-error{border-color:#b3261e;background:#fff7f6;}
+  .lead-form .ref-consent label{display:flex;gap:12px;align-items:flex-start;margin:0;font-weight:600;font-size:14px;color:var(--ink);cursor:pointer;line-height:1.5;}
+  .lead-form .ref-consent input{width:20px;height:20px;margin:2px 0 0;flex-shrink:0;accent-color:var(--green);}
+  .ref-privacy{font-size:13px;color:var(--steel);margin:10px 0 0 32px;}
+  .ref-privacy a{color:var(--green-deep);font-weight:700;}
+  .ref-banner{background:#fff7f6;border:1px solid #f0c4c0;color:#8f1f18;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;margin-bottom:18px;}
+  .ref-note{font-size:12.5px;color:var(--steel);text-align:center;margin-top:12px;}
+  .ref-hp{position:absolute !important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+  .lead-form button[type="submit"].ref-submit{display:flex;align-items:center;justify-content:center;gap:10px;}
+  .ref-spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:refspin .7s linear infinite;}
+  @keyframes refspin{to{transform:rotate(360deg);}}
+
+  /* Confirmación */
+  .ref-thanks{max-width:720px;background:var(--paper-raised);border:1px solid var(--line);border-top:4px solid var(--green);border-radius:16px;padding:36px 32px;text-align:left;}
+  .ref-thanks:focus{outline:none;}
+  .ref-thanks-icon{width:56px;height:56px;border-radius:50%;background:rgba(28,132,73,.12);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .ref-thanks h3{font-size:clamp(24px,3vw,32px);margin-bottom:10px;}
+  .ref-thanks p{font-size:15.5px;color:var(--steel);line-height:1.7;margin-bottom:10px;}
+  .ref-folio{color:var(--ink);}
+  .ref-folio strong{font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--green-deep);}
+  .ref-thanks .btn{margin-top:14px;}
+
+  /* Cierre */
+  .ref-closing{background:var(--paper-raised);border-top:1px solid var(--line);text-align:center;padding:48px 0;}
+  .ref-closing p{max-width:52ch;margin:0 auto;font-size:17px;color:var(--ink);line-height:1.6;}
+  .ref-closing .ref-sign{margin-top:8px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--green-deep);}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  @media (prefers-reduced-motion:reduce){ .ref-spinner{animation:none;} }
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLSS9VN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="topbar-phone">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="topbar-label">Llámanos:</span>
+      <a href="tel:+525532009907">55 3200 9907</a>
+    </div>
+  </div>
+</div>
+
+<nav class="topnav">
+  <div class="wrap topnav-inner">
+    <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
+    <div class="navlinks">
+      <a href="/ubicaciones/">Ubicaciones</a><a href="/servicios-oficinas/">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="/programa-de-referidos/" class="nav-ref" aria-label="Programa de referidos" aria-current="page"><span class="nav-ref-full">Programa de referidos</span><span class="nav-ref-short">Referidos</span></a><a href="https://sistema.ofirent.com.mx/" target="_blank" rel="noopener">Acceso a clientes</a><a href="/contacto/" class="nav-cta">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="ref-hero" aria-labelledby="ref-titulo">
+  <div class="wrap ref-hero-grid">
+    <div class="ref-copy">
+      <div class="eyebrow">Programa de referidos</div>
+      <h1 class="hero-title" id="ref-titulo">¡RECOMIENDA Y GANA!</h1>
+      <p class="ref-offer">Gana un bono de <strong>$2,500 MXN</strong> por cada referido que rente y firme contrato.</p>
+      <p class="ref-lead">Comparte tu experiencia con amigos, familiares o socios, pídeles que mencionen tu nombre al cotizar y, cuando su contrato esté activo, tu bono se aplicará automáticamente.</p>
+    </div>
+    <div class="ref-cta">
+      <a class="btn primary ref-btn" href="#formulario">¡QUIERO RECOMENDAR A ALGUIEN!</a>
+      <a class="ref-pdf" href="/assets/referidos/OfiRent_Flyer_Referidos_Interactivo.pdf" download>Descargar flyer en PDF</a>
+    </div>
+    <figure class="ref-flyer">
+      <button type="button" class="ref-flyer-open" id="flyer-open" aria-haspopup="dialog" aria-label="Ampliar el flyer de la campaña">
+        <img src="/assets/referidos/ofirent-flyer-referidos.jpeg" width="900" height="1600" alt="Flyer de OfiRent: ¡Recomienda y gana! Gana un bono de $2,500 MXN por cada referido que rente y firme contrato." fetchpriority="high" decoding="async">
+        <span class="ref-flyer-hint" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
+          Toca para ampliar
+        </span>
+      </button>
+    </figure>
+  </div>
+</section>
+
+<dialog class="ref-lightbox" id="flyer-dialog" aria-label="Flyer ampliado">
+  <button type="button" class="ref-lightbox-close" id="flyer-close">Cerrar</button>
+  <div class="ref-lightbox-scroll">
+    <img src="/assets/referidos/ofirent-flyer-referidos.jpeg" width="900" height="1600" alt="Flyer de OfiRent: ¡Recomienda y gana! Gana un bono de $2,500 MXN por cada referido que rente y firme contrato." loading="lazy" decoding="async">
+  </div>
+</dialog>
+
+<section class="alt" id="como-funciona" aria-labelledby="como-titulo">
+  <div class="wrap">
+    <div class="eyebrow">Tres pasos sencillos</div>
+    <h2 class="section-title" id="como-titulo">¿Cómo funciona?</h2>
+    <ol class="ref-steps">
+      <li class="ref-step">
+        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span>
+        <span class="ref-step-num">Paso 1</span>
+        <h3>Recomienda</h3>
+        <p>Comparte tu experiencia con amigos, familiares o socios.</p>
+      </li>
+      <li class="ref-step">
+        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+        <span class="ref-step-num">Paso 2</span>
+        <h3>Pídele que te mencione</h3>
+        <p>Diles que mencionen tu nombre al cotizar su nuevo espacio.</p>
+      </li>
+      <li class="ref-step">
+        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>
+        <span class="ref-step-num">Paso 3</span>
+        <h3>Recibe tu bono</h3>
+        <p>Cuando su contrato esté activo, tu bono se aplicará automáticamente.</p>
+      </li>
+    </ol>
+    <p class="ref-highlight">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+      <span>Entre más personas recomiendes que renten, más beneficios acumulas.</span>
+    </p>
+  </div>
+</section>
+
+<section class="ref-form-section" id="formulario" aria-labelledby="form-titulo">
+  <div class="wrap">
+    <div class="eyebrow">Registra tu recomendación</div>
+    <h2 class="section-title" id="form-titulo">Cuéntanos a quién recomiendas</h2>
+    <p class="section-sub">Nuestro equipo podrá dar seguimiento a tu recomendación.</p>
+
+    <form class="lead-form ref-form" id="ref-form" novalidate>
+      <p class="ref-banner" id="ref-summary" role="alert" hidden>Revisa los campos marcados en rojo para poder enviar tu recomendación.</p>
+      <p class="ref-banner" id="ref-banner" role="alert" hidden></p>
+
+      <div class="ref-hp" aria-hidden="true">
+        <label>No llenes este campo
+          <input type="text" name="website" id="f-website" tabindex="-1" autocomplete="off">
+        </label>
+      </div>
+
+      <fieldset class="ref-fieldset">
+        <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">1</span> Tus datos (quien recomienda)</legend>
+
+        <div class="ref-field" data-field="referrerName">
+          <label for="f-referrerName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+          <input id="f-referrerName" type="text" autocomplete="name" maxlength="120" aria-invalid="false">
+          <p class="ref-error" id="e-referrerName" hidden></p>
+        </div>
+        <div class="ref-field" data-field="referrerCompany">
+          <label for="f-referrerCompany">Empresa <span class="ref-opt">(opcional)</span></label>
+          <input id="f-referrerCompany" type="text" autocomplete="organization" maxlength="120" aria-invalid="false">
+          <p class="ref-error" id="e-referrerCompany" hidden></p>
+        </div>
+        <div class="lead-form-grid">
+          <div class="ref-field" data-field="referrerPhone">
+            <label for="f-referrerPhone">Teléfono de contacto <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+            <input id="f-referrerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" aria-invalid="false">
+            <p class="ref-error" id="e-referrerPhone" hidden></p>
+          </div>
+          <div class="ref-field" data-field="referrerEmail">
+            <label for="f-referrerEmail">Correo electrónico <span class="ref-opt">(opcional)</span></label>
+            <input id="f-referrerEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-invalid="false">
+            <p class="ref-error" id="e-referrerEmail" hidden></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="ref-fieldset">
+        <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">2</span> Datos de la persona que recomiendas</legend>
+
+        <div class="ref-field" data-field="referredName">
+          <label for="f-referredName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+          <input id="f-referredName" type="text" autocomplete="off" maxlength="120" aria-invalid="false">
+          <p class="ref-error" id="e-referredName" hidden></p>
+        </div>
+        <div class="lead-form-grid">
+          <div class="ref-field" data-field="referredPhone">
+            <label for="f-referredPhone">Teléfono <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+            <input id="f-referredPhone" type="tel" inputmode="tel" autocomplete="off" placeholder="55 1234 5678" aria-invalid="false">
+            <p class="ref-error" id="e-referredPhone" hidden></p>
+          </div>
+          <div class="ref-field" data-field="referredEmail">
+            <label for="f-referredEmail">Correo electrónico <span class="ref-opt">(opcional)</span></label>
+            <input id="f-referredEmail" type="email" inputmode="email" autocomplete="off" maxlength="254" aria-invalid="false">
+            <p class="ref-error" id="e-referredEmail" hidden></p>
+          </div>
+        </div>
+
+        <div class="ref-field" data-field="spaceType">
+          <span class="field-label" id="spaceType-label" style="display:block;margin-bottom:10px;">Tipo de espacio que busca <span class="ref-opt">(opcional)</span></span>
+          <div class="ref-chips" id="f-spaceType-group" role="group" aria-labelledby="spaceType-label" tabindex="-1">
+            <button type="button" class="ref-chip" data-value="oficina" aria-pressed="false">Oficina</button>
+            <button type="button" class="ref-chip" data-value="bodega" aria-pressed="false">Bodega</button>
+            <button type="button" class="ref-chip" data-value="otro" aria-pressed="false">Otro</button>
+          </div>
+          <p class="ref-error" id="e-spaceType" hidden></p>
+        </div>
+
+        <div class="ref-field" data-field="zone">
+          <label for="f-zone">Zona o sucursal de interés <span class="ref-opt">(opcional)</span></label>
+          <input id="f-zone" type="text" autocomplete="off" maxlength="120" placeholder="Por ejemplo: Del Valle, Roma, Condesa" aria-invalid="false">
+          <p class="ref-error" id="e-zone" hidden></p>
+        </div>
+        <div class="ref-field" data-field="comments">
+          <label for="f-comments">Comentarios <span class="ref-opt">(opcional)</span></label>
+          <textarea id="f-comments" rows="3" maxlength="1000" aria-invalid="false"></textarea>
+          <p class="ref-error" id="e-comments" hidden></p>
+        </div>
+      </fieldset>
+
+      <div class="ref-consent" id="ref-consent" data-field="consent">
+        <label for="f-consent">
+          <input type="checkbox" id="f-consent" aria-invalid="false">
+          <span>Confirmo que cuento con la autorización de la persona que recomiendo para compartir sus datos de contacto con OfiRent.</span>
+        </label>
+        <p class="ref-error" id="e-consent" style="margin:8px 0 0 32px;" hidden></p>
+        <p class="ref-privacy">Consulta el <a href="/aviso-de-privacidad/" target="_blank" rel="noopener">Aviso de privacidad</a>.</p>
+      </div>
+
+      <button type="submit" class="ref-submit" id="ref-submit">Enviar recomendación</button>
+      <p class="ref-note">Los campos marcados con * son obligatorios.</p>
+    </form>
+
+    <div class="ref-thanks" id="ref-thanks" role="status" aria-live="polite" tabindex="-1" hidden>
+      <div class="ref-thanks-icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+      <h3>¡Gracias por recomendar a alguien a OfiRent!</h3>
+      <p>Hemos recibido tu información y nuestro equipo podrá dar seguimiento a tu recomendación.</p>
+      <p class="ref-folio">Folio de tu recomendación: <strong id="ref-folio"></strong></p>
+      <button type="button" class="btn ghost" id="ref-another">Recomendar a otra persona</button>
+    </div>
+  </div>
+</section>
+
+<section class="ref-closing">
+  <div class="wrap">
+    <p>Gracias por seguir confiando en nosotros para resguardar tus espacios.</p>
+    <p class="ref-sign">El equipo de OfiRent.</p>
+  </div>
+</section>
+</main>
+
+<footer id="contacto-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-addr"><b>OfiRent</b>6 ubicaciones en Ciudad de México:<br><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a> · <a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a> · <a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a> · <a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a> · <a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a> · <a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></div>
+      <div class="footer-contact">
+        55 3200 9907<br>55 1253 4900<br>800 282 6778 (sin costo)<br>contacto@ofirent.com.mx
+        <div class="social-icons">
+          <a href="https://www.facebook.com/ofirent.mx/" target="_blank" rel="noopener" aria-label="OfiRent en Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.6h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46H16.6V4.34C16.06 4.28 15.2 4.2 14.2 4.2c-2.08 0-3.5 1.27-3.5 3.6v2h-2.6v3h2.6V21h2.8z"/></svg></a>
+          <a href="https://x.com/ofirentmx" target="_blank" rel="noopener" aria-label="OfiRent en X"><svg viewBox="0 0 24 24"><path d="M18.24 3H21l-6.3 7.2L22 21h-6.35l-4.97-6.5L4.9 21H2.1l6.75-7.7L2 3h6.5l4.5 5.94L18.24 3zm-1.1 16.2h1.5L7 4.7H5.4l11.74 14.5z"/></svg></a>
+          <a href="https://www.linkedin.com/company/ofirent/" target="_blank" rel="noopener" aria-label="OfiRent en LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H3.56V21h3.38V8.5zM5.25 3a1.96 1.96 0 100 3.92 1.96 1.96 0 000-3.92zM21 21v-7.03c0-3.76-2-5.51-4.68-5.51-2.16 0-3.13 1.19-3.66 2.02V8.5H9.28c.04 1 0 12.5 0 12.5h3.38v-6.98c0-.37.03-.75.14-1.02.3-.75 1-1.53 2.15-1.53 1.52 0 2.13 1.16 2.13 2.86V21H21z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-blog">
+        <b>Blog</b>
+        <p>Guías sobre oficinas, domicilio fiscal y coworking en CDMX.</p>
+        <a href="/blog/">Ver todos los artículos →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">OFIRENT © 2026 · <a href="/blog/" style="color:inherit;">Blog</a> · <a href="/programa-de-referidos/" style="color:inherit;">Programa de referidos</a> · <a href="/aviso-de-privacidad/" style="color:inherit;">Aviso de privacidad</a></div>
+  </div>
+</footer>
+
+<script src="/assets/referidos/validation.js"></script>
+<script>
+(function () {
+  'use strict';
+  var V = window.OfiRentReferidos;
+  var API_URL = '/api/referidos';
+  var GENERIC_ERROR = 'No pudimos enviar tu recomendación. Tus datos siguen aquí: revisa tu conexión e inténtalo de nuevo.';
+
+  var form = document.getElementById('ref-form');
+  var thanks = document.getElementById('ref-thanks');
+  var summary = document.getElementById('ref-summary');
+  var banner = document.getElementById('ref-banner');
+  var submit = document.getElementById('ref-submit');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.ref-chip'));
+  var state = { spaceType: '', key: '', mountedAt: 0, inFlight: false };
+
+  function newKey() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    var bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    return Array.prototype.map.call(bytes, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+
+  function resetAttempt() {
+    state.key = newKey();
+    state.mountedAt = performance.now();
+  }
+
+  function el(name) { return document.getElementById('f-' + name); }
+
+  function readValues() {
+    return {
+      referrerName: el('referrerName').value,
+      referrerCompany: el('referrerCompany').value,
+      referrerPhone: el('referrerPhone').value,
+      referrerEmail: el('referrerEmail').value,
+      referredName: el('referredName').value,
+      referredPhone: el('referredPhone').value,
+      referredEmail: el('referredEmail').value,
+      spaceType: state.spaceType,
+      zone: el('zone').value,
+      comments: el('comments').value,
+      consent: el('consent').checked
+    };
+  }
+
+  function holderOf(name) {
+    return form.querySelector('[data-field="' + name + '"]');
+  }
+
+  function clearError(name) {
+    var holder = holderOf(name);
+    if (!holder) return;
+    holder.classList.remove('has-error');
+    var msg = document.getElementById('e-' + name);
+    if (msg) { msg.hidden = true; msg.textContent = ''; }
+    var input = el(name);
+    if (input) { input.setAttribute('aria-invalid', 'false'); input.removeAttribute('aria-describedby'); }
+  }
+
+  function clearAllErrors() {
+    V.FIELD_ORDER.forEach(clearError);
+    summary.hidden = true;
+    banner.hidden = true;
+    banner.textContent = '';
+  }
+
+  function showErrors(errors) {
+    Object.keys(errors).forEach(function (name) {
+      var holder = holderOf(name);
+      if (!holder) return;
+      holder.classList.add('has-error');
+      var msg = document.getElementById('e-' + name);
+      if (msg) { msg.textContent = errors[name]; msg.hidden = false; }
+      var input = el(name);
+      if (input) { input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', 'e-' + name); }
+    });
+    summary.hidden = false;
+    var first = V.FIELD_ORDER.filter(function (n) { return errors[n]; })[0];
+    var target = first ? (el(first) || document.getElementById('f-spaceType-group')) : null;
+    if (target) {
+      // setTimeout y no requestAnimationFrame: también corre con la pestaña en segundo plano.
+      setTimeout(function () {
+        target.focus();
+        target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }, 0);
+    }
+  }
+
+  function setChip(value) {
+    state.spaceType = value;
+    chips.forEach(function (chip) {
+      chip.setAttribute('aria-pressed', chip.getAttribute('data-value') === value ? 'true' : 'false');
+    });
+  }
+
+  function setBusy(busy) {
+    state.inFlight = busy;
+    form.setAttribute('aria-busy', busy ? 'true' : 'false');
+    submit.disabled = busy;
+    submit.innerHTML = busy ? '<span class="ref-spinner" aria-hidden="true"></span> Enviando...' : 'Enviar recomendación';
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var value = chip.getAttribute('data-value');
+      setChip(state.spaceType === value ? '' : value);
+      clearError('spaceType');
+    });
+  });
+
+  V.FIELD_ORDER.forEach(function (name) {
+    var input = el(name);
+    if (!input) return;
+    input.addEventListener(input.type === 'checkbox' ? 'change' : 'input', function () { clearError(name); });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (state.inFlight) return;
+
+    var result = V.validateReferral(readValues());
+    clearAllErrors();
+    if (!result.ok) { showErrors(result.errors); return; }
+
+    setBusy(true);
+    var payload = {};
+    Object.keys(result.value).forEach(function (k) { payload[k] = result.value[k]; });
+    payload.website = el('website').value;
+    payload.fillMs = Math.round(performance.now() - state.mountedAt);
+    payload.idempotencyKey = state.key;
+
+    fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return response.json().catch(function () { return null; }).then(function (data) {
+        // Solo se muestra la confirmación si el servidor confirmó que se guardó.
+        if (response.ok && data && data.ok === true && typeof data.reference === 'string') {
+          document.getElementById('ref-folio').textContent = data.reference;
+          form.hidden = true;
+          thanks.hidden = false;
+          setBusy(false);
+          setTimeout(function () {
+            thanks.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            thanks.focus();
+          }, 50);
+          return;
+        }
+        setBusy(false);
+        if (response.status === 422 && data && data.errors) {
+          showErrors(data.errors);
+        } else {
+          banner.textContent = (data && typeof data.message === 'string' && data.message) || GENERIC_ERROR;
+          banner.hidden = false;
+        }
+      });
+    }).catch(function () {
+      setBusy(false);
+      banner.textContent = GENERIC_ERROR;
+      banner.hidden = false;
+    });
+  });
+
+  document.getElementById('ref-another').addEventListener('click', function () {
+    // Conserva los datos de quien recomienda; limpia los de la persona recomendada.
+    ['referredName', 'referredPhone', 'referredEmail', 'zone', 'comments', 'website'].forEach(function (n) { el(n).value = ''; });
+    el('consent').checked = false;
+    setChip('');
+    clearAllErrors();
+    resetAttempt();
+    thanks.hidden = true;
+    form.hidden = false;
+    setTimeout(function () {
+      form.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      el('referredName').focus();
+    }, 50);
+  });
+
+  // Flyer ampliado
+  var dialog = document.getElementById('flyer-dialog');
+  document.getElementById('flyer-open').addEventListener('click', function () {
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else window.open('/assets/referidos/ofirent-flyer-referidos.jpeg', '_blank', 'noopener');
+  });
+  document.getElementById('flyer-close').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (event) { if (event.target === dialog) dialog.close(); });
+
+  resetAttempt();
+})();
+</script>
+<script src="/assets/cookie-consent.js" defer></script>
+</body>
+</html>

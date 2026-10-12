@@ -14,6 +14,7 @@ Este repo se trabaja en paralelo desde más de una sesión de Claude Code (local
 ### Decisiones confirmadas con el cliente
 - Membresía Oro de coworking (incluye domicilio fiscal/comercial): contrato mínimo **6 meses**, no 1 año.
 - Teléfono/WhatsApp por marca (confirmado por el usuario, 2026-09-28): **OfiRent CDMX = 55 3200 9907**, **Torre Altius = 55 3148 5707**. No mezclar. Los posts del blog de OfiRent que hablan de Querétaro/Altius (19 posts con Querétaro, Jurica o Juriquilla en título o slug) llevan el número de Altius en el topbar y el pie; todos los demás posts y páginas llevan el de OfiRent. Los posts nuevos sobre Querétaro deben seguir la misma regla.
+- **Programa de referidos de OfiRent CDMX** (confirmado por el usuario, 2026-10-12): bono de **$2,500 MXN por cada referido que rente y firme contrato**. Texto oficial de la promoción: "Gana un bono de $2,500 MXN por cada referido que rente y firme contrato." y "Entre más personas recomiendes que renten, más beneficios acumulas." (no agregar requisitos ni beneficios). Página: `/programa-de-referidos/`. Cada recomendación se guarda en Airtable (tabla "Referidos") y se avisa por correo a **contacto@ofirent.com.mx** (siempre fijo en el servidor, nunca viene del formulario). El estado "Contrato firmado" y "Bono aplicado" solo lo cambia el personal de OfiRent a mano en Airtable.
 
 ## Qué hace cada sitio
 
@@ -23,7 +24,7 @@ Este repo se trabaja en paralelo desde más de una sesión de Claude Code (local
 
 ## Stack
 
-Los 3 son **HTML/CSS/JS puro, sin framework ni build step** (no hay `node_modules`, `package.json` ni bundler). Cada carpeta se despliega directo a Vercel tal cual está. La única excepción es `ofirent-resenas-site/api/review.js`, una función serverless de Node que Vercel detecta automáticamente por vivir en `/api`.
+Los 3 son **HTML/CSS/JS puro, sin framework ni build step** (no hay `node_modules`, `package.json` ni bundler). Cada carpeta se despliega directo a Vercel tal cual está. Las únicas excepciones son las funciones serverless de Node (CommonJS, `fetch` nativo, sin dependencias) que Vercel detecta por vivir en `/api`: `ofirent-resenas-site/api/review.js` y, en `ofirent-cdmx-site/api/`, `referidos.js` y `referidos-reintento.js` (módulos auxiliares en `api/_lib/`, lo que empieza con guion bajo no se expone como función).
 
 - Tipografías: **Big Shoulders Display** (condensada, para títulos) + **Public Sans** (cuerpo). En `ofirent-cdmx-site` y `torre-altius-site` están auto-hospedadas como `.woff2` en `/assets`; en `ofirent-resenas-site` se cargan desde Google Fonts CDN.
 - **Nunca usar fuente monoespaciada** (`--mono`) en ningún sitio — regla de marca explícita del cliente. Ya se quitó de `ofirent-cdmx-site`; si aparece en `torre-altius-site` no tocar a menos que se pida.
@@ -61,6 +62,7 @@ Ambos sitios principales usan bordes muy redondeados (16-22px en tarjetas/panele
 - `ofirent-resenas-site/api/review.js` — función serverless que escribe en Airtable. El token vive en variables de entorno de Vercel, nunca en el código.
 - **Elementos del 20 aniversario, todos TEMPORALES, quitar en 2027** (instrucción explícita del cliente, 2026-08-17): logo `assets/logo-20-anos.png` (referenciado en las 110 páginas + `generate_blog.py`, revertir a `logo.png` original que sigue intacto), banner superior `.anniversary-banner` en `index.html`, y el video de intro a pantalla completa `.anniv-intro` (`aniversario-20-anos-desktop.mp4` / `-mobile.mp4`) también en `index.html`. El sistema de cookies/GA4 NO es parte de esto, es permanente.
 - **Posts editoriales nuevos del blog (OFR-018 en adelante, desde 2026-09-28)** son HTML escrito directo en `ofirent-cdmx-site/blog/<slug>/index.html`, tomado de los Google Docs de entregables SEO-GEO que manda Jaime (Sheet "Master de Entregables", pestaña CONTROL_EDITORIAL). **No salen de `blog-data/generate_blog.py`**: ese script solo conoce los 94 posts de WordPress y su plantilla de nav/footer quedó desactualizada frente al HTML real (topbar, GTM, footer con Blog y Aviso, etc.). **No lo vuelvas a correr** sin ponerlo al día antes: sobrescribiría `blog/index.html` (perdería las tarjetas nuevas) y regresaría los 94 posts. Cada post nuevo también va en `sitemap.xml` y como tarjeta en `blog/index.html`.
+- **Programa de referidos** (`ofirent-cdmx-site`): página `programa-de-referidos/index.html`; flyer aprobado `assets/referidos/ofirent-flyer-referidos.jpeg` (se muestra sin recortar ni reprocesar, no convertir a webp) y su PDF interactivo `assets/referidos/OfiRent_Flyer_Referidos_Interactivo.pdf` (anotación de enlace sobre el botón verde hacia `/programa-de-referidos/#formulario`; si se cambia el flyer hay que volver a medir el botón y regenerar el PDF con los scripts de la app original); validación compartida navegador y servidor en `assets/referidos/validation.js` (la función la importa desde `api/_lib/validation.js`, una sola fuente de reglas); funciones `api/referidos.js` (POST, guarda en Airtable y avisa por correo con Resend) y `api/referidos-reintento.js` (cron diario de `vercel.json`, reenvía correos fallidos, máximo 5 intentos). Pruebas: `node --test tests/referidos.test.js` (sin red, sin `package.json`). El enlace "Programa de referidos" del menú y del pie está en las páginas HTML escrito a mano; `tools/add-referidos-nav.py` lo agrega de forma idempotente a una página nueva (`python tools/add-referidos-nav.py --site ofirent-cdmx-site --backup <carpeta>`), y toda página nueva del sitio debe llevarlo.
 - `ofirent-cdmx-site/assets/cookie-consent.js` y `torre-altius-site/assets/cookie-consent.js` — banner de consentimiento de cookies (Aceptar/Rechazar) que carga GA4 solo si el visitante acepta. Referenciado con `<script src="/assets/cookie-consent.js" defer></script>` antes de cerrar `</body>` en las 110 páginas de OfiRent (incluido el template `FOOTER` de `generate_blog.py`, para que sobreviva regeneraciones del blog) y en el único `index.html` de Altius. **`GA_MEASUREMENT_ID` está en `'G-PENDIENTE'` en ambos archivos** — reemplazar por el ID real (`G-XXXXXXXXXX`) cuando se tenga; mientras tanto el banner funciona pero no manda datos a ningún lado.
 
 **Nota:** los scripts generadores originales (`build_locations.js` para las 6 páginas de ubicación de OfiRent, `build_prod.js` para Altius) vivían en un scratchpad de sesión y no se incluyeron en este repo — el HTML aquí es el resultado ya compilado. Para futuras ediciones, editar el HTML/CSS directamente en su archivo final; no existe un paso de "rebuild" automático.
@@ -103,7 +105,22 @@ Solo `ofirent-resenas-site` las necesita, ya configuradas directamente en el das
 | `AIRTABLE_BASE_ID` | ID de la base de Airtable (`app...`) |
 | `AIRTABLE_TABLE_NAME` | ID o nombre de la tabla destino |
 
-Los otros dos sitios no requieren variables de entorno (son 100% estáticos, sin backend propio).
+`ofirent-cdmx-site` también necesita variables para el programa de referidos (Production y Preview, tipo "Sensitive"). Sin ellas el formulario responde 503 y no confirma nada (comportamiento esperado):
+
+| Variable | Uso |
+|---|---|
+| `AIRTABLE_TOKEN` | Token personal de Airtable con `data.records:read` y `data.records:write`, limitado a la base |
+| `AIRTABLE_BASE_ID` | ID de la base (`app...`), la misma de "Leads" |
+| `AIRTABLE_REFERIDOS_TABLE_ID` | ID de la tabla "Referidos" (`tbl...`) |
+| `RESEND_API_KEY` | Clave de Resend para el aviso por correo |
+| `EMAIL_FROM` | Remitente, p. ej. `OfiRent Referidos <referidos@dominio-verificado>` |
+| `NOTIFY_TO` | Destino del aviso: `contacto@ofirent.com.mx` |
+| `CRON_SECRET` | Secreto largo; Vercel lo manda al cron de reintentos |
+| `IP_HASH_SALT` | Sal para la huella de conexión del límite de envíos (no se guarda la IP) |
+
+Campos de la tabla "Referidos" (nombres exactos; el código escribe estos): Folio, Fecha de recepción, Estado (Nuevo, Contactado, Contrato firmado, Bono aplicado, No procede), Nombre/Empresa/Teléfono/Correo de quien recomienda, Nombre/Teléfono/Correo del referido, Tipo de espacio (Oficina, Bodega, Otro), Zona o sucursal, Comentarios, Autorización confirmada, Sitio, Notificación (Pendiente, Enviada, Fallida), Intentos, Último error, Clave de envío, Huella de conexión.
+
+`torre-altius-site` no requiere variables de entorno (100% estático, sin backend propio).
 
 ## Contexto de negocio relevante para no meter la pata
 
