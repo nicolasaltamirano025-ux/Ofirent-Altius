@@ -205,6 +205,15 @@ textarea{ resize:vertical; min-height:88px; font-family:var(--body); }
   line-height:1.5;
   margin:0;
 }
+.go-google{ display:block; width:100%; text-align:center; text-decoration:none; margin-top:6px; }
+.go-count{ font-size:13px; color:#5f6b62; margin-top:10px; }
+.ref-invite{
+  margin-top:20px; padding:16px 16px 14px; border:1px solid #dbe0da; border-radius:14px;
+  background:#f7f8f5; text-align:left;
+}
+.ref-invite b{ display:block; color:var(--green-dark); font-size:15px; margin-bottom:4px; }
+.ref-invite p{ margin:0 0 10px; font-size:14px; line-height:1.5; color:#3b4340; }
+.ref-invite a{ font-weight:700; color:var(--green); text-decoration:underline; text-underline-offset:3px; }
 .spinner{
   width:20px;height:20px;
   border-radius:50%;
@@ -274,7 +283,13 @@ textarea{ resize:vertical; min-height:88px; font-family:var(--body); }
       </div>
       <h2 class="result-title" id="txt-positive-title"></h2>
       <p class="result-text" id="txt-positive-text"></p>
-      <div class="spinner"></div>
+      <a class="btn btn-primary go-google" id="btn-google" href="#"></a>
+      <p class="go-count" id="txt-countdown"></p>
+      <div class="ref-invite">
+        <b id="txt-invite-title"></b>
+        <p id="txt-invite-text"></p>
+        <a id="lnk-invite" href="#" target="_blank" rel="noopener"></a>
+      </div>
     </div>
 
     <!-- ===== ESTADO 3: camino negativo, confirmación ===== -->
@@ -324,7 +339,15 @@ const CONFIG = {
 
   // ---- Camino POSITIVO (4-5 estrellas) ----
   positiveTitle: "¡Gracias por tu calificación!",
-  positiveText: "Nos alegra que tu experiencia haya sido excelente. Te estamos redirigiendo…",
+  positiveText: "Nos alegra que tu experiencia haya sido excelente. Ayúdanos con una reseña en Google, solo toma un minuto.",
+  googleButtonText: "Dejar mi reseña en Google",
+  countdownText: "Te llevamos a Google en {n} segundos.",
+
+  // Invitación al Programa de referidos (se muestra a quien califica con 4 o 5 estrellas)
+  inviteTitle: "¿Conoces a alguien que necesite una oficina?",
+  inviteText: "Recomienda OfiRent y gana el equivalente a una mensualidad de renta de tu referido, hasta $5,000 MXN.",
+  inviteLinkText: "Quiero recomendar y ganar",
+  inviteUrl: "https://www.ofirent.com.mx/programa-de-referidos/?utm_source=resenas&utm_medium=encuesta&utm_campaign=referidos",
   // PENDIENTE: pega aquí el link al que quieres mandar a la gente feliz (ej. tu link de reseña de Google).
   // PENDIENTE: pega aquí el link de reseña de Google de CADA ubicación
   // (Google Business Profile → esa sede → "Pedir reseñas" → copiar enlace,
@@ -342,7 +365,7 @@ const CONFIG = {
     "Narvarte": "https://search.google.com/local/writereview?placeid=ChIJgTgOhsv_0YURNZRkAWbm8WE",
     "Río Po (Cuauhtémoc)": "https://search.google.com/local/writereview?placeid=ChIJX43jGBj50YURZz4f3yTdktE"
   },
-  positiveRedirectDelayMs: 1400,
+  positiveRedirectDelayMs: 9000,
 
   // ---- Camino NEGATIVO (1-3 estrellas) ----
   negativeIntro: "Gracias por tu honestidad. Cuéntanos qué pasó para poder mejorar:",
@@ -383,6 +406,11 @@ document.getElementById('txt-email-label').textContent = CONFIG.emailLabel;
 document.getElementById('btn-submit-negative').textContent = CONFIG.submitButtonText;
 document.getElementById('txt-positive-title').textContent = CONFIG.positiveTitle;
 document.getElementById('txt-positive-text').textContent = CONFIG.positiveText;
+document.getElementById('btn-google').textContent = CONFIG.googleButtonText;
+document.getElementById('txt-invite-title').textContent = CONFIG.inviteTitle;
+document.getElementById('txt-invite-text').textContent = CONFIG.inviteText;
+document.getElementById('lnk-invite').textContent = CONFIG.inviteLinkText;
+document.getElementById('lnk-invite').href = CONFIG.inviteUrl;
 document.getElementById('txt-negative-done-title').textContent = CONFIG.negativeDoneTitle;
 document.getElementById('txt-negative-done-text').textContent = CONFIG.negativeDoneText;
 document.getElementById('txt-footer').textContent = CONFIG.footer;
@@ -440,13 +468,28 @@ function showState(id){
   document.getElementById(id).classList.add('active');
 }
 
+let redirectTimer = null;
 function goPositive(){
   showState('state-positive');
   const selectedLocation = locSelect.value;
   const url = CONFIG.positiveLinks[selectedLocation] || Object.values(CONFIG.positiveLinks)[0];
-  setTimeout(()=>{
-    window.location.href = url;
-  }, CONFIG.positiveRedirectDelayMs);
+  document.getElementById('btn-google').href = url;
+
+  // Cuenta regresiva visible: da tiempo de ver la invitación y la reseña sigue siendo el camino por defecto.
+  let left = Math.round(CONFIG.positiveRedirectDelayMs / 1000);
+  const countEl = document.getElementById('txt-countdown');
+  const paint = ()=>{ countEl.textContent = CONFIG.countdownText.replace('{n}', left); };
+  paint();
+  clearInterval(redirectTimer);
+  redirectTimer = setInterval(()=>{
+    left -= 1;
+    if(left <= 0){
+      clearInterval(redirectTimer);
+      window.location.href = url;
+      return;
+    }
+    paint();
+  }, 1000);
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
