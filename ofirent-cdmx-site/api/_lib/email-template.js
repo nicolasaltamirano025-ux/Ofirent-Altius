@@ -56,6 +56,7 @@ function sections(r) {
 function buildNotificationEmail(r) {
   const clean = {};
   for (const key of Object.keys(r)) clean[key] = typeof r[key] === 'string' ? r[key] : '';
+  const alerts = (Array.isArray(r.alerts) ? r.alerts : []).filter((a) => typeof a === 'string' && a.trim());
   const receivedAt = formatReceivedAt(clean.createdAt);
   const blocks = sections(clean);
 
@@ -103,6 +104,14 @@ function buildNotificationEmail(r) {
     })
     .join('');
 
+  const alertsHtml = alerts.length
+    ? '<div style="margin:16px 0 0;padding:12px 14px;background:#FFF4E5;border:1px solid #F0C27B;border-radius:8px;font-size:13px;color:#7A4B00;">' +
+      '<strong>Revisar antes de pagar:</strong>' +
+      '<ul style="margin:6px 0 0 18px;padding:0;">' +
+      alerts.map((a) => '<li style="margin:2px 0;">' + escapeHtml(a) + '</li>').join('') +
+      '</ul></div>'
+    : '';
+
   const html =
     '<!doctype html>\n<html lang="es"><body style="margin:0;padding:24px;background:#F4F6F4;font-family:Arial,Helvetica,sans-serif;">' +
     '<div style="max-width:620px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;">' +
@@ -117,6 +126,7 @@ function buildNotificationEmail(r) {
     '<p style="margin:0;font-size:14px;color:#5B675F;">Recibida: <strong style="color:#14201A;">' +
     escapeHtml(receivedAt) +
     '</strong></p>' +
+    alertsHtml +
     htmlSections +
     '<p style="margin:24px 0 0;font-size:13px;color:#5B675F;">' +
     'Autorización: quien recomienda confirmó que cuenta con autorización para compartir los datos de contacto de la persona recomendada.' +
@@ -132,6 +142,7 @@ function buildNotificationEmail(r) {
     'Folio: ' + clean.reference,
     'Recibida: ' + receivedAt,
   ]
+    .concat(alerts.length ? ['', 'REVISAR ANTES DE PAGAR:'].concat(alerts.map((a) => '- ' + a)) : [])
     .concat(
       blocks.reduce((acc, section) => {
         acc.push('', section.title.toUpperCase());

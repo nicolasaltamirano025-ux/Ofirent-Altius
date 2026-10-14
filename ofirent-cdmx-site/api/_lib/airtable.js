@@ -7,6 +7,10 @@
 const REQUEST_TIMEOUT_MS = 8000;
 // Un aviso no enviado se reintenta cada dia mientras el registro tenga menos de estos dias.
 const RETRY_WINDOW_DAYS = 7;
+// El tope de recomendaciones por persona se cuenta en esta ventana (12 meses moviles).
+const REFERRER_WINDOW_DAYS = 365;
+// Tabla "Leads" de la misma base (la usa ofirent-resenas-site/api/lead.js).
+const LEADS_TABLE_ID_DEFAULT = 'tbl6E6ipJTHkb2YBV';
 
 // Nombres exactos de los campos de la tabla.
 const F = {
@@ -34,6 +38,7 @@ const DETAIL_LABELS = [
   ['zone', 'Zona o sucursal'],
 ];
 const COMMENTS_LABEL = 'Comentarios';
+const ALERT_PREFIX = 'ALERTA: ';
 const CONSENT_LINE =
   'Autorización: quien recomienda confirmó contar con la autorización de la persona recomendada.';
 
@@ -119,6 +124,67 @@ async function countRecentByIpHash(cfg, ipHash, cap) {
   return (data.records || []).length;
 }
 
+// Recomendaciones vigentes (no marcadas "No procede") que esta persona registro en la
+// ventana, hasta `cap`.
+async function countByReferrerPhone(cfg, phone, cap) {
+  const formula =
+    'AND({' + F.referrerPhone + "}='" + escapeFormulaString(phone) + "'," +
+    '{' + F.status + "}!='No procede'," +
+    "IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-" + REFERRER_WINDOW_DAYS + ",'days')))";
+  const data = await request(cfg, 'GET', '', {
+    query: [
+      ['filterByFormula', formula],
+      ['maxRecords', String(cap)],
+      ['pageSize', String(cap)],
+      ['fields[]', F.folio],
+    ],
+  });
+  return (data.records || []).length;
+}
+
+// Registros vigentes donde este telefono ya figura como persona recomendada.
+async function findByReferredPhone(cfg, phone) {
+  const formula =
+    'AND({' + F.referredPhone + "}='" + escapeFormulaString(phone) + "'," +
+    '{' + F.status + "}!='No procede')";
+  const data = await request(cfg, 'GET', '', {
+    query: [
+      ['filterByFormula', formula],
+      ['maxRecords', '10'],
+      ['pageSize', '10'],
+      ['fields[]', F.folio],
+      ['fields[]', F.referrerPhone],
+    ],
+  });
+  return (data.records || [])
+    .map((r) => ({
+      folio: str((r.fields || {})[F.folio]),
+      referrerPhone: str((r.fields || {})[F.referrerPhone]),
+      createdTime: str(r.createdTime),
+    }))
+    .sort((a, b) => a.createdTime.localeCompare(b.createdTime));
+}
+
+// Fecha de creacion del lead mas antiguo con este telefono en la tabla "Leads"
+// (los telefonos de ahi son texto libre: se comparan solo los digitos). null si no hay.
+async function findLeadByPhone(cfg, phone) {
+  const digits = String(phone).replace(/\D/g, '');
+  if (!digits) return null;
+  let stripped = '{Teléfono}';
+  for (const ch of [' ', '-', '(', ')', '+', '.']) stripped = "SUBSTITUTE(" + stripped + ",'" + ch + "','')";
+  const tableId = (process.env.AIRTABLE_LEADS_TABLE_ID || '').trim() || LEADS_TABLE_ID_DEFAULT;
+  const data = await request(Object.assign({}, cfg, { tableId }), 'GET', '', {
+    query: [
+      ['filterByFormula', "FIND('" + digits + "'," + stripped + ")>0"],
+      ['maxRecords', '5'],
+      ['pageSize', '5'],
+      ['fields[]', 'Teléfono'],
+    ],
+  });
+  const times = (data.records || []).map((r) => str(r.createdTime)).filter(Boolean).sort();
+  return times[0] || null;
+}
+
 async function createRecord(cfg, fields) {
   return request(cfg, 'POST', '', { body: { fields } });
 }
@@ -145,8 +211,8 @@ async function listUnsent(cfg, limit) {
 }
 
 // Datos secundarios del formulario -> texto del campo "Detalles".
-function serializeDetails(value) {
-  const lines = [];
+function serializeDetails(value, alerts) {
+  const lines = (alerts || []).map((a) => ALERT_PREFIX + a);
   for (const [key, label] of DETAIL_LABELS) {
     const raw = key === 'spaceType' ? SPACE_TO_LABEL[value.spaceType] || '' : value[key];
     if (raw) lines.push(label + ': ' + raw);
@@ -163,6 +229,10 @@ function parseDetails(text) {
   const commentsPrefix = COMMENTS_LABEL + ': ';
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    if (line.startsWith(ALERT_PREFIX)) {
+      (out.alerts = out.alerts || []).push(line.slice(ALERT_PREFIX.length));
+      continue;
+    }
     if (line.startsWith(commentsPrefix)) {
       out.comments = [line.slice(commentsPrefix.length)].concat(lines.slice(i + 1)).join('\n');
       break;
@@ -184,7 +254,7 @@ function toFields(value, meta) {
     [F.referrerPhone]: value.referrerPhone,
     [F.referredName]: value.referredName,
     [F.referredPhone]: value.referredPhone,
-    [F.details]: serializeDetails(value),
+    [F.details]: serializeDetails(value, meta.alerts),
     [F.mail]: 'Pendiente',
   };
   if (meta.ipHash) fields[F.ipHash] = meta.ipHash;
@@ -213,16 +283,21 @@ function toReferral(record) {
     spaceType: str(extra.spaceType),
     zone: str(extra.zone),
     comments: str(extra.comments),
+    alerts: Array.isArray(extra.alerts) ? extra.alerts : [],
   };
 }
 
 module.exports = {
   F,
   RETRY_WINDOW_DAYS,
+  REFERRER_WINDOW_DAYS,
   AirtableError,
   config,
   findByFolio,
   countRecentByIpHash,
+  countByReferrerPhone,
+  findByReferredPhone,
+  findLeadByPhone,
   createRecord,
   updateRecord,
   listUnsent,

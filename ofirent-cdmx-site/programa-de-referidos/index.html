@@ -69,7 +69,8 @@
   /* Formulario */
   .ref-form-section{background:var(--paper);scroll-margin-top:140px;}
   #formulario{scroll-margin-top:140px;}
-  .ref-form-section .section-sub{margin-bottom:28px;}
+  .ref-form-section .section-sub{margin-bottom:12px;}
+  .ref-cap{font-family:var(--body);font-weight:700;font-size:14px;color:var(--green-deep);margin:0 0 24px;}
   .lead-form.ref-form{max-width:720px;margin:0;}
   @media (max-width:600px){ .lead-form.ref-form{padding:24px 20px;} }
   .ref-fieldset{border:0;margin:0 0 8px;padding:0;min-width:0;}
@@ -208,6 +209,7 @@
     <div class="eyebrow">Registra tu recomendación</div>
     <h2 class="section-title" id="form-titulo">Cuéntanos a quién recomiendas</h2>
     <p class="section-sub">Nuestro equipo podrá dar seguimiento a tu recomendación.</p>
+    <p class="ref-cap" id="ref-cap" hidden></p>
 
     <form class="lead-form ref-form" id="ref-form" novalidate>
       <p class="ref-banner" id="ref-summary" role="alert" hidden>Revisa los campos marcados en rojo para poder enviar tu recomendación.</p>
@@ -530,6 +532,14 @@
   });
   document.getElementById('flyer-close').addEventListener('click', function () { dialog.close(); });
   dialog.addEventListener('click', function (event) { if (event.target === dialog) dialog.close(); });
+
+  // Regla del programa: tope de recomendaciones por persona (misma cifra que aplica el servidor).
+  var cap = V.PROGRAM && V.PROGRAM.maxReferralsPerPerson;
+  if (cap) {
+    var capEl = document.getElementById('ref-cap');
+    capEl.textContent = 'Cada persona puede registrar hasta ' + cap + ' recomendaciones.';
+    capEl.hidden = false;
+  }
 
   resetAttempt();
 })();

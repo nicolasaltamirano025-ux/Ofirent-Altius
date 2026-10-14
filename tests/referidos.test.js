@@ -22,6 +22,7 @@ const ENV = {
   AIRTABLE_TOKEN: 'tok_test',
   AIRTABLE_BASE_ID: 'appTEST',
   AIRTABLE_REFERIDOS_TABLE_ID: 'tblTEST',
+  AIRTABLE_LEADS_TABLE_ID: 'tblLEADS',
   RESEND_API_KEY: 're_test',
   EMAIL_FROM: 'OfiRent Referidos <referidos@example.test>',
   NOTIFY_TO: 'contacto@ofirent.com.mx',
@@ -35,7 +36,9 @@ const ALLOWED_FIELDS = new Set(Object.values(airtable.F));
 function makeWorld() {
   const world = {
     records: [],
+    leads: [],
     emails: [],
+    leadsMode: 'ok', // ok | fail
     airtableMode: 'ok', // ok | down | failCreate
     resendMode: 'ok', // ok | http403 | throw
     unknownFetches: [],
@@ -64,9 +67,19 @@ function makeWorld() {
       if (world.airtableMode === 'down') return json(500, { error: { type: 'SERVER_ERROR', message: 'x' } });
       const parts = u.pathname.split('/').filter(Boolean); // v0, base, table, [rec]
       assert.equal(parts[1], 'appTEST');
-      assert.equal(parts[2], 'tblTEST');
       const recId = parts[3];
       const method = init.method || 'GET';
+
+      if (parts[2] === 'tblLEADS') {
+        assert.equal(method, 'GET', 'la tabla Leads solo se lee');
+        if (world.leadsMode === 'fail') return json(422, { error: { type: 'UNKNOWN_FIELD_NAME' } });
+        const f = u.searchParams.get('filterByFormula') || '';
+        const m = f.match(/^FIND\('(\d+)',.*\)>0$/);
+        assert.ok(m, 'fórmula de Leads inesperada: ' + f);
+        const hit = world.leads.filter((r) => String(r.fields['Teléfono'] || '').replace(/\D/g, '').includes(m[1]));
+        return json(200, { records: hit });
+      }
+      assert.equal(parts[2], 'tblTEST');
 
       if (method === 'POST') {
         if (world.airtableMode === 'failCreate') return json(422, { error: { type: 'INVALID_VALUE_FOR_COLUMN' } });
@@ -93,7 +106,23 @@ function makeWorld() {
         let found;
         const folioMatch = formula.match(/^\{Folio\}='(.*)'$/);
         const ipMatch = formula.match(/\{Huella de conexión\}='([^']*)'/);
-        if (folioMatch) {
+        const personMatch = formula.match(
+          /^AND\(\{Teléfono de quien recomienda\}='([^']*)',\{Estado\}!='No procede',IS_AFTER\(CREATED_TIME\(\),DATEADD\(NOW\(\),-(\d+),'days'\)\)\)$/,
+        );
+        const referredMatch = formula.match(/^AND\(\{Teléfono del referido\}='([^']*)',\{Estado\}!='No procede'\)$/);
+        if (personMatch) {
+          const since = Date.now() - Number(personMatch[2]) * 86400 * 1000;
+          found = world.records.filter(
+            (r) =>
+              r.fields['Teléfono de quien recomienda'] === personMatch[1] &&
+              r.fields['Estado'] !== 'No procede' &&
+              Date.parse(r.createdTime) > since,
+          );
+        } else if (referredMatch) {
+          found = world.records.filter(
+            (r) => r.fields['Teléfono del referido'] === referredMatch[1] && r.fields['Estado'] !== 'No procede',
+          );
+        } else if (folioMatch) {
           found = world.records.filter((r) => r.fields['Folio'] === folioMatch[1]);
         } else if (ipMatch) {
           assert.ok(formula.includes("IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-1,'hours'))"), 'ventana de una hora');
@@ -210,6 +239,20 @@ function validBody(overrides) {
       idempotencyKey: randomUUID(),
     },
     overrides || {},
+  );
+}
+
+// Teléfonos distintos en cada llamada: el tope es por persona y el duplicado por referido,
+// así que las pruebas que envían muchas recomendaciones necesitan personas diferentes.
+let phoneSeq = 0;
+function uniqueBody(overrides) {
+  phoneSeq += 1;
+  const n = String(phoneSeq).padStart(4, '0');
+  return validBody(
+    Object.assign(
+      { referrerPhone: '5511' + n + '00', referredPhone: '5522' + n + '00', idempotencyKey: randomUUID() },
+      overrides || {},
+    ),
   );
 }
 
@@ -340,7 +383,7 @@ test('origen ajeno: 403; el mismo origen (incluida una preview) pasa', async () 
     assert.equal(foreign.headers['access-control-allow-origin'], undefined, 'sin CORS');
     assert.equal(world.records.length, 0);
 
-    const same = await call(handler, { headers: { origin: 'https://' + HOST }, body: validBody() });
+    const same = await call(handler, { headers: { origin: 'https://' + HOST }, body: uniqueBody() });
     assert.equal(same.statusCode, 201);
 
     const preview = await call(handler, {
@@ -349,7 +392,7 @@ test('origen ajeno: 403; el mismo origen (incluida una preview) pasa', async () 
         host: 'internal-host',
         'x-forwarded-host': 'ofirent-cdmx-site-git-referidos.vercel.app',
       },
-      body: validBody(),
+      body: uniqueBody(),
     });
     assert.equal(preview.statusCode, 201);
 
@@ -472,8 +515,8 @@ test('falla de red al enviar el correo: registro conservado y marcado Fallido', 
 test('reintento: solo registros de los últimos 7 días; sin correo configurado no hace nada', async () => {
   await withWorld(async (world) => {
     world.resendMode = 'http403';
-    await call(handler, { body: validBody() });
-    await call(handler, { body: validBody({ referredName: 'Marta Gómez' }) });
+    await call(handler, { body: uniqueBody() });
+    await call(handler, { body: uniqueBody({ referredName: 'Marta Gómez' }) });
     assert.equal(world.records.length, 2);
     // El primero se vuelve de hace 8 días: ya salió de la ventana de reintento.
     world.records[0].createdTime = new Date(Date.now() - 8 * 86400 * 1000).toISOString();
@@ -533,7 +576,7 @@ test('el folio sale de la clave de envío: misma clave, mismo folio; claves dist
     const keyA = randomUUID();
     const a1 = await call(handler, { body: validBody({ idempotencyKey: keyA }) });
     const a2 = await call(handler, { body: validBody({ idempotencyKey: keyA, referredName: 'Otro Nombre' }) });
-    const b = await call(handler, { body: validBody({ idempotencyKey: randomUUID() }) });
+    const b = await call(handler, { body: uniqueBody({ idempotencyKey: randomUUID() }) });
     assert.equal(a1.json.reference, a2.json.reference);
     assert.notEqual(a1.json.reference, b.json.reference);
     assert.equal(world.records.length, 2);
@@ -674,13 +717,16 @@ test('los logs no contienen datos personales (solo folio y tipo de error)', asyn
       're_test',
     ];
 
+    const extra = [uniqueBody(), uniqueBody(), uniqueBody()];
+    for (const b of extra) secrets.push(b.referrerPhone, b.referredPhone);
+
     await call(handler, { body }); // éxito
     world.resendMode = 'http403';
-    await call(handler, { body: validBody() }); // correo fallido
+    await call(handler, { body: extra[0] }); // correo fallido
     world.resendMode = 'throw';
-    await call(handler, { body: validBody() }); // red caída
+    await call(handler, { body: extra[1] }); // red caída
     world.airtableMode = 'down';
-    await call(handler, { body: validBody() }); // Airtable caído
+    await call(handler, { body: extra[2] }); // Airtable caído
     world.airtableMode = 'ok';
     await call(handler, { body: validBody({ referrerName: 'A' }) }); // 422
     await call(retryHandler, { method: 'GET', noBody: true, headers: { authorization: 'Bearer cron-secret-test' } });
@@ -695,21 +741,21 @@ test('los logs no contienen datos personales (solo folio y tipo de error)', asyn
 test('límite por conexión: 10 por hora; sin x-forwarded-for se omite', async () => {
   await withWorld(async (world) => {
     for (let i = 0; i < 10; i++) {
-      const res = await call(handler, { body: validBody() });
+      const res = await call(handler, { body: uniqueBody() });
       assert.equal(res.statusCode, 201, 'envío ' + (i + 1));
     }
-    const blocked = await call(handler, { body: validBody() });
+    const blocked = await call(handler, { body: uniqueBody() });
     assert.equal(blocked.statusCode, 429);
     assert.equal(blocked.json.ok, false);
     assert.equal(world.records.length, 10);
 
-    const otherIp = await call(handler, { body: validBody(), headers: { 'x-forwarded-for': '198.51.100.7, 10.0.0.1' } });
+    const otherIp = await call(handler, { body: uniqueBody(), headers: { 'x-forwarded-for': '198.51.100.7, 10.0.0.1' } });
     assert.equal(otherIp.statusCode, 201, 'otra conexión no está limitada');
   });
 
   await withWorld(async (world) => {
     for (let i = 0; i < 12; i++) {
-      const req = makeReq({ body: validBody() });
+      const req = makeReq({ body: uniqueBody() });
       delete req.headers['x-forwarded-for'];
       const res = makeRes();
       await handler(req, res);
@@ -722,8 +768,8 @@ test('límite por conexión: 10 por hora; sin x-forwarded-for se omite', async (
 
 test('un reintento con la misma clave sigue devolviendo el folio aunque la conexión esté al límite', async () => {
   await withWorld(async (world) => {
-    const last = validBody();
-    for (let i = 0; i < 9; i++) await call(handler, { body: validBody() });
+    const last = uniqueBody();
+    for (let i = 0; i < 9; i++) await call(handler, { body: uniqueBody() });
     const tenth = await call(handler, { body: last });
     assert.equal(tenth.statusCode, 201);
     const retry = await call(handler, { body: last });
@@ -731,6 +777,166 @@ test('un reintento con la misma clave sigue devolviendo el folio aunque la conex
     assert.equal(retry.json.reference, tenth.json.reference);
     assert.equal(world.records.length, 10);
   });
+});
+
+test('tope por persona: máximo 4 recomendaciones por teléfono de quien recomienda', async () => {
+  await withWorld(async (world) => {
+    const MAX = sharedValidation.PROGRAM.maxReferralsPerPerson;
+    assert.equal(MAX, 4);
+    const referrerPhone = '5599887766';
+    for (let i = 0; i < MAX; i++) {
+      const res = await call(handler, { body: uniqueBody({ referrerPhone }) });
+      assert.equal(res.statusCode, 201, 'recomendación ' + (i + 1));
+    }
+    const emailsBefore = world.emails.length;
+    const over = await call(handler, { body: uniqueBody({ referrerPhone }) });
+    assert.equal(over.statusCode, 422);
+    assert.equal(over.json.ok, false);
+    assert.equal(over.json.code, 'referrer_limit');
+    assert.match(over.json.message, /máximo de 4 recomendaciones/);
+    assert.equal(over.json.reference, undefined);
+    assert.equal(world.records.length, MAX, 'la quinta no se guarda');
+    assert.equal(world.emails.length, emailsBefore, 'ni se avisa');
+
+    // Otra persona no se ve afectada.
+    const other = await call(handler, { body: uniqueBody({ referrerPhone: '5544332211' }) });
+    assert.equal(other.statusCode, 201);
+
+    // Lo que el personal marca "No procede" libera el cupo.
+    world.records[0].fields['Estado'] = 'No procede';
+    const afterRelease = await call(handler, { body: uniqueBody({ referrerPhone }) });
+    assert.equal(afterRelease.statusCode, 201);
+
+    // Los de hace más de 12 meses ya no cuentan.
+    const old = new Date(Date.now() - 400 * 86400 * 1000).toISOString();
+    world.records.filter((r) => r.fields['Teléfono de quien recomienda'] === referrerPhone).forEach((r) => (r.createdTime = old));
+    const afterWindow = await call(handler, { body: uniqueBody({ referrerPhone }) });
+    assert.equal(afterWindow.statusCode, 201);
+  });
+});
+
+test('la misma persona recomendando al mismo referido otra vez no duplica ni gasta cupo', async () => {
+  await withWorld(async (world) => {
+    const first = await call(handler, { body: uniqueBody() });
+    const f = world.records[0].fields;
+    const again = await call(handler, {
+      body: validBody({
+        referrerPhone: f['Teléfono de quien recomienda'],
+        referredPhone: f['Teléfono del referido'],
+        idempotencyKey: randomUUID(),
+      }),
+    });
+    assert.equal(first.statusCode, 201);
+    assert.equal(again.statusCode, 200);
+    assert.equal(again.json.reference, first.json.reference);
+    assert.equal(world.records.length, 1);
+    assert.equal(world.emails.length, 1);
+  });
+});
+
+test('referido ya registrado por otra persona: se guarda con alerta de duplicado y el primer folio', async () => {
+  await withWorld(async (world) => {
+    const referredPhone = '5577665544';
+    const first = await call(handler, { body: uniqueBody({ referredPhone }) });
+    const second = await call(handler, { body: uniqueBody({ referredPhone }) });
+    assert.equal(first.statusCode, 201);
+    assert.equal(second.statusCode, 201, 'no se le revela nada a quien envía');
+    assert.equal(world.records.length, 2);
+    assert.ok(!world.records[0].fields['Detalles'].includes('ALERTA:'));
+    const details = world.records[1].fields['Detalles'];
+    assert.ok(details.startsWith('ALERTA: Posible duplicado'), details);
+    assert.ok(details.includes(first.json.reference));
+    const html = world.emails[1].body.html;
+    assert.ok(html.includes('Revisar antes de pagar'));
+    assert.ok(html.includes(first.json.reference));
+    assert.ok(world.emails[1].body.text.includes('REVISAR ANTES DE PAGAR:'));
+    assert.ok(!world.emails[0].body.html.includes('Revisar antes de pagar'));
+
+    // Con el primero en "No procede", el duplicado se mide contra el siguiente vigente.
+    world.records[0].fields['Estado'] = 'No procede';
+    const third = await call(handler, { body: uniqueBody({ referredPhone }) });
+    assert.equal(third.statusCode, 201);
+    assert.ok(world.records[2].fields['Detalles'].includes(second.json.reference));
+    assert.ok(!world.records[2].fields['Detalles'].includes(first.json.reference));
+
+    // Con todos en "No procede", ya no hay duplicado.
+    world.records[1].fields['Estado'] = 'No procede';
+    world.records[2].fields['Estado'] = 'No procede';
+    const fourth = await call(handler, { body: uniqueBody({ referredPhone }) });
+    assert.equal(fourth.statusCode, 201);
+    assert.ok(!world.records[3].fields['Detalles'].includes('Posible duplicado'));
+  });
+});
+
+test('teléfono del referido ya en Leads: se guarda con alerta; si Leads falla, igual se guarda', async () => {
+  await withWorld(async (world) => {
+    world.leads.push({
+      id: 'recLead1',
+      createdTime: '2026-09-01T15:00:00.000Z',
+      fields: { Nombre: 'Prospecto', 'Teléfono': '(55) 4455-6677' },
+    });
+    const res = await call(handler, { body: uniqueBody({ referredPhone: '5544556677' }) });
+    assert.equal(res.statusCode, 201);
+    const details = world.records[0].fields['Detalles'];
+    assert.match(details, /^ALERTA: Ya era prospecto: .*Leads desde el 0?1\/09\/2026/);
+
+    world.leadsMode = 'fail';
+    const res2 = await call(handler, { body: uniqueBody({ referredPhone: '5544556677' }) });
+    assert.equal(res2.statusCode, 201, 'Leads caído no bloquea');
+    assert.ok(!world.records[1].fields['Detalles'].includes('ALERTA: Ya era prospecto'));
+  });
+});
+
+test('autorreferido: el teléfono de la persona recomendada no puede ser el de quien recomienda', async () => {
+  const same = validateSelf();
+  assert.equal(same.ok, false);
+  assert.equal(same.errors.referredPhone, sharedValidation.MESSAGES.selfReferral);
+
+  await withWorld(async (world) => {
+    const res = await call(handler, {
+      body: validBody({ referrerPhone: '+52 55 1234 5678', referredPhone: '(55) 1234-5678' }),
+    });
+    assert.equal(res.statusCode, 422);
+    assert.ok(res.json.errors.referredPhone);
+    assert.equal(world.records.length, 0);
+  });
+
+  function validateSelf() {
+    return sharedValidation.validateReferral(
+      validBody({ referrerPhone: '55 1234 5678', referredPhone: '5512345678' }),
+    );
+  }
+});
+
+test('las alertas sobreviven al reintento: el correo reenviado también las lleva', async () => {
+  await withWorld(async (world) => {
+    const referredPhone = '5533221100';
+    await call(handler, { body: uniqueBody({ referredPhone }) });
+    world.resendMode = 'http403';
+    await call(handler, { body: uniqueBody({ referredPhone }) });
+    world.resendMode = 'ok';
+    const before = world.emails.length;
+    const run = await call(retryHandler, {
+      method: 'GET',
+      noBody: true,
+      headers: { authorization: 'Bearer cron-secret-test' },
+    });
+    assert.equal(run.json.attempted, 1);
+    const resent = world.emails[before].body;
+    assert.ok(resent.html.includes('Revisar antes de pagar'));
+    assert.ok(resent.html.includes('Posible duplicado'));
+  });
+});
+
+test('"Detalles" con alertas: ida y vuelta', () => {
+  const { serializeDetails, parseDetails } = airtable;
+  const text = serializeDetails({ referrerCompany: 'ACME', comments: 'hola' }, ['A uno', 'B dos']);
+  assert.ok(text.startsWith('ALERTA: A uno\nALERTA: B dos\n'));
+  const back = parseDetails(text);
+  assert.deepEqual(back.alerts, ['A uno', 'B dos']);
+  assert.equal(back.referrerCompany, 'ACME');
+  assert.equal(back.comments, 'hola');
+  assert.equal(parseDetails(serializeDetails({}, [])).alerts, undefined);
 });
 
 test('validación compartida: teléfonos y límites', () => {

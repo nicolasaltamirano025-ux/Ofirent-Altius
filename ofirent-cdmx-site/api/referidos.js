@@ -7,14 +7,28 @@ const { createHash } = require('node:crypto');
 const airtable = require('./_lib/airtable');
 const { notifyRecord } = require('./_lib/notify');
 const { getClientIp, hashIp, isSameOrigin } = require('./_lib/security');
-const { validateReferral } = require('./_lib/validation');
+const { validateReferral, PROGRAM } = require('./_lib/validation');
 
 const MAX_BODY_BYTES = 16 * 1024;
 // Un humano tarda más que esto en llenar dos secciones; un bot suele enviar al instante.
 const MIN_FILL_MS = 2500;
 const RATE_LIMIT_PER_HOUR = 10;
+const MAX_PER_PERSON = PROGRAM.maxReferralsPerPerson;
 const KEY_RE = /^[A-Za-z0-9-]{16,64}$/;
 const FOLIO_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+function dateEs(iso) {
+  try {
+    return new Date(iso).toLocaleDateString('es-MX', {
+      timeZone: 'America/Mexico_City',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  } catch {
+    return '';
+  }
+}
 
 function send(res, status, body) {
   res.statusCode = status;
@@ -109,26 +123,61 @@ module.exports = async (req, res) => {
   const ipHash = ip ? hashIp(ip) : null;
 
   const folio = folioFromKey(idempotencyKey);
+  const { referrerPhone, referredPhone } = validation.value;
 
   try {
-    // Las dos consultas son independientes. Un reintento con la misma clave
-    // devuelve el folio ya guardado aunque la conexión esté al límite.
-    const [existing, recent] = await Promise.all([
+    // Consultas independientes. Un reintento con la misma clave devuelve el folio ya
+    // guardado aunque la conexión esté al límite. Las dos últimas solo generan alertas
+    // para el personal: si fallan, el registro se guarda igual.
+    const [existing, recent, perPerson, sameReferred, leadSince] = await Promise.all([
       airtable.findByFolio(cfg, folio),
       ipHash ? airtable.countRecentByIpHash(cfg, ipHash, RATE_LIMIT_PER_HOUR) : Promise.resolve(0),
+      airtable.countByReferrerPhone(cfg, referrerPhone, MAX_PER_PERSON),
+      airtable.findByReferredPhone(cfg, referredPhone).catch(() => []),
+      airtable.findLeadByPhone(cfg, referredPhone).catch(() => null),
     ]);
 
     if (existing) {
       return send(res, 200, { ok: true, reference: folio });
     }
+    // La misma persona recomendando otra vez al mismo referido: mismo folio, sin duplicar
+    // el registro ni gastar uno de sus cupos.
+    const mine = sameReferred.find((r) => r.referrerPhone === referrerPhone && r.folio);
+    if (mine) {
+      return send(res, 200, { ok: true, reference: mine.folio });
+    }
     if (recent >= RATE_LIMIT_PER_HOUR) {
       return fail(res, 429, 'rate_limited', 'Recibimos muchos envíos desde tu conexión. Inténtalo de nuevo más tarde.');
+    }
+    if (perPerson >= MAX_PER_PERSON) {
+      return fail(
+        res,
+        422,
+        'referrer_limit',
+        'Ya registraste el máximo de ' + MAX_PER_PERSON + ' recomendaciones con este teléfono. Si crees que es un error, escríbenos a contacto@ofirent.com.mx.',
+      );
+    }
+
+    // Alertas para quien revisa antes de pagar. No cambian lo que ve quien envía.
+    const alerts = [];
+    if (sameReferred.length > 0) {
+      const first = sameReferred[0];
+      alerts.push(
+        'Posible duplicado: este teléfono ya fue registrado como referido en ' + first.folio +
+          (dateEs(first.createdTime) ? ' el ' + dateEs(first.createdTime) : '') +
+          ' por otra persona. Aplica el primer registro.',
+      );
+    }
+    if (leadSince) {
+      alerts.push(
+        'Ya era prospecto: este teléfono ya estaba en la tabla Leads desde el ' + dateEs(leadSince) + '.',
+      );
     }
 
     // El éxito solo se devuelve cuando Airtable ya confirmó este guardado.
     const record = await airtable.createRecord(
       cfg,
-      airtable.toFields(validation.value, { folio, ipHash }),
+      airtable.toFields(validation.value, { folio, ipHash, alerts }),
     );
 
     // Con el registro ya guardado se intenta el correo; su fallo no cambia la respuesta.

@@ -14,6 +14,11 @@
 
   var LIMITS = { name: 120, company: 120, email: 254, zone: 120, comments: 1000 };
 
+  // Reglas del programa que comparten la página (texto visible) y el servidor (las aplica).
+  // Cada persona (teléfono de quien recomienda) puede registrar hasta este número de
+  // recomendaciones en los últimos 12 meses. Para cambiarlo basta editar esta cifra.
+  var PROGRAM = { maxReferralsPerPerson: 4 };
+
   var MESSAGES = {
     referrerName: 'Escribe tu nombre completo.',
     referrerPhone: 'Escribe tu teléfono de contacto a 10 dígitos (por ejemplo, 55 1234 5678).',
@@ -21,6 +26,7 @@
     referredName: 'Escribe el nombre completo de la persona que recomiendas.',
     referredPhone:
       'Escribe el teléfono de la persona que recomiendas a 10 dígitos (por ejemplo, 55 1234 5678).',
+    selfReferral: 'El teléfono de la persona que recomiendas no puede ser el tuyo.',
     spaceType: 'Selecciona una opción válida.',
     consent: 'Confirma que cuentas con la autorización de la persona recomendada para compartir sus datos.',
     tooLong: function (max) {
@@ -140,6 +146,7 @@
 
     var referredPhone = normalizePhone(value.referredPhone);
     if (!referredPhone) errors.referredPhone = MESSAGES.referredPhone;
+    else if (referrerPhone && referredPhone === referrerPhone) errors.referredPhone = MESSAGES.selfReferral;
     else value.referredPhone = referredPhone;
 
     if (value.referredEmail && !isValidEmail(value.referredEmail)) errors.referredEmail = MESSAGES.email;
@@ -155,6 +162,7 @@
   return {
     SPACE_TYPES: SPACE_TYPES,
     LIMITS: LIMITS,
+    PROGRAM: PROGRAM,
     MESSAGES: MESSAGES,
     FIELD_ORDER: FIELD_ORDER,
     isValidEmail: isValidEmail,
