@@ -130,7 +130,9 @@ async function updateRecord(cfg, recordId, fields) {
 // Registros cuyo aviso no salio y que siguen dentro de la ventana de reintento.
 async function listUnsent(cfg, limit) {
   const formula =
-    'AND({' + F.mail + "}!='Enviado'," +
+    // {Folio} vacio = fila que no creo el formulario (p. ej. las 3 filas en blanco de una tabla nueva).
+    'AND({' + F.folio + "}!=''," +
+    '{' + F.mail + "}!='Enviado'," +
     "IS_AFTER(CREATED_TIME(),DATEADD(NOW(),-" + RETRY_WINDOW_DAYS + ",'days')))";
   const data = await request(cfg, 'GET', '', {
     query: [

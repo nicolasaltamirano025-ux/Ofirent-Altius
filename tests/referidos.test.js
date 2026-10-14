@@ -104,8 +104,12 @@ function makeWorld() {
         } else if (formula.includes("{Aviso por correo}!='Enviado'")) {
           const days = Number(formula.match(/-(\d+),'days'/)[1]);
           const since = Date.now() - days * 86400 * 1000;
+          const requiresFolio = formula.includes("{Folio}!=''");
           found = world.records.filter(
-            (r) => r.fields['Aviso por correo'] !== 'Enviado' && Date.parse(r.createdTime) > since,
+            (r) =>
+              (!requiresFolio || (r.fields['Folio'] || '') !== '') &&
+              r.fields['Aviso por correo'] !== 'Enviado' &&
+              Date.parse(r.createdTime) > since,
           );
         } else {
           throw new Error('fórmula no reconocida por el simulador: ' + formula);
@@ -500,6 +504,28 @@ test('reintento: solo registros de los últimos 7 días; sin correo configurado 
     },
     { RESEND_API_KEY: null },
   );
+});
+
+test('reintento: ignora filas sin folio (filas en blanco de una tabla nueva o notas del personal)', async () => {
+  await withWorld(async (world) => {
+    // Airtable crea 3 filas vacías al crear una tabla; nadie les puso folio ni aviso.
+    for (let i = 0; i < 3; i++) {
+      world.records.push({ id: 'recBlank' + i, createdTime: new Date().toISOString(), fields: {} });
+    }
+    world.resendMode = 'http403';
+    await call(handler, { body: validBody() });
+    world.resendMode = 'ok';
+    const emailsBefore = world.emails.length;
+    const run = await call(retryHandler, {
+      method: 'GET',
+      noBody: true,
+      headers: { authorization: 'Bearer cron-secret-test' },
+    });
+    assert.equal(run.statusCode, 200);
+    assert.equal(run.json.attempted, 1, 'solo el registro real');
+    assert.equal(world.emails.length, emailsBefore + 1);
+    assert.ok(world.records.filter((r) => r.id.startsWith('recBlank')).every((r) => !r.fields['Aviso por correo']));
+  });
 });
 
 test('el folio sale de la clave de envío: misma clave, mismo folio; claves distintas, folios distintos', async () => {
