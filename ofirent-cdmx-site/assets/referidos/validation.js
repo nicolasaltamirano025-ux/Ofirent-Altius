@@ -17,7 +17,12 @@
   // Reglas del programa que comparten la página (texto visible) y el servidor (las aplica).
   // Cada persona (teléfono de quien recomienda) puede registrar hasta este número de
   // recomendaciones en los últimos 12 meses. Para cambiarlo basta editar esta cifra.
-  var PROGRAM = { maxReferralsPerPerson: 4 };
+  var PROGRAM = {
+    maxReferralsPerPerson: 4,
+    maxBonus: 5000, // tope por referido, en MXN
+    clientCreditExtraPct: 20, // clientes actuales que eligen crédito en su renta
+    ambassadorAfter: 2, // recomendaciones cerradas para ser Embajador
+  };
 
   var MESSAGES = {
     referrerName: 'Escribe tu nombre completo.',

@@ -13,6 +13,7 @@ const { randomUUID } = require('node:crypto');
 const SITE = path.join(__dirname, '..', 'ofirent-cdmx-site');
 const handler = require(path.join(SITE, 'api', 'referidos.js'));
 const retryHandler = require(path.join(SITE, 'api', 'referidos-reintento.js'));
+const trackHandler = require(path.join(SITE, 'api', 'referidos-seguimiento.js'));
 const airtable = require(path.join(SITE, 'api', '_lib', 'airtable.js'));
 const sharedValidation = require(path.join(SITE, 'assets', 'referidos', 'validation.js'));
 
@@ -110,7 +111,14 @@ function makeWorld() {
           /^AND\(\{Teléfono de quien recomienda\}='([^']*)',\{Estado\}!='No procede',IS_AFTER\(CREATED_TIME\(\),DATEADD\(NOW\(\),-(\d+),'days'\)\)\)$/,
         );
         const referredMatch = formula.match(/^AND\(\{Teléfono del referido\}='([^']*)',\{Estado\}!='No procede'\)$/);
-        if (personMatch) {
+        const closedMatch = formula.match(
+          /^AND\(\{Teléfono de quien recomienda\}='([^']*)',\{Estado\}='Bono aplicado'\)$/,
+        );
+        if (closedMatch) {
+          found = world.records.filter(
+            (r) => r.fields['Teléfono de quien recomienda'] === closedMatch[1] && r.fields['Estado'] === 'Bono aplicado',
+          );
+        } else if (personMatch) {
           const since = Date.now() - Number(personMatch[2]) * 86400 * 1000;
           found = world.records.filter(
             (r) =>
@@ -939,6 +947,118 @@ test('"Detalles" con alertas: ida y vuelta', () => {
   assert.equal(parseDetails(serializeDetails({}, [])).alerts, undefined);
 });
 
+let ipSeq = 0;
+function trackBody(body, extra) {
+  ipSeq += 1;
+  return {
+    body,
+    headers: Object.assign({ 'x-forwarded-for': '198.51.100.' + (ipSeq % 250) + ', 10.0.0.1' }, extra || {}),
+  };
+}
+
+test('seguimiento: con folio y teléfono correctos muestra la etapa, sin datos personales del referido', async () => {
+  await withWorld(async (world) => {
+    const created = await call(handler, {
+      body: validBody({ referredName: 'Luis Mendoza Ríos', referredEmail: 'luis@correo.com' }),
+    });
+    const folio = created.json.reference;
+
+    const ok = await call(trackHandler, trackBody({ folio, phone: '+52 55 1234 5678' }));
+    assert.equal(ok.statusCode, 200);
+    assert.equal(ok.json.ok, true);
+    assert.equal(ok.json.stage, 'received');
+    assert.equal(ok.json.title, 'Recibida');
+    assert.equal(ok.json.folio, folio);
+    assert.equal(ok.json.referredFirstName, 'Luis');
+    assert.equal(ok.json.closed, 0);
+    assert.equal(ok.json.ambassador, false);
+    assert.equal(ok.json.ambassadorAfter, 2);
+    const text = JSON.stringify(ok.json);
+    for (const secret of ['5587654321', 'luis@correo.com', 'Mendoza', 'Ríos', 'Estudio Pérez', 'ana@empresa.com']) {
+      assert.ok(!text.includes(secret), 'filtra: ' + secret);
+    }
+
+    // Cada Estado del personal se traduce a una etapa legible.
+    const expected = {
+      Contactado: 'contacted',
+      'Contrato firmado': 'signed',
+      'Bono aplicado': 'paid',
+      'No procede': 'rejected',
+    };
+    for (const [estado, stage] of Object.entries(expected)) {
+      world.records[0].fields['Estado'] = estado;
+      const r = await call(trackHandler, trackBody({ folio: folio.toLowerCase(), phone: '5512345678' }));
+      assert.equal(r.statusCode, 200, estado);
+      assert.equal(r.json.stage, stage, estado);
+    }
+  });
+});
+
+test('seguimiento: teléfono incorrecto, folio inexistente o mal formado dan la misma respuesta', async () => {
+  await withWorld(async (world) => {
+    const created = await call(handler, { body: validBody() });
+    const folio = created.json.reference;
+    const wrongPhone = await call(trackHandler, trackBody({ folio, phone: '5599999999' }));
+    const wrongFolio = await call(trackHandler, trackBody({ folio: 'REF-AAAAAAAA', phone: '5512345678' }));
+    const badFolio = await call(trackHandler, trackBody({ folio: "REF-'; DROP", phone: '5512345678' }));
+    const noPhone = await call(trackHandler, trackBody({ folio, phone: 'abc' }));
+    for (const r of [wrongPhone, wrongFolio, badFolio, noPhone]) {
+      assert.equal(r.statusCode, 404);
+      assert.equal(r.json.code, 'not_found');
+      assert.equal(r.json.message, wrongPhone.json.message, 'mismo mensaje en todos los casos');
+      assert.equal(r.json.folio, undefined);
+    }
+  });
+});
+
+test('seguimiento: Embajador al tener 2 recomendaciones con bono aplicado', async () => {
+  await withWorld(async (world) => {
+    const referrerPhone = '5566778899';
+    const a = await call(handler, { body: uniqueBody({ referrerPhone }) });
+    const b = await call(handler, { body: uniqueBody({ referrerPhone }) });
+    world.records[0].fields['Estado'] = 'Bono aplicado';
+    const one = await call(trackHandler, trackBody({ folio: a.json.reference, phone: referrerPhone }));
+    assert.equal(one.json.closed, 1);
+    assert.equal(one.json.ambassador, false);
+    world.records[1].fields['Estado'] = 'Bono aplicado';
+    const two = await call(trackHandler, trackBody({ folio: b.json.reference, phone: referrerPhone }));
+    assert.equal(two.json.closed, 2);
+    assert.equal(two.json.ambassador, true);
+  });
+});
+
+test('seguimiento: método, origen, cuerpo, Airtable caído y límite de consultas', async () => {
+  await withWorld(async (world) => {
+    const created = await call(handler, { body: validBody() });
+    const good = { folio: created.json.reference, phone: '5512345678' };
+
+    assert.equal((await call(trackHandler, { method: 'GET', noBody: true })).statusCode, 405);
+    assert.equal(
+      (await call(trackHandler, trackBody(good, { origin: 'https://sitio-malo.example' }))).statusCode,
+      403,
+    );
+    assert.equal((await call(trackHandler, { raw: '{no es json', headers: { 'x-forwarded-for': '198.51.100.201' } })).statusCode, 400);
+    assert.equal(
+      (await call(trackHandler, { raw: JSON.stringify({ x: 'y'.repeat(5000) }), headers: { 'x-forwarded-for': '198.51.100.202' } }))
+        .statusCode,
+      413,
+    );
+
+    world.airtableMode = 'down';
+    const down = await call(trackHandler, trackBody(good));
+    assert.equal(down.statusCode, 503);
+    assert.equal(down.json.ok, false);
+    world.airtableMode = 'ok';
+
+    // Más de 30 consultas por hora desde la misma conexión: se frena.
+    let last;
+    for (let i = 0; i < 32; i++) {
+      last = await call(trackHandler, { body: good, headers: { 'x-forwarded-for': '198.51.100.250' } });
+    }
+    assert.equal(last.statusCode, 429);
+  });
+});
+
 test('validación compartida: teléfonos y límites', () => {
   const { normalizePhone, validateReferral, LIMITS } = sharedValidation;
   const cases = [
@@ -982,12 +1102,15 @@ test('ningún archivo del programa contiene guion largo', () => {
     'assets/referidos/validation.js',
     'api/referidos.js',
     'api/referidos-reintento.js',
+    'api/referidos-seguimiento.js',
     'api/_lib/airtable.js',
     'api/_lib/email-template.js',
     'api/_lib/notify.js',
     'api/_lib/security.js',
     'api/_lib/validation.js',
     'programa-de-referidos/index.html',
+    'programa-de-referidos/terminos/index.html',
+    'programa-de-referidos/seguimiento/index.html',
     'assets/site.css',
     'vercel.json',
     'sitemap.xml',

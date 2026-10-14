@@ -142,6 +142,22 @@ async function countByReferrerPhone(cfg, phone, cap) {
   return (data.records || []).length;
 }
 
+// Recomendaciones cerradas (bono aplicado) de esta persona; sirve para el programa de Embajadores.
+async function countClosedByReferrerPhone(cfg, phone) {
+  const formula =
+    'AND({' + F.referrerPhone + "}='" + escapeFormulaString(phone) + "'," +
+    '{' + F.status + "}='Bono aplicado')";
+  const data = await request(cfg, 'GET', '', {
+    query: [
+      ['filterByFormula', formula],
+      ['maxRecords', '20'],
+      ['pageSize', '20'],
+      ['fields[]', F.folio],
+    ],
+  });
+  return (data.records || []).length;
+}
+
 // Registros vigentes donde este telefono ya figura como persona recomendada.
 async function findByReferredPhone(cfg, phone) {
   const formula =
@@ -296,6 +312,7 @@ module.exports = {
   findByFolio,
   countRecentByIpHash,
   countByReferrerPhone,
+  countClosedByReferrerPhone,
   findByReferredPhone,
   findLeadByPhone,
   createRecord,
