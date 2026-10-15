@@ -21,19 +21,13 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-  /* Hero: texto y botón a la izquierda, tarjeta de la oferta a la derecha */
-  .ref-hero{padding:34px 0 56px;background:var(--paper);}
-  .ref-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,450px);column-gap:56px;align-items:center;}
-  .ref-offer{font-size:clamp(19px,2.2vw,24px);font-weight:700;line-height:1.35;color:var(--ink);margin-bottom:14px;max-width:36ch;}
-  .ref-offer strong{color:var(--green);}
-  .ref-lead{font-size:16px;color:var(--steel);line-height:1.7;max-width:54ch;}
-  .ref-btn{font-weight:700;letter-spacing:.01em;text-transform:uppercase;padding:17px 28px;}
-  .ref-cta{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:26px;}
-  .ref-links{display:flex;flex-wrap:wrap;gap:6px 18px;}
-  .ref-links a{font-family:var(--body);font-weight:700;font-size:13.5px;color:var(--green-deep);text-decoration:underline;text-underline-offset:3px;}
-  .ref-links a:hover{color:var(--green);}
-  .ref-fine{font-size:12.5px;color:var(--steel);margin-top:2px;line-height:1.5;max-width:60ch;}
-  .ref-offercard{background:var(--paper-raised);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:20px;box-shadow:0 20px 50px rgba(19,32,26,.12);padding:24px 26px 20px;}
+  /* Encabezado: oferta a la izquierda, formulario a la derecha */
+  .ref-hero{padding:34px 0 52px;background:var(--paper);}
+  .ref-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,500px);grid-template-rows:auto 1fr;grid-template-areas:"copy card" "meta card";column-gap:56px;align-items:start;}
+  .ref-copy{grid-area:copy;}
+  .ref-meta{grid-area:meta;}
+  .ref-copy h1.hero-title{margin-bottom:16px;}
+  .ref-offercard{background:var(--paper-raised);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:20px;box-shadow:0 20px 50px rgba(19,32,26,.12);padding:24px 26px 20px;max-width:470px;}
   .ref-offercard .oc-logo{display:block;height:64px;width:auto;margin-bottom:8px;}
   .oc-up{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
   .oc-amount{font-family:var(--display);font-weight:800;font-size:clamp(48px,6vw,66px);line-height:1;color:var(--green-deep);margin:2px 0 6px;}
@@ -45,89 +39,94 @@
   .oc-table td{padding:9px 0;border-top:1px solid var(--line);color:var(--ink);}
   .oc-table td:last-child{font-weight:800;color:var(--green-deep);white-space:nowrap;}
   .oc-fine{font-size:12px;color:var(--steel);margin-top:10px;line-height:1.45;}
-  @media (max-width:860px){
-    .ref-hero{padding:26px 0 40px;}
-    .ref-hero-grid{grid-template-columns:minmax(0,1fr);row-gap:28px;}
-    .ref-cta{align-items:stretch;}
-    .ref-btn{justify-content:center;text-align:center;}
+  .ref-mini{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px;max-width:46ch;}
+  .ref-mini li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink);}
+  .ref-mini li span{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:700;font-size:13px;}
+  .ref-fine{font-size:12.5px;color:var(--steel);line-height:1.5;max-width:60ch;margin-bottom:6px;}
+  .ref-fine a,.ref-track a{color:var(--green-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+  .ref-track{font-size:14px;color:var(--steel);margin-top:10px;}
+  @media (max-width:900px){
+    .ref-hero{padding:24px 0 36px;}
+    .ref-hero-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"copy" "card" "meta";row-gap:22px;}
   }
 
-  /* Beneficios */
-  .ref-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px;}
-  @media (max-width:860px){ .ref-benefits{grid-template-columns:1fr;} }
-  .ref-benefit{background:var(--paper-raised);border:1px solid var(--line);border-radius:18px;padding:24px 24px 22px;}
-  .ref-benefit.feature{border-top:4px solid var(--gold);}
-  .ref-benefit h3{font-size:20px;margin-bottom:8px;}
-  .ref-benefit p{font-size:14.5px;color:var(--steel);line-height:1.65;}
-  .ref-benefit p strong{color:var(--ink);}
-
-  /* Cómo funciona */
-  .ref-steps{list-style:none;margin:8px 0 28px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  @media (max-width:800px){ .ref-steps{grid-template-columns:1fr;} }
-  .ref-step{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px;}
-  .ref-step-icon{width:52px;height:52px;border-radius:14px;background:rgba(28,132,73,.1);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-  .ref-step-num{display:block;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
-  .ref-step h3{font-size:21px;margin-bottom:8px;}
-  .ref-step p{font-size:14.5px;color:var(--steel);line-height:1.65;}
-  .ref-highlight{display:flex;align-items:center;gap:14px;background:var(--green-deep);color:#fff;border-radius:18px;padding:20px 24px;font-family:var(--body);font-weight:600;font-size:16px;line-height:1.5;}
-  .ref-highlight svg{flex-shrink:0;color:var(--gold);}
-
-  /* Formulario */
-  .ref-form-section{background:var(--paper);scroll-margin-top:140px;}
-  #formulario{scroll-margin-top:140px;}
-  .ref-form-section .section-sub{margin-bottom:12px;}
-  .ref-cap{font-family:var(--body);font-weight:700;font-size:14px;color:var(--green-deep);margin:0 0 24px;}
-  .lead-form.ref-form{max-width:720px;margin:0;}
-  @media (max-width:600px){ .lead-form.ref-form{padding:24px 20px;} }
+  /* Tarjeta del formulario */
+  .ref-formcard{grid-area:card;background:var(--paper-raised);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:20px;box-shadow:0 20px 50px rgba(19,32,26,.12);padding:26px 26px 22px;scroll-margin-top:140px;}
+  @media (max-width:600px){ .ref-formcard{padding:22px 18px 18px;} }
+  .ref-form-title{font-size:24px;margin-bottom:4px;}
+  .ref-form-sub{font-size:14px;color:var(--steel);margin-bottom:18px;}
+  .ref-formcard .lead-form.ref-form{max-width:none;margin:0;border:0;border-radius:0;padding:0;background:transparent;}
   .ref-fieldset{border:0;margin:0 0 8px;padding:0;min-width:0;}
-  .ref-legend{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:18px;padding:0;}
-  .ref-legend-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--body);font-size:14px;font-weight:700;}
-  .ref-field{margin-bottom:12px;}
-  .lead-form .ref-field input,.lead-form .ref-field textarea{margin-bottom:6px;}
-  .lead-form .ref-field textarea{min-height:96px;}
+  .ref-legend{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:17px;color:var(--ink);margin-bottom:10px;padding:0;}
+  .ref-legend-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--body);font-size:13px;font-weight:700;}
+  .ref-field{margin-bottom:8px;}
+  .lead-form .ref-field input,.lead-form .ref-field textarea{margin-bottom:4px;}
+  .lead-form .ref-field textarea{min-height:84px;}
   .ref-req{color:#b3261e;}
   .ref-opt{font-weight:500;color:var(--steel);}
   .ref-field.has-error input,.ref-field.has-error textarea{border-color:#b3261e;background:#fff7f6;}
   .ref-error{color:#b3261e;font-size:13px;font-weight:600;margin:0 0 4px;}
-  .ref-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
-  .ref-chip{font-family:var(--body);font-size:14px;font-weight:600;padding:11px 20px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .ref-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .ref-chip{font-family:var(--body);font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;}
   .ref-chip:hover{border-color:var(--green);}
   .ref-chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;}
   .ref-chip:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
-  .ref-consent{margin:20px 0 22px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper);}
+  .ref-more{margin:10px 0 4px;border-top:1px solid var(--line);padding-top:12px;}
+  .ref-more summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--body);font-weight:700;font-size:14px;color:var(--green-deep);}
+  .ref-more summary::-webkit-details-marker{display:none;}
+  .ref-more summary::after{content:"+";font-size:20px;line-height:1;}
+  .ref-more[open] summary::after{content:"\2212";}
+  .ref-more-body{padding-top:14px;}
+  .ref-consent{margin:14px 0 16px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--paper);}
   .ref-consent.has-error{border-color:#b3261e;background:#fff7f6;}
-  .lead-form .ref-consent label{display:flex;gap:12px;align-items:flex-start;margin:0;font-weight:600;font-size:14px;color:var(--ink);cursor:pointer;line-height:1.5;}
+  .lead-form .ref-consent label{display:flex;gap:12px;align-items:flex-start;margin:0;font-weight:600;font-size:13.5px;color:var(--ink);cursor:pointer;line-height:1.5;}
   .lead-form .ref-consent input{width:20px;height:20px;margin:2px 0 0;flex-shrink:0;accent-color:var(--green);}
-  .ref-privacy{font-size:13px;color:var(--steel);margin:10px 0 0 32px;}
+  .ref-privacy{font-size:12.5px;color:var(--steel);margin:8px 0 0 32px;}
   .ref-privacy a{color:var(--green-deep);font-weight:700;}
-  .ref-banner{background:#fff7f6;border:1px solid #f0c4c0;color:#8f1f18;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;margin-bottom:18px;}
-  .ref-note{font-size:12.5px;color:var(--steel);text-align:center;margin-top:12px;}
+  .ref-banner{background:#fff7f6;border:1px solid #f0c4c0;color:#8f1f18;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;margin-bottom:16px;}
+  .ref-note{font-size:12.5px;color:var(--steel);text-align:center;margin-top:10px;}
   .ref-hp{position:absolute !important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
   .lead-form button[type="submit"].ref-submit{display:flex;align-items:center;justify-content:center;gap:10px;}
   .ref-spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:refspin .7s linear infinite;}
   @keyframes refspin{to{transform:rotate(360deg);}}
 
-  /* Confirmación */
-  .ref-thanks{max-width:720px;background:var(--paper-raised);border:1px solid var(--line);border-top:4px solid var(--green);border-radius:16px;padding:36px 32px;text-align:left;}
+  /* Confirmación (dentro de la tarjeta) */
+  .ref-thanks{background:transparent;border:0;border-radius:0;padding:0;text-align:left;}
   .ref-thanks:focus{outline:none;}
-  .ref-thanks-icon{width:56px;height:56px;border-radius:50%;background:rgba(28,132,73,.12);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
-  .ref-thanks h3{font-size:clamp(24px,3vw,32px);margin-bottom:10px;}
-  .ref-thanks p{font-size:15.5px;color:var(--steel);line-height:1.7;margin-bottom:10px;}
+  .ref-thanks-icon{width:52px;height:52px;border-radius:50%;background:rgba(28,132,73,.12);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .ref-thanks h3{font-size:clamp(22px,2.6vw,28px);margin-bottom:10px;}
+  .ref-thanks p{font-size:15px;color:var(--steel);line-height:1.65;margin-bottom:10px;}
   .ref-folio{color:var(--ink);}
-  .ref-folio strong{font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--green-deep);}
-  .ref-thanks .btn{margin-top:14px;}
+  .ref-folio strong{font-family:var(--display);font-size:22px;letter-spacing:.04em;color:var(--green-deep);}
+  .ref-thanks .btn{margin-top:12px;}
   .ref-thanks a.inline{color:var(--green-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
-  .ref-share{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);}
+  .ref-share{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
   .ref-share p{margin-bottom:6px;}
   .ref-share-row{display:flex;flex-wrap:wrap;gap:10px;}
-  .ref-share-row .btn{margin-top:4px;padding:11px 18px;font-size:14px;}
+  .ref-share-row .btn{margin-top:4px;padding:10px 16px;font-size:14px;}
   .ref-share-msg{font-size:13px;color:var(--steel);margin-top:8px;}
 
+  /* Más información (plegable) */
+  .ref-info{padding:48px 0;}
+  .ref-acc{max-width:820px;margin-top:18px;display:grid;gap:10px;}
+  .ref-acc details{background:var(--paper);border:1px solid var(--line);border-radius:14px;}
+  .ref-acc summary{list-style:none;cursor:pointer;padding:16px 48px 16px 20px;font-family:var(--body);font-weight:700;font-size:15.5px;color:var(--ink);position:relative;}
+  .ref-acc summary::-webkit-details-marker{display:none;}
+  .ref-acc summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--green);}
+  .ref-acc details[open] summary::after{content:"\2212";}
+  .ref-acc summary:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:14px;}
+  .ref-acc-body{padding:0 20px 18px;font-size:14.5px;color:var(--steel);line-height:1.65;}
+  .ref-acc-body p{margin-bottom:10px;}
+  .ref-acc-body p:last-child{margin-bottom:0;}
+  .ref-acc-body strong{color:var(--ink);}
+  .ref-acc-body ul{margin:0;padding-left:20px;}
+  .ref-acc-body li{margin-bottom:6px;}
+  .ref-acc-body a{color:var(--green-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+
   /* Cierre */
-  .ref-closing{background:var(--paper-raised);border-top:1px solid var(--line);text-align:center;padding:48px 0;}
-  .ref-closing p{max-width:52ch;margin:0 auto;font-size:17px;color:var(--ink);line-height:1.6;}
-  .ref-closing .ref-sign{margin-top:8px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--green-deep);}
-  .ref-closing .ref-legal{margin-top:18px;font-size:13px;color:var(--steel);}
+  .ref-closing{background:var(--paper-raised);border-top:1px solid var(--line);text-align:center;padding:30px 0;}
+  .ref-closing p{max-width:60ch;margin:0 auto;font-size:15px;color:var(--ink);line-height:1.6;}
+  .ref-closing .ref-legal{margin-top:6px;font-size:13px;color:var(--steel);}
   .ref-closing .ref-legal a{color:var(--green-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
   .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   @media (prefers-reduced-motion:reduce){ .ref-spinner{animation:none;} }
@@ -161,212 +160,192 @@
     <div class="ref-copy">
       <div class="eyebrow">Programa de referidos</div>
       <h1 class="hero-title" id="ref-titulo">¡RECOMIENDA Y GANA!</h1>
-      <p class="ref-offer">Gana el equivalente a <strong>una mensualidad de renta</strong> de tu referido, <strong>hasta $5,000 MXN</strong>.</p>
-      <p class="ref-lead">Recomienda a alguien que necesite una oficina virtual, un espacio de coworking o una oficina privada. Cuando firme su contrato y pague sus dos primeras mensualidades, recibes tu bono.</p>
-      <div class="ref-cta">
-        <a class="btn primary ref-btn" href="#formulario">¡QUIERO RECOMENDAR A ALGUIEN!</a>
-        <div class="ref-links">
-          <a href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a>
-          <a href="/programa-de-referidos/terminos/">Términos y condiciones</a>
-        </div>
-        <p class="ref-fine">Programa vigente del 14 de octubre de 2026 al 14 de enero de 2027. Máximo 4 recomendaciones por persona. Aplican términos y condiciones.</p>
-      </div>
+      <aside class="ref-offercard" aria-label="Cuánto puedes ganar">
+        <img class="oc-logo" src="/assets/logo-20-anos.png" alt="OfiRent, 20 años. Impulsando tu negocio desde 2006">
+        <div class="oc-up">Hasta</div>
+        <div class="oc-amount">$5,000<span>MXN</span></div>
+        <p class="oc-text">por cada referido que firme su contrato y pague sus dos primeras mensualidades. Tu bono es una mensualidad de lo que contrate.</p>
+        <table class="oc-table">
+          <thead><tr><th scope="col">Si tu referido contrata</th><th scope="col">Tu bono</th></tr></thead>
+          <tbody>
+            <tr><td>Oficina virtual</td><td>$799 a $1,899</td></tr>
+            <tr><td>Coworking (por persona)</td><td>$2,500 a $2,900</td></tr>
+            <tr><td>Oficina privada</td><td>hasta $5,000</td></tr>
+          </tbody>
+        </table>
+        <p class="oc-fine">Con precios de lista. El bono se calcula sobre la renta pactada en el contrato, antes de IVA. Si tu referido contrata más de un servicio, se suma una mensualidad de cada uno, hasta $5,000 en total.</p>
+      </aside>
     </div>
-    <aside class="ref-offercard" aria-label="Cuánto puedes ganar">
-      <img class="oc-logo" src="/assets/logo-20-anos.png" alt="OfiRent, 20 años. Impulsando tu negocio desde 2006">
-      <div class="oc-up">Hasta</div>
-      <div class="oc-amount">$5,000<span>MXN</span></div>
-      <p class="oc-text">por cada referido que firme su contrato y pague sus dos primeras mensualidades. Tu bono es una mensualidad de lo que contrate.</p>
-      <table class="oc-table">
-        <thead><tr><th scope="col">Si tu referido contrata</th><th scope="col">Tu bono</th></tr></thead>
-        <tbody>
-          <tr><td>Oficina virtual</td><td>$799 a $1,899</td></tr>
-          <tr><td>Coworking (por persona)</td><td>$2,500 a $2,900</td></tr>
-          <tr><td>Oficina privada</td><td>hasta $5,000</td></tr>
-        </tbody>
-      </table>
-      <p class="oc-fine">Con precios de lista. El bono se calcula sobre la renta pactada en el contrato, antes de IVA. Si tu referido contrata más de un servicio, se suma una mensualidad de cada uno, hasta $5,000 en total.</p>
-    </aside>
-  </div>
-</section>
 
-<section class="alt" id="como-funciona" aria-labelledby="como-titulo">
-  <div class="wrap">
-    <div class="eyebrow">Tres pasos sencillos</div>
-    <h2 class="section-title" id="como-titulo">¿Cómo funciona?</h2>
-    <ol class="ref-steps">
-      <li class="ref-step">
-        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span>
-        <span class="ref-step-num">Paso 1</span>
-        <h3>Recomienda</h3>
-        <p>Comparte tu experiencia con amigos, familiares o socios y registra su recomendación aquí, en menos de 2 minutos.</p>
-      </li>
-      <li class="ref-step">
-        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
-        <span class="ref-step-num">Paso 2</span>
-        <h3>Pídele que te mencione</h3>
-        <p>Diles que mencionen tu nombre al cotizar su nuevo espacio.</p>
-      </li>
-      <li class="ref-step">
-        <span class="ref-step-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>
-        <span class="ref-step-num">Paso 3</span>
-        <h3>Recibe tu bono</h3>
-        <p>Cuando tu referido firme su contrato y pague sus dos primeras mensualidades, recibes tu bono.</p>
-      </li>
-    </ol>
-    <p class="ref-highlight">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
-      <span>Hasta 4 recomendaciones por persona. Con 2 recomendaciones cerradas te vuelves Embajador OfiRent.</span>
-    </p>
-  </div>
-</section>
+    <div class="ref-formcard" id="formulario" role="region" aria-labelledby="form-titulo">
+      <h2 class="ref-form-title" id="form-titulo">Registra tu recomendación</h2>
+      <p class="ref-form-sub">Solo 4 datos para empezar. Nuestro equipo da seguimiento.</p>
 
-<section id="beneficios" aria-labelledby="beneficios-titulo">
-  <div class="wrap">
-    <div class="eyebrow">Beneficios</div>
-    <h2 class="section-title" id="beneficios-titulo">Tu bono, a tu manera</h2>
-    <div class="ref-benefits">
-      <div class="ref-benefit">
-        <h3>Si ya eres cliente</h3>
-        <p>Elige tu bono como <strong>crédito en tu renta o membresía</strong> y recibe <strong>20% adicional</strong> (hasta $6,000 MXN). También puedes recibirlo por transferencia.</p>
-      </div>
-      <div class="ref-benefit">
-        <h3>Si aún no eres cliente</h3>
-        <p>Recibe tu bono por <strong>transferencia bancaria</strong>. Solo necesitas registrar tu recomendación en esta página, no hace falta tener cuenta. Si eres corredor, broker externo o empresa, también puedes participar.</p>
-      </div>
-      <div class="ref-benefit feature">
-        <h3>Embajador OfiRent</h3>
-        <p>Con <strong>2 recomendaciones cerradas</strong> ganas <strong>4 horas de sala de juntas sin costo</strong> en cualquier sede, además de tu bono.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <form class="lead-form ref-form" id="ref-form" novalidate>
+        <p class="ref-banner" id="ref-summary" role="alert" hidden>Revisa los campos marcados en rojo para poder enviar tu recomendación.</p>
+        <p class="ref-banner" id="ref-banner" role="alert" hidden></p>
 
-<section class="ref-form-section" id="formulario" aria-labelledby="form-titulo">
-  <div class="wrap">
-    <div class="eyebrow">Registra tu recomendación</div>
-    <h2 class="section-title" id="form-titulo">Cuéntanos a quién recomiendas</h2>
-    <p class="section-sub">Nuestro equipo podrá dar seguimiento a tu recomendación.</p>
-    <p class="ref-cap" id="ref-cap" hidden></p>
-
-    <form class="lead-form ref-form" id="ref-form" novalidate>
-      <p class="ref-banner" id="ref-summary" role="alert" hidden>Revisa los campos marcados en rojo para poder enviar tu recomendación.</p>
-      <p class="ref-banner" id="ref-banner" role="alert" hidden></p>
-
-      <div class="ref-hp" aria-hidden="true">
-        <label>No llenes este campo
-          <input type="text" name="website" id="f-website" tabindex="-1" autocomplete="off">
-        </label>
-      </div>
-
-      <fieldset class="ref-fieldset">
-        <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">1</span> Tus datos (quien recomienda)</legend>
-
-        <div class="ref-field" data-field="referrerName">
-          <label for="f-referrerName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-          <input id="f-referrerName" type="text" autocomplete="name" maxlength="120" aria-invalid="false">
-          <p class="ref-error" id="e-referrerName" hidden></p>
+        <div class="ref-hp" aria-hidden="true">
+          <label>No llenes este campo
+            <input type="text" name="website" id="f-website" tabindex="-1" autocomplete="off">
+          </label>
         </div>
-        <div class="ref-field" data-field="referrerCompany">
-          <label for="f-referrerCompany">Empresa <span class="ref-opt">(opcional)</span></label>
-          <input id="f-referrerCompany" type="text" autocomplete="organization" maxlength="120" aria-invalid="false">
-          <p class="ref-error" id="e-referrerCompany" hidden></p>
-        </div>
-        <div class="lead-form-grid">
+
+        <fieldset class="ref-fieldset">
+          <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">1</span> Tus datos</legend>
+          <div class="ref-field" data-field="referrerName">
+            <label for="f-referrerName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+            <input id="f-referrerName" type="text" autocomplete="name" maxlength="120" aria-invalid="false">
+            <p class="ref-error" id="e-referrerName" hidden></p>
+          </div>
           <div class="ref-field" data-field="referrerPhone">
             <label for="f-referrerPhone">Teléfono de contacto <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
             <input id="f-referrerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" aria-invalid="false">
             <p class="ref-error" id="e-referrerPhone" hidden></p>
           </div>
-          <div class="ref-field" data-field="referrerEmail">
-            <label for="f-referrerEmail">Correo electrónico <span class="ref-opt">(opcional)</span></label>
-            <input id="f-referrerEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-invalid="false">
-            <p class="ref-error" id="e-referrerEmail" hidden></p>
+        </fieldset>
+
+        <fieldset class="ref-fieldset">
+          <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">2</span> A quién recomiendas</legend>
+          <div class="ref-field" data-field="referredName">
+            <label for="f-referredName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+            <input id="f-referredName" type="text" autocomplete="off" maxlength="120" aria-invalid="false">
+            <p class="ref-error" id="e-referredName" hidden></p>
           </div>
-        </div>
-      </fieldset>
-
-      <fieldset class="ref-fieldset">
-        <legend class="ref-legend"><span class="ref-legend-num" aria-hidden="true">2</span> Datos de la persona que recomiendas</legend>
-
-        <div class="ref-field" data-field="referredName">
-          <label for="f-referredName">Nombre completo <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-          <input id="f-referredName" type="text" autocomplete="off" maxlength="120" aria-invalid="false">
-          <p class="ref-error" id="e-referredName" hidden></p>
-        </div>
-        <div class="lead-form-grid">
           <div class="ref-field" data-field="referredPhone">
             <label for="f-referredPhone">Teléfono <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
             <input id="f-referredPhone" type="tel" inputmode="tel" autocomplete="off" placeholder="55 1234 5678" aria-invalid="false">
             <p class="ref-error" id="e-referredPhone" hidden></p>
           </div>
-          <div class="ref-field" data-field="referredEmail">
-            <label for="f-referredEmail">Correo electrónico <span class="ref-opt">(opcional)</span></label>
-            <input id="f-referredEmail" type="email" inputmode="email" autocomplete="off" maxlength="254" aria-invalid="false">
-            <p class="ref-note" style="margin:6px 0 0;">Le avisaremos que lo recomendaste y le daremos nuestro aviso de privacidad en el primer contacto.</p>
-            <p class="ref-error" id="e-referredEmail" hidden></p>
+          <div class="ref-field" data-field="spaceType">
+            <span class="field-label" id="spaceType-label" style="display:block;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--steel);">¿Qué busca? <span class="ref-opt">(opcional)</span></span>
+            <div class="ref-chips" id="f-spaceType-group" role="group" aria-labelledby="spaceType-label" tabindex="-1">
+              <button type="button" class="ref-chip" data-value="fisica" aria-pressed="false">Oficina física</button>
+              <button type="button" class="ref-chip" data-value="virtual" aria-pressed="false">Oficina virtual</button>
+              <button type="button" class="ref-chip" data-value="coworking" aria-pressed="false">Espacio de coworking</button>
+            </div>
+            <p class="ref-error" id="e-spaceType" hidden></p>
           </div>
-        </div>
+        </fieldset>
 
-        <div class="ref-field" data-field="spaceType">
-          <span class="field-label" id="spaceType-label" style="display:block;margin-bottom:10px;">Tipo de espacio que busca <span class="ref-opt">(opcional)</span></span>
-          <div class="ref-chips" id="f-spaceType-group" role="group" aria-labelledby="spaceType-label" tabindex="-1">
-            <button type="button" class="ref-chip" data-value="oficina" aria-pressed="false">Oficina</button>
-            <button type="button" class="ref-chip" data-value="bodega" aria-pressed="false">Bodega</button>
-            <button type="button" class="ref-chip" data-value="otro" aria-pressed="false">Otro</button>
+        <details class="ref-more" id="ref-more">
+          <summary>Agregar más datos (opcional)</summary>
+          <div class="ref-more-body">
+            <div class="ref-field" data-field="referredEmail">
+              <label for="f-referredEmail">Correo de la persona que recomiendas</label>
+              <input id="f-referredEmail" type="email" inputmode="email" autocomplete="off" maxlength="254" aria-invalid="false">
+              <p class="ref-note" style="margin:6px 0 0;text-align:left;">Le avisaremos que lo recomendaste y le daremos nuestro aviso de privacidad en el primer contacto.</p>
+              <p class="ref-error" id="e-referredEmail" hidden></p>
+            </div>
+            <div class="ref-field" data-field="zone">
+              <label for="f-zone">Zona o sucursal de interés</label>
+              <input id="f-zone" type="text" autocomplete="off" maxlength="120" placeholder="Por ejemplo: Del Valle, Roma, Condesa" aria-invalid="false">
+              <p class="ref-error" id="e-zone" hidden></p>
+            </div>
+            <div class="ref-field" data-field="referrerEmail">
+              <label for="f-referrerEmail">Tu correo electrónico</label>
+              <input id="f-referrerEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-invalid="false">
+              <p class="ref-error" id="e-referrerEmail" hidden></p>
+            </div>
+            <div class="ref-field" data-field="referrerCompany">
+              <label for="f-referrerCompany">Tu empresa</label>
+              <input id="f-referrerCompany" type="text" autocomplete="organization" maxlength="120" aria-invalid="false">
+              <p class="ref-error" id="e-referrerCompany" hidden></p>
+            </div>
+            <div class="ref-field" data-field="comments">
+              <label for="f-comments">Comentarios</label>
+              <textarea id="f-comments" rows="3" maxlength="1000" aria-invalid="false"></textarea>
+              <p class="ref-error" id="e-comments" hidden></p>
+            </div>
           </div>
-          <p class="ref-error" id="e-spaceType" hidden></p>
+        </details>
+
+        <div class="ref-consent" id="ref-consent" data-field="consent">
+          <label for="f-consent">
+            <input type="checkbox" id="f-consent" aria-invalid="false">
+            <span>Confirmo que cuento con la autorización de la persona que recomiendo para compartir sus datos de contacto con OfiRent.</span>
+          </label>
+          <p class="ref-error" id="e-consent" style="margin:8px 0 0 32px;" hidden></p>
+          <p class="ref-privacy">Consulta el <a href="/aviso-de-privacidad/" target="_blank" rel="noopener">Aviso de privacidad</a> y los <a href="/programa-de-referidos/terminos/" target="_blank" rel="noopener">Términos y condiciones</a>.</p>
         </div>
 
-        <div class="ref-field" data-field="zone">
-          <label for="f-zone">Zona o sucursal de interés <span class="ref-opt">(opcional)</span></label>
-          <input id="f-zone" type="text" autocomplete="off" maxlength="120" placeholder="Por ejemplo: Del Valle, Roma, Condesa" aria-invalid="false">
-          <p class="ref-error" id="e-zone" hidden></p>
-        </div>
-        <div class="ref-field" data-field="comments">
-          <label for="f-comments">Comentarios <span class="ref-opt">(opcional)</span></label>
-          <textarea id="f-comments" rows="3" maxlength="1000" aria-invalid="false"></textarea>
-          <p class="ref-error" id="e-comments" hidden></p>
-        </div>
-      </fieldset>
+        <button type="submit" class="ref-submit" id="ref-submit">Enviar recomendación</button>
+        <p class="ref-note" id="ref-cap" hidden></p>
+      </form>
 
-      <div class="ref-consent" id="ref-consent" data-field="consent">
-        <label for="f-consent">
-          <input type="checkbox" id="f-consent" aria-invalid="false">
-          <span>Confirmo que cuento con la autorización de la persona que recomiendo para compartir sus datos de contacto con OfiRent.</span>
-        </label>
-        <p class="ref-error" id="e-consent" style="margin:8px 0 0 32px;" hidden></p>
-        <p class="ref-privacy">Consulta el <a href="/aviso-de-privacidad/" target="_blank" rel="noopener">Aviso de privacidad</a> y los <a href="/programa-de-referidos/terminos/" target="_blank" rel="noopener">Términos y condiciones</a> del programa.</p>
+      <div class="ref-thanks" id="ref-thanks" role="status" aria-live="polite" tabindex="-1" hidden>
+        <div class="ref-thanks-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+        <h3>¡Gracias por recomendar a alguien a OfiRent!</h3>
+        <p>Hemos recibido tu información y nuestro equipo podrá dar seguimiento a tu recomendación.</p>
+        <p class="ref-folio">Folio de tu recomendación: <strong id="ref-folio"></strong></p>
+        <p>Guarda tu folio. Con él y tu teléfono puedes ver en qué va tu recomendación en <a class="inline" id="ref-track-link" href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a>.</p>
+        <button type="button" class="btn ghost" id="ref-another">Recomendar a otra persona</button>
+        <div class="ref-share">
+          <p><b>¿Conoces a alguien más que pueda necesitar una oficina?</b> Compártelo en un clic. Después puedes registrarlo aquí para ganar tu bono.</p>
+          <div class="ref-share-row">
+            <a class="btn ghost" id="share-wa" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+            <a class="btn ghost" id="share-mail">Enviar por correo</a>
+            <button type="button" class="btn ghost" id="share-copy">Copiar mensaje</button>
+          </div>
+          <p class="ref-share-msg" id="share-msg" role="status" aria-live="polite"></p>
+        </div>
       </div>
+    </div>
 
-      <button type="submit" class="ref-submit" id="ref-submit">Enviar recomendación</button>
-      <p class="ref-note">Los campos marcados con * son obligatorios.</p>
-    </form>
+    <div class="ref-meta">
+      <ol class="ref-mini">
+        <li><span>1</span><div>Regístrala aquí, en menos de 2 minutos.</div></li>
+        <li><span>2</span><div>Pídele que mencione tu nombre al cotizar.</div></li>
+        <li><span>3</span><div>Cuando firme y pague sus dos primeras mensualidades, recibes tu bono.</div></li>
+      </ol>
+      <p class="ref-fine">Vigente del 14 de octubre de 2026 al 14 de enero de 2027. Máximo 4 recomendaciones por persona. <a href="/programa-de-referidos/terminos/">Términos y condiciones</a></p>
+      <p class="ref-track">¿Ya recomendaste a alguien? <a href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a></p>
+    </div>
+  </div>
+</section>
 
-    <div class="ref-thanks" id="ref-thanks" role="status" aria-live="polite" tabindex="-1" hidden>
-      <div class="ref-thanks-icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
-      <h3>¡Gracias por recomendar a alguien a OfiRent!</h3>
-      <p>Hemos recibido tu información y nuestro equipo podrá dar seguimiento a tu recomendación.</p>
-      <p class="ref-folio">Folio de tu recomendación: <strong id="ref-folio"></strong></p>
-      <p>Guarda tu folio. Con él y tu teléfono puedes ver en qué va tu recomendación en <a class="inline" id="ref-track-link" href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a>.</p>
-      <button type="button" class="btn ghost" id="ref-another">Recomendar a otra persona</button>
-      <div class="ref-share">
-        <p><b>¿Conoces a alguien más que pueda necesitar una oficina?</b> Compártelo en un clic. Después puedes registrarlo aquí para ganar tu bono.</p>
-        <div class="ref-share-row">
-          <a class="btn ghost" id="share-wa" target="_blank" rel="noopener">Compartir por WhatsApp</a>
-          <a class="btn ghost" id="share-mail">Enviar por correo</a>
-          <button type="button" class="btn ghost" id="share-copy">Copiar mensaje</button>
+<section class="alt ref-info" id="mas-informacion" aria-labelledby="info-titulo">
+  <div class="wrap">
+    <div class="eyebrow">Si quieres el detalle</div>
+    <h2 class="section-title" id="info-titulo">Todo lo que necesitas saber</h2>
+    <div class="ref-acc">
+      <details>
+        <summary>Si ya soy cliente de OfiRent</summary>
+        <div class="ref-acc-body">
+          <p>Elige tu bono como <strong>crédito en tu renta o membresía</strong> y recibe <strong>20% adicional</strong> (hasta $6,000 MXN). También puedes recibirlo por transferencia.</p>
         </div>
-        <p class="ref-share-msg" id="share-msg" role="status" aria-live="polite"></p>
-      </div>
+      </details>
+      <details>
+        <summary>Si no soy cliente, soy broker o empresa</summary>
+        <div class="ref-acc-body">
+          <p>Recibes tu bono por <strong>transferencia bancaria</strong>. No necesitas tener cuenta: solo registra tu recomendación en esta página.</p>
+          <p>Corredores, brokers externos y empresas también pueden participar. Si tienes RFC, te pediremos tu comprobante fiscal al pagar.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Embajador OfiRent</summary>
+        <div class="ref-acc-body">
+          <p>Por cada <strong>2 recomendaciones cerradas</strong> ganas <strong>4 horas de sala de juntas sin costo</strong> en cualquier sede, con 90 días para usarlas, además de tu bono.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Reglas y límites</summary>
+        <div class="ref-acc-body">
+          <ul>
+            <li>Máximo 4 recomendaciones por persona.</li>
+            <li>Registra a la persona antes de que cotice con OfiRent.</li>
+            <li>Vigente del 14 de octubre de 2026 al 14 de enero de 2027.</li>
+            <li>Detalle completo en los <a href="/programa-de-referidos/terminos/">términos y condiciones</a>.</li>
+          </ul>
+        </div>
+      </details>
     </div>
   </div>
 </section>
 
 <section class="ref-closing">
   <div class="wrap">
-    <p>Gracias por seguir confiando en nosotros para resguardar tus espacios.</p>
-    <p class="ref-sign">El equipo de OfiRent.</p>
+    <p>Gracias por seguir confiando en nosotros para resguardar tus espacios. El equipo de OfiRent.</p>
     <p class="ref-legal"><a href="/programa-de-referidos/terminos/">Términos y condiciones</a> · <a href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a> · <a href="/aviso-de-privacidad/">Aviso de privacidad</a></p>
   </div>
 </section>
@@ -497,6 +476,8 @@
       if (input) { input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', 'e-' + name); }
     });
     summary.hidden = false;
+    var more = document.getElementById('ref-more');
+    if (more && Object.keys(errors).some(function (n) { var h = holderOf(n); return h && more.contains(h); })) more.open = true;
     var first = V.FIELD_ORDER.filter(function (n) { return errors[n]; })[0];
     var target = first ? (el(first) || document.getElementById('f-spaceType-group')) : null;
     if (target) {

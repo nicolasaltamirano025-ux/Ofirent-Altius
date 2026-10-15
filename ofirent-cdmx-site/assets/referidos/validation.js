@@ -10,7 +10,11 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  var SPACE_TYPES = ['oficina', 'bodega', 'otro'];
+  var SPACE_TYPES = ['fisica', 'virtual', 'coworking'];
+  // Valores de la primera version del formulario (una pagina abierta o guardada en cache puede
+  // seguir mandandolos): 'oficina' es oficina fisica; 'bodega' y 'otro' ya no existen y se
+  // ignoran en lugar de rechazar el envio.
+  var LEGACY_SPACE_TYPES = { oficina: 'fisica', bodega: '', otro: '' };
 
   var LIMITS = { name: 120, company: 120, email: 254, zone: 120, comments: 1000 };
 
@@ -129,7 +133,8 @@
 
     var spaceType = cleanLine(src.spaceType);
     if (spaceType) {
-      if (SPACE_TYPES.indexOf(spaceType) !== -1) value.spaceType = spaceType;
+      if (Object.prototype.hasOwnProperty.call(LEGACY_SPACE_TYPES, spaceType)) value.spaceType = LEGACY_SPACE_TYPES[spaceType];
+      else if (SPACE_TYPES.indexOf(spaceType) !== -1) value.spaceType = spaceType;
       else errors.spaceType = MESSAGES.spaceType;
     }
 

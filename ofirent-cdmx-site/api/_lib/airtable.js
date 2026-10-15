@@ -25,8 +25,8 @@ const F = {
   ipHash: 'Huella de conexión',
 };
 
-const SPACE_TO_LABEL = { oficina: 'Oficina', bodega: 'Bodega', otro: 'Otro' };
-const LABEL_TO_SPACE = { Oficina: 'oficina', Bodega: 'bodega', Otro: 'otro' };
+const SPACE_TO_LABEL = { fisica: 'Oficina física', virtual: 'Oficina virtual', coworking: 'Espacio de coworking' };
+const LABEL_TO_SPACE = { 'Oficina física': 'fisica', 'Oficina virtual': 'virtual', 'Espacio de coworking': 'coworking', Oficina: 'fisica' };
 
 // Datos secundarios (una sola linea cada uno). "Comentarios" va siempre al final
 // porque es el unico multilinea: todo lo que sigue a su etiqueta le pertenece.
