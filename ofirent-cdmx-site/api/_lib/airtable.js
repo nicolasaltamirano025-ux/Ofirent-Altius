@@ -43,11 +43,13 @@ const CONSENT_LINE =
   'Autorización: quien recomienda confirmó contar con la autorización de la persona recomendada.';
 
 class AirtableError extends Error {
-  constructor(status, kind) {
+  constructor(status, kind, detail) {
     super('Airtable ' + status + (kind ? ' ' + kind : ''));
     this.name = 'AirtableError';
     this.status = status;
     this.kind = kind || '';
+    // Solo el NOMBRE de un campo que Airtable no reconoce (esquema de la tabla, no datos de personas).
+    this.detail = detail || '';
   }
 }
 
@@ -86,14 +88,21 @@ async function request(cfg, method, path, options) {
 
   if (!response.ok) {
     let kind = '';
+    let detail = '';
     try {
       const data = await response.json();
       const err = data && data.error;
       kind = typeof err === 'string' ? err : err && typeof err.type === 'string' ? err.type : '';
+      // Un campo mal escrito en la tabla es el fallo más probable al configurar. Airtable dice
+      // cuál; se conserva solo ese nombre (nunca el resto del mensaje, que puede traer datos).
+      if (kind === 'UNKNOWN_FIELD_NAME' && err && typeof err.message === 'string') {
+        const m = err.message.match(/Unknown field name:?\s*"([^"]{1,60})"/i);
+        if (m) detail = m[1];
+      }
     } catch {
       kind = '';
     }
-    throw new AirtableError(response.status, kind);
+    throw new AirtableError(response.status, kind, detail);
   }
   return response.json();
 }

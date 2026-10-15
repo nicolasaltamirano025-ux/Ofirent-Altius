@@ -186,7 +186,7 @@ module.exports = async (req, res) => {
     return send(res, 201, { ok: true, reference: folio });
   } catch (error) {
     const kind = error && error.name === 'AirtableError' ? 'airtable_' + error.status + (error.kind ? '_' + error.kind : '') : error && error.name ? error.name : 'unknown';
-    console.error('[referidos] no se pudo guardar ' + kind);
+    console.error('[referidos] no se pudo guardar ' + kind + (error && error.detail ? ' campo="' + error.detail + '"' : ''));
     return fail(res, 503, 'storage_unavailable', 'No pudimos guardar tu recomendación en este momento. Tus datos siguen en el formulario; inténtalo de nuevo en unos minutos.');
   }
 };
