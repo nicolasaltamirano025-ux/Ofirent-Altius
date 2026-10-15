@@ -50,6 +50,22 @@
   .navlinks a:hover{color:var(--green);}
   @media (max-width:900px){ .navlinks a:not(.nav-cta){display:none;} }
   .nav-cta{background:linear-gradient(135deg, var(--gold), #f3c978);color:#13201a !important;padding:10px 20px;border-radius:10px;box-shadow:0 0 0 1px rgba(233,166,59,.3), 0 4px 16px rgba(233,166,59,.35);}
+  .navlinks a{white-space:nowrap;}
+  .navlinks{gap:18px;}
+  .nav-ref{border:1.5px solid var(--green);border-radius:10px;padding:7px 11px;font-size:13px;color:var(--green-deep);transition:background .15s ease;}
+  .navlinks a.nav-ref:hover{background:rgba(28,132,73,.1);color:var(--green-deep);}
+  .navlinks a.nav-ref[aria-current="page"]{background:rgba(28,132,73,.1);}
+  .nav-ref .nav-ref-short{display:none;}
+  @media (max-width:1180px){
+    .navlinks{gap:14px;font-size:13px;}
+    .nav-ref{padding:6px 9px;font-size:12.5px;}
+    .nav-ref .nav-ref-full{display:none;}
+    .nav-ref .nav-ref-short{display:inline;}
+  }
+  @media (min-width:701px) and (max-width:1180px){
+    .topnav-inner{padding-left:24px;padding-right:24px;}
+    .logo-mark img{height:54px;}
+  }
 
   /* MOBILE MENU */
   .menu-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;margin-left:6px;background:none;border:none;cursor:pointer;}

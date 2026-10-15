@@ -15,5 +15,8 @@
     { "source": "/ubicaciones/renta-oficinas-colonia-del-valle/", "destination": "/ubicacion-delvalle.html" },
     { "source": "/ubicaciones/renta-oficinas-colonia-narvarte/", "destination": "/ubicacion-narvarte.html" },
     { "source": "/ubicaciones/renta-oficinas-colonia-napoles/", "destination": "/ubicacion-napoles.html" }
+  ],
+  "crons": [
+    { "path": "/api/referidos-reintento/", "schedule": "0 14 * * *" }
   ]
 }
