@@ -163,4 +163,71 @@ function buildNotificationEmail(r) {
   return { subject: NOTIFICATION_SUBJECT, html, text };
 }
 
-module.exports = { NOTIFICATION_SUBJECT, escapeHtml, formatReceivedAt, buildNotificationEmail };
+// ---------------------------------------------------------------- aviso a la persona recomendada
+//
+// Primer contacto automático: cuando quien recomienda deja el correo de su referido, se le
+// avisa que fue recomendado y se le da el aviso de privacidad (LFPDPPP, datos obtenidos de un
+// tercero). Es solo informativo: sin oferta, sin enlaces de terceros y con un texto fijo.
+// Lo único que escribe otra persona es su nombre, que se limpia antes de entrar al mensaje.
+
+const REFERRED_NOTICE_SUBJECT = 'Te recomendaron con OfiRent';
+const PRIVACY_URL = 'https://www.ofirent.com.mx/aviso-de-privacidad/';
+const CONTACT_EMAIL = 'contacto@ofirent.com.mx';
+const NAME_MAX = 60;
+
+// Un nombre sale en un mensaje enviado desde el dominio de OfiRent: sin enlaces, sin
+// correos y con largo acotado, para que el formulario no sirva para mandar publicidad ajena.
+function safeName(value, fallback) {
+  const text = String(value || '')
+    .replace(/https?:\/\/\S+|www\.\S+|\S+@\S+/gi, ' ')
+    .replace(/[<>"`]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, NAME_MAX)
+    .trim();
+  return text.length >= 2 ? text : fallback;
+}
+
+function buildReferredNoticeEmail(r) {
+  const referred = safeName(r.referredName, '');
+  const referrer = safeName(r.referrerName, 'Una persona');
+  const hello = referred ? 'Hola ' + referred + ':' : 'Hola:';
+
+  const paragraphs = [
+    referrer +
+      ' te recomendó con OfiRent y compartió con nosotros tus datos de contacto para que un asesor pueda comunicarse contigo. ' +
+      'OfiRent renta oficinas virtuales, espacios de coworking y oficinas privadas en Ciudad de México.',
+    'Qué datos recibimos: tu nombre, tu teléfono, tu correo y, si lo indicó, el tipo de espacio y la zona que podrían interesarte.',
+    'Para qué los usamos: solo para contactarte por esta recomendación y, si te interesa, atender tu solicitud.',
+    'No tienes que hacer nada. Si prefieres que no te contactemos, o quieres conocer, corregir o pedir que se eliminen tus datos, ' +
+      'responde a este correo o escribe a ' + CONTACT_EMAIL + ' y no volveremos a escribirte.',
+  ];
+  const footer = 'OfiRent · Álvaro Obregón 270, Colonia Condesa, Ciudad de México · 55 3200 9907';
+
+  const text = [hello, ''].concat(
+    paragraphs.reduce((acc, p) => acc.concat([p, '']), []),
+    ['Aviso de privacidad completo: ' + PRIVACY_URL, '', footer],
+  ).join('\n');
+
+  const html =
+    '<!doctype html>\n<html lang="es"><body style="margin:0;padding:24px;background:#F4F6F4;font-family:Arial,Helvetica,sans-serif;">' +
+    '<div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;">' +
+    '<div style="background:' + GREEN + ';padding:18px 24px;color:#ffffff;font-size:18px;font-weight:700;">OfiRent</div>' +
+    '<div style="padding:20px 24px;font-size:15px;line-height:1.6;color:#14201A;">' +
+    '<p style="margin:0 0 14px;">' + escapeHtml(hello) + '</p>' +
+    paragraphs.map((p) => '<p style="margin:0 0 14px;">' + escapeHtml(p) + '</p>').join('') +
+    '<p style="margin:0 0 14px;">Aviso de privacidad completo: <a href="' + PRIVACY_URL + '" style="color:' + GREEN_DARK + ';">' + PRIVACY_URL + '</a></p>' +
+    '<p style="margin:18px 0 0;font-size:12px;color:#8A948E;">' + escapeHtml(footer) + '</p>' +
+    '</div></div></body></html>';
+
+  return { subject: REFERRED_NOTICE_SUBJECT, html, text };
+}
+
+module.exports = {
+  NOTIFICATION_SUBJECT,
+  REFERRED_NOTICE_SUBJECT,
+  escapeHtml,
+  formatReceivedAt,
+  buildNotificationEmail,
+  buildReferredNoticeEmail,
+};

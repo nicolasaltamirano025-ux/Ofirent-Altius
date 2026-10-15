@@ -38,10 +38,12 @@ function makeWorld() {
   const world = {
     records: [],
     leads: [],
-    emails: [],
+    emails: [], // avisos internos a OfiRent
+    noticeEmails: [], // avisos de primer contacto a la persona recomendada
     leadsMode: 'ok', // ok | fail
     airtableMode: 'ok', // ok | down | failCreate
-    resendMode: 'ok', // ok | http403 | throw
+    resendMode: 'ok', // ok | http403 | throw (aviso interno)
+    noticeMode: 'ok', // ok | http403 | throw (aviso al referido)
     unknownFetches: [],
     seq: 0,
   };
@@ -55,12 +57,18 @@ function makeWorld() {
 
     if (u.hostname === 'api.resend.com') {
       const body = JSON.parse(init.body);
-      world.emails.push({ url: u.toString(), headers, body });
-      if (world.resendMode === 'throw') throw new TypeError('fetch failed');
-      if (world.resendMode === 'http403') {
+      // Dos tipos de correo: el aviso interno a OfiRent (world.emails) y el aviso de primer
+      // contacto a la persona recomendada (world.noticeEmails), cada uno con su propio modo.
+      const internalTo = process.env.NOTIFY_TO || 'contacto@ofirent.com.mx';
+      const isNotice = !body.to.includes(internalTo) && !body.to.includes('contacto@ofirent.com.mx');
+      const list = isNotice ? world.noticeEmails : world.emails;
+      const mode = isNotice ? world.noticeMode : world.resendMode;
+      list.push({ url: u.toString(), headers, body });
+      if (mode === 'throw') throw new TypeError('fetch failed');
+      if (mode === 'http403') {
         return json(403, { statusCode: 403, name: 'validation_error', message: 'Dominio no verificado.' });
       }
-      return json(200, { id: 'email_' + world.emails.length });
+      return json(200, { id: 'email_' + (world.emails.length + world.noticeEmails.length) });
     }
 
     if (u.hostname === 'api.airtable.com') {
@@ -948,6 +956,119 @@ test('"Detalles" con alertas: ida y vuelta', () => {
 });
 
 let ipSeq = 0;
+// ---------------------------------------------------------------- aviso al referido (primer contacto)
+
+const CRON = { method: 'GET', noBody: true, headers: { authorization: 'Bearer cron-secret-test' } };
+
+test('aviso al referido: con correo válido sale un mensaje aparte, con aviso de privacidad y sin datos de quien recomienda', async () => {
+  await withWorld(async (world) => {
+    const body = uniqueBody({ referredEmail: 'luis@correo.com' });
+    const res = await call(handler, { body });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.emails.length, 1, 'un aviso interno');
+    assert.equal(world.noticeEmails.length, 1, 'un aviso al referido');
+
+    const n = world.noticeEmails[0].body;
+    assert.deepEqual(n.to, ['luis@correo.com']);
+    assert.equal(n.from, ENV.EMAIL_FROM);
+    assert.equal(n.reply_to, 'contacto@ofirent.com.mx', 'las respuestas llegan a OfiRent');
+    assert.equal(n.subject, 'Te recomendaron con OfiRent');
+    assert.ok(n.text.startsWith('Hola Luis Mendoza:'));
+    assert.ok(n.text.includes('Ana Pérez Soto te recomendó con OfiRent'));
+    assert.ok(n.text.includes('contacto@ofirent.com.mx'));
+    assert.ok(n.html.includes('href="https://www.ofirent.com.mx/aviso-de-privacidad/"'));
+
+    // De quien recomienda solo viaja su nombre. Nada de su teléfono, correo, empresa,
+    // comentarios ni el folio (que junto con su teléfono abre el seguimiento).
+    const everything = n.subject + n.html + n.text;
+    for (const secret of [body.referrerPhone, 'ana@empresa.com', 'Estudio Pérez', 'Prefiere planta baja', res.json.reference]) {
+      assert.ok(!everything.includes(secret), 'no debe incluir: ' + secret);
+    }
+    assert.ok(!everything.includes(EM_DASH), 'sin guion largo');
+    assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+  });
+});
+
+test('aviso al referido: sin correo del referido no sale ningún aviso', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, { body: uniqueBody({ referredEmail: '' }) });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.emails.length, 1);
+    assert.equal(world.noticeEmails.length, 0);
+    assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+  });
+});
+
+test('aviso al referido: si ya estaba registrado por otra persona no se le avisa dos veces', async () => {
+  await withWorld(async (world) => {
+    const referredPhone = '5599887766';
+    await call(handler, { body: uniqueBody({ referredPhone, referredEmail: 'luis@correo.com' }) });
+    await call(handler, { body: uniqueBody({ referredPhone, referredEmail: 'luis@correo.com' }) });
+    assert.equal(world.records.length, 2);
+    assert.equal(world.emails.length, 2, 'cada registro avisa al personal');
+    assert.equal(world.noticeEmails.length, 1, 'al referido solo una vez');
+  });
+});
+
+test('aviso al referido: el nombre de quien recomienda no mete enlaces, correos ni HTML', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, {
+      body: uniqueBody({
+        referrerName: 'Ver https://promo.example/oferta <b>YA</b> info@promo.example',
+        referredName: 'Luis <script>x</script> www.malo.example',
+      }),
+    });
+    assert.equal(res.statusCode, 201);
+    const n = world.noticeEmails[0].body;
+    const everything = n.html + n.text;
+    for (const bad of ['promo.example', 'malo.example', 'info@', '<script', '<b>']) {
+      assert.ok(!everything.includes(bad), 'no debe incluir: ' + bad);
+    }
+  });
+});
+
+test('aviso al referido: si falla, el aviso interno no se repite y el reintento solo envía el que faltaba', async () => {
+  await withWorld(async (world) => {
+    world.noticeMode = 'http403';
+    const res = await call(handler, { body: uniqueBody({ referredEmail: 'luis@correo.com' }) });
+    assert.equal(res.statusCode, 201, 'el fallo no cambia la respuesta');
+    assert.equal(world.emails.length, 1);
+    assert.equal(world.noticeEmails.length, 1, 'se intentó');
+    assert.match(world.records[0].fields['Aviso por correo'], /^Enviado\. Falta el aviso al referido: .*403/);
+
+    world.noticeMode = 'ok';
+    const retry = await call(retryHandler, CRON);
+    assert.equal(retry.statusCode, 200);
+    assert.deepEqual(
+      { attempted: retry.json.attempted, sent: retry.json.sent, failed: retry.json.failed },
+      { attempted: 1, sent: 1, failed: 0 },
+    );
+    assert.equal(world.emails.length, 1, 'el aviso interno no se duplica');
+    assert.equal(world.noticeEmails.length, 2, 'el aviso al referido se reenvió');
+    assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+
+    const again = await call(retryHandler, CRON);
+    assert.equal(again.json.attempted, 0);
+  });
+});
+
+test('aviso al referido: si el aviso interno falla, todavía no se avisa al referido', async () => {
+  await withWorld(async (world) => {
+    world.resendMode = 'http403';
+    const res = await call(handler, { body: uniqueBody({ referredEmail: 'luis@correo.com' }) });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.noticeEmails.length, 0);
+    assert.match(world.records[0].fields['Aviso por correo'], /^Fallido: /);
+
+    world.resendMode = 'ok';
+    const retry = await call(retryHandler, CRON);
+    assert.equal(retry.json.sent, 1);
+    assert.equal(world.emails.length, 2);
+    assert.equal(world.noticeEmails.length, 1);
+    assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+  });
+});
+
 function trackBody(body, extra) {
   ipSeq += 1;
   return {
