@@ -92,6 +92,9 @@ function makeWorld() {
 
       if (method === 'POST') {
         if (world.airtableMode === 'failCreate') return json(422, { error: { type: 'INVALID_VALUE_FOR_COLUMN' } });
+        if (world.airtableMode === 'unknownField') {
+          return json(422, { error: { type: 'UNKNOWN_FIELD_NAME', message: 'Unknown field name: "Detalles"' } });
+        }
         const { fields } = JSON.parse(init.body);
         for (const name of Object.keys(fields)) assert.ok(ALLOWED_FIELDS.has(name), 'campo desconocido: ' + name);
         const record = { id: 'rec' + ++world.seq, createdTime: new Date().toISOString(), fields };
@@ -956,6 +959,23 @@ test('"Detalles" con alertas: ida y vuelta', () => {
 });
 
 let ipSeq = 0;
+test('campo mal escrito en la tabla: 503, el log dice cuál campo y no trae datos de personas', async () => {
+  await withWorld(async (world, logs) => {
+    world.airtableMode = 'unknownField';
+    const body = uniqueBody({ referredEmail: 'luis@correo.com' });
+    const res = await call(handler, { body });
+    assert.equal(res.statusCode, 503);
+    assert.equal(world.records.length, 0);
+    const line = logs.find((l) => l.includes('no se pudo guardar'));
+    assert.ok(line, 'debe registrar el fallo');
+    assert.ok(line.includes('UNKNOWN_FIELD_NAME'), line);
+    assert.ok(line.includes('campo="Detalles"'), 'dice cuál campo falta: ' + line);
+    for (const personal of [body.referrerName, body.referredName, body.referrerPhone, body.referredPhone, 'luis@correo.com']) {
+      assert.ok(!logs.join('\n').includes(personal), 'no debe registrar: ' + personal);
+    }
+  });
+});
+
 // ---------------------------------------------------------------- aviso al referido (primer contacto)
 
 const CRON = { method: 'GET', noBody: true, headers: { authorization: 'Bearer cron-secret-test' } };
