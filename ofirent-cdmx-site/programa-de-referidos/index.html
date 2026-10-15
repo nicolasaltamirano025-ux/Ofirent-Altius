@@ -26,19 +26,13 @@
   .ref-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,500px);grid-template-rows:auto 1fr;grid-template-areas:"copy card" "meta card";column-gap:56px;align-items:start;}
   .ref-copy{grid-area:copy;}
   .ref-meta{grid-area:meta;}
-  .ref-copy h1.hero-title{margin-bottom:16px;}
-  .ref-offercard{background:var(--paper-raised);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:20px;box-shadow:0 20px 50px rgba(19,32,26,.12);padding:24px 26px 20px;max-width:470px;}
-  .ref-offercard .oc-logo{display:block;height:64px;width:auto;margin-bottom:8px;}
-  .oc-up{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
-  .oc-amount{font-family:var(--display);font-weight:800;font-size:clamp(48px,6vw,66px);line-height:1;color:var(--green-deep);margin:2px 0 6px;}
-  .oc-amount span{font-size:.4em;color:var(--steel);margin-left:6px;}
-  .oc-text{font-size:15px;color:var(--ink);line-height:1.5;margin-bottom:14px;}
-  .oc-table{width:100%;border-collapse:collapse;font-size:14px;}
-  .oc-table th{font-family:var(--body);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);text-align:left;font-weight:700;padding:0 0 6px;}
-  .oc-table th:last-child,.oc-table td:last-child{text-align:right;}
-  .oc-table td{padding:9px 0;border-top:1px solid var(--line);color:var(--ink);}
-  .oc-table td:last-child{font-weight:800;color:var(--green-deep);white-space:nowrap;}
-  .oc-fine{font-size:12px;color:var(--steel);margin-top:10px;line-height:1.45;}
+  .ref-copy h1.hero-title{margin-bottom:12px;}
+  .ref-amount{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .ref-amount-up{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  .ref-amount-num{font-family:var(--display);font-weight:800;font-size:clamp(54px,7vw,84px);line-height:1;color:var(--green-deep);}
+  .ref-amount-cur{font-family:var(--display);font-weight:800;font-size:24px;color:var(--steel);}
+  .ref-offer{font-size:clamp(17px,1.9vw,20px);font-weight:600;line-height:1.45;color:var(--ink);margin-bottom:22px;max-width:40ch;}
+  .ref-offer strong{color:var(--green);}
   .ref-mini{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px;max-width:46ch;}
   .ref-mini li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink);}
   .ref-mini li span{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:700;font-size:13px;}
@@ -122,6 +116,11 @@
   .ref-acc-body ul{margin:0;padding-left:20px;}
   .ref-acc-body li{margin-bottom:6px;}
   .ref-acc-body a{color:var(--green-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+  .ref-table{width:100%;border-collapse:collapse;font-size:14.5px;margin:2px 0 12px;}
+  .ref-table th{font-family:var(--body);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);text-align:left;font-weight:700;padding:0 0 6px;}
+  .ref-table th:last-child,.ref-table td:last-child{text-align:right;}
+  .ref-table td{padding:9px 0;border-top:1px solid var(--line);color:var(--ink);}
+  .ref-table td:last-child{font-weight:800;color:var(--green-deep);white-space:nowrap;}
 
   /* Cierre */
   .ref-closing{background:var(--paper-raised);border-top:1px solid var(--line);text-align:center;padding:30px 0;}
@@ -160,21 +159,15 @@
     <div class="ref-copy">
       <div class="eyebrow">Programa de referidos</div>
       <h1 class="hero-title" id="ref-titulo">¡RECOMIENDA Y GANA!</h1>
-      <aside class="ref-offercard" aria-label="Cuánto puedes ganar">
-        <img class="oc-logo" src="/assets/logo-20-anos.png" alt="OfiRent, 20 años. Impulsando tu negocio desde 2006">
-        <div class="oc-up">Hasta</div>
-        <div class="oc-amount">$5,000<span>MXN</span></div>
-        <p class="oc-text">por cada referido que firme su contrato y pague sus dos primeras mensualidades. Tu bono es una mensualidad de lo que contrate.</p>
-        <table class="oc-table">
-          <thead><tr><th scope="col">Si tu referido contrata</th><th scope="col">Tu bono</th></tr></thead>
-          <tbody>
-            <tr><td>Oficina virtual</td><td>$799 a $1,899</td></tr>
-            <tr><td>Coworking (por persona)</td><td>$2,500 a $2,900</td></tr>
-            <tr><td>Oficina privada</td><td>hasta $5,000</td></tr>
-          </tbody>
-        </table>
-        <p class="oc-fine">Con precios de lista. El bono se calcula sobre la renta pactada en el contrato, antes de IVA. Si tu referido contrata más de un servicio, se suma una mensualidad de cada uno, hasta $5,000 en total.</p>
-      </aside>
+      <div class="ref-amount" aria-label="Hasta 5,000 pesos mexicanos">
+        <span class="ref-amount-up">Hasta</span><span class="ref-amount-num">$5,000</span><span class="ref-amount-cur">MXN</span>
+      </div>
+      <p class="ref-offer">Por cada persona que recomiendes y contrate con OfiRent: el equivalente a <strong>una mensualidad de su renta</strong>.</p>
+      <ol class="ref-mini">
+        <li><span>1</span><div>Regístrala aquí, en menos de 2 minutos.</div></li>
+        <li><span>2</span><div>Pídele que mencione tu nombre al cotizar.</div></li>
+        <li><span>3</span><div>Cuando firme y pague sus dos primeras mensualidades, recibes tu bono.</div></li>
+      </ol>
     </div>
 
     <div class="ref-formcard" id="formulario" role="region" aria-labelledby="form-titulo">
@@ -293,11 +286,6 @@
     </div>
 
     <div class="ref-meta">
-      <ol class="ref-mini">
-        <li><span>1</span><div>Regístrala aquí, en menos de 2 minutos.</div></li>
-        <li><span>2</span><div>Pídele que mencione tu nombre al cotizar.</div></li>
-        <li><span>3</span><div>Cuando firme y pague sus dos primeras mensualidades, recibes tu bono.</div></li>
-      </ol>
       <p class="ref-fine">Vigente del 14 de octubre de 2026 al 14 de enero de 2027. Máximo 4 recomendaciones por persona. <a href="/programa-de-referidos/terminos/">Términos y condiciones</a></p>
       <p class="ref-track">¿Ya recomendaste a alguien? <a href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a></p>
     </div>
@@ -309,6 +297,20 @@
     <div class="eyebrow">Si quieres el detalle</div>
     <h2 class="section-title" id="info-titulo">Todo lo que necesitas saber</h2>
     <div class="ref-acc">
+      <details>
+        <summary>¿Cuánto puedo ganar?</summary>
+        <div class="ref-acc-body">
+          <table class="ref-table">
+            <thead><tr><th scope="col">Si tu referido contrata</th><th scope="col">Tu bono</th></tr></thead>
+            <tbody>
+              <tr><td>Oficina virtual</td><td>$799 a $1,899</td></tr>
+              <tr><td>Coworking (por persona)</td><td>$2,500 a $2,900</td></tr>
+              <tr><td>Oficina privada</td><td>hasta $5,000</td></tr>
+            </tbody>
+          </table>
+          <p>Con precios de lista. El bono es una mensualidad de la renta pactada en el contrato, antes de IVA, con tope de <strong>$5,000 MXN</strong>. Si tu referido contrata más de un servicio, se suma una mensualidad de cada uno, hasta $5,000 en total.</p>
+        </div>
+      </details>
       <details>
         <summary>Si ya soy cliente de OfiRent</summary>
         <div class="ref-acc-body">
