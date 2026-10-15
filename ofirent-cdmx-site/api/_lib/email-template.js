@@ -1,6 +1,6 @@
 const NOTIFICATION_SUBJECT = 'Nueva recomendación · Campaña OfiRent';
 
-const SPACE_LABELS = { oficina: 'Oficina', bodega: 'Bodega', otro: 'Otro' };
+const SPACE_LABELS = { fisica: 'Oficina física', virtual: 'Oficina virtual', coworking: 'Espacio de coworking', oficina: 'Oficina física' };
 
 const GREEN = '#1C8449';
 const GREEN_DARK = '#0E5C33';

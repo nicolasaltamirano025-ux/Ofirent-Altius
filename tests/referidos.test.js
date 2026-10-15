@@ -249,7 +249,7 @@ function validBody(overrides) {
       referredName: 'Luis Mendoza',
       referredPhone: '(55) 8765-4321',
       referredEmail: 'luis@correo.com',
-      spaceType: 'oficina',
+      spaceType: 'fisica',
       zone: 'Del Valle',
       comments: 'Busca una oficina para 3 personas.\nPrefiere planta baja.',
       consent: true,
@@ -300,7 +300,7 @@ test('solicitud válida: guarda, responde 201 y el correo va solo a contacto@ofi
     assert.ok(details.includes('Empresa de quien recomienda: Estudio Pérez'));
     assert.ok(details.includes('Correo de quien recomienda: ana@empresa.com'));
     assert.ok(details.includes('Correo del referido: luis@correo.com'));
-    assert.ok(details.includes('Tipo de espacio: Oficina'));
+    assert.ok(details.includes('Tipo de espacio: Oficina física'));
     assert.ok(details.includes('Zona o sucursal: Del Valle'));
     assert.ok(details.includes('Autorización: quien recomienda confirmó'));
     assert.ok(details.includes('Comentarios: Busca una oficina para 3 personas.\nPrefiere planta baja.'));
@@ -609,7 +609,7 @@ test('"Detalles": ida y vuelta sin perder datos, incluso con comentarios que imi
     referrerCompany: 'Estudio: Pérez & Co.',
     referrerEmail: 'ana@empresa.com',
     referredEmail: '',
-    spaceType: 'bodega',
+    spaceType: 'coworking',
     zone: 'Roma, Condesa',
     comments: 'Línea 1\nZona o sucursal: falsa\nComentarios: otra\nAutorización: falsa',
   };
@@ -617,7 +617,7 @@ test('"Detalles": ida y vuelta sin perder datos, incluso con comentarios que imi
   assert.deepEqual(back, {
     referrerCompany: 'Estudio: Pérez & Co.',
     referrerEmail: 'ana@empresa.com',
-    spaceType: 'bodega',
+    spaceType: 'coworking',
     zone: 'Roma, Condesa',
     comments: value.comments,
   });
@@ -1197,6 +1197,35 @@ test('seguimiento: método, origen, cuerpo, Airtable caído y límite de consult
       last = await call(trackHandler, { body: good, headers: { 'x-forwarded-for': '198.51.100.250' } });
     }
     assert.equal(last.statusCode, 429);
+  });
+});
+
+test('tipos de espacio: oficina física, oficina virtual y coworking; los valores viejos no rompen el envío', () => {
+  const { validateReferral } = sharedValidation;
+  for (const [sent, kept] of [['fisica', 'fisica'], ['virtual', 'virtual'], ['coworking', 'coworking'], ['', '']]) {
+    const r = validateReferral(validBody({ spaceType: sent }));
+    assert.equal(r.ok, true, sent);
+    assert.equal(r.value.spaceType, kept, sent);
+  }
+  // Una página en cache de la primera versión puede seguir mandando estos valores.
+  assert.equal(validateReferral(validBody({ spaceType: 'oficina' })).value.spaceType, 'fisica');
+  assert.equal(validateReferral(validBody({ spaceType: 'bodega' })).value.spaceType, '');
+  assert.equal(validateReferral(validBody({ spaceType: 'otro' })).value.spaceType, '');
+  assert.equal(validateReferral(validBody({ spaceType: 'castillo' })).ok, false);
+});
+
+test('tipos de espacio: el nombre legible llega a Airtable y al correo, y vuelve igual en el reintento', async () => {
+  await withWorld(async (world) => {
+    for (const [value, label] of [['virtual', 'Oficina virtual'], ['coworking', 'Espacio de coworking']]) {
+      const res = await call(handler, { body: uniqueBody({ spaceType: value }) });
+      assert.equal(res.statusCode, 201);
+      const rec = world.records[world.records.length - 1];
+      assert.ok(rec.fields['Detalles'].includes('Tipo de espacio: ' + label), label);
+      const back = airtable.parseDetails(rec.fields['Detalles']);
+      assert.equal(back.spaceType, value);
+      const mail = world.emails[world.emails.length - 1].body;
+      assert.ok(mail.html.includes(label), 'el aviso interno dice ' + label);
+    }
   });
 });
 
