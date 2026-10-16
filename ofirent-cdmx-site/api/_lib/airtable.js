@@ -39,6 +39,7 @@ const DETAIL_LABELS = [
 ];
 const COMMENTS_LABEL = 'Comentarios';
 const ALERT_PREFIX = 'ALERTA: ';
+const OPT_OUT_ALERT = 'Baja:';
 const CONSENT_LINE =
   'Autorización: quien recomienda confirmó contar con la autorización de la persona recomendada.';
 
@@ -105,6 +106,16 @@ async function request(cfg, method, path, options) {
     throw new AirtableError(response.status, kind, detail);
   }
   return response.json();
+}
+
+// Un registro por su id interno; null si ya no existe.
+async function getRecord(cfg, recordId) {
+  try {
+    return await request(cfg, 'GET', '/' + encodeURIComponent(recordId));
+  } catch (error) {
+    if (error && error.name === 'AirtableError' && error.status === 404) return null;
+    throw error;
+  }
 }
 
 async function findByFolio(cfg, folio) {
@@ -208,6 +219,61 @@ async function findLeadByPhone(cfg, phone) {
   });
   const times = (data.records || []).map((r) => str(r.createdTime)).filter(Boolean).sort();
   return times[0] || null;
+}
+
+// Registros vigentes donde este correo ya figura como persona recomendada. El correo vive
+// en "Detalles" (linea "Correo del referido: ..."), asi que se busca la linea completa.
+async function findByReferredEmail(cfg, email) {
+  const needle = escapeFormulaString(DETAIL_LABELS.find(([key]) => key === 'referredEmail')[1] + ': ' + email);
+  const formula =
+    "AND(FIND('" + needle + "' & '\n',{" + F.details + "} & '\n')>0," +
+    '{' + F.status + "}!='No procede')";
+  const data = await request(cfg, 'GET', '', {
+    query: [
+      ['filterByFormula', formula],
+      ['maxRecords', '10'],
+      ['pageSize', '10'],
+      ['fields[]', F.folio],
+      ['fields[]', F.referrerPhone],
+    ],
+  });
+  return (data.records || [])
+    .map((r) => ({
+      folio: str((r.fields || {})[F.folio]),
+      referrerPhone: str((r.fields || {})[F.referrerPhone]),
+      createdTime: str(r.createdTime),
+    }))
+    .sort((a, b) => a.createdTime.localeCompare(b.createdTime));
+}
+
+// true si este correo ya pidio no recibir mas mensajes (en cualquier registro, aunque ya no este vigente).
+async function isEmailOptedOut(cfg, email) {
+  const needle = escapeFormulaString(DETAIL_LABELS.find(([key]) => key === 'referredEmail')[1] + ': ' + email);
+  const formula =
+    "AND(FIND('" + needle + "' & '\n',{" + F.details + "} & '\n')>0," +
+    "FIND('" + ALERT_PREFIX + OPT_OUT_ALERT + "',{" + F.details + "})>0)";
+  const data = await request(cfg, 'GET', '', {
+    query: [
+      ['filterByFormula', formula],
+      ['maxRecords', '1'],
+      ['pageSize', '1'],
+      ['fields[]', F.folio],
+    ],
+  });
+  return (data.records || []).length > 0;
+}
+
+// Baja de la persona recomendada: la recomendacion pasa a "No procede" y queda una alerta al
+// inicio de "Detalles" (alli la leen el personal y los reintentos). No borra nada.
+async function markOptOut(cfg, record, dateText) {
+  const details = str(((record && record.fields) || {})[F.details]);
+  if (details.includes(ALERT_PREFIX + OPT_OUT_ALERT)) return false;
+  const line = ALERT_PREFIX + OPT_OUT_ALERT + ' la persona pidió no recibir más mensajes de OfiRent' + (dateText ? ' (' + dateText + ')' : '') + '.';
+  await updateRecord(cfg, record.id, {
+    [F.status]: 'No procede',
+    [F.details]: line + (details ? '\n' + details : ''),
+  });
+  return true;
 }
 
 async function createRecord(cfg, fields) {
@@ -319,10 +385,15 @@ module.exports = {
   AirtableError,
   config,
   findByFolio,
+  getRecord,
   countRecentByIpHash,
   countByReferrerPhone,
   countClosedByReferrerPhone,
   findByReferredPhone,
+  findByReferredEmail,
+  isEmailOptedOut,
+  markOptOut,
+  OPT_OUT_ALERT,
   findLeadByPhone,
   createRecord,
   updateRecord,

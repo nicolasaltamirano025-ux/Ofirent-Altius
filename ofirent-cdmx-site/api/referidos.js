@@ -123,19 +123,27 @@ module.exports = async (req, res) => {
   const ipHash = ip ? hashIp(ip) : null;
 
   const folio = folioFromKey(idempotencyKey);
-  const { referrerPhone, referredPhone } = validation.value;
+  const { referrerPhone, referredPhone, referredEmail } = validation.value;
 
   try {
     // Consultas independientes. Un reintento con la misma clave devuelve el folio ya
     // guardado aunque la conexión esté al límite. Las dos últimas solo generan alertas
     // para el personal: si fallan, el registro se guarda igual.
-    const [existing, recent, perPerson, sameReferred, leadSince] = await Promise.all([
+    // El referido se identifica por teléfono, por correo o por ambos (basta uno).
+    const [existing, recent, perPerson, byPhone, byEmail, optedOut, leadSince] = await Promise.all([
       airtable.findByFolio(cfg, folio),
       ipHash ? airtable.countRecentByIpHash(cfg, ipHash, RATE_LIMIT_PER_HOUR) : Promise.resolve(0),
       airtable.countByReferrerPhone(cfg, referrerPhone, MAX_PER_PERSON),
-      airtable.findByReferredPhone(cfg, referredPhone).catch(() => []),
-      airtable.findLeadByPhone(cfg, referredPhone).catch(() => null),
+      referredPhone ? airtable.findByReferredPhone(cfg, referredPhone).catch(() => []) : Promise.resolve([]),
+      referredEmail ? airtable.findByReferredEmail(cfg, referredEmail).catch(() => []) : Promise.resolve([]),
+      referredEmail ? airtable.isEmailOptedOut(cfg, referredEmail).catch(() => false) : Promise.resolve(false),
+      referredPhone ? airtable.findLeadByPhone(cfg, referredPhone).catch(() => null) : Promise.resolve(null),
     ]);
+    const sameReferred = [];
+    for (const r of byPhone.concat(byEmail)) {
+      if (r.folio && !sameReferred.some((x) => x.folio === r.folio)) sameReferred.push(r);
+    }
+    sameReferred.sort((a, b) => a.createdTime.localeCompare(b.createdTime));
 
     if (existing) {
       return send(res, 200, { ok: true, reference: folio });
@@ -172,6 +180,10 @@ module.exports = async (req, res) => {
       alerts.push(
         'Ya era prospecto: este teléfono ya estaba en la tabla Leads desde el ' + dateEs(leadSince) + '.',
       );
+    }
+    if (optedOut) {
+      // No se le escribe: el correo ya pidió la baja en una recomendación anterior.
+      alerts.push(airtable.OPT_OUT_ALERT + ' este correo ya pidió no recibir mensajes de OfiRent. No lo contactes.');
     }
 
     // El éxito solo se devuelve cuando Airtable ya confirmó este guardado.

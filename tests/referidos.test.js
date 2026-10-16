@@ -14,6 +14,8 @@ const SITE = path.join(__dirname, '..', 'ofirent-cdmx-site');
 const handler = require(path.join(SITE, 'api', 'referidos.js'));
 const retryHandler = require(path.join(SITE, 'api', 'referidos-reintento.js'));
 const trackHandler = require(path.join(SITE, 'api', 'referidos-seguimiento.js'));
+const bajaHandler = require(path.join(SITE, 'api', 'referidos-baja.js'));
+const notifyLib = require(path.join(SITE, 'api', '_lib', 'notify.js'));
 const airtable = require(path.join(SITE, 'api', '_lib', 'airtable.js'));
 const sharedValidation = require(path.join(SITE, 'assets', 'referidos', 'validation.js'));
 
@@ -27,6 +29,7 @@ const ENV = {
   RESEND_API_KEY: 're_test',
   EMAIL_FROM: 'OfiRent Referidos <referidos@example.test>',
   NOTIFY_TO: 'contacto@ofirent.com.mx',
+  NOTIFY_CC: 'nico@example.test, gerencia@example.test',
   CRON_SECRET: 'cron-secret-test',
   IP_HASH_SALT: 'salt-test',
 };
@@ -97,7 +100,8 @@ function makeWorld() {
         }
         const { fields } = JSON.parse(init.body);
         for (const name of Object.keys(fields)) assert.ok(ALLOWED_FIELDS.has(name), 'campo desconocido: ' + name);
-        const record = { id: 'rec' + ++world.seq, createdTime: new Date().toISOString(), fields };
+        // Los ids reales de Airtable son "rec" + 14 caracteres.
+        const record = { id: 'rec' + String(++world.seq).padStart(14, '0'), createdTime: new Date().toISOString(), fields };
         world.records.push(record);
         return json(200, record);
       }
@@ -112,6 +116,10 @@ function makeWorld() {
         }
         return json(200, record);
       }
+      if (method === 'GET' && recId) {
+        const record = world.records.find((r) => r.id === recId);
+        return record ? json(200, record) : json(404, { error: 'NOT_FOUND' });
+      }
       if (method === 'GET') {
         const formula = u.searchParams.get('filterByFormula') || '';
         const max = Number(u.searchParams.get('maxRecords')) || 100;
@@ -122,10 +130,19 @@ function makeWorld() {
           /^AND\(\{Teléfono de quien recomienda\}='([^']*)',\{Estado\}!='No procede',IS_AFTER\(CREATED_TIME\(\),DATEADD\(NOW\(\),-(\d+),'days'\)\)\)$/,
         );
         const referredMatch = formula.match(/^AND\(\{Teléfono del referido\}='([^']*)',\{Estado\}!='No procede'\)$/);
+        const emailMatch = formula.match(/^AND\(FIND\('Correo del referido: (.*)' & '\n',\{Detalles\} & '\n'\)>0,(.*)\)$/s);
         const closedMatch = formula.match(
           /^AND\(\{Teléfono de quien recomienda\}='([^']*)',\{Estado\}='Bono aplicado'\)$/,
         );
-        if (closedMatch) {
+        if (emailMatch) {
+          const wanted = 'Correo del referido: ' + emailMatch[1].replace(/\\'/g, "'") + '\n';
+          const optOutQuery = emailMatch[2].startsWith("FIND('ALERTA: Baja:'");
+          found = world.records.filter((r) => {
+            const hasEmail = ((r.fields['Detalles'] || '') + '\n').includes(wanted);
+            if (!hasEmail) return false;
+            return optOutQuery ? (r.fields['Detalles'] || '').includes('ALERTA: Baja:') : r.fields['Estado'] !== 'No procede';
+          });
+        } else if (closedMatch) {
           found = world.records.filter(
             (r) => r.fields['Teléfono de quien recomienda'] === closedMatch[1] && r.fields['Estado'] === 'Bono aplicado',
           );
@@ -205,10 +222,11 @@ async function withWorld(fn, envOverrides) {
 
 // ---------------------------------------------------------------- req / res
 
-function makeReq({ method = 'POST', headers = {}, body, raw, noBody = false } = {}) {
+function makeReq({ method = 'POST', headers = {}, body, raw, noBody = false, url = '/' } = {}) {
   const text = raw !== undefined ? raw : JSON.stringify(body);
   const req = Readable.from(noBody ? [] : [Buffer.from(text)]);
   req.method = method;
+  req.url = url;
   req.headers = Object.assign(
     { 'content-type': 'application/json', host: HOST, 'x-forwarded-for': '203.0.113.9' },
     headers,
@@ -269,7 +287,7 @@ function uniqueBody(overrides) {
   const n = String(phoneSeq).padStart(4, '0');
   return validBody(
     Object.assign(
-      { referrerPhone: '5511' + n + '00', referredPhone: '5522' + n + '00', idempotencyKey: randomUUID() },
+      { referrerPhone: '5511' + n + '00', referredPhone: '5522' + n + '00', referredEmail: 'luis' + n + '@correo.com', idempotencyKey: randomUUID() },
       overrides || {},
     ),
   );
@@ -993,7 +1011,7 @@ test('aviso al referido: con correo válido sale un mensaje aparte, con aviso de
     assert.equal(n.from, ENV.EMAIL_FROM);
     assert.equal(n.reply_to, 'contacto@ofirent.com.mx', 'las respuestas llegan a OfiRent');
     assert.equal(n.subject, 'Te recomendaron con OfiRent');
-    assert.ok(n.text.startsWith('Hola Luis Mendoza:'));
+    assert.ok(n.text.startsWith('Hola Luis Mendoza,'));
     assert.ok(n.text.includes('Ana Pérez Soto te recomendó con OfiRent'));
     assert.ok(n.text.includes('contacto@ofirent.com.mx'));
     assert.ok(n.html.includes('href="https://www.ofirent.com.mx/aviso-de-privacidad/"'));
@@ -1086,6 +1104,182 @@ test('aviso al referido: si el aviso interno falla, todavía no se avisa al refe
     assert.equal(world.emails.length, 2);
     assert.equal(world.noticeEmails.length, 1);
     assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+  });
+});
+
+// ---------------------------------------------------------------- teléfono o correo del referido
+
+test('validación: el referido necesita teléfono o correo (con uno basta)', () => {
+  const { validateReferral, MESSAGES } = sharedValidation;
+  const neither = validateReferral(validBody({ referredPhone: '', referredEmail: '' }));
+  assert.equal(neither.ok, false);
+  assert.equal(neither.errors.referredPhone, MESSAGES.contactRequired);
+
+  const onlyEmail = validateReferral(validBody({ referredPhone: '', referredEmail: 'Luis@Correo.com' }));
+  assert.equal(onlyEmail.ok, true);
+  assert.equal(onlyEmail.value.referredPhone, '');
+  assert.equal(onlyEmail.value.referredEmail, 'luis@correo.com');
+
+  const onlyPhone = validateReferral(validBody({ referredPhone: '55 8765 4321', referredEmail: '' }));
+  assert.equal(onlyPhone.ok, true);
+  assert.equal(onlyPhone.value.referredPhone, '5587654321');
+
+  // Un dato escrito pero inválido sigue siendo error, aunque exista el otro.
+  assert.equal(validateReferral(validBody({ referredPhone: '123', referredEmail: 'luis@correo.com' })).errors.referredPhone, MESSAGES.referredPhone);
+  assert.equal(validateReferral(validBody({ referredPhone: '', referredEmail: 'no-es-correo' })).errors.referredEmail, MESSAGES.email);
+  // No puede recomendarse a sí misma por correo.
+  const self = validateReferral(validBody({ referrerEmail: 'ana@empresa.com', referredEmail: 'ANA@empresa.com' }));
+  assert.equal(self.errors.referredEmail, MESSAGES.selfReferralEmail);
+});
+
+test('solo correo: se guarda sin teléfono, sale el aviso al referido y el aviso interno no lleva copia', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, { body: uniqueBody({ referredPhone: '', referredEmail: 'solo.correo@example.test' }) });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.records[0].fields['Teléfono del referido'], '');
+    assert.equal(world.noticeEmails.length, 1);
+    assert.deepEqual(world.noticeEmails[0].body.to, ['solo.correo@example.test']);
+    assert.equal(world.emails.length, 1);
+    assert.equal(world.emails[0].body.cc, undefined, 'el primer contacto es automático: nadie más lo atiende');
+    assert.match(world.emails[0].body.text, /El sistema ya envió un correo de presentación a solo\.correo@example\.test/);
+    assert.equal(world.records[0].fields['Aviso por correo'], 'Enviado');
+  });
+});
+
+test('solo teléfono: no hay aviso al referido y el aviso interno va con copia y trae el paso a paso', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, { body: uniqueBody({ referredEmail: '', spaceType: 'virtual', referredName: 'Luis Mendoza' }) });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.noticeEmails.length, 0);
+    assert.equal(world.emails.length, 1);
+    const mail = world.emails[0].body;
+    assert.deepEqual(mail.to, ['contacto@ofirent.com.mx']);
+    assert.deepEqual(mail.cc, ['nico@example.test', 'gerencia@example.test']);
+    assert.match(mail.html, /Qué hacer ahora: solo dejó teléfono, el primer contacto es manual/);
+    assert.match(mail.text, /1\. Contacta a Luis Mendoza al \d{10} por WhatsApp o llamada dentro de las próximas 24 horas hábiles\./);
+    assert.match(mail.text, /aviso de privacidad: https:\/\/www\.ofirent\.com\.mx\/aviso-de-privacidad\//);
+    assert.match(mail.text, /Mensaje sugerido para WhatsApp:\nHola Luis Mendoza, te escribimos de OfiRent\. Ana Pérez Soto nos compartió tu contacto porque pensó que podríamos ayudarte con una oficina virtual\./);
+    // Trae todo lo que dio el cliente.
+    for (const needle of ['Ana Pérez Soto', 'Estudio Pérez', 'ana@empresa.com', 'Oficina virtual', 'Del Valle', 'Prefiere planta baja.']) {
+      assert.ok(mail.text.includes(needle), 'falta en el aviso interno: ' + needle);
+    }
+    assert.ok(!(mail.html + mail.text).includes(EM_DASH));
+  });
+});
+
+test('NOTIFY_CC: solo direcciones válidas, sin repetir ni duplicar al destinatario principal, y sin variable no hay copia', async () => {
+  await withWorld(async (world) => {
+    process.env.NOTIFY_CC = 'a@example.test; B@Example.test, a@example.test, no-es-correo, contacto@ofirent.com.mx';
+    assert.deepEqual(notifyLib.notifyCc(), ['a@example.test', 'b@example.test']);
+    process.env.NOTIFY_CC = '';
+    assert.deepEqual(notifyLib.notifyCc(), []);
+    const res = await call(handler, { body: uniqueBody({ referredEmail: '' }) });
+    assert.equal(res.statusCode, 201);
+    assert.equal(world.emails[0].body.cc, undefined);
+  });
+});
+
+test('correo repetido por otra persona: se guarda con alerta de duplicado y no se le escribe dos veces', async () => {
+  await withWorld(async (world) => {
+    const email = 'repetido@example.test';
+    const first = await call(handler, { body: uniqueBody({ referredPhone: '', referredEmail: email }) });
+    const second = await call(handler, { body: uniqueBody({ referredPhone: '', referredEmail: email }) });
+    assert.equal(first.statusCode, 201);
+    assert.equal(second.statusCode, 201);
+    assert.equal(world.records.length, 2);
+    assert.ok(world.records[1].fields['Detalles'].startsWith('ALERTA: Posible duplicado'));
+    assert.ok(world.records[1].fields['Detalles'].includes(first.json.reference));
+    assert.equal(world.noticeEmails.length, 1);
+    // Sin aviso automático, el primer contacto del segundo registro lo hace el personal (con copia).
+    assert.deepEqual(world.emails[1].body.cc, ['nico@example.test', 'gerencia@example.test']);
+  });
+});
+
+test('el correo al referido trae servicios con precios publicados, invitación al programa y baja, y pone primero lo que busca', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, { body: uniqueBody({ spaceType: 'virtual', referredEmail: 'luis@example.test' }) });
+    assert.equal(res.statusCode, 201);
+    const n = world.noticeEmails[0].body;
+    const html = n.html;
+    assert.ok(html.indexOf('Oficina virtual y domicilio fiscal') < html.indexOf('Oficinas equipadas'), 'lo que busca va primero');
+    assert.ok(html.includes('Lo que buscas'));
+    for (const price of ['Desde $6,500 al mes', 'Desde $799 al mes', 'Desde $2,500 al mes']) assert.ok(html.includes(price), price);
+    assert.ok(html.includes('hasta $5,000 MXN'), 'invitación al programa de referidos');
+    assert.ok(html.includes('https://www.ofirent.com.mx/programa-de-referidos/?utm_source=correo'));
+    assert.ok(html.includes('https://wa.me/525532009907?text='), 'botón principal de WhatsApp');
+    assert.match(html, /https:\/\/www\.ofirent\.com\.mx\/assets\/email\/servicio-oficina-virtual\.jpg/);
+    assert.ok(html.includes('https://www.ofirent.com.mx/aviso-de-privacidad/'));
+    assert.ok(n.text.includes('Somos parte del grupo OfiRent'));
+    // Baja de un clic: enlace en el cuerpo y cabeceras para Gmail y Apple Mail.
+    assert.match(html, /https:\/\/www\.ofirent\.com\.mx\/api\/referidos-baja\/\?t=rec[A-Za-z0-9]{14}\./);
+    assert.match(n.headers['List-Unsubscribe'], /^<https:\/\/www\.ofirent\.com\.mx\/api\/referidos-baja\/\?t=/);
+    assert.equal(n.headers['List-Unsubscribe-Post'], 'List-Unsubscribe=One-Click');
+    // Sin el folio: junto con el teléfono de quien recomienda abre el seguimiento.
+    assert.ok(!(n.html + n.text).includes(res.json.reference));
+    assert.ok(!(n.html + n.text + n.subject).includes(EM_DASH));
+  });
+});
+
+test('baja de un clic: el GET solo pregunta, el POST da de baja y ese correo no vuelve a recibir el aviso', async () => {
+  await withWorld(async (world) => {
+    const email = 'baja@example.test';
+    const reg = await call(handler, { body: uniqueBody({ referredEmail: email }) });
+    assert.equal(reg.statusCode, 201);
+    const link = world.noticeEmails[0].body.headers['List-Unsubscribe'].slice(1, -1);
+    const url = new URL(link);
+    const token = url.searchParams.get('t');
+    const target = '/api/referidos-baja/?t=' + encodeURIComponent(token);
+
+    // Un GET (los filtros de correo abren los enlaces solos) no cambia nada.
+    const get = await call(bajaHandler, { method: 'GET', noBody: true, url: target });
+    assert.equal(get.statusCode, 200);
+    assert.match(get.body, /Confirmar, no quiero recibir más mensajes/);
+    assert.equal(world.records[0].fields['Estado'], 'Nuevo');
+
+    // El POST (botón o "un clic") sí.
+    const post = await call(bajaHandler, { method: 'POST', noBody: true, url: target });
+    assert.equal(post.statusCode, 200);
+    assert.match(post.body, /no volveremos a escribirte/);
+    assert.equal(world.records[0].fields['Estado'], 'No procede');
+    assert.ok(world.records[0].fields['Detalles'].startsWith('ALERTA: Baja: la persona pidió no recibir más mensajes de OfiRent'));
+    // Repetirlo no duplica la alerta.
+    await call(bajaHandler, { method: 'POST', noBody: true, url: target });
+    assert.equal(world.records[0].fields['Detalles'].split('ALERTA: Baja:').length, 2);
+
+    // Otra persona vuelve a recomendar ese correo: se guarda, pero no se le escribe.
+    const before = world.noticeEmails.length;
+    const again = await call(handler, { body: uniqueBody({ referredEmail: email }) });
+    assert.equal(again.statusCode, 201);
+    assert.equal(world.noticeEmails.length, before, 'no recibe el aviso');
+    const last = world.records[world.records.length - 1].fields['Detalles'];
+    assert.ok(last.includes('ALERTA: Baja: este correo ya pidió no recibir mensajes'), last);
+    const internal = world.emails[world.emails.length - 1].body;
+    assert.match(internal.html, /esta persona pidió no ser contactada/);
+  });
+});
+
+test('baja: enlace alterado, sin firma o de otro registro se rechaza y no cambia nada', async () => {
+  await withWorld(async (world) => {
+    const reg = await call(handler, { body: uniqueBody({ referredEmail: 'firma@example.test' }) });
+    assert.equal(reg.statusCode, 201);
+    const token = new URL(world.noticeEmails[0].body.headers['List-Unsubscribe'].slice(1, -1)).searchParams.get('t');
+    const [recId, sig] = token.split('.');
+    const bad = [
+      '/api/referidos-baja/',
+      '/api/referidos-baja/?t=',
+      '/api/referidos-baja/?t=' + recId,
+      '/api/referidos-baja/?t=' + recId + '.' + 'x'.repeat(sig.length),
+      '/api/referidos-baja/?t=recAAAAAAAAAAAAAA.' + sig,
+      '/api/referidos-baja/?t=' + encodeURIComponent('REF-ABCDEFGH.' + sig),
+    ];
+    for (const url of bad) {
+      for (const method of ['GET', 'POST']) {
+        const r = await call(bajaHandler, { method, noBody: true, url });
+        assert.equal(r.statusCode, 400, method + ' ' + url);
+      }
+    }
+    assert.equal(world.records[0].fields['Estado'], 'Nuevo');
+    assert.equal((await call(bajaHandler, { method: 'PUT', noBody: true, url: '/api/referidos-baja/?t=' + encodeURIComponent(token) })).statusCode, 405);
   });
 });
 
