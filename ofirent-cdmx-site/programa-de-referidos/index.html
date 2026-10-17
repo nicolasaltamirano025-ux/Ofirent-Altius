@@ -54,6 +54,11 @@
   .ref-legend{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:17px;color:var(--ink);margin-bottom:10px;padding:0;}
   .ref-legend-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--body);font-size:13px;font-weight:700;}
   .ref-field{margin-bottom:8px;}
+  .ref-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;}
+  @media (max-width:560px){ .ref-row{grid-template-columns:minmax(0,1fr);gap:0;} }
+  .ref-hint{font-size:13px;line-height:1.5;color:var(--steel);margin:2px 0 10px;}
+  .ref-hint strong{color:var(--ink);}
+  .ref-chips.small .ref-chip{padding:8px 12px;font-size:13px;}
   .lead-form .ref-field input,.lead-form .ref-field textarea{margin-bottom:4px;}
   .lead-form .ref-field textarea{min-height:84px;}
   .ref-req{color:#b3261e;}
@@ -65,12 +70,6 @@
   .ref-chip:hover{border-color:var(--green);}
   .ref-chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;}
   .ref-chip:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
-  .ref-more{margin:10px 0 4px;border-top:1px solid var(--line);padding-top:12px;}
-  .ref-more summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--body);font-weight:700;font-size:14px;color:var(--green-deep);}
-  .ref-more summary::-webkit-details-marker{display:none;}
-  .ref-more summary::after{content:"+";font-size:20px;line-height:1;}
-  .ref-more[open] summary::after{content:"\2212";}
-  .ref-more-body{padding-top:14px;}
   .ref-consent{margin:14px 0 16px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--paper);}
   .ref-consent.has-error{border-color:#b3261e;background:#fff7f6;}
   .lead-form .ref-consent label{display:flex;gap:12px;align-items:flex-start;margin:0;font-weight:600;font-size:13.5px;color:var(--ink);cursor:pointer;line-height:1.5;}
@@ -172,7 +171,7 @@
 
     <div class="ref-formcard" id="formulario" role="region" aria-labelledby="form-titulo">
       <h2 class="ref-form-title" id="form-titulo">Registra tu recomendación</h2>
-      <p class="ref-form-sub">Solo 4 datos para empezar. Nuestro equipo da seguimiento.</p>
+      <p class="ref-form-sub">Con tu nombre y teléfono y el contacto de la persona basta. Lo demás nos ayuda a atenderla mejor.</p>
 
       <form class="lead-form ref-form" id="ref-form" novalidate>
         <p class="ref-banner" id="ref-summary" role="alert" hidden>Revisa los campos marcados en rojo para poder enviar tu recomendación.</p>
@@ -191,10 +190,17 @@
             <input id="f-referrerName" type="text" autocomplete="name" maxlength="120" aria-invalid="false">
             <p class="ref-error" id="e-referrerName" hidden></p>
           </div>
-          <div class="ref-field" data-field="referrerPhone">
-            <label for="f-referrerPhone">Teléfono de contacto <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-            <input id="f-referrerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" aria-invalid="false">
-            <p class="ref-error" id="e-referrerPhone" hidden></p>
+          <div class="ref-row">
+            <div class="ref-field" data-field="referrerPhone">
+              <label for="f-referrerPhone">Teléfono <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+              <input id="f-referrerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" aria-invalid="false">
+              <p class="ref-error" id="e-referrerPhone" hidden></p>
+            </div>
+            <div class="ref-field" data-field="referrerEmail">
+              <label for="f-referrerEmail">Correo <span class="ref-opt">(opcional)</span></label>
+              <input id="f-referrerEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-invalid="false">
+              <p class="ref-error" id="e-referrerEmail" hidden></p>
+            </div>
           </div>
         </fieldset>
 
@@ -205,53 +211,50 @@
             <input id="f-referredName" type="text" autocomplete="off" maxlength="120" aria-invalid="false">
             <p class="ref-error" id="e-referredName" hidden></p>
           </div>
-          <div class="ref-field" data-field="referredPhone">
-            <label for="f-referredPhone">Teléfono <span class="ref-req" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-            <input id="f-referredPhone" type="tel" inputmode="tel" autocomplete="off" placeholder="55 1234 5678" aria-invalid="false">
-            <p class="ref-error" id="e-referredPhone" hidden></p>
+          <p class="ref-hint" id="contact-hint"><strong>Teléfono o correo: con uno basta.</strong> Si dejas su correo, le enviamos un mensaje para presentarle OfiRent.</p>
+          <div class="ref-row">
+            <div class="ref-field" data-field="referredPhone">
+              <label for="f-referredPhone">Teléfono</label>
+              <input id="f-referredPhone" type="tel" inputmode="tel" autocomplete="off" placeholder="55 1234 5678" aria-invalid="false" aria-describedby="contact-hint">
+            </div>
+            <div class="ref-field" data-field="referredEmail">
+              <label for="f-referredEmail">Correo</label>
+              <input id="f-referredEmail" type="email" inputmode="email" autocomplete="off" maxlength="254" aria-invalid="false" aria-describedby="contact-hint">
+            </div>
           </div>
+          <p class="ref-error" id="e-referredPhone" hidden></p>
+          <p class="ref-error" id="e-referredEmail" hidden></p>
+
           <div class="ref-field" data-field="spaceType">
             <span class="field-label" id="spaceType-label" style="display:block;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--steel);">¿Qué busca? <span class="ref-opt">(opcional)</span></span>
             <div class="ref-chips" id="f-spaceType-group" role="group" aria-labelledby="spaceType-label" tabindex="-1">
-              <button type="button" class="ref-chip" data-value="fisica" aria-pressed="false">Oficina física</button>
-              <button type="button" class="ref-chip" data-value="virtual" aria-pressed="false">Oficina virtual</button>
-              <button type="button" class="ref-chip" data-value="coworking" aria-pressed="false">Espacio de coworking</button>
+              <button type="button" class="ref-chip" data-group="spaceType" data-value="fisica" aria-pressed="false">Oficina física</button>
+              <button type="button" class="ref-chip" data-group="spaceType" data-value="virtual" aria-pressed="false">Oficina virtual</button>
+              <button type="button" class="ref-chip" data-group="spaceType" data-value="coworking" aria-pressed="false">Espacio de coworking</button>
             </div>
             <p class="ref-error" id="e-spaceType" hidden></p>
           </div>
-        </fieldset>
 
-        <details class="ref-more" id="ref-more">
-          <summary>Agregar más datos (opcional)</summary>
-          <div class="ref-more-body">
-            <div class="ref-field" data-field="referredEmail">
-              <label for="f-referredEmail">Correo de la persona que recomiendas</label>
-              <input id="f-referredEmail" type="email" inputmode="email" autocomplete="off" maxlength="254" aria-invalid="false">
-              <p class="ref-note" style="margin:6px 0 0;text-align:left;">Le avisaremos que lo recomendaste y le daremos nuestro aviso de privacidad en el primer contacto.</p>
-              <p class="ref-error" id="e-referredEmail" hidden></p>
+          <div class="ref-field" data-field="zone">
+            <span class="field-label" id="zone-label" style="display:block;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--steel);">¿En qué zona? <span class="ref-opt">(opcional)</span></span>
+            <div class="ref-chips small" id="f-zone-group" role="group" aria-labelledby="zone-label" tabindex="-1">
+              <button type="button" class="ref-chip" data-group="zone" data-value="Nápoles" aria-pressed="false">Nápoles</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Del Valle" aria-pressed="false">Del Valle</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Condesa" aria-pressed="false">Condesa</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Roma" aria-pressed="false">Roma</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Narvarte" aria-pressed="false">Narvarte</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Cuauhtémoc" aria-pressed="false">Cuauhtémoc</button>
+              <button type="button" class="ref-chip" data-group="zone" data-value="Aún no lo sé" aria-pressed="false">Aún no lo sé</button>
             </div>
-            <div class="ref-field" data-field="zone">
-              <label for="f-zone">Zona o sucursal de interés</label>
-              <input id="f-zone" type="text" autocomplete="off" maxlength="120" placeholder="Por ejemplo: Del Valle, Roma, Condesa" aria-invalid="false">
-              <p class="ref-error" id="e-zone" hidden></p>
-            </div>
-            <div class="ref-field" data-field="referrerEmail">
-              <label for="f-referrerEmail">Tu correo electrónico</label>
-              <input id="f-referrerEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-invalid="false">
-              <p class="ref-error" id="e-referrerEmail" hidden></p>
-            </div>
-            <div class="ref-field" data-field="referrerCompany">
-              <label for="f-referrerCompany">Tu empresa</label>
-              <input id="f-referrerCompany" type="text" autocomplete="organization" maxlength="120" aria-invalid="false">
-              <p class="ref-error" id="e-referrerCompany" hidden></p>
-            </div>
-            <div class="ref-field" data-field="comments">
-              <label for="f-comments">Comentarios</label>
-              <textarea id="f-comments" rows="3" maxlength="1000" aria-invalid="false"></textarea>
-              <p class="ref-error" id="e-comments" hidden></p>
-            </div>
+            <p class="ref-error" id="e-zone" hidden></p>
           </div>
-        </details>
+
+          <div class="ref-field" data-field="comments">
+            <label for="f-comments">¿Algo más que debamos saber? <span class="ref-opt">(opcional)</span></label>
+            <textarea id="f-comments" rows="2" maxlength="1000" placeholder="Por ejemplo: cuántas personas son o para cuándo lo necesitan" aria-invalid="false"></textarea>
+            <p class="ref-error" id="e-comments" hidden></p>
+          </div>
+        </fieldset>
 
         <div class="ref-consent" id="ref-consent" data-field="consent">
           <label for="f-consent">
@@ -389,7 +392,7 @@
   var banner = document.getElementById('ref-banner');
   var submit = document.getElementById('ref-submit');
   var chips = Array.prototype.slice.call(document.querySelectorAll('.ref-chip'));
-  var state = { spaceType: '', key: '', mountedAt: 0, inFlight: false, referrerName: '' };
+  var state = { spaceType: '', zone: '', key: '', mountedAt: 0, inFlight: false, referrerName: '' };
 
   function shareText() {
     var who = state.referrerName ? ' (' + state.referrerName + ')' : '';
@@ -433,14 +436,13 @@
   function readValues() {
     return {
       referrerName: el('referrerName').value,
-      referrerCompany: el('referrerCompany').value,
       referrerPhone: el('referrerPhone').value,
       referrerEmail: el('referrerEmail').value,
       referredName: el('referredName').value,
       referredPhone: el('referredPhone').value,
       referredEmail: el('referredEmail').value,
       spaceType: state.spaceType,
-      zone: el('zone').value,
+      zone: state.zone,
       comments: el('comments').value,
       consent: el('consent').checked
     };
@@ -478,10 +480,8 @@
       if (input) { input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', 'e-' + name); }
     });
     summary.hidden = false;
-    var more = document.getElementById('ref-more');
-    if (more && Object.keys(errors).some(function (n) { var h = holderOf(n); return h && more.contains(h); })) more.open = true;
     var first = V.FIELD_ORDER.filter(function (n) { return errors[n]; })[0];
-    var target = first ? (el(first) || document.getElementById('f-spaceType-group')) : null;
+    var target = first ? (el(first) || document.getElementById('f-' + first + '-group') || document.getElementById('f-spaceType-group')) : null;
     if (target) {
       // setTimeout y no requestAnimationFrame: también corre con la pestaña en segundo plano.
       setTimeout(function () {
@@ -491,9 +491,11 @@
     }
   }
 
-  function setChip(value) {
-    state.spaceType = value;
+  // Cada grupo de botones (qué busca, zona) guarda su valor en state[grupo].
+  function setChip(group, value) {
+    state[group] = value;
     chips.forEach(function (chip) {
+      if (chip.getAttribute('data-group') !== group) return;
       chip.setAttribute('aria-pressed', chip.getAttribute('data-value') === value ? 'true' : 'false');
     });
   }
@@ -507,9 +509,10 @@
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
+      var group = chip.getAttribute('data-group');
       var value = chip.getAttribute('data-value');
-      setChip(state.spaceType === value ? '' : value);
-      clearError('spaceType');
+      setChip(group, state[group] === value ? '' : value);
+      clearError(group);
     });
   });
 
@@ -571,9 +574,10 @@
 
   document.getElementById('ref-another').addEventListener('click', function () {
     // Conserva los datos de quien recomienda; limpia los de la persona recomendada.
-    ['referredName', 'referredPhone', 'referredEmail', 'zone', 'comments', 'website'].forEach(function (n) { el(n).value = ''; });
+    ['referredName', 'referredPhone', 'referredEmail', 'comments', 'website'].forEach(function (n) { el(n).value = ''; });
     el('consent').checked = false;
-    setChip('');
+    setChip('spaceType', '');
+    setChip('zone', '');
     clearAllErrors();
     resetAttempt();
     thanks.hidden = true;

@@ -36,6 +36,8 @@
     referredPhone:
       'Escribe el teléfono de la persona que recomiendas a 10 dígitos (por ejemplo, 55 1234 5678).',
     selfReferral: 'El teléfono de la persona que recomiendas no puede ser el tuyo.',
+    selfReferralEmail: 'El correo de la persona que recomiendas no puede ser el tuyo.',
+    contactRequired: 'Escribe el teléfono o el correo de la persona que recomiendas (con uno basta).',
     spaceType: 'Selecciona una opción válida.',
     consent: 'Confirma que cuentas con la autorización de la persona recomendada para compartir sus datos.',
     tooLong: function (max) {
@@ -154,12 +156,20 @@
     if (value.referredName.length < 2) errors.referredName = MESSAGES.referredName;
     else if (value.referredName.length > LIMITS.name) errors.referredName = MESSAGES.tooLong(LIMITS.name);
 
-    var referredPhone = normalizePhone(value.referredPhone);
-    if (!referredPhone) errors.referredPhone = MESSAGES.referredPhone;
-    else if (referrerPhone && referredPhone === referrerPhone) errors.referredPhone = MESSAGES.selfReferral;
-    else value.referredPhone = referredPhone;
+    // Con teléfono o con correo basta: hace falta al menos uno para poder contactar a la persona.
+    if (value.referredPhone) {
+      var referredPhone = normalizePhone(value.referredPhone);
+      if (!referredPhone) errors.referredPhone = MESSAGES.referredPhone;
+      else if (referrerPhone && referredPhone === referrerPhone) errors.referredPhone = MESSAGES.selfReferral;
+      else value.referredPhone = referredPhone;
+    }
 
-    if (value.referredEmail && !isValidEmail(value.referredEmail)) errors.referredEmail = MESSAGES.email;
+    if (value.referredEmail) {
+      if (!isValidEmail(value.referredEmail)) errors.referredEmail = MESSAGES.email;
+      else if (value.referrerEmail && value.referrerEmail === value.referredEmail) errors.referredEmail = MESSAGES.selfReferralEmail;
+    }
+
+    if (!value.referredPhone && !value.referredEmail) errors.referredPhone = MESSAGES.contactRequired;
 
     if (value.zone.length > LIMITS.zone) errors.zone = MESSAGES.tooLong(LIMITS.zone);
     if (value.comments.length > LIMITS.comments) errors.comments = MESSAGES.tooLong(LIMITS.comments);
