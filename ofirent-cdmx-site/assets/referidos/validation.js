@@ -19,10 +19,11 @@
   var LIMITS = { name: 120, company: 120, email: 254, zone: 120, comments: 1000 };
 
   // Reglas del programa que comparten la página (texto visible) y el servidor (las aplica).
-  // Cada persona (teléfono de quien recomienda) puede registrar hasta este número de
-  // recomendaciones en los últimos 12 meses. Para cambiarlo basta editar esta cifra.
+  // Cada persona (teléfono de quien recomienda) puede recomendar a cuantas personas quiera;
+  // el bono se paga hasta por este número de recomendaciones cerradas. Para cambiarlo basta
+  // editar esta cifra.
   var PROGRAM = {
-    maxReferralsPerPerson: 4,
+    maxBonusesPerPerson: 4,
     maxBonus: 5000, // tope por referido, en MXN
     clientCreditExtraPct: 20, // clientes actuales que eligen crédito en su renta
     ambassadorAfter: 2, // recomendaciones cerradas para ser Embajador

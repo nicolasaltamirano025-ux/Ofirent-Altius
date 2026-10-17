@@ -289,7 +289,7 @@
     </div>
 
     <div class="ref-meta">
-      <p class="ref-fine">Vigente del 14 de octubre de 2026 al 14 de enero de 2027. Máximo 4 recomendaciones por persona. <a href="/programa-de-referidos/terminos/">Términos y condiciones</a></p>
+      <p class="ref-fine">Vigente del 14 de octubre de 2026 al 14 de enero de 2027. Puedes recomendar a cuantas personas quieras; el bono se paga hasta por 4 recomendaciones que lleguen a contrato. <a href="/programa-de-referidos/terminos/">Términos y condiciones</a></p>
       <p class="ref-track">¿Ya recomendaste a alguien? <a href="/programa-de-referidos/seguimiento/">Consulta tu recomendación</a></p>
     </div>
   </div>
@@ -337,7 +337,7 @@
         <summary>Reglas y límites</summary>
         <div class="ref-acc-body">
           <ul>
-            <li>Máximo 4 recomendaciones por persona.</li>
+            <li>Puedes recomendar a cuantas personas quieras. El bono se paga hasta por 4 recomendaciones que lleguen a contrato.</li>
             <li>Registra a la persona antes de que cotice con OfiRent.</li>
             <li>Vigente del 14 de octubre de 2026 al 14 de enero de 2027.</li>
             <li>Detalle completo en los <a href="/programa-de-referidos/terminos/">términos y condiciones</a>.</li>
@@ -588,11 +588,12 @@
     }, 50);
   });
 
-  // Regla del programa: tope de recomendaciones por persona (misma cifra que aplica el servidor).
-  var cap = V.PROGRAM && V.PROGRAM.maxReferralsPerPerson;
+  // Regla del programa: se puede recomendar a cuantas personas se quiera; el bono se paga
+  // hasta por este número de recomendaciones cerradas (misma cifra que usa el servidor).
+  var cap = V.PROGRAM && V.PROGRAM.maxBonusesPerPerson;
   if (cap) {
     var capEl = document.getElementById('ref-cap');
-    capEl.textContent = 'Cada persona puede registrar hasta ' + cap + ' recomendaciones.';
+    capEl.textContent = 'Puedes recomendar a cuantas personas quieras. El bono se paga hasta por ' + cap + ' recomendaciones que lleguen a contrato.';
     capEl.hidden = false;
   }
 

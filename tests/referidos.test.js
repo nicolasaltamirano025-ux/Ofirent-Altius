@@ -816,39 +816,36 @@ test('un reintento con la misma clave sigue devolviendo el folio aunque la conex
   });
 });
 
-test('tope por persona: máximo 4 recomendaciones por teléfono de quien recomienda', async () => {
+test('sin tope de registro: se puede recomendar a cuantas personas se quiera; desde la quinta solo hay una alerta', async () => {
   await withWorld(async (world) => {
-    const MAX = sharedValidation.PROGRAM.maxReferralsPerPerson;
+    const MAX = sharedValidation.PROGRAM.maxBonusesPerPerson;
     assert.equal(MAX, 4);
     const referrerPhone = '5599887766';
-    for (let i = 0; i < MAX; i++) {
+    for (let i = 0; i < MAX + 2; i++) {
       const res = await call(handler, { body: uniqueBody({ referrerPhone }) });
       assert.equal(res.statusCode, 201, 'recomendación ' + (i + 1));
+      assert.equal(res.json.ok, true);
     }
-    const emailsBefore = world.emails.length;
-    const over = await call(handler, { body: uniqueBody({ referrerPhone }) });
-    assert.equal(over.statusCode, 422);
-    assert.equal(over.json.ok, false);
-    assert.equal(over.json.code, 'referrer_limit');
-    assert.match(over.json.message, /máximo de 4 recomendaciones/);
-    assert.equal(over.json.reference, undefined);
-    assert.equal(world.records.length, MAX, 'la quinta no se guarda');
-    assert.equal(world.emails.length, emailsBefore, 'ni se avisa');
+    assert.equal(world.records.length, MAX + 2, 'todas se guardan');
+
+    // Las primeras 4 no llevan alerta; la quinta y la sexta sí, para que el personal revise el pago.
+    for (let i = 0; i < MAX; i++) {
+      assert.ok(!world.records[i].fields['Detalles'].includes('ALERTA:'), 'registro ' + (i + 1));
+    }
+    assert.match(world.records[MAX].fields['Detalles'], /^ALERTA: Quien recomienda ya tenía 4 recomendaciones registradas/);
+    assert.match(world.records[MAX].fields['Detalles'], /hasta por 4 recomendaciones cerradas/);
+    assert.match(world.records[MAX + 1].fields['Detalles'], /^ALERTA: Quien recomienda ya tenía 5 recomendaciones registradas/);
 
     // Otra persona no se ve afectada.
     const other = await call(handler, { body: uniqueBody({ referrerPhone: '5544332211' }) });
     assert.equal(other.statusCode, 201);
+    assert.ok(!world.records[world.records.length - 1].fields['Detalles'].includes('ALERTA:'));
 
-    // Lo que el personal marca "No procede" libera el cupo.
-    world.records[0].fields['Estado'] = 'No procede';
+    // Lo que el personal marca "No procede" no cuenta para la alerta.
+    world.records.filter((r) => r.fields['Teléfono de quien recomienda'] === referrerPhone).forEach((r) => (r.fields['Estado'] = 'No procede'));
     const afterRelease = await call(handler, { body: uniqueBody({ referrerPhone }) });
     assert.equal(afterRelease.statusCode, 201);
-
-    // Los de hace más de 12 meses ya no cuentan.
-    const old = new Date(Date.now() - 400 * 86400 * 1000).toISOString();
-    world.records.filter((r) => r.fields['Teléfono de quien recomienda'] === referrerPhone).forEach((r) => (r.createdTime = old));
-    const afterWindow = await call(handler, { body: uniqueBody({ referrerPhone }) });
-    assert.equal(afterWindow.statusCode, 201);
+    assert.ok(!world.records[world.records.length - 1].fields['Detalles'].includes('ALERTA:'));
   });
 });
 

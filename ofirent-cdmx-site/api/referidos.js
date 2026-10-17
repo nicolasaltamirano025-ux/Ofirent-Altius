@@ -13,7 +13,11 @@ const MAX_BODY_BYTES = 16 * 1024;
 // Un humano tarda más que esto en llenar dos secciones; un bot suele enviar al instante.
 const MIN_FILL_MS = 2500;
 const RATE_LIMIT_PER_HOUR = 10;
-const MAX_PER_PERSON = PROGRAM.maxReferralsPerPerson;
+// Quien recomienda puede registrar a cuantas personas quiera; el bono se paga hasta por este
+// número de recomendaciones cerradas. Al pasar de ahí solo se deja una alerta para el personal.
+const MAX_BONUSES_PER_PERSON = PROGRAM.maxBonusesPerPerson;
+// Tope de la consulta que cuenta sus registros (solo sirve para la alerta, no bloquea).
+const PERSON_COUNT_QUERY_CAP = 25;
 const KEY_RE = /^[A-Za-z0-9-]{16,64}$/;
 const FOLIO_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -133,7 +137,7 @@ module.exports = async (req, res) => {
     const [existing, recent, perPerson, byPhone, byEmail, optedOut, leadSince] = await Promise.all([
       airtable.findByFolio(cfg, folio),
       ipHash ? airtable.countRecentByIpHash(cfg, ipHash, RATE_LIMIT_PER_HOUR) : Promise.resolve(0),
-      airtable.countByReferrerPhone(cfg, referrerPhone, MAX_PER_PERSON),
+      airtable.countByReferrerPhone(cfg, referrerPhone, PERSON_COUNT_QUERY_CAP).catch(() => 0),
       referredPhone ? airtable.findByReferredPhone(cfg, referredPhone).catch(() => []) : Promise.resolve([]),
       referredEmail ? airtable.findByReferredEmail(cfg, referredEmail).catch(() => []) : Promise.resolve([]),
       referredEmail ? airtable.isEmailOptedOut(cfg, referredEmail).catch(() => false) : Promise.resolve(false),
@@ -157,17 +161,16 @@ module.exports = async (req, res) => {
     if (recent >= RATE_LIMIT_PER_HOUR) {
       return fail(res, 429, 'rate_limited', 'Recibimos muchos envíos desde tu conexión. Inténtalo de nuevo más tarde.');
     }
-    if (perPerson >= MAX_PER_PERSON) {
-      return fail(
-        res,
-        422,
-        'referrer_limit',
-        'Ya registraste el máximo de ' + MAX_PER_PERSON + ' recomendaciones con este teléfono. Si crees que es un error, escríbenos a contacto@ofirent.com.mx.',
-      );
-    }
 
     // Alertas para quien revisa antes de pagar. No cambian lo que ve quien envía.
     const alerts = [];
+    if (perPerson >= MAX_BONUSES_PER_PERSON) {
+      alerts.push(
+        'Quien recomienda ya tenía ' + (perPerson >= PERSON_COUNT_QUERY_CAP ? PERSON_COUNT_QUERY_CAP + ' o más' : perPerson) +
+          ' recomendaciones registradas en los últimos 12 meses. El bono se paga hasta por ' + MAX_BONUSES_PER_PERSON +
+          ' recomendaciones cerradas por persona: revisa cuántas lleva pagadas antes de aprobar.',
+      );
+    }
     if (sameReferred.length > 0) {
       const first = sameReferred[0];
       alerts.push(

@@ -7,7 +7,7 @@
 const REQUEST_TIMEOUT_MS = 8000;
 // Un aviso no enviado se reintenta cada dia mientras el registro tenga menos de estos dias.
 const RETRY_WINDOW_DAYS = 7;
-// El tope de recomendaciones por persona se cuenta en esta ventana (12 meses moviles).
+// Los registros de una persona se cuentan en esta ventana (12 meses moviles) para avisar al personal al pasar de 4.
 const REFERRER_WINDOW_DAYS = 365;
 // Tabla "Leads" de la misma base (la usa ofirent-resenas-site/api/lead.js).
 const LEADS_TABLE_ID_DEFAULT = 'tbl6E6ipJTHkb2YBV';

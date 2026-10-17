@@ -340,7 +340,7 @@ function buildReferredNoticeEmail(r, opts) {
   const invite =
     '¿Conoces a alguien más que necesite una oficina? Recomienda OfiRent y gana el equivalente a una mensualidad de renta de tu referido, hasta $5,000 MXN.';
   const inviteFine =
-    'Vigencia del 14 de octubre de 2026 al 14 de enero de 2027. Máximo 4 recomendaciones por persona. Aplican términos y condiciones.';
+    'Vigencia del 14 de octubre de 2026 al 14 de enero de 2027. El bono se paga hasta por 4 recomendaciones cerradas por persona. Aplican términos y condiciones.';
   const dataLine =
     'Qué datos recibimos: tu nombre, tu teléfono o correo y, si lo indicó, el tipo de espacio y la zona que podrían interesarte. ' +
     'Los usamos solo para contactarte por esta recomendación y, si te interesa, atender tu solicitud.';
