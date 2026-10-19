@@ -5,10 +5,10 @@
     <lastmod>2026-08-19</lastmod>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-ventanal.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-2.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-dos-puestos.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/recepcion.webp</image:loc>
@@ -43,10 +43,10 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/portada.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-luminosa.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/portada.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
@@ -60,7 +60,7 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/portada.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion.webp</image:loc>
@@ -80,19 +80,19 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/portada.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-luminosa.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-ventanal.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-3.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-piso-oscuro.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-2.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-luz.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-2.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-estantes.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -106,16 +106,16 @@
       <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/lounge.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/mesa-redonda.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/area-comun.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cocina-descanso.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/capacitacion.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/aula.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -128,19 +128,82 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-2.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/sala-juntas.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/patio.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/cafe.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-plantas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-ventanal.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-dos-puestos.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-individual.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/zona-cafe.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-laptop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/barra-muro-verde.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/fachada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/patio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-2-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-3-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-plantas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-ventanal-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-dos-puestos-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-individual-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/zona-cafe-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza-laptop-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/barra-muro-verde-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/fachada-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -148,19 +211,100 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-puerta-abierta.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-particion-vidrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-sillas-naranjas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-plantas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-ventanal.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-escritorio-oscuro.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/area-comun.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-sofa.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/cafe.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/lounge.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/terraza-cafe.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/pasillo-escalera.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio-luces.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/espacio-trabajo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/fachada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-puerta-abierta-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-particion-vidrio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-sillas-naranjas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-plantas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-ventanal-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina-escritorio-oscuro-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-sofa-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/cafe-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/terraza-cafe-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/pasillo-escalera-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio-luces-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/espacio-trabajo-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/fachada-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -168,7 +312,22 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-amplia.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-escritorio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-arte.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-luz.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-reunion.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/sala-juntas.webp</image:loc>
@@ -177,7 +336,40 @@
       <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/cafe.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-2.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/sala-sofa.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/recepcion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-amplia-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-escritorio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-arte-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-luz-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-reunion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/cafe-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/sala-sofa-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/terraza-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -185,16 +377,94 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion-pasillo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-ventanales.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-escritorios.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-estantes.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-individual.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-mesa-redonda.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-mesa-redonda-2.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/area-comun.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas-2.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/lounge.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/espera.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cocina-descanso.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cafe.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cafeteria-escalera.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/patio-jardin-vertical.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion-pasillo-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-ventanales-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-escritorios-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-estantes-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-individual-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-mesa-redonda-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-mesa-redonda-2-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas-2-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/espera-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cocina-descanso-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cafe-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/cafeteria-escalera-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/patio-jardin-vertical-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -202,16 +472,100 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-luminosa.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking-pared.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking-barra.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-ventanas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-tres-escritorios.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-escritorios.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/mesa-redonda.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/rincon-sillon.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/sala-juntas.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/area-comun.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/sala-mensaje.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/lounge.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/aula.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/patio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/pasillo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/escalera.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-luminosa-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/recepcion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking-pared-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking-barra-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-ventanas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-tres-escritorios-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina-escritorios-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/mesa-redonda-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/rincon-sillon-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/sala-mensaje-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/aula-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/patio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/pasillo-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/escalera-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -219,19 +573,100 @@
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-plantas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-escritorios.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-pared-verde.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-pared-verde-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-puerta-vidrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-ordenada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-piso-oscuro.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-muebles.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-silla.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/sala-juntas.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/terraza.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/sala-reuniones.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/portada.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/pasillo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/cafe.webp</image:loc>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/cocina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/balcon.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/fachada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/recepcion-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-plantas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-escritorios-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-pared-verde-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-pared-verde-2-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-puerta-vidrio-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-ordenada-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-piso-oscuro-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-muebles-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-silla-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/sala-juntas-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/sala-reuniones-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/pasillo-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/cocina-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/balcon-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/fachada-thumb.webp</image:loc>
     </image:image>
   </url>
   <url>

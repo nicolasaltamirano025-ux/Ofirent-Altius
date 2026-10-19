@@ -1,366 +1,874 @@
 {
  "condesa": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 5184,
-   "src_h": 3456,
-   "kb": 97,
-   "kb800": 29
+  "atrio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 119,
+   "kb800": 37,
+   "kbthumb": 8,
+   "archivo_origen": "Atrio moderno con sillón verde oliva.png"
   },
   "recepcion": {
-   "w": 1280,
-   "h": 853,
-   "src_w": 1280,
-   "src_h": 853,
-   "kb": 61,
-   "kb800": 29
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 161,
+   "kb800": 52,
+   "kbthumb": 11,
+   "archivo_origen": "Recepción moderna con escalera y vidrio.png"
   },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 97,
-   "kb800": 23
+  "oficina-puerta-abierta": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 79,
+   "kb800": 23,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con puerta abierta.png"
+  },
+  "oficina-particion-vidrio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 81,
+   "kb800": 22,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina moderna con partición de vidrio.png"
+  },
+  "oficina-sillas-naranjas": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 88,
+   "kb800": 26,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con sillas naranjas.png"
+  },
+  "oficina-plantas": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 65,
+   "kb800": 23,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina minimalista con plantas y escritorios.png"
+  },
+  "oficina-ventanal": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 139,
+   "kb800": 36,
+   "kbthumb": 6,
+   "archivo_origen": "Rincón de oficina moderno y luminoso.png"
+  },
+  "oficina-escritorio-oscuro": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 109,
+   "kb800": 24,
+   "kbthumb": 5,
+   "archivo_origen": "}.png"
   },
   "sala-juntas": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 1600,
-   "src_h": 1200,
-   "kb": 78,
-   "kb800": 30
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 105,
+   "kb800": 39,
+   "kbthumb": 9,
+   "archivo_origen": "Sala de reuniones moderna con TV apagada.png"
   },
-  "area-comun": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 116,
-   "kb800": 40
+  "sala-sofa": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 213,
+   "kb800": 47,
+   "kbthumb": 7,
+   "archivo_origen": "Sala moderna con sofá y plantas.png"
   },
-  "lounge": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 131,
-   "kb800": 27
+  "cafe": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 125,
+   "kb800": 47,
+   "kbthumb": 11,
+   "archivo_origen": "Café moderno con plantas y sillones.png"
   },
-  "atrio": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 5184,
-   "src_h": 3456,
-   "kb": 143,
-   "kb800": 49
+  "terraza-cafe": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 147,
+   "kb800": 53,
+   "kbthumb": 11,
+   "archivo_origen": "Terraza Café Moderna con Plantas.png"
+  },
+  "pasillo-escalera": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 90,
+   "kb800": 38,
+   "kbthumb": 14,
+   "archivo_origen": "Pasillo moderno con escalera flotante.png"
+  },
+  "atrio-luces": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 156,
+   "kb800": 64,
+   "kbthumb": 21,
+   "archivo_origen": "Atrio moderno con luces colgantes y sillón oliva.png"
+  },
+  "espacio-trabajo": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 105,
+   "kb800": 43,
+   "kbthumb": 14,
+   "archivo_origen": "Espacio de trabajo moderno con laptop y silla mesh.png"
+  },
+  "fachada": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 207,
+   "kb800": 75,
+   "kbthumb": 21,
+   "archivo_origen": "Fachada verde histórica con portero.png"
   }
  },
  "del-valle": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 77,
-   "kb800": 21
-  },
   "recepcion": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 90,
-   "kb800": 24
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 95,
+   "kb800": 29,
+   "kbthumb": 6,
+   "archivo_origen": "Recepción moderna con luz natural.png"
   },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 67,
-   "kb800": 17
+  "recepcion-pasillo": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 119,
+   "kb800": 33,
+   "kbthumb": 6,
+   "archivo_origen": "Recepción moderna con detalles verdes.png"
   },
-  "oficina-2": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 1600,
-   "src_h": 1200,
-   "kb": 47,
-   "kb800": 15
+  "oficina-ventanales": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 92,
+   "kb800": 25,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con luz natural y escritorios de madera.png"
   },
-  "sala-juntas": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 1600,
-   "src_h": 1200,
-   "kb": 65,
-   "kb800": 20
+  "oficina-escritorios": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 94,
+   "kb800": 25,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina moderna con luz natural.png"
   },
-  "area-comun": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 1600,
-   "src_h": 1200,
-   "kb": 74,
-   "kb800": 28
+  "oficina-estantes": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 94,
+   "kb800": 24,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina minimalista con escritorios de madera.png"
   },
-  "lounge": {
-   "w": 1280,
-   "h": 960,
-   "src_w": 1280,
-   "src_h": 960,
-   "kb": 90,
-   "kb800": 28
-  }
- },
- "narvarte": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 78,
-   "kb800": 24
+  "oficina-individual": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 114,
+   "kb800": 33,
+   "kbthumb": 9,
+   "archivo_origen": "Oficina luminosa con escritorio ordenado.png"
   },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 65,
-   "kb800": 23
+  "sala-mesa-redonda": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 99,
+   "kb800": 30,
+   "kbthumb": 6,
+   "archivo_origen": "Sala de reuniones moderna con mesa redonda.png"
   },
-  "oficina-2": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 120,
-   "kb800": 32
-  },
-  "sala-juntas": {
-   "w": 1221,
-   "h": 929,
-   "src_w": 1221,
-   "src_h": 929,
-   "kb": 48,
-   "kb800": 20
-  },
-  "lounge": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 153,
-   "kb800": 39
-  },
-  "area-comun": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 372,
-   "kb800": 103
-  },
-  "recepcion": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 98,
-   "kb800": 21
-  },
-  "capacitacion": {
-   "w": 1100,
-   "h": 1467,
-   "src_w": 1200,
-   "src_h": 1600,
-   "kb": 56,
-   "kb800": 24
-  },
-  "coworking": {
-   "w": 1100,
-   "h": 1467,
-   "src_w": 1200,
-   "src_h": 1600,
-   "kb": 73,
-   "kb800": 29
-  }
- },
- "cuauhtemoc": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 105,
-   "kb800": 26
-  },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 42,
-   "kb800": 10
-  },
-  "oficina-2": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 56,
-   "kb800": 18
+  "sala-mesa-redonda-2": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 71,
+   "kb800": 23,
+   "kbthumb": 5,
+   "archivo_origen": "Sala de reuniones moderna y luminosa.png"
   },
   "sala-juntas": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 130,
-   "kb800": 25
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 94,
+   "kb800": 29,
+   "kbthumb": 9,
+   "archivo_origen": "Sala de juntas moderna y luminosa.png"
+  },
+  "sala-juntas-2": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 91,
+   "kb800": 30,
+   "kbthumb": 10,
+   "archivo_origen": "Sala de Reuniones Moderna y Minimalista.png"
+  },
+  "espera": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 187,
+   "kb800": 43,
+   "kbthumb": 6,
+   "archivo_origen": "Rincón moderno de espera acogedor.png"
+  },
+  "cocina-descanso": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 117,
+   "kb800": 44,
+   "kbthumb": 10,
+   "archivo_origen": "Rincón moderno de descanso y cocina.png"
   },
   "cafe": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 87,
-   "kb800": 26
+   "w": 1536,
+   "h": 864,
+   "src_w": 1672,
+   "src_h": 941,
+   "kb": 145,
+   "kb800": 44,
+   "kbthumb": 7,
+   "archivo_origen": "Rincón moderno de café en oficina.png"
   },
-  "fachada": {
-   "w": 1100,
-   "h": 1658,
-   "src_w": 3025,
-   "src_h": 4560,
-   "kb": 323,
-   "kb800": 91
-  }
- },
- "roma": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 318,
-   "kb800": 76
+  "cafeteria-escalera": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 169,
+   "kb800": 61,
+   "kbthumb": 18,
+   "archivo_origen": "Cafetería moderna bajo la escalera.png"
   },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 60,
-   "kb800": 18
-  },
-  "oficina-2": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 120,
-   "kb800": 33
-  },
-  "cafe": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 42,
-   "kb800": 15
-  },
-  "sala-juntas": {
-   "w": 1100,
-   "h": 1467,
-   "src_w": 1200,
-   "src_h": 1600,
-   "kb": 77,
-   "kb800": 31
-  },
-  "terraza-2": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 284,
-   "kb800": 73
-  },
-  "terraza": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 312,
-   "kb800": 99
+  "patio-jardin-vertical": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 304,
+   "kb800": 102,
+   "kbthumb": 28,
+   "archivo_origen": "Patio moderno con jardín vertical.png"
   }
  },
  "napoles": {
-  "portada": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 105,
-   "kb800": 19
+  "recepcion": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 100,
+   "kb800": 23,
+   "kbthumb": 5,
+   "archivo_origen": "Recepción moderna con flores y letreros.png"
   },
-  "oficina": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 109,
-   "kb800": 26
+  "oficina-plantas": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 127,
+   "kb800": 31,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna luminosa con plantas y escritorios.png"
   },
-  "oficina-2": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 63,
-   "kb800": 18
+  "oficina-escritorios": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 137,
+   "kb800": 36,
+   "kbthumb": 8,
+   "archivo_origen": "Oficina moderna con detalles cálidos.png"
   },
-  "oficina-3": {
-   "w": 1600,
-   "h": 1200,
-   "src_w": 1600,
-   "src_h": 1200,
-   "kb": 68,
-   "kb800": 25
+  "oficina-pared-verde": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 87,
+   "kb800": 26,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con pared verde.png"
+  },
+  "oficina-pared-verde-2": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 41,
+   "kb800": 13,
+   "kbthumb": 4,
+   "archivo_origen": "Oficina minimalista con pared verde.png"
+  },
+  "oficina-puerta-vidrio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 95,
+   "kb800": 29,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con puerta de vidrio abierta.png"
+  },
+  "oficina-ordenada": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 128,
+   "kb800": 33,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna luminosa y ordenada.png"
+  },
+  "oficina-piso-oscuro": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 124,
+   "kb800": 37,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna con escritorios de madera.png"
+  },
+  "oficina-muebles": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 151,
+   "kb800": 41,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna con muebles de madera y vidrio.png"
+  },
+  "oficina-silla": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 93,
+   "kb800": 36,
+   "kbthumb": 12,
+   "archivo_origen": "Oficina moderna con silla ergonómica y plantas.png"
   },
   "sala-juntas": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 112,
-   "kb800": 23
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 114,
+   "kb800": 32,
+   "kbthumb": 7,
+   "archivo_origen": "Sala de juntas moderna con sillas verdes.png"
   },
-  "cafe": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 6000,
-   "src_h": 4000,
-   "kb": 93,
-   "kb800": 24
-  },
-  "terraza": {
-   "w": 1600,
-   "h": 1067,
-   "src_w": 5888,
-   "src_h": 3925,
-   "kb": 128,
-   "kb800": 35
+  "sala-reuniones": {
+   "w": 1536,
+   "h": 690,
+   "src_w": 1871,
+   "src_h": 840,
+   "kb": 96,
+   "kb800": 21,
+   "kbthumb": 3,
+   "archivo_origen": "Sala de reuniones moderna con sillas naranjas.png"
   },
   "pasillo": {
-   "w": 1100,
-   "h": 1650,
-   "src_w": 3456,
-   "src_h": 5184,
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 142,
+   "kb800": 44,
+   "kbthumb": 14,
+   "archivo_origen": "Pasillo de oficina moderno con tragaluz.png"
+  },
+  "cocina": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 121,
+   "kb800": 36,
+   "kbthumb": 6,
+   "archivo_origen": "Cocina de oficina limpia y moderna.png"
+  },
+  "balcon": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 160,
+   "kb800": 53,
+   "kbthumb": 7,
+   "archivo_origen": "Balcón minimalista con mesa y sillas negras.png"
+  },
+  "fachada": {
+   "w": 1126,
+   "h": 1397,
+   "src_w": 1126,
+   "src_h": 1397,
+   "kb": 488,
+   "kb800": 144,
+   "kbthumb": 35,
+   "archivo_origen": "Fachada urbana cubierta de hiedra.png"
+  }
+ },
+ "narvarte": {
+  "oficina-luminosa": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 104,
+   "kb800": 32,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna luminosa con plantas.png"
+  },
+  "recepcion": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 136,
+   "kb800": 27,
+   "kbthumb": 5,
+   "archivo_origen": "Recepción moderna con flores y plantas.png"
+  },
+  "coworking": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 98,
+   "kb800": 35,
+   "kbthumb": 11,
+   "archivo_origen": "Coworking.png"
+  },
+  "coworking-pared": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 95,
+   "kb800": 33,
+   "kbthumb": 11,
+   "archivo_origen": "Espacio coworking.png"
+  },
+  "coworking-barra": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 106,
+   "kb800": 37,
+   "kbthumb": 12,
+   "archivo_origen": "Oficina moderna con luces y plantas.png"
+  },
+  "oficina-ventanas": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 95,
+   "kb800": 35,
+   "kbthumb": 8,
+   "archivo_origen": "Oficina moderna junto a ventanas.png"
+  },
+  "oficina-tres-escritorios": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 98,
+   "kb800": 24,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina moderna con tres escritorios.png"
+  },
+  "oficina-escritorios": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 75,
+   "kb800": 23,
+   "kbthumb": 5,
+   "archivo_origen": "Oficina luminosa con escritorios de madera si.png"
+  },
+  "mesa-redonda": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 60,
+   "kb800": 19,
+   "kbthumb": 5,
+   "archivo_origen": "Rincón moderno con sillas naranjas.png"
+  },
+  "rincon-sillon": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 187,
+   "kb800": 65,
+   "kbthumb": 18,
+   "archivo_origen": "Rincón de oficina moderno con teléfono.png"
+  },
+  "sala-juntas": {
+   "w": 1437,
+   "h": 1094,
+   "src_w": 1437,
+   "src_h": 1094,
+   "kb": 71,
+   "kb800": 26,
+   "kbthumb": 6,
+   "archivo_origen": "Sala de reuniones moderna y luminosa.png"
+  },
+  "sala-mensaje": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
    "kb": 113,
-   "kb800": 36
+   "kb800": 30,
+   "kbthumb": 7,
+   "archivo_origen": "Sala de reuniones con mensaje motivacional.png"
+  },
+  "aula": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 77,
+   "kb800": 28,
+   "kbthumb": 10,
+   "archivo_origen": "Aula moderna con mensaje inspirador.png"
+  },
+  "patio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 430,
+   "kb800": 124,
+   "kbthumb": 18,
+   "archivo_origen": "Patio moderno con mesa de vidrio.png"
+  },
+  "pasillo": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 88,
+   "kb800": 27,
+   "kbthumb": 8,
+   "archivo_origen": "Pasillo de oficina moderno y luminoso.png"
+  },
+  "escalera": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 223,
+   "kb800": 80,
+   "kbthumb": 23,
+   "archivo_origen": "Escalera moderna con jardín vertical.png"
+  }
+ },
+ "cuauhtemoc": {
+  "recepcion": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 138,
+   "kb800": 34,
+   "kbthumb": 7,
+   "archivo_origen": "Recepción moderna con pasillo iluminado.png"
+  },
+  "oficina-amplia": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 68,
+   "kb800": 22,
+   "kbthumb": 5,
+   "archivo_origen": "OF 6 PAX RIO PO.jpg"
+  },
+  "oficina-escritorio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 85,
+   "kb800": 19,
+   "kbthumb": 4,
+   "archivo_origen": "MUESTRA RIO PO 4.jpg"
+  },
+  "oficina-arte": {
+   "w": 1448,
+   "h": 1086,
+   "src_w": 1448,
+   "src_h": 1086,
+   "kb": 85,
+   "kb800": 29,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con arte colorido y escritorios.png"
+  },
+  "oficina-luz": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 93,
+   "kb800": 30,
+   "kbthumb": 7,
+   "archivo_origen": "Oficina moderna con luz natural y plantas.png"
+  },
+  "oficina-reunion": {
+   "w": 1465,
+   "h": 1074,
+   "src_w": 1465,
+   "src_h": 1074,
+   "kb": 79,
+   "kb800": 26,
+   "kbthumb": 6,
+   "archivo_origen": "Oficina moderna con sala de reuniones.png"
+  },
+  "sala-juntas": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 109,
+   "kb800": 30,
+   "kbthumb": 6,
+   "archivo_origen": "Sala de juntas rio po.jpg"
+  },
+  "cafe": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 124,
+   "kb800": 40,
+   "kbthumb": 8,
+   "archivo_origen": "Estación de café moderna y ordenada.png"
+  },
+  "sala-sofa": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 167,
+   "kb800": 39,
+   "kbthumb": 7,
+   "archivo_origen": "Sala moderna con sofá y lámpara verde.png"
+  },
+  "terraza": {
+   "w": 691,
+   "h": 1536,
+   "src_w": 841,
+   "src_h": 1870,
+   "kb": 248,
+   "kb800": 175,
+   "kbthumb": 51,
+   "archivo_origen": "Terraza Rio Po.jpg"
+  }
+ },
+ "roma": {
+  "patio": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 230,
+   "kb800": 58,
+   "kbthumb": 9,
+   "archivo_origen": "Patio moderno con sombrilla y luces cálidas.png"
+  },
+  "terraza": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 354,
+   "kb800": 95,
+   "kbthumb": 16,
+   "archivo_origen": "TERRAZA ROMA 2(1).jpg"
+  },
+  "terraza-2": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 393,
+   "kb800": 105,
+   "kbthumb": 16,
+   "archivo_origen": "TERRAZA ROMA 3.jpg"
+  },
+  "terraza-3": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 319,
+   "kb800": 97,
+   "kbthumb": 17,
+   "archivo_origen": "tERRZA ROMA 4(1).jpg"
+  },
+  "oficina-plantas": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 138,
+   "kb800": 41,
+   "kbthumb": 8,
+   "archivo_origen": "Oficina moderna iluminada con plantas.png"
+  },
+  "oficina-ventanal": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 176,
+   "kb800": 52,
+   "kbthumb": 10,
+   "archivo_origen": "ROMA OF MUESTRA 3.jpg"
+  },
+  "oficina-dos-puestos": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 137,
+   "kb800": 39,
+   "kbthumb": 8,
+   "archivo_origen": "ROMA OF MUESTRA.jpg"
+  },
+  "oficina-individual": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 115,
+   "kb800": 37,
+   "kbthumb": 11,
+   "archivo_origen": "ROMA20MUETSRA%205.jpg"
+  },
+  "zona-cafe": {
+   "w": 1536,
+   "h": 1024,
+   "src_w": 1536,
+   "src_h": 1024,
+   "kb": 58,
+   "kb800": 20,
+   "kbthumb": 5,
+   "archivo_origen": "ZONA CAFE.jpg"
+  },
+  "sala-juntas": {
+   "w": 1086,
+   "h": 1448,
+   "src_w": 1086,
+   "src_h": 1448,
+   "kb": 153,
+   "kb800": 52,
+   "kbthumb": 15,
+   "archivo_origen": "SALA DE JUNTAS ACTUAL ROMA.jpg"
+  },
+  "terraza-laptop": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 118,
+   "kb800": 53,
+   "kbthumb": 20,
+   "archivo_origen": "TERRAZA ROMA 4.jpg"
+  },
+  "barra-muro-verde": {
+   "w": 1085,
+   "h": 1536,
+   "src_w": 1447,
+   "src_h": 2048,
+   "kb": 163,
+   "kb800": 50,
+   "kbthumb": 12,
+   "archivo_origen": "IMG_9380.JPG"
+  },
+  "fachada": {
+   "w": 1024,
+   "h": 1536,
+   "src_w": 1024,
+   "src_h": 1536,
+   "kb": 335,
+   "kb800": 122,
+   "kbthumb": 35,
+   "archivo_origen": "FACHADA ROMA.jpeg"
   }
  }
 }
