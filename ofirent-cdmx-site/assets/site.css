@@ -476,14 +476,15 @@
   @media (max-width:600px){ .hero-form{padding:16px 16px 18px;} }
   .hero.hero--form{padding-top:36px;}
 
-  /* ANIVERSARIO-TOPBAR: sello pequeño de los 20 años a la izquierda del teléfono (TEMPORAL, quitar en 2027) */
-  .topbar-inner{justify-content:flex-start;gap:9px;}
-  .topbar-inner::before{content:"20";order:0;display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 7px;border-radius:999px;background:var(--gold);color:var(--ink);font-family:var(--display);font-weight:800;font-size:14px;line-height:1;}
-  .topbar-inner::after{content:"años · ¡Estamos de aniversario!";order:1;margin-right:auto;font-family:var(--body);font-size:12.5px;font-weight:600;color:#cfe8da;letter-spacing:.01em;}
+  /* ANIVERSARIO-TOPBAR: sello discreto de los 20 años a la izquierda del teléfono (TEMPORAL, quitar en 2027) */
+  .topbar{padding:8px 0;}
+  .topbar-inner{justify-content:flex-start;gap:10px;}
+  .topbar-inner::before{content:"20";order:0;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1.5px solid var(--gold);border-radius:50%;color:var(--gold);font-family:var(--display);font-weight:800;font-size:11.5px;line-height:1;letter-spacing:.01em;padding-top:1px;}
+  .topbar-inner::after{content:"Años · ¡Estamos de aniversario!";order:1;margin-right:auto;font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#d9ece1;}
   .topbar-phone{order:2;}
   @media (max-width:700px){
     .topbar-inner{justify-content:flex-start;}
-    .topbar-inner::after{content:"años";}
+    .topbar-inner::after{content:"Años";}
   }
 
   /* SEDES: nombre grande de la sede en la portada de cada página de ubicación */
