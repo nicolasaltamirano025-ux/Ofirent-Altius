@@ -234,17 +234,6 @@
   </div>
 </div>
 
-<div class="anniversary-banner" id="anniversary-banner">
-  <div class="confetti-container" id="confetti-container"></div>
-  <div class="wrap anniversary-inner">
-    <div class="anniversary-content">
-      <div class="anniversary-num">20</div>
-      <div class="anniversary-text"><b>¡Estamos de aniversario!</b> Celebramos 20 años ayudando a que tu negocio crezca en Ciudad de México.</div>
-    </div>
-    <button class="anniversary-close" id="anniversary-close" aria-label="Cerrar aviso">&times;</button>
-  </div>
-</div>
-
 <section class="hero hero--form">
   <div class="hero-bg"></div>
   <div class="hero-inner">
@@ -867,34 +856,6 @@
         menuToggle.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
       }
-    });
-  })();
-
-  (function(){
-    var banner = document.getElementById('anniversary-banner');
-    if(!banner) return;
-    if(sessionStorage.getItem('ofirent_anniv_dismissed')){
-      banner.classList.add('hidden');
-      return;
-    }
-    var container = document.getElementById('confetti-container');
-    var colors = ['#e9a63b', '#1c8449', '#5cc082', '#ffffff', '#b3781f'];
-    var pieceCount = window.innerWidth < 700 ? 40 : 70;
-    for(var i = 0; i < pieceCount; i++){
-      var piece = document.createElement('div');
-      piece.className = 'confetti-piece';
-      piece.style.left = (Math.random() * 100) + '%';
-      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-      piece.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
-      piece.style.animationDelay = (Math.random() * 0.5) + 's';
-      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-      container.appendChild(piece);
-    }
-    setTimeout(function(){ container.innerHTML = ''; }, 4200);
-
-    document.getElementById('anniversary-close').addEventListener('click', function(){
-      banner.classList.add('hidden');
-      sessionStorage.setItem('ofirent_anniv_dismissed', '1');
     });
   })();
 
