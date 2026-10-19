@@ -37,6 +37,12 @@
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/aula.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/servicios-oficinas/</loc>
@@ -53,6 +59,9 @@
     </image:image>
     <image:image>
       <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-mesa-redonda.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/aula.webp</image:loc>
     </image:image>
   </url>
   <url>
