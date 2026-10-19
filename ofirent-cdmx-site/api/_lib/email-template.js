@@ -24,6 +24,12 @@ const SPACE_PHRASE = {
 
 const GREEN = '#1C8449';
 const GREEN_DARK = '#0E5C33';
+// Public Sans (la fuente de la marca) llega a Apple Mail y iPhone; Gmail y Outlook usan la primera fuente
+// del sistema disponible (Segoe UI en Windows, la del sistema en Mac y Android) en lugar de Arial.
+// Sin comillas en los nombres para poder usarla dentro de atributos style="...".
+const FONT = 'Public Sans,Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Arial,sans-serif';
+const FONT_FACE_CSS =
+  '@font-face{font-family:"Public Sans";src:url(' + SITE + '/assets/public.woff2) format("woff2");font-weight:100 900;font-style:normal;}';
 
 function escapeHtml(value) {
   return String(value)
@@ -314,7 +320,7 @@ function button(href, label, primary) {
   const color = primary ? '#ffffff' : GREEN_DARK;
   return (
     '<a href="' + escapeHtml(href) + '" target="_blank" style="display:inline-block;background:' + bg + ';color:' + color +
-    ';border:2px solid ' + GREEN + ';border-radius:10px;padding:13px 22px;font-size:15px;font-weight:bold;text-decoration:none;margin:0 8px 8px 0;">' +
+    ';border:2px solid ' + GREEN + ';border-radius:10px;padding:14px 24px;font-family:' + FONT + ';font-size:15px;line-height:1.2;font-weight:700;letter-spacing:.2px;text-decoration:none;margin:0 8px 8px 0;">' +
     escapeHtml(label) + '</a>'
   );
 }
@@ -333,9 +339,10 @@ function buildReferredNoticeEmail(r, opts) {
   const waUrl = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
   const locationsUrl = SITE + '/ubicaciones/';
 
-  const intro =
-    referrer + ' te recomendó con OfiRent y compartió con nosotros tus datos de contacto para que un asesor pueda ayudarte. ' +
+  const introHtml =
+    'Compartió tus datos de contacto con nosotros para que un asesor pueda ayudarte a encontrar el espacio que necesitas. ' +
     'Somos parte del grupo OfiRent: oficinas equipadas, oficinas virtuales y coworking en 6 ubicaciones de la Ciudad de México.';
+  const intro = referrer + ' te recomendó con OfiRent. ' + introHtml;
   const nextLine = 'No tienes que hacer nada: un asesor se pondrá en contacto contigo. Si prefieres adelantarte, escríbenos o llámanos al ' + PHONE_TEXT + '.';
   const invite =
     '¿Conoces a alguien más que necesite una oficina? Recomienda OfiRent y gana el equivalente a una mensualidad de renta de tu referido, hasta $5,000 MXN.';
@@ -370,29 +377,32 @@ function buildReferredNoticeEmail(r, opts) {
     .join('');
 
   const html =
-    '<!doctype html>\n<html lang="es"><body style="margin:0;padding:0;background:#F4F6F4;font-family:Arial,Helvetica,sans-serif;">' +
+    '<!doctype html>\n<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<style>' + FONT_FACE_CSS + '</style></head>' +
+    '<body style="margin:0;padding:0;background:#F4F6F4;font-family:' + FONT + ';-webkit-font-smoothing:antialiased;">' +
     '<div style="display:none;max-height:0;overflow:hidden;opacity:0;">' + escapeHtml(referrer + ' te recomendó con OfiRent. Conoce nuestros servicios.') + '</div>' +
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#F4F6F4;"><tr><td align="center" style="padding:20px 10px;">' +
     '<table role="presentation" width="600" cellspacing="0" cellpadding="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;">' +
     '<tr><td style="padding:22px 22px 0;border-top:6px solid ' + GREEN + ';">' +
     '<img src="' + SITE + '/assets/logo.png" width="150" alt="OfiRent" style="display:block;width:150px;height:auto;border:0;">' +
     '</td></tr>' +
-    '<tr><td style="padding:18px 22px 6px;">' +
-    '<div style="font-size:24px;line-height:1.25;font-weight:bold;color:#14201A;">' + escapeHtml(referrer) + ' te recomendó con OfiRent</div>' +
-    '<p style="font-size:15px;line-height:1.6;color:#14201A;margin:14px 0 6px;">' + escapeHtml(hello) + '</p>' +
-    '<p style="font-size:15px;line-height:1.6;color:#14201A;margin:0 0 16px;">' + escapeHtml(intro) + '</p>' +
+    '<tr><td style="padding:22px 22px 6px;font-family:' + FONT + ';">' +
+    '<div style="font-size:12px;line-height:1;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:' + GREEN + ';margin:0 0 12px;">Una recomendación para ti</div>' +
+    '<div style="font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.4px;color:#14201A;"><span style="color:' + GREEN_DARK + ';">' + escapeHtml(referrer) + '</span> te recomendó con OfiRent</div>' +
+    '<p style="font-size:17px;line-height:1.5;font-weight:600;color:#14201A;margin:20px 0 8px;">' + escapeHtml(hello) + '</p>' +
+    '<p style="font-size:16px;line-height:1.7;color:#33413A;margin:0 0 22px;">' + escapeHtml(introHtml) + '</p>' +
     button(waUrl, 'Escríbenos por WhatsApp', true) +
     button(locationsUrl, 'Ver ubicaciones', false) +
-    '<p style="font-size:13px;line-height:1.55;color:#5B675F;margin:8px 0 22px;">' + escapeHtml(nextLine) + '</p>' +
+    '<p style="font-size:13.5px;line-height:1.6;color:#66736B;margin:8px 0 24px;">' + escapeHtml(nextLine) + '</p>' +
     '</td></tr>' +
-    '<tr><td style="padding:0 22px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0">' + serviceHtml + '</table></td></tr>' +
-    '<tr><td style="padding:0 22px 22px;">' +
+    '<tr><td style="font-family:' + FONT + ';padding:0 22px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0">' + serviceHtml + '</table></td></tr>' +
+    '<tr><td style="font-family:' + FONT + ';padding:0 22px 22px;">' +
     '<a href="' + escapeHtml(PROGRAM_URL) + '" target="_blank" style="display:block;text-decoration:none;">' +
     '<img src="' + SITE + '/assets/email/programa-referidos.jpg" width="556" alt="' + escapeHtml(invite + ' ' + inviteFine) + '" style="display:block;width:100%;max-width:556px;height:auto;border-radius:12px;border:0;">' +
     '</a>' +
     '<div style="padding-top:10px;">' + button(PROGRAM_URL, 'Conocer el programa', false) + '</div>' +
     '</td></tr>' +
-    '<tr><td style="padding:0 22px 22px;border-top:1px solid #E3E8E4;">' +
+    '<tr><td style="font-family:' + FONT + ';padding:0 22px 22px;border-top:1px solid #E3E8E4;">' +
     '<p style="font-size:12px;line-height:1.6;color:#5B675F;margin:16px 0 8px;">' + escapeHtml(dataLine) + ' ' +
     'Aviso de privacidad completo: <a href="' + PRIVACY_URL + '" target="_blank" style="color:' + GREEN_DARK + ';">' + PRIVACY_URL + '</a></p>' +
     '<p style="font-size:12px;line-height:1.6;color:#5B675F;margin:0 0 8px;">' + escapeHtml(optOutLine) +
