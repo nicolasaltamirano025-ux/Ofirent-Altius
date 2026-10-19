@@ -1192,6 +1192,22 @@ test('correo repetido por otra persona: se guarda con alerta de duplicado y no s
   });
 });
 
+test('el correo al referido usa los flyers y todas sus imágenes existen en el sitio', async () => {
+  await withWorld(async (world) => {
+    const res = await call(handler, { body: uniqueBody({ spaceType: 'coworking', referredEmail: 'ana@example.test' }) });
+    assert.equal(res.statusCode, 201);
+    const html = world.noticeEmails[0].body.html;
+    const imgs = [...html.matchAll(/<img src="https:\/\/www\.ofirent\.com\.mx(\/assets\/[^"]+)"/g)].map((m) => m[1]);
+    for (const f of ['servicio-oficina-fisica.jpg', 'servicio-oficina-virtual.jpg', 'servicio-coworking.jpg', 'programa-referidos.jpg']) {
+      assert.ok(imgs.includes('/assets/email/' + f), f);
+    }
+    for (const rel of imgs) assert.ok(fs.existsSync(path.join(SITE, rel)), 'falta ' + rel);
+    // Cada flyer es un enlace al servicio o al programa, y trae su descripción por si se bloquean las imágenes.
+    assert.match(html, /<a href="https:\/\/www\.ofirent\.com\.mx\/servicios\/renta-oficinas-equipadas-cdmx\/"[^>]*><img [^>]*alt="Oficinas equipadas listas para trabajar/);
+    assert.match(html, /alt="[^"]*hasta \$5,000 MXN[^"]*4 recomendaciones cerradas por persona/);
+  });
+});
+
 test('el correo al referido trae servicios con precios publicados, invitación al programa y baja, y pone primero lo que busca', async () => {
   await withWorld(async (world) => {
     const res = await call(handler, { body: uniqueBody({ spaceType: 'virtual', referredEmail: 'luis@example.test' }) });

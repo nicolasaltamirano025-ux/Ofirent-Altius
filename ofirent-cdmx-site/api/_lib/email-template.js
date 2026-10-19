@@ -276,7 +276,7 @@ const SERVICES = [
     blurb: 'Privados listos para trabajar, con mobiliario, internet, recepción, limpieza y mantenimiento incluidos.',
     price: 'Desde $6,500 al mes',
     image: '/assets/email/servicio-oficina-fisica.jpg',
-    alt: 'Oficina privada equipada en OfiRent',
+    alt: 'Oficinas equipadas listas para trabajar: mobiliario, internet y recepción incluidos. Desde $6,500 al mes.',
     path: '/servicios/renta-oficinas-equipadas-cdmx/',
     cta: 'Ver oficinas equipadas',
   },
@@ -286,7 +286,7 @@ const SERVICES = [
     blurb: 'Una dirección profesional, recepción de correspondencia y atención de llamadas sin ocupar una oficina todos los días.',
     price: 'Desde $799 al mes',
     image: '/assets/email/servicio-oficina-virtual.jpg',
-    alt: 'Recepción de OfiRent',
+    alt: 'Domicilio fiscal y comercial en CDMX: recepción de correspondencia y atención de llamadas. Desde $799 al mes.',
     path: '/servicios/renta-oficinas-virtuales-cdmx/',
     cta: 'Ver oficinas virtuales',
   },
@@ -296,7 +296,7 @@ const SERVICES = [
     blurb: 'Espacio compartido sin renta fija, con internet, coffee station y horas de sala de juntas, en Roma, Del Valle y Narvarte.',
     price: 'Desde $2,500 al mes',
     image: '/assets/email/servicio-coworking.jpg',
-    alt: 'Área de coworking en OfiRent',
+    alt: 'Coworking sin renta fija: internet, coffee station y salas de juntas. Desde $2,500 al mes.',
     path: '/servicios/renta-salas-juntas-y-coworking/',
     cta: 'Ver coworking',
   },
@@ -355,13 +355,14 @@ function buildReferredNoticeEmail(r, opts) {
         hasWanted && i === 0
           ? '<div style="font-size:11px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;color:' + GREEN + ';margin:0 0 6px;">Lo que buscas</div>'
           : '';
+      // El flyer ya trae el título y el precio; abajo va solo la descripción y el enlace.
       return (
-        '<tr><td style="padding:0 0 22px;">' +
+        '<tr><td style="padding:0 0 22px;">' + badge +
+        '<a href="' + SITE + s.path + '" target="_blank" style="display:block;text-decoration:none;">' +
         '<img src="' + SITE + s.image + '" width="556" alt="' + escapeHtml(s.alt) + '" style="display:block;width:100%;max-width:556px;height:auto;border-radius:12px;border:0;">' +
-        '<div style="padding-top:12px;">' + badge +
-        '<div style="font-size:18px;font-weight:bold;color:#14201A;">' + escapeHtml(s.title) + '</div>' +
-        '<div style="font-size:14px;line-height:1.55;color:#5B675F;margin:4px 0 6px;">' + escapeHtml(s.blurb) + '</div>' +
-        '<div style="font-size:15px;font-weight:bold;color:' + GREEN_DARK + ';">' + escapeHtml(s.price) + '</div>' +
+        '</a>' +
+        '<div style="padding-top:10px;">' +
+        '<div style="font-size:14px;line-height:1.55;color:#5B675F;margin:0 0 6px;">' + escapeHtml(s.blurb) + '</div>' +
         '<a href="' + SITE + s.path + '" target="_blank" style="font-size:14px;font-weight:bold;color:' + GREEN + ';">' + escapeHtml(s.cta) + ' →</a>' +
         '</div></td></tr>'
       );
@@ -386,12 +387,11 @@ function buildReferredNoticeEmail(r, opts) {
     '</td></tr>' +
     '<tr><td style="padding:0 22px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0">' + serviceHtml + '</table></td></tr>' +
     '<tr><td style="padding:0 22px 22px;">' +
-    '<div style="background:#EAF5EE;border:1px solid #BFE0CB;border-radius:12px;padding:18px;">' +
-    '<div style="font-size:17px;font-weight:bold;color:' + GREEN_DARK + ';margin-bottom:6px;">Programa de referidos</div>' +
-    '<p style="font-size:14px;line-height:1.55;color:#14201A;margin:0 0 12px;">' + escapeHtml(invite) + '</p>' +
-    button(PROGRAM_URL, 'Conocer el programa', false) +
-    '<p style="font-size:11px;line-height:1.5;color:#5B675F;margin:4px 0 0;">' + escapeHtml(inviteFine) + '</p>' +
-    '</div></td></tr>' +
+    '<a href="' + escapeHtml(PROGRAM_URL) + '" target="_blank" style="display:block;text-decoration:none;">' +
+    '<img src="' + SITE + '/assets/email/programa-referidos.jpg" width="556" alt="' + escapeHtml(invite + ' ' + inviteFine) + '" style="display:block;width:100%;max-width:556px;height:auto;border-radius:12px;border:0;">' +
+    '</a>' +
+    '<div style="padding-top:10px;">' + button(PROGRAM_URL, 'Conocer el programa', false) + '</div>' +
+    '</td></tr>' +
     '<tr><td style="padding:0 22px 22px;border-top:1px solid #E3E8E4;">' +
     '<p style="font-size:12px;line-height:1.6;color:#5B675F;margin:16px 0 8px;">' + escapeHtml(dataLine) + ' ' +
     'Aviso de privacidad completo: <a href="' + PRIVACY_URL + '" target="_blank" style="color:' + GREEN_DARK + ';">' + PRIVACY_URL + '</a></p>' +
