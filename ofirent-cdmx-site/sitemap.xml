@@ -1,29 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.ofirent.com.mx/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/cafe.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/pasillo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/servicios-oficinas/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/portada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/portada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/portada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/recepcion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/pasillo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/coworking.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/portada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina-2.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/lounge.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/area-comun.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/capacitacion.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/</loc>
@@ -34,31 +127,112 @@
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-roma/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/oficina-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/roma/cafe.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-condesa/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/area-comun.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/atrio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/condesa/lounge.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-cuauhtemoc/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/cafe.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/cuauhtemoc/oficina-2.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-del-valle/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/area-comun.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/del-valle/lounge.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-narvarte/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/area-comun.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/narvarte/lounge.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-napoles/</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/oficina.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/sala-juntas.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/terraza.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/portada.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ofirent.com.mx/assets/fotos/napoles/cafe.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.ofirent.com.mx/contacto/</loc>

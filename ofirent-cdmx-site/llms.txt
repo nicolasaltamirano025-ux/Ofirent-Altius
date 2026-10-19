@@ -1,0 +1,32 @@
+# OfiRent
+
+> OfiRent renta oficinas equipadas, oficinas virtuales (domicilio fiscal y comercial), coworking y salas de juntas en Ciudad de México, con 6 sedes y 20 años de trayectoria (desde 2006). Sitio oficial: https://www.ofirent.com.mx/
+
+Datos de contacto: WhatsApp y teléfono +52 55 3200 9907, correo contacto@ofirent.com.mx. Los precios son de lista; la disponibilidad se confirma con el equipo y no se publica en vivo.
+
+## Servicios
+
+- [Oficinas equipadas](https://www.ofirent.com.mx/servicios/renta-oficinas-equipadas-cdmx/): oficinas privadas con mobiliario, internet, recepción, limpieza y mantenimiento. Desde $6,500 al mes.
+- [Oficinas virtuales](https://www.ofirent.com.mx/servicios/renta-oficinas-virtuales-cdmx/): domicilio fiscal y comercial en CDMX. Planes Básico $799, Ejecutivo $1,299, Plus $1,599 y VIP $1,899 al mes.
+- [Coworking y salas de juntas](https://www.ofirent.com.mx/servicios/renta-salas-juntas-y-coworking/): membresías Silver desde $2,500 y Oro desde $2,900 al mes en Roma, Del Valle y Narvarte; salas de juntas en varias sedes.
+- [Todos los servicios](https://www.ofirent.com.mx/servicios-oficinas/): resumen para elegir el servicio.
+
+## Sedes en Ciudad de México
+
+- [OfiRent Nápoles](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-napoles/): Rochester 94, C.P. 03810, Ciudad de México. Oficinas desde $6,500 al mes.
+- [OfiRent Del Valle](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-del-valle/): Gabriel Mancera 725, C.P. 03100, Ciudad de México. Oficinas desde $7,500 al mes.
+- [OfiRent Condesa](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-condesa/): Avenida Álvaro Obregón 270, C.P. 06100, Ciudad de México. Oficinas desde $7,900 al mes.
+- [OfiRent Roma](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-roma/): Calle Orizaba 208, C.P. 06700, Ciudad de México. Oficinas desde $9,900 al mes.
+- [OfiRent Narvarte](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-narvarte/): Eje 1 Poniente, Avenida Cuauhtémoc 722, C.P. 03020, Ciudad de México. Oficinas desde $6,900 al mes.
+- [OfiRent Cuauhtémoc](https://www.ofirent.com.mx/ubicaciones/renta-oficinas-colonia-cuauhtemoc/): Calle Río Po 43, C.P. 06600, Ciudad de México. Oficinas desde $6,900 al mes.
+
+## Programa de referidos
+
+- [Programa de referidos](https://www.ofirent.com.mx/programa-de-referidos/): quien recomienda a alguien que firma contrato y paga sus dos primeras mensualidades recibe un bono igual a una mensualidad de su renta, con tope de $5,000 MXN. Vigente del 14 de octubre de 2026 al 14 de enero de 2027. Se puede recomendar a cuantas personas se quiera y el bono se paga hasta por 4 recomendaciones cerradas por persona.
+- [Términos y condiciones del programa](https://www.ofirent.com.mx/programa-de-referidos/terminos/): reglas completas, pago, vigencia y verificación.
+
+## Más información
+
+- [Blog de OfiRent](https://www.ofirent.com.mx/blog/): guías sobre oficinas virtuales, domicilio fiscal, coworking y renta de oficinas en CDMX.
+- [Aviso de privacidad](https://www.ofirent.com.mx/aviso-de-privacidad/)
+- [Mapa del sitio](https://www.ofirent.com.mx/sitemap.xml)
