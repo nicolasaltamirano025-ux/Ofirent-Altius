@@ -245,10 +245,10 @@
   </div>
 </div>
 
-<section class="hero">
+<section class="hero hero--form">
   <div class="hero-bg"></div>
   <div class="hero-inner">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-grid hero-grid--form">
       <div class="hero-copy">
         <div class="eyebrow">Ciudad de México</div>
         <h1 class="hero-title">Oficinas en renta en CDMX<br><span class="thin">listas para trabajar</span></h1>
@@ -270,40 +270,36 @@
           <source src="/assets/ofirent-hero.mp4" type="video/mp4">
         </video>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="contacto-form">
-  <div class="wrap">
-    <div class="eyebrow">Resolvemos tus dudas</div>
-    <h2 class="section-title">Déjanos tus datos y te contactamos</h2>
-    <p class="section-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
-    <form class="lead-form" id="lead-form">
-      <div class="lead-form-grid">
-        <div><label for="lf-name">Nombre *</label><input type="text" id="lf-name" name="name" required></div>
-        <div><label for="lf-phone">Teléfono *</label><input type="tel" id="lf-phone" name="phone" required></div>
-        <div><label for="lf-email">Correo *</label><input type="email" id="lf-email" name="email" required></div>
-        <div><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company"></div>
-        <div><label for="lf-location">Ubicación de interés</label>
-          <select id="lf-location" name="location">
-            <option value="">No estoy seguro</option>
-            <option>Nápoles</option><option>Del Valle</option><option>Condesa</option>
-            <option>Roma</option><option>Narvarte</option><option>Cuauhtémoc</option>
-          </select>
-        </div>
-        <div><label for="lf-service">Servicio de interés</label>
-          <select id="lf-service" name="serviceType">
-            <option value="">No estoy seguro</option>
-            <option>Oficina equipada</option><option>Oficina virtual</option>
-            <option>Coworking</option><option>Sala de juntas</option>
-          </select>
-        </div>
-        <div class="full"><label for="lf-comments">Comentarios</label><textarea id="lf-comments" name="comments"></textarea></div>
+      <div class="hero-form" id="contacto-form">
+        <h2 class="hero-form-title">Déjanos tus datos y te contactamos</h2>
+        <p class="hero-form-sub">Cuéntanos qué necesitas y un asesor te contacta a la brevedad.</p>
+        <form class="lead-form" id="lead-form">
+              <div class="lead-form-grid">
+                <div><label for="lf-name">Nombre *</label><input type="text" id="lf-name" name="name" required></div>
+                <div><label for="lf-phone">Teléfono *</label><input type="tel" id="lf-phone" name="phone" required></div>
+                <div><label for="lf-email">Correo *</label><input type="email" id="lf-email" name="email" required></div>
+                <div><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company"></div>
+                <div><label for="lf-location">Ubicación de interés</label>
+                  <select id="lf-location" name="location">
+                    <option value="">No estoy seguro</option>
+                    <option>Nápoles</option><option>Del Valle</option><option>Condesa</option>
+                    <option>Roma</option><option>Narvarte</option><option>Cuauhtémoc</option>
+                  </select>
+                </div>
+                <div><label for="lf-service">Servicio de interés</label>
+                  <select id="lf-service" name="serviceType">
+                    <option value="">No estoy seguro</option>
+                    <option>Oficina equipada</option><option>Oficina virtual</option>
+                    <option>Coworking</option><option>Sala de juntas</option>
+                  </select>
+                </div>
+                <div class="full"><label for="lf-comments">Comentarios</label><textarea id="lf-comments" name="comments"></textarea></div>
+              </div>
+              <button type="submit">Enviar</button>
+              <div class="lead-form-msg" id="lf-msg"></div>
+            </form>
       </div>
-      <button type="submit">Enviar</button>
-      <div class="lead-form-msg" id="lf-msg"></div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -977,18 +973,6 @@
     });
   })();
 </script>
-<section id="kommo-form-test">
-  <div class="wrap" style="max-width:560px;text-align:center;">
-    <div class="eyebrow" style="justify-content:center;">Formulario en prueba</div>
-    <h2 class="section-title" style="font-size:26px;">¿Prefieres este formulario?</h2>
-    <p class="section-sub" style="margin-left:auto;margin-right:auto;">Estamos probando si este formulario ya funciona correctamente. Si no ves nada debajo de este texto, sigue usando el formulario de arriba o escríbenos directamente.</p>
-    <div class="kommo-form-card">
-      <script src="https://forms.kommo.com/forms/js/form_1635815_535ab9144ad964393884e00792e6c796.js" charset="utf-8"></script>
-      <script id="amoforms_script_1635815" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1767728992"></script>
-    </div>
-  </div>
-</section>
-
 <script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>
