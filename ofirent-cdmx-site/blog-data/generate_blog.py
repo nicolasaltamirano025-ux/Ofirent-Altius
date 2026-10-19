@@ -18,7 +18,7 @@ NAV = '''<nav class="topnav">
   <div class="wrap topnav-inner">
     <div class="logo-mark"><a href="/"><img src="/assets/logo.png" alt="OfiRent"></a></div>
     <div class="navlinks">
-      <a href="/#ubicaciones">Ubicaciones</a><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="https://sistema.ofirent.com.mx/" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
+      <span class="nav-dd"><a href="/#ubicaciones" class="nav-dd-trigger" aria-haspopup="true">Ubicaciones</a><span class="nav-dd-menu"><span class="nav-dd-menu-in"><a href="/ubicaciones/renta-oficinas-colonia-napoles/">Nápoles</a><a href="/ubicaciones/renta-oficinas-colonia-del-valle/">Del Valle</a><a href="/ubicaciones/renta-oficinas-colonia-condesa/">Condesa</a><a href="/ubicaciones/renta-oficinas-colonia-roma/">Roma</a><a href="/ubicaciones/renta-oficinas-colonia-narvarte/">Narvarte</a><a href="/ubicaciones/renta-oficinas-colonia-cuauhtemoc/">Cuauhtémoc</a></span></span></span><a href="/#servicios">Servicios</a><a href="/servicios/renta-oficinas-virtuales-cdmx/">Oficina Virtual</a><a href="/servicios/renta-oficinas-equipadas-cdmx/">Oficina Física</a><a href="https://sistema.ofirent.com.mx/" target="_blank" rel="noopener">Acceso a clientes</a><a href="/#contacto" class="nav-cta">Contacto</a>
     </div>
   </div>
 </nav>'''
