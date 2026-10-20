@@ -498,3 +498,36 @@
   .locpage-hero .hero-lede{line-height:1.8;margin-bottom:28px;}
   .locpage-hero .hero-ctas{margin-bottom:48px;}
   @media (max-width:700px){ .locpage-hero .back-link{margin-bottom:24px;} .sede-name{margin:6px 0 18px;} h1.hero-title.sede-title{margin-bottom:26px;} }
+
+  /* PROMO-ANIVERSARIO: promociones por los 20 años en el inicio (TEMPORAL: quitar al terminar la campaña) */
+  .promo-aniv{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--green-deep) 0%,var(--green) 75%);color:#fff;padding:54px 0 44px;}
+  .promo-aniv::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 68px),repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 68px);pointer-events:none;}
+  .promo-aniv .wrap{position:relative;z-index:1;}
+  .promo-head{display:flex;align-items:center;gap:20px;}
+  .promo-seal{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:68px;height:68px;border:2px solid var(--gold);border-radius:50%;color:var(--gold);font-family:var(--display);font-weight:800;font-size:32px;line-height:1;padding-top:2px;}
+  .promo-aniv .eyebrow{color:var(--gold);margin-bottom:8px;}
+  .promo-aniv .eyebrow::before{background:var(--gold);}
+  .promo-title{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(28px,3.6vw,46px);line-height:1.05;text-transform:uppercase;color:#fff;}
+  .promo-sub{max-width:64ch;margin:16px 0 28px;font-size:16px;line-height:1.65;color:#d9ece1;}
+  .promo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
+  .promo-card{display:flex;flex-direction:column;gap:6px;padding:28px 28px 26px;background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 20px 48px rgba(0,0,0,.24);}
+  .promo-kicker{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  .promo-big{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:4px 0 6px;font-family:var(--display);font-weight:800;line-height:1;color:var(--green-deep);}
+  .promo-from{font-size:20px;color:var(--steel);}
+  .promo-price{font-size:clamp(52px,5.4vw,72px);letter-spacing:-.01em;}
+  .promo-unit{font-size:20px;color:var(--ink);}
+  .promo-note{flex:1;margin:0 0 16px;font-size:15px;line-height:1.6;color:var(--steel);}
+  .btn.promo-btn{align-self:flex-start;background:linear-gradient(135deg,var(--gold),#f3c978);color:var(--ink);border:0;box-shadow:0 0 0 1px rgba(233,166,59,.35),0 6px 18px rgba(233,166,59,.35);}
+  .btn.promo-btn:hover{box-shadow:0 0 0 1px rgba(233,166,59,.5),0 10px 24px rgba(233,166,59,.45);}
+  .promo-contact{margin:22px 0 0;font-size:15px;color:#fff;}
+  .promo-contact a{color:var(--gold);font-weight:700;text-decoration:none;}
+  .promo-contact a:hover{text-decoration:underline;}
+  .promo-fine{max-width:80ch;margin:10px 0 0;font-size:12px;line-height:1.55;color:#bcd8c8;}
+  @media (max-width:760px){
+    .promo-aniv{padding:40px 0 34px;}
+    .promo-head{gap:14px;}
+    .promo-seal{width:54px;height:54px;font-size:26px;}
+    .promo-grid{grid-template-columns:minmax(0,1fr);gap:16px;}
+    .promo-card{padding:22px 20px 20px;}
+    .btn.promo-btn{align-self:stretch;justify-content:center;}
+  }
